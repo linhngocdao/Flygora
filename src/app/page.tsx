@@ -1,5 +1,6 @@
 "use client";
 import HeaderComponent from "@/components/Clients/layout/header/page";
+import PartnerCarousel from "@/components/Clients/ui/slider";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -45,7 +46,7 @@ export default function Home() {
               <div className="flex items-center justify-between button-1">
                 <div className="pt-1 text-gray-700 uppercase headline-3">Find your trip</div>
                 <div className="flex items-center justify-center duration-300 ease-in-out rounded-full cursor-pointer bg-[#6c8a1f] lg:hover:bg-primary-darker w-10 h-10 md:flex-shrink-0">
-                <Image src="/ic-search.svg" width={25} height={25} alt="search icon" style={{ filter: 'invert(83%) sepia(10%) saturate(241%) hue-rotate(47deg) brightness(97%) contrast(85%)' }} />
+                  <Image src="/ic-search.svg" width={25} height={25} alt="search icon" style={{ filter: 'invert(83%) sepia(10%) saturate(241%) hue-rotate(47deg) brightness(97%) contrast(85%)' }} />
                 </div>
               </div>
             </div>
@@ -208,33 +209,35 @@ export default function Home() {
         {/* end section 2 */}
         {/* section 3 - slider */}
         <section className="relative pt-7 md:pb-[72px] pb-[64px]">
-              <Image
-              src="/partner-background.webp"
-              alt="partner background"
-              className="absolute inset-0 object-cover w-full h-full lg:object-bottom max-lg:object-right max-md:hidden"
-              loading="lazy"
-              fill
-              />
-            <Image
-              src="/partner-background-mobile.webp"
-              alt="partner background mobile"
-              className="absolute inset-0 object-cover w-full h-full md:hidden"
-              loading="lazy"
-              fill
-              />
-              <div className="relative overflow-hidden">
-                <div className="box box01 left" style={{
-  translate: "none",
-  rotate: "none",
-  scale: "none",
-  transform: "translate3d(-2737.82px, 0px, 0px)"
-}}
->
-                  <div className="item_child"> nơi chứa ảnh ở đây</div>
-                </div>
-              </div>
+          <Image
+            src="/partner-background.webp"
+            alt="partner background"
+            className="absolute inset-0 object-cover w-full h-full lg:object-bottom max-lg:object-right max-md:hidden"
+            loading="lazy"
+            fill
+          />
+          <Image
+            src="/partner-background-mobile.webp"
+            alt="partner background mobile"
+            className="absolute inset-0 object-cover w-full h-full md:hidden"
+            loading="lazy"
+            fill
+          />
+          <div className="relative overflow-hidden">
+            <div className="box box01 left" style={{
+              translate: "none",
+              rotate: "none",
+              scale: "none",
+              transform: "translate3d(-2737.82px, 0px, 0px)"
+            }}
+            >
+              <div className="item_child"> nơi chứa ảnh ở đây</div>
+            </div>
+          </div>
         </section>
         {/* end section 3 */}
+
+        <PartnerCarousel autoPlay={true} />
       </main>
     </div>
   );
