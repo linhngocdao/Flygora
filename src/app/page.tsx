@@ -1,12 +1,32 @@
 "use client";
 import HeaderComponent from "@/components/Clients/layout/header/page";
-import React from "react";
+import Image from "next/image";
+import React, { useEffect, useRef, useState } from "react";
 
 export default function Home() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+
+  useEffect(() => {
+    if (!sectionRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      {
+        threshold: 0.3,
+      }
+    );
+    observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div>
       <HeaderComponent />
       <main className="homepage max-lg:pt-[68px]">
+        {/* section 1 */}
         <section className="relative z-40 lg:h-[calc(100vh-68px)] md:h-[calc(100vh-160px)]">
           <div className="w-full h-full max-md:aspect-w-16 max-md:aspect-h-9">
             <picture>
@@ -24,19 +44,12 @@ export default function Home() {
             <div className="rounded-[16px] border-4 border-primary-400 bg-white xl:px-20 md:px-12 px-8 py-4 relative lg:hidden" >
               <div className="flex items-center justify-between button-1">
                 <div className="pt-1 text-gray-700 uppercase headline-3">Find your trip</div>
-                <div className="flex items-center justify-center duration-300 ease-in-out rounded-full cursor-pointer bg-primary lg:hover:bg-primary-darker w-10 h-10 md:flex-shrink-0">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="21" height="22" viewBox="0 0 21 22" fill="none"
-                    className="text-white">
-                    <path
-                      d="M6.6979 1.12156C4.59338 1.66512 2.71318 3.22604 1.70593 5.15345C0.552054 7.36147 0.487662 10.1184 1.53717 12.379C3.47436 16.5516 8.59573 18.359 12.9533 16.0008C13.95 17.6361 15.1954 19.1822 16.4236 20.5391C17.03 21.2091 18.1258 21.6574 18.9996 21.3069C19.7452 21.1427 20.277 20.4958 20.277 19.7223C20.277 19.331 20.1377 18.9531 19.885 18.6577C18.4329 16.9642 17.055 15.252 15.7756 13.561C16.3974 12.7187 16.8509 11.762 17.0696 10.7346C19.0956 4.59833 12.8579 -1.28273 6.6979 1.12156ZM19.5106 18.9788C20.1731 19.7522 19.5604 20.9407 18.5506 20.8506C18.22 20.8217 17.9201 20.6499 17.7287 20.3799C16.5553 18.7161 15.2848 17.0335 13.9533 15.3679C14.5107 14.9603 15.0197 14.4881 15.4613 13.962C16.7249 15.6274 18.0816 17.3121 19.5106 18.9788ZM16.8599 9.53634C16.3684 12.5662 13.8127 15.1219 10.7832 15.6137C7.63689 16.1253 4.20934 14.3608 2.89075 11.333C1.17511 7.15604 3.27976 2.29263 7.99029 1.23851C12.8865 0.142925 17.6963 4.37901 16.8599 9.53634Z"
-                      fill="currentColor"></path>
-                  </svg>
+                <div className="flex items-center justify-center duration-300 ease-in-out rounded-full cursor-pointer bg-[#6c8a1f] lg:hover:bg-primary-darker w-10 h-10 md:flex-shrink-0">
+                <Image src="/ic-search.svg" width={25} height={25} alt="search icon" style={{ filter: 'invert(83%) sepia(10%) saturate(241%) hue-rotate(47deg) brightness(97%) contrast(85%)' }} />
                 </div>
               </div>
             </div>
-
-            {/* style="box-shadow:0px 4px 8px 0px rgba(0, 0, 0, 0.15);" */}
-            <div className="md:flex rounded-[16px] border-4 border-[#6c8a1f] bg-white xl:px-20 md:px-12 px-8 py-4 relative max-lg:hidden">
+            <div className="md:flex rounded-[16px] border-4 bg-white xl:px-20 md:px-12 px-8 py-4 relative max-lg:hidden" style={{ boxShadow: "rgba(0, 0, 0, 0.15) 0px 4px 8px 0px", borderColor: 'rgb(214 226 80 / 1)' }}>
               <div className="xl:space-x-16 md:space-x-8 md:flex md:items-center md:flex-grow md:justify-center max-md:space-y-8">
                 <div className="flex-1 space-y-1 cursor-pointer max-md:border-b max-md:border-gray-200 max-md:pb-1">
                   <div className="text-gray-900 title-1">Tour</div>
@@ -77,14 +90,151 @@ export default function Home() {
                 </div>
                 <div className="max-md:flex max-md:justify-end">
                   <div
-                    className="flex items-center justify-center duration-300 ease-in-out rounded-full cursor-pointer bg-primary pointer-events-none w-14 h-14 md:flex-shrink-0 opacity-50">
-                      <div className=""></div>
-                    </div>
+                    className="flex items-center justify-center duration-300 ease-in-out rounded-full cursor-pointer bg-[#6c8a1f] pointer-events-none w-14 h-14 md:flex-shrink-0 opacity-70">
+                    <Image src="/ic-search.svg" width={25} height={25} alt="search icon" style={{ filter: 'invert(83%) sepia(10%) saturate(241%) hue-rotate(47deg) brightness(97%) contrast(85%)' }} />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
+        {/* end section 1 */}
+        {/* section 2 */}
+        <section ref={sectionRef} className="relative section-animation">
+          <div className="relative overflow-hidden max-lg:pt-16 max-md:pb-8 max-md:pt-20 bg-section-2">
+            <div className="flex max-md:flex-col-reverse items-center container md:space-x-[37px] xl:pt-[119px] lg:pt-[100px] md:py-8 relative z-30">
+              <div className="flex flex-col justify-center flex-grow space-y-2">
+                <h1 className="display-1 uppercase tracking-[-1.2px] text-text-500">Jungle Boss</h1>
+                <div className="space-y-4">
+                  <div className="uppercase headline-2 text-text-500">
+                    Leading certified adventure travel company
+                  </div>
+                  <div className="flex flex-wrap items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                      <div className="text-gray-900 title-1">Excellent</div>
+                      <div className="flex items-center space-x-1">
+                        {/* 5 stars icon, có thể tạo component riêng hoặc import icon */}
+                        {Array(5).fill(0).map((_, idx) => (
+                          <svg key={idx} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 mb-1 md:w-6 md:h-6 text-primary">
+                            <path d="M8.29602 0.75L5.79602 6L1.29602 6.25L4.79602 9.75L3.04602 15.25L8.29602 12.25L12.796 15.5L11.796 9.25L15.046 6H10.296L8.29602 0.75Z" />
+                          </svg>
+                        ))}
+                      </div>
+                      <div className="text-gray-900 title-1">on</div>
+                      <Image
+                        src="/section-2-tripadvisor.png"
+                        alt="tripadvisor"
+                        className="h-7"
+                        width={100}
+                        height={28}
+                        loading="lazy"
+                      />
+                    </div>
+                    <a
+                      href="https://www.tripadvisor.com/Attraction_Review-g4014591-d8403784-Reviews-Jungle_Boss_Tours-Phong_Nha_Ke_Bang_National_Park_Quang_Binh_Province.html"
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      className="text-gray-900 label-1 lg:hover:text-primary lg:duration-150"
+                    >
+                      View 995 (reviews)
+                    </a>
+                  </div>
+                  <div className="prose introduce">
+                    <p>
+                      We offer exclusive cave exploration and jungle treks for small groups and jungle style team building activities in the UNESCO-listed Phong Nha-Ke Bang National Park and surrounding areas, including our newest tour to{" "}
+                      <a href="https://junglebosstours.com/tour/do-quyen-waterfall-top-adventure-conquering-3d2n" target="_blank" rel="noopener">
+                        Conquering Do Quyen Waterfall
+                      </a>
+                      – the highest waterfall in South East Asia, and the legendary{" "}
+                      <a href="/tour/kong-collapse-top-adventure-5d4n" target="_blank" rel="noopener">
+                        Kong Collapse
+                      </a>
+                      – one of the deepest sinkholes on the planet.
+                    </p>
+                  </div>
+                  <a href="/about-us" className="block">
+                    <button className="btn btn-solid">
+                      <span className="relative z-20 flex items-center justify-center w-full font-medium button-1">
+                        About Us
+                      </span>
+                    </button>
+                  </a>
+                </div>
+              </div>
+              <div className="lg:w-[432px] md:w-1/3 w-1/2 max-lg:mx-auto flex-shrink-0 flex items-center max-md:my-4">
+                <Image
+                  src="/section-2-welcome.webp"
+                  alt="welcome"
+                  width={432}
+                  height={432}
+                  className="duration-500 lg:hover:translate-x-10 lg:hover:-translate-y-10"
+                  loading="eager"
+                />
+              </div>
+            </div>
+            <Image
+              src="/leaf-bg-right.webp"
+              alt="leaf"
+              width={267}
+              height={267}
+              className={`absolute top-[-100px] right-[-80px] transition-transform duration-700 ease-out
+    w-[267px] h-[267px]
+    max-md:w-[150px] max-md:h-[150px]
+    ${isVisible
+                  ? "translate-x-0 translate-y-0"
+                  : "translate-x-full -translate-y-full"
+                }`}
+              loading="eager"
+            />
+
+            <Image
+              src="/leaf-bg-left.webp"
+              alt="leaf"
+              width={267}
+              height={267}
+              className={`absolute bottom-[-100px] left-[-90px] transition-transform duration-700 ease-out
+    w-[267px] h-[267px]
+    max-md:w-[150px] max-md:h-[150px]
+    ${isVisible
+                  ? "translate-x-0 translate-y-0"
+                  : "-translate-x-full translate-y-full"
+                }`}
+              loading="eager"
+            />
+
+
+          </div>
+        </section>
+        {/* end section 2 */}
+        {/* section 3 - slider */}
+        <section className="relative pt-7 md:pb-[72px] pb-[64px]">
+              <Image
+              src="/partner-background.webp"
+              alt="partner background"
+              className="absolute inset-0 object-cover w-full h-full lg:object-bottom max-lg:object-right max-md:hidden"
+              loading="lazy"
+              fill
+              />
+            <Image
+              src="/partner-background-mobile.webp"
+              alt="partner background mobile"
+              className="absolute inset-0 object-cover w-full h-full md:hidden"
+              loading="lazy"
+              fill
+              />
+              <div className="relative overflow-hidden">
+                <div className="box box01 left" style={{
+  translate: "none",
+  rotate: "none",
+  scale: "none",
+  transform: "translate3d(-2737.82px, 0px, 0px)"
+}}
+>
+                  <div className="item_child"> nơi chứa ảnh ở đây</div>
+                </div>
+              </div>
+        </section>
+        {/* end section 3 */}
       </main>
     </div>
   );

@@ -1,4 +1,5 @@
 "use client"
+import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState, useEffect } from 'react'
 
@@ -68,21 +69,38 @@ const HeaderComponent = () => {
                   </a>
                 </div>
 
-
-
                 {/* Icons search */}
                 <div className="flex items-center justify-between space-x-[22px]">
                   <div className={`cursor-pointer text-[#eef4b7] transition-all duration-300 ${isScrolled ? 'scale-90' : 'scale-100'}`}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="22" viewBox="0 0 21 22" fill="none" data-v-ecb57835=""><path d="M6.6979 1.12156C4.59338 1.66512 2.71318 3.22604 1.70593 5.15345C0.552054 7.36147 0.487662 10.1184 1.53717 12.379C3.47436 16.5516 8.59573 18.359 12.9533 16.0008C13.95 17.6361 15.1954 19.1822 16.4236 20.5391C17.03 21.2091 18.1258 21.6574 18.9996 21.3069C19.7452 21.1427 20.277 20.4958 20.277 19.7223C20.277 19.331 20.1377 18.9531 19.885 18.6577C18.4329 16.9642 17.055 15.252 15.7756 13.561C16.3974 12.7187 16.8509 11.762 17.0696 10.7346C19.0956 4.59833 12.8579 -1.28273 6.6979 1.12156ZM19.5106 18.9788C20.1731 19.7522 19.5604 20.9407 18.5506 20.8506C18.22 20.8217 17.9201 20.6499 17.7287 20.3799C16.5553 18.7161 15.2848 17.0335 13.9533 15.3679C14.5107 14.9603 15.0197 14.4881 15.4613 13.962C16.7249 15.6274 18.0816 17.3121 19.5106 18.9788ZM16.8599 9.53634C16.3684 12.5662 13.8127 15.1219 10.7832 15.6137C7.63689 16.1253 4.20934 14.3608 2.89075 11.333C1.17511 7.15604 3.27976 2.29263 7.99029 1.23851C12.8865 0.142925 17.6963 4.37901 16.8599 9.53634Z" fill="currentColor"></path></svg>
+                    <Image
+                      src="/ic-search.svg"
+                      width={25}
+                      height={25}
+                      alt="search icon"
+                      style={{ filter: 'invert(83%) sepia(10%) saturate(241%) hue-rotate(47deg) brightness(97%) contrast(85%)' }}
+                    />
+
                   </div>
 
                   {/* Language switcher */}
                   <div className="relative languages">
                     <div className="items-center hidden space-x-2 cursor-pointer md:flex">
                       <div className="max-w-[27px] w-full border border-primary-100 rounded overflow-hidden">
-                        <img src="/flag-vi.webp" alt="flag vi" className="object-cover w-full h-full" />
+                        <Image
+                        width={30}
+                        height={30}
+                          src="/flag-vi.webp"
+                          alt="flag vi"
+                          className="object-cover w-full h-full"
+                        />
                       </div>
-                  <svg className="text-[#eef4b7]" xmlns="http://www.w3.org/2000/svg" width="16" height="10" viewBox="0 0 16 10" fill="none" data-v-ecb57835=""><path d="M14.5739 0.920555C10.0879 0.623555 5.60192 0.537556 1.11592 0.530556C0.270921 0.500556 -0.208078 1.62656 0.419922 2.21156C2.65092 4.53656 5.04192 6.95456 7.33892 9.19855C7.69492 9.56055 8.27992 9.56055 8.63492 9.19855C10.7479 7.04955 12.8209 4.86156 14.8279 2.60656C15.1349 2.27356 15.2069 1.96656 15.1299 1.77456C15.6119 1.51256 15.4919 0.989555 14.5739 0.920555ZM8.03692 7.26756C6.53592 5.66756 4.97692 4.03956 3.42192 2.45156C6.96592 2.37156 10.5089 2.22756 14.0529 1.95556C11.9999 3.67956 10.0049 5.45956 8.03692 7.26756Z" fill="#FCFFDF"></path></svg>
+                          <Image
+                        width={30}
+                        height={30}
+                          src="/ic-arrow-down.svg"
+                          alt="flag vi"
+                          className="object-cover w-full h-full"
+                        />
                     </div>
 
                     {/* Dropdown (hidden by default) */}
@@ -99,7 +117,6 @@ const HeaderComponent = () => {
                         </Link>
                       </div>
                     </div>
-
                   </div>
                 </div>
               </div>

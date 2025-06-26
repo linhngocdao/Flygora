@@ -63,3 +63,9 @@ body {
   margin-left: -50vw;
   margin-right: -50vw;
 }
+.bg-section-2{
+  background-image: url('/section-2-bg.webp');
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
