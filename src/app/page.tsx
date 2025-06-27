@@ -1,6 +1,9 @@
 "use client";
 import HeaderComponent from "@/components/Clients/layout/header/page";
+import ButtonPrimary from "@/components/Clients/ui/buttonPrimary";
+import AdventureTourSwiper from "@/components/Clients/ui/s";
 import PartnerCarousel from "@/components/Clients/ui/slider";
+import TopAdventureTour from "@/components/Clients/ui/TopAdventureTour";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -8,18 +11,22 @@ export default function Home() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
-
   useEffect(() => {
-    if (!sectionRef.current) return;
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
+      (entries) => {
+        const anyVisible = entries.some(entry => entry.isIntersecting);
+        setIsVisible(anyVisible);
       },
       {
         threshold: 0.3,
       }
     );
-    observer.observe(sectionRef.current);
+
+    // Observe cả hai section
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
     return () => observer.disconnect();
   }, []);
 
@@ -153,18 +160,7 @@ export default function Home() {
                       – one of the deepest sinkholes on the planet.
                     </p>
                   </div>
-                  <a href="/about-us" className="block">
-                    <button className="btn btn-solid !p-0">
-                      <div className="absolute inset-0 w-full">
-
-                      </div>
-                      <span className="font-medium button-1 relative z-20 flex items-center justify-center w-full">
-                        <div className="flex items-center justify-center space-x-2">
-                          <span>About Us</span>
-                        </div>
-                      </span>
-                    </button>
-                  </a>
+                  <ButtonPrimary name="About Us" href="/about-us" />
                 </div>
               </div>
               <div className="lg:w-[432px] md:w-1/3 w-1/2 max-lg:mx-auto flex-shrink-0 flex items-center max-md:my-4">
@@ -183,17 +179,32 @@ export default function Home() {
               alt="leaf"
               width={267}
               height={267}
-              className={`absolute top-[-100px] right-[-80px] transition-transform duration-700 ease-out w-[267px] h-[267px] max-md:w-[150px] max-md:h-[150px] ${isVisible ? "translate-x-0 translate-y-0" : "translate-x-full -translate-y-full"}`}
+              className={`absolute top-[-100px] right-[-80px] transition-transform duration-700 ease-out
+    w-[267px] h-[267px]
+    max-md:w-[150px] max-md:h-[150px]
+    ${isVisible
+                  ? "translate-x-0 translate-y-0"
+                  : "translate-x-full -translate-y-full"
+                }`}
               loading="eager"
             />
+
             <Image
               src="/leaf-bg-left.webp"
               alt="leaf"
               width={267}
               height={267}
-              className={`absolute bottom-[-100px] left-[-90px] transition-transform duration-700 ease-out w-[267px] h-[267px] max-md:w-[150px] max-md:h-[150px] ${isVisible ? "translate-x-0 translate-y-0" : "-translate-x-full translate-y-full"}`}
+              className={`absolute bottom-[-100px] left-[-90px] transition-transform duration-700 ease-out
+    w-[267px] h-[267px]
+    max-md:w-[150px] max-md:h-[150px]
+    ${isVisible
+                  ? "translate-x-0 translate-y-0"
+                  : "-translate-x-full translate-y-full"
+                }`}
               loading="eager"
             />
+
+
           </div>
         </section>
         {/* end section 2 */}
@@ -287,6 +298,11 @@ export default function Home() {
           </div>
         </section>
         {/* end section 4 */}
+        {/* section 5 */}
+
+        <TopAdventureTour />
+
+        {/* end section 5 */}
       </main>
     </div>
   );
