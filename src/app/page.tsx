@@ -154,9 +154,14 @@ export default function Home() {
                     </p>
                   </div>
                   <a href="/about-us" className="block">
-                    <button className="btn btn-solid">
-                      <span className="relative z-20 flex items-center justify-center w-full font-medium button-1">
-                        About Us
+                    <button className="btn btn-solid !p-0">
+                      <div className="absolute inset-0 w-full">
+
+                      </div>
+                      <span className="font-medium button-1 relative z-20 flex items-center justify-center w-full">
+                        <div className="flex items-center justify-center space-x-2">
+                          <span>About Us</span>
+                        </div>
                       </span>
                     </button>
                   </a>
@@ -178,66 +183,110 @@ export default function Home() {
               alt="leaf"
               width={267}
               height={267}
-              className={`absolute top-[-100px] right-[-80px] transition-transform duration-700 ease-out
-    w-[267px] h-[267px]
-    max-md:w-[150px] max-md:h-[150px]
-    ${isVisible
-                  ? "translate-x-0 translate-y-0"
-                  : "translate-x-full -translate-y-full"
-                }`}
+              className={`absolute top-[-100px] right-[-80px] transition-transform duration-700 ease-out w-[267px] h-[267px] max-md:w-[150px] max-md:h-[150px] ${isVisible ? "translate-x-0 translate-y-0" : "translate-x-full -translate-y-full"}`}
               loading="eager"
             />
-
             <Image
               src="/leaf-bg-left.webp"
               alt="leaf"
               width={267}
               height={267}
-              className={`absolute bottom-[-100px] left-[-90px] transition-transform duration-700 ease-out
-    w-[267px] h-[267px]
-    max-md:w-[150px] max-md:h-[150px]
-    ${isVisible
-                  ? "translate-x-0 translate-y-0"
-                  : "-translate-x-full translate-y-full"
-                }`}
+              className={`absolute bottom-[-100px] left-[-90px] transition-transform duration-700 ease-out w-[267px] h-[267px] max-md:w-[150px] max-md:h-[150px] ${isVisible ? "translate-x-0 translate-y-0" : "-translate-x-full translate-y-full"}`}
               loading="eager"
             />
-
-
           </div>
         </section>
         {/* end section 2 */}
-        {/* section 3 - slider */}
-        <section className="relative pt-7 md:pb-[72px] pb-[64px]">
-          <Image
-            src="/partner-background.webp"
-            alt="partner background"
-            className="absolute inset-0 object-cover w-full h-full lg:object-bottom max-lg:object-right max-md:hidden"
-            loading="lazy"
-            fill
-          />
-          <Image
-            src="/partner-background-mobile.webp"
-            alt="partner background mobile"
-            className="absolute inset-0 object-cover w-full h-full md:hidden"
-            loading="lazy"
-            fill
-          />
-          <div className="relative overflow-hidden">
-            <div className="box box01 left" style={{
-              translate: "none",
-              rotate: "none",
-              scale: "none",
-              transform: "translate3d(-2737.82px, 0px, 0px)"
-            }}
-            >
-              <div className="item_child"> nơi chứa ảnh ở đây</div>
+        {/* section 3 */}
+        <PartnerCarousel />
+        {/* end section 3 */}
+        {/* section 4 */}
+        <section>
+          <div className="lg:py-[68px] md:py-[47px] py-[34px]">
+            <div className="container space-y-8">
+              <div className="space-y-4">
+                <h3 className="pre-header text-[#6c8a1f] tracking-[1.4px] text-center">Our Advantage</h3>
+                <h2 className="text-center uppercase headline-1 text-[#004750] text-[32px] font-bold max-xl:w-[80%] max-md:w-full mx-auto">
+                  Why Jungle Boss Is The Top Choice For Adventure Tourism?
+                </h2>
+              </div>
+              <div className="grid lg:grid-cols-4 md:grid-cols-2 lg:gap-x-[64px] md:gap-x-45 max-md:gap-y-8 max-md:w-[70%] max-md:mx-auto">
+                <div className="space-y-[14px]">
+                  <div className="flex justify-center">
+                    <Image
+                      src="/section-3-unique.webp"
+                      alt="Unique Experience"
+                      width={100}
+                      height={100}
+                      className="object-contain"
+                    />
+                  </div>
+                  <div className="md:space-y-2">
+                    <div className="text-center text-[18px] title-2 text-[#6c8a1f]">Unique Experience</div>
+                    <div className="text-center text-gray-700 body-1">
+                      Discover thrilling adventures tailored by Jungle Boss to explore the best of jungle trekking and caving experience!
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-[14px]">
+                  <div className="flex justify-center">
+                    <Image
+                      src="/section-3-exclusive.webp"
+                      alt="Exclusive Tour"
+                      width={100}
+                      height={100}
+                      className="object-contain"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <div className="text-center text-[18px] title-2 text-[#6c8a1f]">Exclusive Tour</div>
+                    <div className="text-center text-gray-700 body-1">
+                      Every adventure tours of Jungle Boss is exclusive and unique. Includes the Kong Collapse Adventure, the #1 adventurous tour in Vietnam!
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-[14px]">
+                  <div className="flex justify-center">
+                    <Image
+                      src="/section-3-safety.webp"
+                      alt="Safe Adventure"
+                      width={100}
+                      height={100}
+                      className="object-contain"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <div className="text-center text-[18px] title-2 text-[#6c8a1f]">Safe Adventure</div>
+                    <div className="text-center text-gray-700 body-1">
+                      All tours adhere to strict safety protocols & are led by expert guides to ensure a safe jungle experience.
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-[14px]">
+                  <div className="flex justify-center">
+                    <Image
+                      src="/section-3-sustainable.webp"
+                      alt="Sustainable Development"
+                      width={100}
+                      height={100}
+                      className="object-contain"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <div className="text-center text-[18px] title-2 text-[#6c8a1f]">Sustainable Development</div>
+                    <div className="text-center text-gray-700 body-1">
+                      We strive to protect the environment and support local communities through sustainable practices.
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </section>
-        {/* end section 3 */}
-
-        <PartnerCarousel autoPlay={true} />
+        {/* end section 4 */}
       </main>
     </div>
   );

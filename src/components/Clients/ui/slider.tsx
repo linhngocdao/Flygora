@@ -1,9 +1,8 @@
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
-const PartnerCarousel = ({ autoPlay = false, playOnHover = true }) => {
+const PartnerCarousel = () => {
   const carouselRef = useRef<HTMLDivElement>(null);
-  const [isPlaying, setIsPlaying] = useState(autoPlay);
   const animationIdRef = useRef<number | null>(null);
   const translateXRef = useRef(0);
 
@@ -11,19 +10,16 @@ const PartnerCarousel = ({ autoPlay = false, playOnHover = true }) => {
     const carousel = carouselRef.current;
     if (!carousel) return;
 
-    const speed = 0.5; // Tốc độ scroll (px per frame)
+    const speed = 1; // Tốc độ scroll
 
     const animate = () => {
-      if (isPlaying) {
-        translateXRef.current -= speed;
+      translateXRef.current -= speed;
 
-        // Reset position when scrolled past first set of logos
-        if (translateXRef.current <= -carousel.scrollWidth / 2) {
-          translateXRef.current = 0;
-        }
-
-        carousel.style.transform = `translate3d(${translateXRef.current}px, 0px, 0px)`;
+      if (translateXRef.current <= -carousel.scrollWidth / 2) {
+        translateXRef.current = 0;
       }
+
+      carousel.style.transform = `translate3d(${translateXRef.current}px, 0px, 0px)`;
       animationIdRef.current = requestAnimationFrame(animate);
     };
 
@@ -34,21 +30,8 @@ const PartnerCarousel = ({ autoPlay = false, playOnHover = true }) => {
         cancelAnimationFrame(animationIdRef.current);
       }
     };
-  }, [isPlaying]);
+  }, []);
 
-  const handleMouseEnter = () => {
-    if (playOnHover) {
-      setIsPlaying(true);
-    }
-  };
-
-  const handleMouseLeave = () => {
-    if (playOnHover && !autoPlay) {
-      setIsPlaying(false);
-    }
-  };
-
-  // Danh sách logo partners
   const partners = [
     {
       id: 'eda30eb9-a86d-4858-83fc-263ee6fd21b8',
@@ -97,14 +80,14 @@ const PartnerCarousel = ({ autoPlay = false, playOnHover = true }) => {
       {/* Background Images */}
       <div className="absolute inset-0">
         <Image
-          src="/images/homepage/partner-background.webp"
+          src="/partner-background.webp"
           alt="partner background"
           className="absolute inset-0 object-cover w-full h-full lg:object-bottom max-lg:object-right max-md:hidden"
           fill
           priority
         />
         <Image
-          src="/images/homepage/partner-background-mobile.webp"
+          src="/partner-background-mobile.webp"
           alt="partner background mobile"
           className="absolute inset-0 object-cover w-full h-full md:hidden"
           fill
@@ -113,11 +96,7 @@ const PartnerCarousel = ({ autoPlay = false, playOnHover = true }) => {
       </div>
 
       {/* Carousel Container */}
-      <div
-        className="relative overflow-hidden"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
+      <div className="relative overflow-hidden">
         <div
           ref={carouselRef}
           className="flex items-center gap-8 w-fit transition-transform duration-300 ease-out"
@@ -136,29 +115,14 @@ const PartnerCarousel = ({ autoPlay = false, playOnHover = true }) => {
                   className="object-contain w-full h-full filter brightness-0 invert opacity-70 hover:opacity-100 transition-opacity duration-300"
                   fill
                   sizes="(max-width: 768px) 128px, (max-width: 1024px) 160px, 192px"
-                  unoptimized // Thêm prop này để bypass Next.js image optimization cho external domain
+                  unoptimized
                 />
               </div>
             </div>
           ))}
         </div>
 
-        {/* Play/Pause Button (Optional) */}
-        <button
-          onClick={() => setIsPlaying(!isPlaying)}
-          className="absolute top-4 right-4 bg-black/20 hover:bg-black/40 text-white p-2 rounded-full transition-all duration-200 opacity-0 hover:opacity-100 group-hover:opacity-100"
-          aria-label={isPlaying ? "Pause carousel" : "Play carousel"}
-        >
-          {isPlaying ? (
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
-            </svg>
-          ) : (
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd" />
-            </svg>
-          )}
-        </button>
+
       </div>
     </section>
   );

@@ -7,14 +7,13 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'geomanist': ['Geomanist', 'sans-serif'],
+        'sans': ['Geomanist', 'sans-serif'],
+      },
       colors: {
         primary: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          400: 'rgb(214 226 80 / <alpha-value>)',
-          900: '#0c4a6e',
-          darker: '#0369a1',
-          DEFAULT: '#0ea5e9',
+          DEFAULT: '#6c8a1f',
         },
       },
       container: {
