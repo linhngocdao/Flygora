@@ -299,10 +299,11 @@ export default function Home() {
         </section>
         {/* end section 4 */}
         {/* section 5 */}
-
         <TopAdventureTour />
-
         {/* end section 5 */}
+        {/* section 6 */}
+        <section className="lg:py-[68px] md:py-[45px] py-[34px] overflow-hidden space-y-8"></section>
+        {/* end section 6 */}
       </main>
     </div>
   );

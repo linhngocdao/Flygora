@@ -3,26 +3,21 @@ import Image from "next/image";
 import ButtonPrimary from "./buttonPrimary";
 import { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Scrollbar } from "swiper/modules";
+import { Navigation, Pagination, Scrollbar, Thumbs } from "swiper/modules";
 
 const TopAdventureTour = () => {
   const [isVisible, setIsVisible] = useState(false);
   const section5Ref = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const swiperRef = useRef<any>(null);
-
-
-
+  const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + images.length) % images.length);
   };
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % images.length);
-  };
-
-  const goToSlide = (index: number) => {
-    setCurrentSlide(index);
   };
 
   useEffect(() => {
@@ -55,16 +50,15 @@ const TopAdventureTour = () => {
       <section ref={section5Ref} className="relative overflow-hidden section-animation">
         <div className="relative z-10 items-center lg:flex bg-gray-50">
           {/* view image */}
-          <div className="bg-red-600 lg:w-[48.5%] lg:h-full aspect-1 lg:absolute top-0 left-0 overflow-hidden">
+          <div className=" lg:w-[48.5%] lg:h-full aspect-1 lg:absolute top-0 left-0 overflow-hidden">
             <Swiper
-              modules={[Navigation, Pagination, Scrollbar]}
-              spaceBetween={0}
-              slidesPerView={1}
+              loop={true}
+              modules={[Navigation, Pagination, Scrollbar, Thumbs]}
+              spaceBetween={10}
+              thumbs={{ swiper: thumbsSwiper }}
               onSwiper={(swiper) => (swiperRef.current = swiper)}
-              onSlideChange={(swiper) => setCurrentSlide(swiper.activeIndex)}
-              navigation
+              onSlideChange={(swiper) => setCurrentSlide(swiper.realIndex)}
               pagination={{ clickable: true }}
-              scrollbar={{ draggable: true }}
               className="h-full"
             >
               {images.map((img) => (
@@ -78,25 +72,43 @@ const TopAdventureTour = () => {
               ))}
             </Swiper>
           </div>
+
           {/* slider image */}
-          <div className="md:w-[63%] max-lg:max-h-screen md:absolute right-0 lg:bottom-[14%] md:bottom-[45%] slider max-lg:mt-8 overflow-hidden">
+          <div className="w-full md:w-[63%] md:absolute right-0 lg:bottom-[14%] md:bottom-[45%] max-lg:mt-8 px-6">
             <Swiper
-              spaceBetween={8}
+              loop={true}
+              onSwiper={setThumbsSwiper}
               slidesPerView={5}
-              className="w-full"
+              spaceBetween={16}
+              watchSlidesProgress
+              breakpoints={{
+                320: { slidesPerView: 2.3 },
+                480: { slidesPerView: 3 },
+                768: { slidesPerView: 4 },
+                1024: { slidesPerView: 5 },
+              }}
+              grabCursor
+              className="!overflow-visible"
             >
               {images.map((img, index) => (
                 <SwiperSlide key={img.id}>
                   <button
-                    onClick={() => swiperRef.current?.slideTo(index)}
-                    className={`w-16 h-16 rounded-lg overflow-hidden border-2 transition-all ${currentSlide === index ? 'border-green-500 scale-105' : 'border-transparent'}`}
+                    className={`w-[160px] h-[110px] md:w-[170px] md:h-[120px] rounded-lg overflow-hidden border-2 transition-all duration-200
+            ${currentSlide === index ? 'border-[#6c8a1f] scale-105 shadow-lg' : 'border-transparent'}`}
                   >
-                    <img src={img.src} alt={`Thumb ${index}`} className="w-full h-full object-cover" />
+                    <img
+                      src={img.src}
+                      alt={`Thumb ${index}`}
+                      className="w-full h-full object-cover"
+                    />
                   </button>
                 </SwiperSlide>
               ))}
             </Swiper>
           </div>
+
+
+
           {/* content */}
           <div className="container flex lg:flex-col flex-col-reverse lg:items-end justify-between h-full pt-[27px] max-lg:py-8 relative">
             <div className="xl:w-[568px] lg:w-1/2 space-y-4 lg:pl-4 xl:pl-0 lg:pb-[300px]">
