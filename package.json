@@ -10,10 +10,11 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.81.2",
+    "@types/swiper": "^5.4.3",
     "next": "15.3.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "swiper": "^11.2.8"
+    "swiper": "^11.2.10"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

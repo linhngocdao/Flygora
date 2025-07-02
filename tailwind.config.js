@@ -1,39 +1,35 @@
-/** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
-      fontFamily: {
-        'geomanist': ['Geomanist', 'sans-serif'],
-        'sans': ['Geomanist', 'sans-serif'],
-      },
       colors: {
         primary: {
           DEFAULT: '#6c8a1f',
+          dark: '#5a7419',
+        },
+        secondary: {
+          DEFAULT: '#004750',
+          light: '#005f6b',
         },
       },
-      container: {
-        center: true,
-        padding: {
-          DEFAULT: '1rem',
-          sm: '1rem',
-          lg: '1.5rem',
-          xl: '2rem',
-          '2xl': '2rem',
+      animation: {
+        'fade-in': 'fadeIn 0.5s ease-in-out',
+        'slide-up': 'slideUp 0.5s ease-out',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
         },
-        screens: {
-          sm: '100%',
-          md: '100%',
-          lg: '100%',
-          xl: '1200px',
-          '2xl': '1200px',
+        slideUp: {
+          '0%': { transform: 'translateY(20px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
         },
       },
     },
   },
   plugins: [],
-}
+};
