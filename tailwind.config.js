@@ -16,6 +16,15 @@ module.exports = {
           DEFAULT: '#6c8a1f',
         },
       },
+      keyframes: {
+        'spin-text': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' }
+        }
+      },
+      animation: {
+        'spin-text': 'spin-text 1s linear infinite'
+      },
       container: {
         center: true,
         padding: {
