@@ -15,6 +15,23 @@ module.exports = {
           light: '#005f6b',
         },
       },
+      keyframes: {
+        'spin-text': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' }
+        }
+      },
+      animation: {
+        'spin-text': 'spin-text 1s linear infinite'
+      },
+      container: {
+        center: true,
+        padding: {
+          DEFAULT: '1rem',
+          sm: '1rem',
+          lg: '1.5rem',
+          xl: '2rem',
+          '2xl': '2rem',
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in-out',
         'slide-up': 'slideUp 0.5s ease-out',
@@ -32,4 +49,4 @@ module.exports = {
     },
   },
   plugins: [],
-};
+}

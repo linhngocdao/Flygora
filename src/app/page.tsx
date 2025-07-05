@@ -1,7 +1,7 @@
 "use client";
 import HeaderComponent from "@/components/Clients/layout/header/page";
+import AllAdventureTour from "@/components/Clients/layout/home/section6/page";
 import ButtonPrimary from "@/components/Clients/ui/buttonPrimary";
-import AdventureTourSwiper from "@/components/Clients/ui/s";
 import PartnerCarousel from "@/components/Clients/ui/slider";
 import TopAdventureTour from "@/components/Clients/ui/TopAdventureTour";
 import Image from "next/image";
@@ -112,9 +112,9 @@ export default function Home() {
           <div className="relative overflow-hidden max-lg:pt-16 max-md:pb-8 max-md:pt-20 bg-section-2">
             <div className="flex max-md:flex-col-reverse items-center container md:space-x-[37px] xl:pt-[119px] lg:pt-[100px] md:py-8 relative z-30">
               <div className="flex flex-col justify-center flex-grow space-y-2">
-                <h1 className="display-1 uppercase tracking-[-1.2px] text-text-500">Jungle Boss</h1>
+                <h1 className="text-[4.75rem] text-[#004750]  uppercase tracking-[-1.2px] font-[700]">Jungle Boss</h1>
                 <div className="space-y-4">
-                  <div className="uppercase headline-2 text-text-500">
+                  <div className="uppercase headline-2 text-[1.75rem] text-[#004750] font-medium">
                     Leading certified adventure travel company
                   </div>
                   <div className="flex flex-wrap items-center justify-between">
@@ -302,8 +302,91 @@ export default function Home() {
         <TopAdventureTour />
         {/* end section 5 */}
         {/* section 6 */}
-        <section className="lg:py-[68px] md:py-[45px] py-[34px] overflow-hidden space-y-8"></section>
+        <AllAdventureTour />
         {/* end section 6 */}
+        {/* section 7 */}
+        <section
+          className="space-y-8 lg:py-[68px] md:py-[45px] py-[34px] bg-gray-50 overflow-hidden"
+          id="needToMoveSection"
+        >
+          <div className="container space-y-4">
+            <h2 className="text-center pre-header text-primary">Team Building Tour</h2>
+            <div className="text-center uppercase headline-1 text-text-500">
+              Jumpstart Team Synergy <br /> with Exhilarating Challenges
+            </div>
+            <div className="prose team-building-tour">
+              <p>
+                Immerse your team in an unparalleled adventure amid the awe-inspiring jungles of Phong Nha – Ke Bang
+                National Park. Jungle Boss Team building is a transformative journey marked by unique and challenging
+                games, setting us apart from the conventional team building landscape in Vietnam. Escape the mundane
+                and seize the extraordinary as your team engages in missions that demand collaboration, creativity,
+                and camaraderie. Our jungle setting serves as the ultimate canvas for fostering teamwork, creating an
+                atmosphere that is not only thrilling but also indelibly unforgettable.
+              </p>
+              <p>
+                Embrace a one-of-a-kind adventure with us – a promise to not only fortify your team's bonds but also
+                create lasting memories of an exceptionally extraordinary experience. At Jungle Boss, we redefine team
+                building, making it an immersive and thrilling escapade that transcends the ordinary, leaving an
+                enduring mark on your team's collective journey. There are different team building options from 1 day
+                to multiple days. Leave us a request and we can help you tailor a unique Jungle Team building that
+                suits your needs!
+              </p>
+            </div>
+          </div>
+
+          <div className="w-max lg:h-[330px] md:h-[200px] h-[120px] flex gap-x-4" id="needToMove">
+            {[
+              "83bd39bf-107a-474f-95d2-561a9950b543",
+              "af730d8d-dbd1-4991-a6f6-96a763a99baa",
+              "043ca800-98fc-46da-a7e4-9161dad21989",
+              "fe88327e-7382-49e2-b320-d3f637a6e0fe",
+              "279ed19c-0f05-4d18-909c-d7f0fd10454c",
+              "dace4dff-255e-4197-8b7a-5d0c7260583e",
+              "501c8981-a4cd-43f4-a3d8-962b96433382",
+              "145a9bc5-473f-406c-bb53-37dcdac8f333"
+            ].map((id, index) => (
+              <div
+                key={index}
+                className={`lg:w-[400px] md:w-[300px] lg:h-[266px] md:h-[150px] w-[175px] h-[95px] rounded-[8px] overflow-hidden ${index % 2 !== 0 ? "self-end" : ""
+                  }`}
+              >
+                <picture>
+                  <source
+                    media="(max-width: 767px)"
+                    srcSet={`https://cms.junglebosstours.com/assets/${id}?format=webp&width=350&height=190&quality=100`}
+                    type="image/webp"
+                  />
+                  <source
+                    media="(max-width: 767px)"
+                    srcSet={`https://cms.junglebosstours.com/assets/${id}?format=jpeg&width=350&height=190&quality=100`}
+                    type="image/jpeg"
+                  />
+                  <source
+                    media="(max-width: 1439px)"
+                    srcSet={`https://cms.junglebosstours.com/assets/${id}?format=webp&width=800&height=512&quality=100`}
+                    type="image/webp"
+                  />
+                  <source
+                    media="(max-width: 1439px)"
+                    srcSet={`https://cms.junglebosstours.com/assets/${id}?format=jpeg&width=800&height=512&quality=100`}
+                    type="image/jpeg"
+                  />
+                  <img
+                    className="object-cover w-full h-full"
+                    src={`https://cms.junglebosstours.com/assets/${id}?format=webp&width=800&height=512&quality=100`}
+                    alt={`team building image ${index}`}
+                    loading="lazy"
+                    width={400}
+                    height={266}
+                  />
+                </picture>
+              </div>
+            ))}
+          </div>
+
+          <ButtonPrimary name="About us" />
+        </section>
+
       </main>
     </div>
   );
