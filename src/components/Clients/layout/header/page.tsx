@@ -48,18 +48,18 @@ const HeaderComponent = () => {
                     <div className="relative w-full">
                       <div className={`duration-500 ease-in-out xl:max-w-[265px] md:max-w-[186px] max-w-[170px] ${isScrolled ? 'scale-100 opacity-0' : 'scale-100 opacity-100'}`}>
                         <picture>
-                          <source media="(max-width: 767px)" srcSet="/logo.webp?w=500" />
-                          <source media="(max-width: 1439px)" srcSet="/logo.webp?w=1000" />
-                          <img className="xl:max-w-[180px] md:max-w-[160px] max-w-[180px]" src="/logo.webp" alt="logo" loading="lazy" />
+                          <source media="(max-width: 767px)" srcSet="/images/homePage/logo.webp" />
+                          <source media="(max-width: 1439px)" srcSet="/images/homePage/logo.webp" />
+                          <img className="xl:max-w-[180px] md:max-w-[160px] max-w-[180px]" src="/images/homePage/logo.webp" alt="logo" loading="lazy" />
                         </picture>
                       </div>
                       <div className={`absolute flex items-center justify-center w-full mx-auto duration-1000 ease-in-out -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 ${isScrolled ? 'scale-100 opacity-100' : 'scale-0 opacity-0'}`}>
                         <picture>
-                          <source media="(max-width: 767px)" srcSet="/logo-mobile.webp?w=500" />
-                          <source media="(max-width: 1439px)" srcSet="/logo-mobile.webp?w=1000" />
+                          <source media="(max-width: 767px)" srcSet="/images/homePage/logo-mobile.webp" />
+                          <source media="(max-width: 1439px)" srcSet="/images/homePage/logo-mobile.webp" />
                           <img
                             className="xl:max-w-[50px] md:max-w-[60px] max-w-[40px]"
-                            src="/logo-mobile.webp"
+                            src="/images/homePage/logo-mobile.webp"
                             alt="logo mobile"
                             loading="lazy"
                           />
@@ -111,7 +111,7 @@ const HeaderComponent = () => {
                           className="flex items-center px-4 py-3 space-x-3 text-white duration-300 ease-in-out cursor-pointer label-1 lg:hover:bg-primary-50 lg:hover:text-primary-900"
                         >
                           <div className="w-8">
-                            <img src="/flag-en.webp" alt="flag en" className="object-cover w-full h-full" />
+                            <img src="/images/homePage/flag-en.webp" alt="flag en" className="object-cover w-full h-full" />
                           </div>
                           <span className="flex-1">EN</span>
                         </Link>
@@ -128,9 +128,9 @@ const HeaderComponent = () => {
         <div className={`-translate-x-full fixed z-[51] w-screen h-screen overflow-hidden duration-500 ease-in-out bg-white ${isScrolled ? 'top-[60px] h-[calc(100vh-60px)]' : 'top-[70px] h-[calc(100vh-70px)]'}`}>
           <div className="absolute inset-0 w-full h-full">
             <picture>
-              <source media="(max-width: 767px)" srcSet="/bg-overlay-main.webp?w=500" />
-              <source media="(max-width: 1439px)" srcSet="/bg-overlay-main.webp?w=1000" />
-              <img className="object-cover w-full h-full" src="/bg-overlay-main.webp" alt="background menu" loading="lazy" />
+              <source media="(max-width: 767px)" srcSet="/images/homePage/bg-overlay-main.webp" />
+              <source media="(max-width: 1439px)" srcSet="/images/homePage/bg-overlay-main.webp" />
+              <img className="object-cover w-full h-full" src="/images/homePage/bg-overlay-main.webp" alt="background menu" loading="lazy" />
             </picture>
           </div>
           <div className="relative xl:py-[68px] md:py-[48px] py-[34px] xl:px-[120px] lg:pr-[20px] lg:pl-[80px] px-8 md:px-[60px] h-full flex flex-col justify-between xl:space-y-14 md:space-y-10 space-y-7 overflow-y-auto">

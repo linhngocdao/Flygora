@@ -10,10 +10,10 @@ interface ButtonPrimaryProps {
 const ButtonPrimary = ({name, href}: ButtonPrimaryProps) => {
     return (
         <a href={href} className="block max-w-[140px]">
-            <button className="relative w-full h-[48px] cursor-pointer overflow-hidden">
-                <div className="absolute inset-0 w-full h-full z-0">
+            <button className="relative w-full h-[48px] cursor-pointer overflow-hidden ">
+                <div className="absolute inset-0 w-full h-full z-0 ">
                     <Image
-                        src="/images/home/BackBtn.svg"
+                        src="/images/homePage/BackBtn.svg"
                         alt="button background"
                         width={200}
                         height={200}
@@ -22,8 +22,8 @@ const ButtonPrimary = ({name, href}: ButtonPrimaryProps) => {
                     />
                 </div>
 
-                <div className="relative z-10 flex items-center justify-center w-full h-full">
-                    <span className="text-white font-semibold spin-animation hover:text-yellow-300 transition-colors duration-300">
+                <div className="relative z-10 flex items-center justify-center w-full h-full spin-animation">
+                    <span className="text-white font-semibold   transition-colors duration-300">
                         {name ? name : 'No Name Provided'}
                     </span>
                 </div>

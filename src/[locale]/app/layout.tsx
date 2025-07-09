@@ -1,8 +1,25 @@
-import type { Metadata } from "next";
+import type {Metadata} from "next";
 import "../styles/globals.css";
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import localFont from 'next/font/local'
+
+const geomanist = localFont({
+  src: [{
+    path: './fonts/Geomanist-Regular.woff2', weight: '400', style: 'normal',
+  }, {
+    path: './fonts/Geomanist-Book.woff2', weight: '300', style: 'normal',
+  }, {
+    path: './fonts/Geomanist-Medium.woff2', weight: '500', style: 'normal',
+  }, {
+    path: './fonts/Geomanist-Bold.woff2', weight: '700', style: 'normal',
+  }], variable: '--font-geomanist'
+})
+
+const svnKingston = localFont({
+  src: './fonts/SVN-Kingston-Regular.woff2', variable: '--font-kingston'
+})
 
 
 export const metadata: Metadata = {
@@ -27,7 +44,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="vi">
-      <body>
+      <body className={`${geomanist.variable} ${svnKingston.variable} antialiased`}>
         {children}
       </body>
     </html>

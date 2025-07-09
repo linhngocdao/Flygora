@@ -1,46 +1,5 @@
 @import "tailwindcss";
 
-/* Font Face Declarations */
-@font-face {
-  font-family: 'Geomanist';
-  src: url('/font/Geomanist-Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Geomanist';
-  src: url('/font/Geomanist-Book.woff2') format('woff2');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Geomanist';
-  src: url('/font/Geomanist-Medium.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Geomanist';
-  src: url('/font/Geomanist-Bold.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'SVN-Kingston';
-  src: url('/font/SVN-Kingston-Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -57,7 +16,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Geomanist', sans-serif;
+  font-family: var(--font-geomanist), sans-serif;
 }
 
 /* Container layout với max-width 1200px */
@@ -99,7 +58,7 @@ body {
   margin-right: -50vw;
 }
 .bg-section-2{
-  background-image: url('/section-2-bg.webp');
+  background-image: url('/images/homePage/section-2-bg.webp');
     background-position: 50%;
     background-repeat: no-repeat;
     background-size: cover;
@@ -109,8 +68,8 @@ body {
 .title-2 {
   font-weight: 600;
 }
-.pre-header{
-      font-family: 'SVN-Kingston', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+.pre-header {
+    font-family: var(--font-kingston), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
     font-size: 1.5rem;
     font-weight: 400;
     letter-spacing: .05em;
@@ -146,7 +105,7 @@ body {
 .card-tour {
     background-color: rgba(245, 245, 245, 1);
     border-radius: 0.5rem;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     position: relative;
 }
@@ -169,29 +128,28 @@ body {
 }
 
 
-@keyframes slide-down-text {
-    0% {
-        transform: translateY(0);
-        opacity: 1;
+@keyframes MoveUpInitial {
+    100% {
+        opacity: 0;
+        transform: translateY(25px);
     }
-    50% {
-        transform: translateY(50px);
-        opacity: 0.5;
+}
+
+@keyframes MoveDownInitial {
+    0% {
+        opacity: 0;
+        transform: translateY(-25px);
     }
     100% {
-        transform: translateY(0);
         opacity: 1;
+        transform: translateY(0);
     }
 }
 
-.spin-animation {
-    display: inline-block;
-    transition: all 0.3s ease;
+
+.spin-animation:hover span {
+    color: #ffdf20;
+    animation:
+            MoveUpInitial 0.3s ease-in-out,
+            MoveDownInitial 0.3s ease-in-out 0.3s;
 }
-
-.spin-animation:hover {
-    animation: slide-down-text 1s ease-in-out ;
-}
-
-
-
