@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'cms.junglebosstours.com',
+        hostname: 'cms.junglebosstours.com,',
         port: '',
         pathname: '/assets/**',
       }
