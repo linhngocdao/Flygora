@@ -1,7 +1,7 @@
 "use client"
 import Image from 'next/image'
-import Link from 'next/link'
 import React, { useState, useEffect } from 'react'
+import LanguageSwitcher from '@/components/Clients/ui/LanguageSwitcher'
 
 const HeaderComponent = () => {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -73,7 +73,7 @@ const HeaderComponent = () => {
                 <div className="flex items-center justify-between space-x-[22px]">
                   <div className={`cursor-pointer text-[#eef4b7] transition-all duration-300 ${isScrolled ? 'scale-90' : 'scale-100'}`}>
                     <Image
-                      src="/ic-search.svg"
+                      src="/images/homePage/ic-search.svg"
                       width={25}
                       height={25}
                       alt="search icon"
@@ -83,41 +83,7 @@ const HeaderComponent = () => {
                   </div>
 
                   {/* Language switcher */}
-                  <div className="relative languages">
-                    <div className="items-center hidden space-x-2 cursor-pointer md:flex">
-                      <div className="max-w-[27px] w-full border border-primary-100 rounded overflow-hidden">
-                        <Image
-                        width={30}
-                        height={30}
-                          src="/flag-vi.webp"
-                          alt="flag vi"
-                          className="object-cover w-full h-full"
-                        />
-                      </div>
-                          <Image
-                        width={30}
-                        height={30}
-                          src="/ic-arrow-down.svg"
-                          alt="flag vi"
-                          className="object-cover w-full h-full"
-                        />
-                    </div>
-
-                    {/* Dropdown (hidden by default) */}
-                    <div className="absolute top-0 w-[90px] -translate-x-1/2 left-1/2 space-y-3 duration-300 ease-in-out pt-10 z-40 opacity-0 invisible">
-                      <div className="overflow-hidden rounded-md bg-primary-darker">
-                        <Link
-                          href="/"
-                          className="flex items-center px-4 py-3 space-x-3 text-white duration-300 ease-in-out cursor-pointer label-1 lg:hover:bg-primary-50 lg:hover:text-primary-900"
-                        >
-                          <div className="w-8">
-                            <img src="/images/homePage/flag-en.webp" alt="flag en" className="object-cover w-full h-full" />
-                          </div>
-                          <span className="flex-1">EN</span>
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
+                <LanguageSwitcher/>
                 </div>
               </div>
             </div>

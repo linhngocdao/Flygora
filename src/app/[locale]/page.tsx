@@ -57,7 +57,7 @@ export default function Home() {
                                 <div className="pt-1 text-gray-700 uppercase headline-3">Find your trip</div>
                                 <div className="flex items-center justify-center duration-300 ease-in-out rounded-full cursor-pointer bg-[#6c8a1f] lg:hover:bg-primary-darker w-10 h-10 md:flex-shrink-0">
                                     <Image
-                                        src="/ic-search.svg"
+                                        src="/images/homePage/ic-search.svg"
                                         width={25}
                                         height={25}
                                         alt="search icon"
