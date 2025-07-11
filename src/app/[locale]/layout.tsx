@@ -9,18 +9,18 @@ import { NextIntlClientProvider } from "next-intl";
 
 const geomanist = localFont({
   src: [{
-    path: './fonts/Geomanist-Regular.woff2', weight: '400', style: 'normal',
+    path: '../../../public/fonts/Geomanist-Regular.woff2', weight: '400', style: 'normal',
   }, {
-    path: './fonts/Geomanist-Book.woff2', weight: '300', style: 'normal',
+    path: '../../../public/fonts/Geomanist-Book.woff2', weight: '300', style: 'normal',
   }, {
-    path: './fonts/Geomanist-Medium.woff2', weight: '500', style: 'normal',
+    path: '../../../public/fonts/Geomanist-Medium.woff2', weight: '500', style: 'normal',
   }, {
-    path: './fonts/Geomanist-Bold.woff2', weight: '700', style: 'normal',
+    path: '../../../public/fonts/Geomanist-Bold.woff2', weight: '700', style: 'normal',
   }], variable: '--font-geomanist'
 })
 
 const svnKingston = localFont({
-  src: './fonts/SVN-Kingston-Regular.woff2', variable: '--font-kingston'
+  src: '../../../public/fonts/SVN-Kingston-Regular.woff2', variable: '--font-kingston'
 })
 
 

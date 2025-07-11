@@ -121,8 +121,6 @@ const PartnerCarousel = () => {
             </div>
           ))}
         </div>
-
-
       </div>
     </section>
   );
