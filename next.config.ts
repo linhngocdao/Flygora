@@ -1,9 +1,10 @@
 import type { NextConfig } from "next";
+import createNextIntlPlugin from 'next-intl/plugin';
+const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
   images: {
     domains: ['cms.junglebosstours.com'],
-    // Hoặc sử dụng remotePatterns cho Next.js 13+
     remotePatterns: [
       {
         protocol: 'https',
@@ -15,4 +16,4 @@ const nextConfig: NextConfig = {
   }
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);

@@ -1,9 +1,11 @@
-import type {Metadata} from "next";
+import type { Metadata } from "next";
 import "../styles/globals.css";
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import localFont from 'next/font/local'
+import { getMessages } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
 
 const geomanist = localFont({
   src: [{
@@ -37,15 +39,21 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: { locale: string };
 }>) {
+  const { locale } = await params;
+  const messages = await getMessages({ locale });
   return (
-    <html lang="vi">
+    <html lang={locale}>
       <body className={`${geomanist.variable} ${svnKingston.variable} antialiased`}>
-        {children}
+        <NextIntlClientProvider messages={messages}>
+          {children}
+        </NextIntlClientProvider>
       </body>
     </html>
   );
