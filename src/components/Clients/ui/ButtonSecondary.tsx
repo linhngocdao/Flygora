@@ -7,7 +7,7 @@ interface ButtonPrimaryProps {
     className?: string;
 }
 
-const ButtonPrimary = ({name, href}: ButtonPrimaryProps) => {
+const ButtonSecondary = ({name, href}: ButtonPrimaryProps) => {
     return (
         <a href={href} className="inline-block">
             <button className="relative px-8 h-[40px] cursor-pointer overflow-hidden">
@@ -28,8 +28,10 @@ const ButtonPrimary = ({name, href}: ButtonPrimaryProps) => {
                     </span>
                 </div>
             </button>
+
+
         </a>
     );
 };
 
-export default ButtonPrimary;
+export default ButtonSecondary;

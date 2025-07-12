@@ -6,6 +6,10 @@ import HeroSection from "@/components/Clients/layout/home/HeroSection/page";
 import WhychooseUsSection from "@/components/Clients/layout/home/WhyChooseUs/page";
 import FeaturedTour from "@/components/Clients/layout/home/FeaturedTour/page";
 import TeamBuilding from "@/components/Clients/layout/home/TeamBuilding/page";
+import GuestReviewSection from "@/components/Clients/layout/home/GuestReview/page";
+import SafetyCommitment from "@/components/Clients/layout/home/SafetyCommitment/page";
+import FaqSection from "@/components/Clients/layout/home/FAQSection/page";
+import RecommendationBanner from "@/components/Clients/layout/home/RecommendationBanner/page";
 
 export default function Home() {
 
@@ -28,6 +32,18 @@ export default function Home() {
 
         {/* Team Building Section */}
         <TeamBuilding/>
+
+        {/*Guest Review Section*/}
+         <GuestReviewSection/>
+
+        {/*SafetyCommitment */}
+        <SafetyCommitment/>
+
+        {/* Faq Section*/}
+        <FaqSection/>
+
+        {/*Recommendation Banner */}
+        <RecommendationBanner/>
       </main>
     </div>
   );
