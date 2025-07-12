@@ -1,10 +1,16 @@
 "use client"
-import Image from 'next/image'
-import React, { useState, useEffect } from 'react'
+import React, {useEffect, useState} from 'react'
 import LanguageSwitcher from '@/components/Clients/ui/LanguageSwitcher'
+import SearchHeader from "@/components/Clients/ui/SearchHeader";
+import Link from "next/link";
 
 const HeaderGotravel = () => {
   const [isScrolled, setIsScrolled] = useState(false)
+  const [showSearchPopup, setShowSearchPopup] = useState<boolean>(false)
+
+  const toggleSearchPopup = () => {
+    setShowSearchPopup((prev) => !prev)
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,7 +25,7 @@ const HeaderGotravel = () => {
   return (
       <div>
         <header>
-          <div className={`fixed top-0 left-0 z-[1000] flex items-center w-full duration-700 ease-in-out header-wrapper ${isScrolled ? 'h-[50px] lg:h-[60px] bg-[#34430f] shadow-lg backdrop-blur-sm' : 'h-[70px] lg:h-24 max-lg:bg-[#34430f]'}`}>
+          <div className={`fixed top-0 left-0 z-[1000] flex items-center w-full duration-700 ease-in-out header-wrapper ${showSearchPopup ? 'bg-[#34430f]' : "bg-none"} ${isScrolled ? 'h-[50px] lg:h-[60px] bg-[#34430f] shadow-lg backdrop-blur-sm' : 'h-[70px] lg:h-24 max-lg:bg-[#34430f]'}`}>
             {/* Background overlay khi scroll */}
             {isScrolled && (
                 <div className="absolute inset-0 w-full h-full opacity-20">
@@ -44,7 +50,7 @@ const HeaderGotravel = () => {
 
                   {/* Logo */}
                   <div>
-                    <a href="/vi" aria-current="page">
+                    <Link href="/vi" aria-current="page">
                       <div className="relative w-full">
                         <div className={`duration-500 ease-in-out xl:max-w-[265px] md:max-w-[186px] max-w-[170px] ${isScrolled ? 'scale-100 opacity-0' : 'scale-100 opacity-100'}`}>
                           <picture>
@@ -66,21 +72,12 @@ const HeaderGotravel = () => {
                           </picture>
                         </div>
                       </div>
-                    </a>
+                    </Link>
                   </div>
 
-                  {/* Icons search */}
                   <div className="flex items-center justify-between space-x-[22px]">
-                    <div className={`cursor-pointer text-[#eef4b7] transition-all duration-300 ${isScrolled ? 'scale-90' : 'scale-100'}`}>
-                      <Image
-                          src="/images/homePage/ic-search.svg"
-                          width={25}
-                          height={25}
-                          alt="search icon"
-                          style={{ filter: 'invert(83%) sepia(10%) saturate(241%) hue-rotate(47deg) brightness(97%) contrast(85%)' }}
-                      />
-
-                    </div>
+                    {/* search component */}
+                    <SearchHeader isScrolled={isScrolled} showSearchPopup={showSearchPopup} toggleSearchPopup={toggleSearchPopup}/>
 
                     {/* Language switcher */}
                     <LanguageSwitcher/>
