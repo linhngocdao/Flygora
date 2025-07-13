@@ -6,11 +6,7 @@ import Link from "next/link";
 
 const HeaderGotravel = () => {
   const [isScrolled, setIsScrolled] = useState(false)
-  const [showSearchPopup, setShowSearchPopup] = useState<boolean>(false)
 
-  const toggleSearchPopup = () => {
-    setShowSearchPopup((prev) => !prev)
-  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,7 +21,7 @@ const HeaderGotravel = () => {
   return (
       <div>
         <header>
-          <div className={`fixed top-0 left-0 z-[1000] flex items-center w-full duration-700 ease-in-out header-wrapper ${showSearchPopup ? 'bg-[#34430f]' : "bg-none"} ${isScrolled ? 'h-[50px] lg:h-[60px] bg-[#34430f] shadow-lg backdrop-blur-sm' : 'h-[70px] lg:h-24 max-lg:bg-[#34430f]'}`}>
+          <div className={`fixed top-0 left-0 z-[1000] flex items-center w-full duration-700 ease-in-out header-wrapper ${isScrolled ? 'h-[50px] lg:h-[60px] bg-[#34430f] shadow-lg backdrop-blur-sm' : 'h-[70px] lg:h-24 max-lg:bg-[#34430f]'}`}>
             {/* Background overlay khi scroll */}
             {isScrolled && (
                 <div className="absolute inset-0 w-full h-full opacity-20">
@@ -77,7 +73,7 @@ const HeaderGotravel = () => {
 
                   <div className="flex items-center justify-between space-x-[22px]">
                     {/* search component */}
-                    <SearchHeader isScrolled={isScrolled} showSearchPopup={showSearchPopup} toggleSearchPopup={toggleSearchPopup}/>
+                    <SearchHeader isScrolled={isScrolled} />
 
                     {/* Language switcher */}
                     <LanguageSwitcher/>
