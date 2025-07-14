@@ -5,6 +5,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 const AllAdventureTour = () => {
   // Sample tour data - replace with your actual data
@@ -94,7 +95,7 @@ const AllAdventureTour = () => {
   return (
       <section className="py-8 lg:py-16 bg-gray-50">
         {/* Header */}
-        <div className="container mx-auto px-4 space-y-4">
+        <div className="container mx-auto px-4 space-y-4 pb-10">
           <h2 className="text-[#6c8a1f] pre-header text-xl font-semibold italic">All Adventure Tour</h2>
           <div>
             <h1 className="text-3xl lg:text-4xl font-bold uppercase text-[#004750]">Start Your Ideal Adventure Tour!</h1>
@@ -105,10 +106,10 @@ const AllAdventureTour = () => {
         {/* Full Width Swiper Container */}
         <div className="relative">
           {/* Desktop Navigation Buttons */}
-          <button className="btn-slider advTourNavPrev absolute top-1/2 -translate-y-1/2 left-4 xl:left-8 z-10 hidden lg:flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300" aria-label="Previous slide">
+          <button className="btn-slider cursor-pointer advTourNavPrev absolute top-1/2 -translate-y-1/2 left-4 xl:left-8 z-10 hidden lg:flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300" aria-label="Previous slide">
             <Image src="/images/homePage/pre.svg" alt="Previous" width={18} height={12} />
           </button>
-          <button className="btn-slider advTourNavNext absolute top-1/2 -translate-y-1/2 right-4 xl:right-8 z-10 hidden lg:flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300" aria-label="Next slide">
+          <button className="btn-slider cursor-pointer advTourNavNext absolute top-1/2 -translate-y-1/2 right-4 xl:right-8 z-10 hidden lg:flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300" aria-label="Next slide">
             <Image src="/images/homePage/pre.svg" alt="Next" className="rotate-180" width={18} height={12} />
           </button>
 
@@ -155,7 +156,7 @@ const AllAdventureTour = () => {
             {tours.map((tour) => (
                 <SwiperSlide key={tour.id}>
                   <article className="rounded-2xl mr-[16px] bg-white shadow-md hover:shadow-lg transition duration-300 overflow-hidden">
-                    <a href="/tour/do-quyen-waterfall-zipline">
+                    <Link href="/tour/do-quyen-waterfall-zipline">
                       <div className="relative w-full h-[180px]">
                         <Image
                             src="https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp"
@@ -164,13 +165,13 @@ const AllAdventureTour = () => {
                             className="object-cover rounded-t-2xl"
                         />
                       </div>
-                    </a>
+                    </Link>
                     <div className="p-4 space-y-2 text-sm">
-                      <a href="/tour/do-quyen-waterfall-zipline">
-                        <h3 className="font-semibold text-base text-gray-900 hover:text-[#6c8a1f] transition line-clamp-2">
+                      <Link href="/tour/do-quyen-waterfall-zipline">
+                        <h3 className="font-semibold text-base text-gray-900 hover:text-[#6c8a1f] transition line-clamp-1">
                           {tour.title}
                         </h3>
-                      </a>
+                      </Link>
                       <p className="text-gray-600">{tour.level}</p>
                       <p className="text-gray-600">{tour.duration}</p>
 
@@ -213,16 +214,16 @@ const AllAdventureTour = () => {
           margin: 0 4px;
           transition: all 0.3s ease;
         }
-        
+
         .swiper-pagination-custom .swiper-pagination-bullet-active {
           background: #6c8a1f;
           transform: scale(1.2);
         }
-        
+
         .btn-slider:hover {
           transform: scale(1.05);
         }
-        
+
         .line-clamp-2 {
           display: -webkit-box;
           -webkit-line-clamp: 2;

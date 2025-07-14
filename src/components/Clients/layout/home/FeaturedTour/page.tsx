@@ -28,7 +28,7 @@ const FeaturedTour = () => {
         }
         return () => observer.disconnect();
     }, []);
-
+    
     const images = [
         {
             id: 1,

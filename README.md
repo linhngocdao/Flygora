@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# GoTravel - Travel Adventure Platform
 
-## Getting Started
+GoTravel là một nền tảng du lịch mạo hiểm được phát triển với công nghệ Next.js, Typescript và Tailwind CSS. Dự án này cung cấp giao diện đa ngôn ngữ (tiếng Anh và tiếng Việt) và được thiết kế để giúp người dùng khám phá và đặt các tour du lịch mạo hiểm trên toàn thế giới.
 
-First, run the development server:
+![GoTravel Logo](public/images/homePage/logo.webp)
 
+## Tính năng chính
+
+- **Đa ngôn ngữ**: Hỗ trợ tiếng Anh và tiếng Việt
+- **Giao diện người dùng hiện đại**: Được thiết kế với Tailwind CSS
+- **Tour du lịch mạo hiểm**: Hiển thị và tìm kiếm các tour du lịch
+- **Trang quản trị**: Quản lý tour, đơn đặt hàng và người dùng
+- **Responsive**: Hiển thị tốt trên desktop và mobile
+
+## Công nghệ sử dụng
+
+- **Frontend**: Next.js 15, React 19, Tailwind CSS 4
+- **Quản lý trạng thái**: React Query (Tanstack Query)
+- **Đa ngôn ngữ**: next-intl
+- **Slider/Carousel**: Swiper
+
+## Cài đặt và Chạy dự án
+
+### Yêu cầu
+
+- Node.js phiên bản 18 trở lên
+- npm hoặc yarn
+
+### Các bước cài đặt
+
+1. Clone dự án:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/linhngocdao/GoTravel.git
+cd GoTravel
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Cài đặt các thư viện:
+```bash
+npm install
+# hoặc
+yarn install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Chạy dự án trong môi trường phát triển:
+```bash
+npm run dev
+# hoặc
+yarn dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Truy cập dự án tại [http://localhost:3000](http://localhost:3000)
 
-## Learn More
+## Cấu trúc dự án
 
-To learn more about Next.js, take a look at the following resources:
+- `src/app/[locale]/`: Định tuyến đa ngôn ngữ
+- `src/components/`: Các component của dự án
+- `messages/`: File ngôn ngữ (Tiếng Anh và Tiếng Việt)
+- `public/`: Tài nguyên tĩnh (hình ảnh, font)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Triển khai
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Dự án có thể được triển khai lên Vercel hoặc bất kỳ nền tảng nào hỗ trợ Next.js:
 
-## Deploy on Vercel
+```bash
+npm run build
+npm run start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Liên hệ
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Nếu bạn có bất kỳ câu hỏi hoặc góp ý nào, vui lòng liên hệ qua email hoặc tạo issue trên Github.
