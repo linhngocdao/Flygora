@@ -1,0 +1,69 @@
+{
+  "dashboard": {
+    "title": "Tổng quan",
+    "subtitle": "Chào mừng trở lại! Đây là tổng quan hoạt động của hệ thống.",
+    "totalRevenue": "Tổng doanh thu",
+    "totalBookings": "Tổng đặt tour",
+    "newCustomers": "Khách hàng mới",
+    "activeTours": "Tours hoạt động",
+    "recentBookings": "Đặt tour gần đây",
+    "quickActions": "Thao tác nhanh",
+    "createTour": "Tạo tour mới",
+    "manageSchedule": "Quản lý lịch trình",
+    "addCustomer": "Thêm khách hàng",
+    "viewReports": "Xem báo cáo"
+  },
+  "sidebar": {
+    "dashboard": "Tổng quan",
+    "tours": "Tours",
+    "bookings": "Đặt tour",
+    "customers": "Khách hàng",
+    "reviews": "Đánh giá",
+    "categories": "Danh mục",
+    "content": "Nội dung",
+    "analytics": "Phân tích",
+    "settings": "Cài đặt"
+  },
+  "header": {
+    "notifications": "Thông báo",
+    "settings": "Cài đặt",
+    "profile": "Hồ sơ",
+    "logout": "Đăng xuất"
+  },
+  "tours": {
+    "title": "Quản lý Tours",
+    "subtitle": "Quản lý tất cả các tour du lịch trong hệ thống",
+    "createNew": "Tạo tour mới",
+    "search": "Tìm kiếm",
+    "filterCategory": "Lọc theo danh mục",
+    "filterStatus": "Lọc theo trạng thái",
+    "active": "Hoạt động",
+    "inactive": "Tạm dừng",
+    "draft": "Nháp"
+  },
+  "bookings": {
+    "title": "Quản lý Đặt tour",
+    "subtitle": "Quản lý tất cả các booking trong hệ thống",
+    "exportExcel": "Xuất Excel",
+    "calendar": "Lịch booking",
+    "totalBookings": "Tổng bookings",
+    "confirmed": "Đã xác nhận",
+    "pending": "Chờ xử lý",
+    "cancelled": "Đã hủy",
+    "completed": "Hoàn thành",
+    "paid": "Đã thanh toán",
+    "unpaid": "Chờ thanh toán",
+    "refunded": "Đã hoàn tiền"
+  },
+  "customers": {
+    "title": "Quản lý Khách hàng",
+    "subtitle": "Quản lý thông tin và hoạt động của khách hàng",
+    "addNew": "Thêm khách hàng",
+    "totalCustomers": "Tổng khách hàng",
+    "activeCustomers": "Khách hàng hoạt động",
+    "totalRevenue": "Doanh thu từ khách hàng",
+    "averageSpending": "Chi tiêu trung bình",
+    "active": "Hoạt động",
+    "inactive": "Không hoạt động"
+  }
+}

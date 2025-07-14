@@ -1,0 +1,69 @@
+{
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Welcome back! Here's an overview of system activities.",
+    "totalRevenue": "Total Revenue",
+    "totalBookings": "Total Bookings",
+    "newCustomers": "New Customers",
+    "activeTours": "Active Tours",
+    "recentBookings": "Recent Bookings",
+    "quickActions": "Quick Actions",
+    "createTour": "Create New Tour",
+    "manageSchedule": "Manage Schedule",
+    "addCustomer": "Add Customer",
+    "viewReports": "View Reports"
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "tours": "Tours",
+    "bookings": "Bookings",
+    "customers": "Customers",
+    "reviews": "Reviews",
+    "categories": "Categories",
+    "content": "Content",
+    "analytics": "Analytics",
+    "settings": "Settings"
+  },
+  "header": {
+    "notifications": "Notifications",
+    "settings": "Settings",
+    "profile": "Profile",
+    "logout": "Logout"
+  },
+  "tours": {
+    "title": "Tours Management",
+    "subtitle": "Manage all tours in the system",
+    "createNew": "Create New Tour",
+    "search": "Search",
+    "filterCategory": "Filter by Category",
+    "filterStatus": "Filter by Status",
+    "active": "Active",
+    "inactive": "Inactive",
+    "draft": "Draft"
+  },
+  "bookings": {
+    "title": "Bookings Management",
+    "subtitle": "Manage all bookings in the system",
+    "exportExcel": "Export Excel",
+    "calendar": "Booking Calendar",
+    "totalBookings": "Total Bookings",
+    "confirmed": "Confirmed",
+    "pending": "Pending",
+    "cancelled": "Cancelled",
+    "completed": "Completed",
+    "paid": "Paid",
+    "unpaid": "Pending Payment",
+    "refunded": "Refunded"
+  },
+  "customers": {
+    "title": "Customers Management",
+    "subtitle": "Manage customer information and activities",
+    "addNew": "Add Customer",
+    "totalCustomers": "Total Customers",
+    "activeCustomers": "Active Customers",
+    "totalRevenue": "Revenue from Customers",
+    "averageSpending": "Average Spending",
+    "active": "Active",
+    "inactive": "Inactive"
+  }
+}
