@@ -142,7 +142,7 @@ const AllAdventureTour = () => {
           slidesPerView={5}
           spaceBetween={0}
           breakpoints={{
-            640: { slidesPerView: 2, spaceBetween: 20 },
+            640: { slidesPerView: 1, spaceBetween: 10 },
             768: { slidesPerView: 2.5, spaceBetween: 24 },
             1024: { slidesPerView: 4, spaceBetween: 28 },
             1280: { slidesPerView: 5, spaceBetween: 32 },
