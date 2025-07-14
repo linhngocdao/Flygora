@@ -83,19 +83,18 @@ const AllAdventureTour = () => {
             <div className="relative pt-10">
                 {!isMobile && (<>
                         <button
-                            className={`btn-slider advTourNavPrev absolute top-1/2 -translate-y-1/2 left-4 xl:left-8 z-10 flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ${isBeginning ? "opacity-50 cursor-not-allowed" : ""}`}
+                            className={`cursor-pointer btn-slider advTourNavPrev absolute top-1/2 -translate-y-1/2 left-4 xl:left-8 z-10 flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ${isBeginning ? "opacity-50 cursor-not-allowed" : ""}`}
                             aria-label="Previous slide"
                             disabled={isBeginning}
                         >
-                            <Image src="/images/homePage/pre.svg" alt="Previous" width={18} height={12}/>
+                            <Image src="/images/homePage/pre.svg" alt="Next" width={18} height={12}/>
                         </button>
                         <button
-                            className={`btn-slider advTourNavNext absolute top-1/2 -translate-y-1/2 right-4 xl:right-8 z-10 flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ${isEnd ? "opacity-50 cursor-not-allowed" : ""}`}
+                            className={`cursor-pointer btn-slider advTourNavNext absolute top-1/2 -translate-y-1/2 right-4 xl:right-8 z-10 flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ${isEnd ? "opacity-50 cursor-not-allowed" : ""}`}
                             aria-label="Next slide"
                             disabled={isEnd}
                         >
-                            <Image src="/images/homePage/pre.svg" alt="Next" className="rotate-180" width={18}
-                                   height={12}/>
+                            <Image src="/images/homePage/pre.svg" alt="Next" className="rotate-180" width={18} height={12}/>
                         </button>
                     </>)}
 
@@ -120,9 +119,6 @@ const AllAdventureTour = () => {
                 >
                     {tours.map((tour) => (<SwiperSlide key={tour.id}>
                             <div className="min-w-[300px] max-w-[360px] flex-shrink-0 snap-start group relative">
-                                {/* Leaf Decorations (hover only) */}
-
-
                                 {/* Card */}
                                 <article
                                     className="rounded-xl overflow-hidden shadow-md bg-white w-full h-full relative z-10">
@@ -132,13 +128,15 @@ const AllAdventureTour = () => {
                                         <Image
                                             src="/images/homePage/leaf-bg-left.webp"
                                             alt="leaf left"
-                                            width={267}
-                                            height={267}
-                                            className="absolute bottom-0 left-0 w-[80px] h-[80px] max-md:w-[60px] max-md:h-[60px] z-10 pointer-events-none
-      opacity-0 translate-x-[-20px] translate-y-[20px]
-      group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0
-      transition-all duration-500 ease-out"
+                                            width={100}
+                                            height={100}
+                                            className="absolute bottom-0 left-[-100] !w-[80px] !h-[80px] z-10 pointer-events-none
+  opacity-0 translate-x-[-20px] translate-y-[20px]
+  group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0
+  transition-all duration-500 ease-out
+  object-contain"
                                         />
+
 
                                         {/* Lá phải */}
                                         <Image
@@ -153,7 +151,8 @@ const AllAdventureTour = () => {
                                         />
 
                                         {/* Ảnh tour */}
-                                        <img
+                                        <Image
+                                            fill
                                             src={tour.image}
                                             alt="Tour Image"
                                             className="object-cover w-full h-full z-0"
