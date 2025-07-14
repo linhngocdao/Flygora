@@ -1,3 +1,8 @@
 {
-  "hello": "Hello"
+  "hello": "Hello",
+  "notFound": {
+    "imageAlt": "Page not found",
+    "description": "Oops! It looks like you're going the wrong way. Contact Jungle Boss via hotline <phone1>(+84) 917 800 805</phone1> or <phone2>(+84) 859 100 222</phone2> to help you find your way.",
+    "backToHome": "Back to Home"
+  }
 }
