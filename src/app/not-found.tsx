@@ -1,9 +1,3 @@
-import NotFoundPage from "@/components/ui/NotFoundComponent";
-
-export default function GlobalNotFound() {
-  return (
-    <>
-      <NotFoundPage />
-    </>
-  );
+export default function NotFound() {
+  return <div>Méo có gì đâu</div>;
 }
