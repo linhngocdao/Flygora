@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { useState, useRef, useEffect } from 'react';
 import { useLocale } from 'next-intl';
 import { Link, usePathname } from '@/i18n/routing';
@@ -27,13 +27,13 @@ const LanguageSwitcher = () => {
     vi: {
       flag: '/images/homePage/flag-vi.webp',
       code: 'VI',
-      name: 'Tiếng Việt'
+      name: 'Tiếng Việt',
     },
     en: {
       flag: '/images/homePage/flag-en.webp',
       code: 'EN',
-      name: 'English'
-    }
+      name: 'English',
+    },
   };
 
   // Ngôn ngữ hiện tại và ngôn ngữ khác
@@ -82,11 +82,13 @@ const LanguageSwitcher = () => {
       </div>
 
       {/* Dropdown với background đẹp */}
-      <div className={`absolute top-0 w-[80px] -translate-x-1/2 left-1/2 duration-300 ease-in-out pt-12 z-50 ${
-        isDropdownOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
-      }`}>
-
-
+      <div
+        className={`absolute top-0 w-[80px] -translate-x-1/2 left-1/2 duration-300 ease-in-out pt-12 z-50 ${
+          isDropdownOpen
+            ? 'opacity-100 visible translate-y-0'
+            : 'opacity-0 invisible -translate-y-2'
+        }`}
+      >
         {/* Dropdown Content với background đẹp */}
         <div className="overflow-hidden rounded-lg bg-white shadow-xl ring-1 ring-black ring-opacity-5 backdrop-blur-sm">
           <Link
@@ -96,13 +98,17 @@ const LanguageSwitcher = () => {
             onClick={handleLanguageChange}
           >
             <div className="w-6 h-6 border border-gray-200 rounded overflow-hidden transition-all duration-300 group-hover/item:border-primary-300 group-hover/item:shadow-sm">
-              <img
+              <Image
+                width={24}
+                height={24}
                 src={otherLang.flag}
                 alt={`flag ${otherLocale}`}
                 className="object-cover w-full h-full transition-transform duration-300 group-hover/item:scale-110"
               />
             </div>
-            <span className="flex-1 font-medium text-sm transition-colors duration-300">{otherLang.code}</span>
+            <span className="flex-1 font-medium text-sm transition-colors duration-300">
+              {otherLang.code}
+            </span>
           </Link>
         </div>
       </div>

@@ -1,6 +1,6 @@
-'use client'
-import { useEffect, useRef, useState } from 'react'
-import { createPortal } from 'react-dom'
+'use client';
+import { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 /**
  * `Portal` là một component giúp render nội dung con (children) ra ngoài cây DOM hiện tại,
@@ -16,13 +16,13 @@ import { createPortal } from 'react-dom'
  */
 
 export default function Portal({ children }: { children: React.ReactNode }) {
-    const ref = useRef<HTMLElement | null>(null)
-    const [mounted, setMounted] = useState(false)
+  const ref = useRef<HTMLElement | null>(null);
+  const [mounted, setMounted] = useState(false);
 
-    useEffect(() => {
-        ref.current = document.body
-        setMounted(true)
-    }, [])
+  useEffect(() => {
+    ref.current = document.body;
+    setMounted(true);
+  }, []);
 
-    return mounted && ref.current ? createPortal(children, ref.current) : null
+  return mounted && ref.current ? createPortal(children, ref.current) : null;
 }

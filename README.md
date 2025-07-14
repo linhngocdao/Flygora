@@ -29,12 +29,14 @@ GoTravel là một nền tảng du lịch mạo hiểm được phát triển v�
 ### Các bước cài đặt
 
 1. Clone dự án:
+
 ```bash
 git clone https://github.com/linhngocdao/GoTravel.git
 cd GoTravel
 ```
 
 2. Cài đặt các thư viện:
+
 ```bash
 npm install
 # hoặc
@@ -42,6 +44,7 @@ yarn install
 ```
 
 3. Chạy dự án trong môi trường phát triển:
+
 ```bash
 npm run dev
 # hoặc
