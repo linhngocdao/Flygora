@@ -6,6 +6,7 @@ import "swiper/css/pagination";
 import localFont from "next/font/local";
 import { getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
+import QueryProvider from "@/provider/Query.provider";
 
 const geomanist = localFont({
   src: [
@@ -60,7 +61,9 @@ export default async function RootLayout({
   return (
     <html lang={locale}>
       <body className={`${geomanist.variable} ${svnKingston.variable} antialiased`}>
-        <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider messages={messages}>
+          <QueryProvider>{children}</QueryProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

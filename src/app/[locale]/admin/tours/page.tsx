@@ -41,6 +41,8 @@ export default function ToursManagement() {
   const t = useTranslations("admin.tours");
   const [searchTerm, setSearchTerm] = useState("");
 
+  //TODO: viết cho tôi 1 đoạn call api sử dụng react query
+
   // Mock data
   const tours: Tour[] = [
     {

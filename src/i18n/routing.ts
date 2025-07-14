@@ -1,4 +1,4 @@
-import { LocaleCode, LocaleList } from "@/utilities/constants";
+import { LocaleCode, LocaleList } from "@/constants";
 import { createNavigation } from "next-intl/navigation";
 import { defineRouting } from "next-intl/routing";
 
