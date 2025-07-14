@@ -54,7 +54,7 @@ const RecommendationBanner = () => {
                     <div className="space-y-2">
                         <h2 className="text-center text-white uppercase text-[1.375rem] font-semibold">
                             Still Trying to Decide?</h2>
-                        <h2 className="text-center uppercase text-[1rem] headline-[125%] font-[600] lg:text-[2.5rem] text-[#ede52a]">Jungle Boss Passionate Team
+                        <h2 className="text-center uppercase text-[0.5rem] headline-[125%] font-[600] lg:text-[1.9rem] text-[#ede52a]">Jungle Boss Passionate Team
                             Always Ready Help You.</h2>
                     </div>
                     <div className="flex justify-center space-x-4">

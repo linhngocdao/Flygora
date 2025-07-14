@@ -1,238 +1,200 @@
 "use client";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+
+import {useEffect, useState} from "react";
+import {Swiper, SwiperSlide} from "swiper/react";
+import {Navigation, Pagination} from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
+const tours = [{
+    id: 1,
+    title: "Tra Ang Excursion 1D",
+    level: "Level 1 - Easy",
+    duration: "1 day",
+    rating: 4.9,
+    reviews: "See Reviews",
+    price: "VND 800,000/pax",
+    image: "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp",
+}, {
+    id: 2,
+    title: "Phong Huong Adventure 1D",
+    level: "Level 3 - Moderate",
+    duration: "1 day",
+    rating: 4.9,
+    reviews: "See Reviews",
+    price: "VND 1,350,000/pax",
+    image: "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp",
+}, {
+    id: 3,
+    title: "Elephant Cave & Ma Da Valley Jungle...",
+    level: "Level 2 - Easy to Moderate",
+    duration: "1 day 1 night",
+    rating: 4.9,
+    reviews: "See Reviews",
+    price: "VND 1,950,000/pax",
+    image: "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp",
+}, {
+    id: 4,
+    title: "Phong Huong Excursion 2D1N",
+    level: "Level 1 - Easy",
+    duration: "2 days 1 night",
+    rating: 4.9,
+    reviews: "See Reviews",
+    price: "VND 1,950,000/pax",
+    image: "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp",
+}, {
+    id: 5,
+    title: "Phong Huong Adventure 2D1N",
+    level: "Level 5 - Strenuous",
+    duration: "2 days 1 night",
+    rating: 4.9,
+    reviews: "See Reviews",
+    price: "VND 3,350,000/pax",
+    image: "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp",
+},];
+
 const AllAdventureTour = () => {
-  // Sample tour data - replace with your actual data
-  const tours = [
-    {
-      id: 1,
-      title: "Tra Ang Excursion 1D",
-      level: "Level 1 - Easy",
-      duration: "1 day",
-      rating: 4.9,
-      reviews: "See Reviews",
-      price: "VND 800,000/pax",
-      image: "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp"
-    },
-    {
-      id: 2,
-      title: "Phong Huong Adventure 1D",
-      level: "Level 3 - Moderate",
-      duration: "1 day",
-      rating: 4.9,
-      reviews: "See Reviews",
-      price: "VND 1,350,000/pax",
-      image: "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp"
-    },
-    {
-      id: 3,
-      title: "Elephant Cave & Ma Da Valley Jungle...",
-      level: "Level 2 - Easy to Moderate",
-      duration: "1 day 1 night",
-      rating: 4.9,
-      reviews: "See Reviews",
-      price: "VND 1,950,000/pax",
-      image: "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp"
-    },
-    {
-      id: 4,
-      title: "Phong Huong Excursion 2D1N",
-      level: "Level 1 - Easy",
-      duration: "2 days 1 night",
-      rating: 4.9,
-      reviews: "See Reviews",
-      price: "VND 1,950,000/pax",
-      image: "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp"
-    },
-    {
-      id: 5,
-      title: "Phong Huong Adventure 2D1N",
-      level: "Level 5 - Strenuous",
-      duration: "2 days 1 night",
-      rating: 4.9,
-      reviews: "See Reviews",
-      price: "VND 3,350,000/pax",
-      image: "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp"
-    },
-    {
-      id: 6,
-      title: "Ma Da Valley Jungle Camping 2D1N",
-      level: "Level 2 - Easy to Moderate",
-      duration: "2 days 1 night",
-      rating: 4.9,
-      reviews: "See Reviews",
-      price: "VND 4,500,000/pax",
-      image: "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp"
-    },
-    {
-      id: 7,
-      title: "Hang Pygmy Exploration 2D1N",
-      level: "Level 6 - Very Strenuous",
-      duration: "2 days 1 night",
-      rating: 4.9,
-      reviews: "See Reviews",
-      price: "VND 7,900,000/pax",
-      image: "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp"
-    },
-    {
-      id: 8,
-      title: "Phi Lieng Exploration 2D1N",
-      level: "Level 6 - Very Strenuous",
-      duration: "2 days 1 night",
-      rating: 4.9,
-      reviews: "See Reviews",
-      price: "VND 8,500,000/pax",
-      image: "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp"
-    }
-  ];
+    const [isMobile, setIsMobile] = useState(false);
+    const [isBeginning, setIsBeginning] = useState(true);
+    const [isEnd, setIsEnd] = useState(false);
 
-  return (
-      <section className="py-8 lg:py-16 bg-gray-50">
-        {/* Header */}
-        <div className="container mx-auto px-4 space-y-4 pb-10">
-          <h2 className="text-[#6c8a1f] pre-header text-xl font-semibold italic">All Adventure Tour</h2>
-          <div>
-            <h1 className="text-3xl lg:text-4xl font-bold uppercase text-[#004750]">Start Your Ideal Adventure Tour!</h1>
-            <p className="text-gray-600">For a day trip, overnighter or longer</p>
-          </div>
-        </div>
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 1024);
+        };
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
-        {/* Full Width Swiper Container */}
-        <div className="relative">
-          {/* Desktop Navigation Buttons */}
-          <button className="btn-slider cursor-pointer advTourNavPrev absolute top-1/2 -translate-y-1/2 left-4 xl:left-8 z-10 hidden lg:flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300" aria-label="Previous slide">
-            <Image src="/images/homePage/pre.svg" alt="Previous" width={18} height={12} />
-          </button>
-          <button className="btn-slider cursor-pointer advTourNavNext absolute top-1/2 -translate-y-1/2 right-4 xl:right-8 z-10 hidden lg:flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300" aria-label="Next slide">
-            <Image src="/images/homePage/pre.svg" alt="Next" className="rotate-180" width={18} height={12} />
-          </button>
+    return (<section className="py-8 lg:py-16 bg-gray-50">
+            <div className="container mx-auto px-4 space-y-4">
+                <h2 className="text-[#6c8a1f] pre-header text-xl font-semibold italic">All Adventure Tour</h2>
+                <div>
+                    <h1 className="text-3xl lg:text-4xl font-bold uppercase text-[#004750]">
+                        Start Your Ideal Adventure Tour!
+                    </h1>
+                    <p className="text-gray-600">For a day trip, overnighter or longer</p>
+                </div>
+            </div>
 
-          {/* Swiper */}
-          <Swiper
-              modules={[Navigation, Pagination]}
-              spaceBetween={0}
-              navigation={{
-                nextEl: ".advTourNavNext",
-                prevEl: ".advTourNavPrev",
-              }}
-              pagination={{
-                clickable: true,
-                el: ".swiper-pagination-custom"
-              }}
-              breakpoints={{
-                0: {
-                  slidesPerView: 1,
-                  spaceBetween: 0,
-                },
-                640: {
-                  slidesPerView: 2,
-                  spaceBetween: 0,
-                },
-                768: {
-                  slidesPerView: 3,
-                  spaceBetween: 0,
-                },
-                1024: {
-                  slidesPerView: 4,
-                  spaceBetween: 0,
-                },
-                1280: {
-                  slidesPerView: 5,
-                  spaceBetween: 0,
-                },
-                1536: {
-                  slidesPerView: 6,
-                  spaceBetween: 0,
-                },
-              }}
-              className="w-full"
-          >
-            {tours.map((tour) => (
-                <SwiperSlide key={tour.id}>
-                  <article className="rounded-2xl mr-[16px] bg-white shadow-md hover:shadow-lg transition duration-300 overflow-hidden">
-                    <Link href="/tour/do-quyen-waterfall-zipline">
-                      <div className="relative w-full h-[180px]">
-                        <Image
-                            src="https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp"
-                            alt="Tour"
-                            fill
-                            className="object-cover rounded-t-2xl"
-                        />
-                      </div>
-                    </Link>
-                    <div className="p-4 space-y-2 text-sm">
-                      <Link href="/tour/do-quyen-waterfall-zipline">
-                        <h3 className="font-semibold text-base text-gray-900 hover:text-[#6c8a1f] transition line-clamp-1">
-                          {tour.title}
-                        </h3>
-                      </Link>
-                      <p className="text-gray-600">{tour.level}</p>
-                      <p className="text-gray-600">{tour.duration}</p>
-
-                      <div className="flex justify-between items-center">
-                        <div className="flex items-center gap-1 text-sm text-gray-900">
-                          <span>{tour.rating}/5</span>
-                          <span className="text-black">★</span>
-                        </div>
-                        <a
-                            href="https://www.tripadvisor.com/Attraction_Review-g4014591-d8403784-Reviews-Jungle_Boss_Tours-Phong_Nha_Ke_Bang_National_Park_Quang_Binh_Province.html"
-                            className="text-green-600 hover:underline text-xs"
-                            target="_blank"
-                            rel="noopener noreferrer"
+            <div className="relative pt-10">
+                {!isMobile && (<>
+                        <button
+                            className={`cursor-pointer btn-slider advTourNavPrev absolute top-1/2 -translate-y-1/2 left-4 xl:left-8 z-10 flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ${isBeginning ? "opacity-50 cursor-not-allowed" : ""}`}
+                            aria-label="Previous slide"
+                            disabled={isBeginning}
                         >
-                          (See Reviews)
-                        </a>
-                      </div>
+                            <Image src="/images/homePage/pre.svg" alt="Next" width={18} height={12}/>
+                        </button>
+                        <button
+                            className={`cursor-pointer btn-slider advTourNavNext absolute top-1/2 -translate-y-1/2 right-4 xl:right-8 z-10 flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ${isEnd ? "opacity-50 cursor-not-allowed" : ""}`}
+                            aria-label="Next slide"
+                            disabled={isEnd}
+                        >
+                            <Image src="/images/homePage/pre.svg" alt="Next" className="rotate-180" width={18} height={12}/>
+                        </button>
+                    </>)}
 
-                      <div className="flex justify-between items-center pt-2 font-semibold text-sm">
-                        <span className="text-gray-800">Price</span>
-                        <span className="text-gray-900">VND {tour.price} /pax</span>
-                      </div>
-                    </div>
-                  </article>
-                </SwiperSlide>
-            ))}
-          </Swiper>
+                <Swiper
+                    modules={[Navigation, Pagination]}
+                    navigation={{
+                        nextEl: ".advTourNavNext", prevEl: ".advTourNavPrev",
+                    }}
+                    onSlideChange={({isBeginning, isEnd}) => {
+                        setIsBeginning(isBeginning);
+                        setIsEnd(isEnd);
+                    }}
+                    className="h-[400px] lg:h-[380px] xl:h-[380px] relative"
+                    slidesPerView={1.2}
+                    spaceBetween={16}
+                    breakpoints={{
+                        640: {slidesPerView: 2, spaceBetween: 20},
+                        768: {slidesPerView: 2.5, spaceBetween: 24},
+                        1024: {slidesPerView: 3.5, spaceBetween: 28},
+                        1280: {slidesPerView: 4, spaceBetween: 32},
+                    }}
+                >
+                    {tours.map((tour) => (<SwiperSlide key={tour.id}>
+                            <div className="min-w-[300px] max-w-[360px] flex-shrink-0 snap-start group relative">
+                                {/* Card */}
+                                <article
+                                    className="rounded-xl overflow-hidden shadow-md bg-white w-full h-full relative z-10">
+                                    <div className="relative aspect-[3/2] w-full overflow-hidden group">
 
-          {/* Custom Pagination for Mobile */}
-          <div className="swiper-pagination-custom flex justify-center mt-6 lg:hidden"></div>
-        </div>
+                                        {/* Lá trái */}
+                                        <Image
+                                            src="/images/homePage/leaf-bg-left.webp"
+                                            alt="leaf left"
+                                            width={100}
+                                            height={100}
+                                            className="absolute bottom-0 left-[-100] !w-[80px] !h-[80px] z-10 pointer-events-none
+  opacity-0 translate-x-[-20px] translate-y-[20px]
+  group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0
+  transition-all duration-500 ease-out
+  object-contain"
+                                        />
 
-        {/* Custom Styles */}
-        <style jsx global>{`
-        .swiper-pagination-custom .swiper-pagination-bullet {
-          width: 10px;
-          height: 10px;
-          background: #d1d5db;
-          border-radius: 50%;
-          margin: 0 4px;
-          transition: all 0.3s ease;
-        }
 
-        .swiper-pagination-custom .swiper-pagination-bullet-active {
-          background: #6c8a1f;
-          transform: scale(1.2);
-        }
+                                        {/* Lá phải */}
+                                        <Image
+                                            src="/images/homePage/leaf-bg-right.webp"
+                                            alt="leaf right"
+                                            width={267}
+                                            height={267}
+                                            className="absolute top-0 right-0 w-[80px] h-[80px] max-md:w-[60px] max-md:h-[60px] z-10 pointer-events-none
+      opacity-0 translate-x-[20px] translate-y-[-20px]
+      group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0
+      transition-all duration-500 ease-out"
+                                        />
 
-        .btn-slider:hover {
-          transform: scale(1.05);
-        }
+                                        {/* Ảnh tour */}
+                                        <Image
+                                            fill
+                                            src={tour.image}
+                                            alt="Tour Image"
+                                            className="object-cover w-full h-full z-0"
+                                        />
+                                    </div>
 
-        .line-clamp-2 {
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-      `}</style>
-      </section>
-  );
+
+                                    <div className="px-4 sm:px-5 md:px-6 py-4 space-y-2">
+                                        <h3 className="text-base sm:text-lg md:text-xl font-semibold text-gray-900 line-clamp-1 hover:text-primary transition-colors duration-300">
+                                            {tour.title}
+                                        </h3>
+                                        <div className="space-y-1 text-sm text-gray-700">
+                                            <p>{tour.level}</p>
+                                            <div
+                                                className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-y-1 sm:gap-y-0">
+                                                <span>{tour.duration}</span>
+                                                <div className="flex items-center gap-1 text-gray-900">
+                                                    <span className="font-semibold">{tour.rating}/5</span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                         className="w-4 h-4 text-yellow-500" viewBox="0 0 24 24"
+                                                         fill="currentColor">
+                                                        <path
+                                                            d="M12 2l2.09 6.26L20 9.27l-5 3.64 1.18 6.89L12 16.9l-5.18 2.9L8 12.91 3 9.27l5.91-.91L12 2z"/>
+                                                    </svg>
+                                                    <a href="#"
+                                                       className="text-green-600 hover:underline text-xs sm:text-sm">({tour.reviews})</a>
+                                                </div>
+                                            </div>
+                                            <div className="flex justify-between">
+                                                <span>Price</span>
+                                                <span className="text-gray-900 font-semibold">{tour.price}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+
+                            </div>
+                        </SwiperSlide>))}
+                </Swiper>
+            </div>
+        </section>);
 };
 
 export default AllAdventureTour;
