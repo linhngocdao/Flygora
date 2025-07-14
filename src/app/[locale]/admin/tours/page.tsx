@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { useTranslations } from 'next-intl';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Input } from '@/components/ui/input';
+import React, { useState } from "react";
+import { useTranslations } from "next-intl";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -13,7 +13,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
+} from "@/components/ui/table";
 import {
   Dialog,
   DialogContent,
@@ -21,8 +21,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { Plus, Search, Edit, Trash2, MapPin, Calendar, Users, Star } from 'lucide-react';
+} from "@/components/ui/dialog";
+import { Plus, Search, Edit, Trash2, MapPin, Calendar, Users, Star } from "lucide-react";
 
 interface Tour {
   id: string;
@@ -32,75 +32,75 @@ interface Tour {
   price: number;
   maxParticipants: number;
   currentBookings: number;
-  status: 'active' | 'inactive' | 'draft';
+  status: "active" | "inactive" | "draft";
   rating: number;
   location: string;
 }
 
 export default function ToursManagement() {
-  const t = useTranslations('admin.tours');
-  const [searchTerm, setSearchTerm] = useState('');
+  const t = useTranslations("admin.tours");
+  const [searchTerm, setSearchTerm] = useState("");
 
   // Mock data
   const tours: Tour[] = [
     {
-      id: 'T001',
-      name: 'Phú Quốc Adventure Tour',
-      category: 'Beach & Islands',
-      duration: '3 ngày 2 đêm',
+      id: "T001",
+      name: "Phú Quốc Adventure Tour",
+      category: "Beach & Islands",
+      duration: "3 ngày 2 đêm",
       price: 2500000,
       maxParticipants: 20,
       currentBookings: 15,
-      status: 'active',
+      status: "active",
       rating: 4.8,
-      location: 'Phú Quốc',
+      location: "Phú Quốc",
     },
     {
-      id: 'T002',
-      name: 'Sapa Trekking Experience',
-      category: 'Mountain Trekking',
-      duration: '2 ngày 1 đêm',
+      id: "T002",
+      name: "Sapa Trekking Experience",
+      category: "Mountain Trekking",
+      duration: "2 ngày 1 đêm",
       price: 1800000,
       maxParticipants: 15,
       currentBookings: 12,
-      status: 'active',
+      status: "active",
       rating: 4.9,
-      location: 'Sapa',
+      location: "Sapa",
     },
     {
-      id: 'T003',
-      name: 'Hạ Long Bay Cruise',
-      category: 'Cruise & Marine',
-      duration: '1 ngày',
+      id: "T003",
+      name: "Hạ Long Bay Cruise",
+      category: "Cruise & Marine",
+      duration: "1 ngày",
       price: 3200000,
       maxParticipants: 25,
       currentBookings: 8,
-      status: 'active',
+      status: "active",
       rating: 4.7,
-      location: 'Hạ Long',
+      location: "Hạ Long",
     },
     {
-      id: 'T004',
-      name: 'Dalat Cycling Tour',
-      category: 'Cycling',
-      duration: '1 ngày',
+      id: "T004",
+      name: "Dalat Cycling Tour",
+      category: "Cycling",
+      duration: "1 ngày",
       price: 1200000,
       maxParticipants: 10,
       currentBookings: 0,
-      status: 'draft',
+      status: "draft",
       rating: 0,
-      location: 'Đà Lạt',
+      location: "Đà Lạt",
     },
   ];
 
   const getStatusBadge = (status: string) => {
     switch (status) {
-      case 'active':
-        return <Badge className="bg-green-100 text-green-800">{t('active')}</Badge>;
-      case 'inactive':
-        return <Badge className="bg-red-100 text-red-800">{t('inactive')}</Badge>;
-      case 'draft':
-        return <Badge className="bg-gray-100 text-gray-800">{t('draft')}</Badge>;
+      case "active":
+        return <Badge className="bg-green-100 text-green-800">{t("active")}</Badge>;
+      case "inactive":
+        return <Badge className="bg-red-100 text-red-800">{t("inactive")}</Badge>;
+      case "draft":
+        return <Badge className="bg-gray-100 text-gray-800">{t("draft")}</Badge>;
       default:
         return <Badge>{status}</Badge>;
     }
@@ -117,14 +117,14 @@ export default function ToursManagement() {
       {/* Page Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('title')}</h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">{t('subtitle')}</p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t("title")}</h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-1">{t("subtitle")}</p>
         </div>
         <Dialog>
           <DialogTrigger asChild>
             <Button>
               <Plus className="mr-2 h-4 w-4" />
-              {t('createNew')}
+              {t("createNew")}
             </Button>
           </DialogTrigger>
           <DialogContent>
@@ -210,7 +210,7 @@ export default function ToursManagement() {
                     </div>
                   </TableCell>
                   <TableCell className="font-medium">
-                    {tour.price.toLocaleString('vi-VN')} VNĐ
+                    {tour.price.toLocaleString("vi-VN")} VNĐ
                   </TableCell>
                   <TableCell>
                     <div className="flex items-center">

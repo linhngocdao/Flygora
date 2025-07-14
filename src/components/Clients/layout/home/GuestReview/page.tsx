@@ -1,6 +1,6 @@
-import React from 'react';
-import ButtonSecondary from '@/components/Clients/ui/ButtonSecondary';
-import Image from 'next/image';
+import React from "react";
+import ButtonSecondary from "@/components/Clients/ui/ButtonSecondary";
+import Image from "next/image";
 
 const GuestReviewSection = () => {
   return (
@@ -43,7 +43,7 @@ const GuestReviewSection = () => {
                 </div>
               </div>
               <div className="text-[#e0e0e0] leading-[155%] text-[0.8rem] lg:text-[1rem] experience">
-                <p style={{ textAlign: 'justify' }}>
+                <p style={{ textAlign: "justify" }}>
                   Nestled amidst the immense rice fields of the Phong Nha - Ke Bang region, Jungle
                   Boss Travelodge is an ideal place for you to unwind during your Quang Binh
                   travels. This destination offers cozy accommodations with a full range of

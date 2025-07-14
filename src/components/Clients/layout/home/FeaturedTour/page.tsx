@@ -1,9 +1,9 @@
-'use client';
-import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Scrollbar, Thumbs } from 'swiper/modules';
-import ButtonPrimary from '@/components/Clients/ui/buttonPrimary';
+"use client";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Scrollbar, Thumbs } from "swiper/modules";
+import ButtonPrimary from "@/components/Clients/ui/buttonPrimary";
 
 const TopAdventureTour = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -37,39 +37,39 @@ const TopAdventureTour = () => {
   }, []);
   const images = [
     {
-      id: '1',
-      alt: 'Image 1',
-      src: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&h=600&fit=crop',
+      id: "1",
+      alt: "Image 1",
+      src: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&h=600&fit=crop",
     },
     {
-      id: '2',
-      alt: 'Image 2',
-      src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
+      id: "2",
+      alt: "Image 2",
+      src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
     },
     {
-      id: '3',
-      alt: 'Image 3',
-      src: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop',
+      id: "3",
+      alt: "Image 3",
+      src: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop",
     },
     {
-      id: '4',
-      alt: 'Image 4',
-      src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
+      id: "4",
+      alt: "Image 4",
+      src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
     },
     {
-      id: '5',
-      alt: 'Image 5',
-      src: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop',
+      id: "5",
+      alt: "Image 5",
+      src: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&h=600&fit=crop",
     },
     {
-      id: '6',
-      alt: 'Image 6',
-      src: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&h=600&fit=crop',
+      id: "6",
+      alt: "Image 6",
+      src: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&h=600&fit=crop",
     },
     {
-      id: '7',
-      alt: 'Image 7',
-      src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
+      id: "7",
+      alt: "Image 7",
+      src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
     },
   ];
 
@@ -124,7 +124,7 @@ const TopAdventureTour = () => {
                 <SwiperSlide key={img.id}>
                   <button
                     className={`w-[160px] h-[110px] md:w-[170px] md:h-[120px] rounded-lg overflow-hidden border-2 transition-all duration-200
-            ${currentSlide === index ? 'border-[#6c8a1f] scale-105 shadow-lg' : 'border-transparent'}`}
+            ${currentSlide === index ? "border-[#6c8a1f] scale-105 shadow-lg" : "border-transparent"}`}
                   >
                     <Image
                       width={100}
@@ -303,9 +303,9 @@ const TopAdventureTour = () => {
 
                 {/* Pagination */}
                 <div className="text-sm text-gray-600">
-                  <span className="font-medium">{String(currentSlide + 1).padStart(2, '0')}</span>
+                  <span className="font-medium">{String(currentSlide + 1).padStart(2, "0")}</span>
                   <span className="text-gray-400 mx-1">/</span>
-                  <span className="text-gray-400">{String(images.length).padStart(2, '0')}</span>
+                  <span className="text-gray-400">{String(images.length).padStart(2, "0")}</span>
                 </div>
               </div>
 
@@ -322,7 +322,7 @@ const TopAdventureTour = () => {
             className={`z-20 absolute top-[-100px] right-[-80px] transition-transform duration-700 ease-out
     w-[267px] h-[267px]
     max-md:w-[150px] max-md:h-[150px]
-    ${isVisible ? 'translate-x-0 translate-y-0' : 'translate-x-full -translate-y-full'}`}
+    ${isVisible ? "translate-x-0 translate-y-0" : "translate-x-full -translate-y-full"}`}
             loading="eager"
           />
         </div>

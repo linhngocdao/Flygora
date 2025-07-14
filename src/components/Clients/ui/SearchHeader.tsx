@@ -1,14 +1,14 @@
-'use client';
-import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
-import Portal from '@/components/Clients/ui/Portal';
+"use client";
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import Portal from "@/components/Clients/ui/Portal";
 
 interface SearchHeaderProps {
   isScrolled: boolean;
 }
 
 const SearchHeader: React.FC<SearchHeaderProps> = ({ isScrolled }) => {
-  const [value, setValue] = useState<string>('');
+  const [value, setValue] = useState<string>("");
   const [showSearchPopup, setShowSearchPopup] = useState<boolean>(false);
 
   const toggleSearchPopup = () => {
@@ -17,13 +17,13 @@ const SearchHeader: React.FC<SearchHeaderProps> = ({ isScrolled }) => {
 
   useEffect(() => {
     if (showSearchPopup) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
 
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     };
   }, [showSearchPopup]);
 
@@ -33,14 +33,14 @@ const SearchHeader: React.FC<SearchHeaderProps> = ({ isScrolled }) => {
   };
 
   const handleClosePopup = () => {
-    setValue('');
+    setValue("");
     toggleSearchPopup();
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (value.trim()) {
-      console.log('Searching for:', value);
+      console.log("Searching for:", value);
     }
   };
 
@@ -49,7 +49,7 @@ const SearchHeader: React.FC<SearchHeaderProps> = ({ isScrolled }) => {
       {/* Search Icon */}
       <div
         className={`cursor-pointer text-[#eef4b7] transition-all duration-300 ${
-          isScrolled ? 'scale-90' : 'scale-100'
+          isScrolled ? "scale-90" : "scale-100"
         }`}
         onClick={toggleSearchPopup}
       >
@@ -60,7 +60,7 @@ const SearchHeader: React.FC<SearchHeaderProps> = ({ isScrolled }) => {
           alt="search icon"
           style={{
             filter:
-              'invert(83%) sepia(10%) saturate(241%) hue-rotate(47deg) brightness(97%) contrast(85%)',
+              "invert(83%) sepia(10%) saturate(241%) hue-rotate(47deg) brightness(97%) contrast(85%)",
           }}
         />
       </div>
@@ -137,7 +137,7 @@ const SearchHeader: React.FC<SearchHeaderProps> = ({ isScrolled }) => {
                     <div className="absolute inset-y-0 right-0 pr-4 flex items-center">
                       <button
                         type="button"
-                        onClick={() => setValue('')}
+                        onClick={() => setValue("")}
                         className="text-gray-400 hover:text-gray-600 transition-colors duration-200 p-1 hover:bg-gray-100 rounded-full"
                       >
                         <svg
@@ -219,12 +219,12 @@ const SearchHeader: React.FC<SearchHeaderProps> = ({ isScrolled }) => {
                     <div className="text-[#eef4b7] text-center mb-6 text-lg">Tìm kiếm phổ biến</div>
                     <div className="flex flex-wrap justify-center gap-3">
                       {[
-                        'Sapa',
-                        'Hạ Long',
-                        'Phú Quốc',
-                        'Đà Lạt',
-                        'Tour miền Bắc',
-                        'Du lịch sinh thái',
+                        "Sapa",
+                        "Hạ Long",
+                        "Phú Quốc",
+                        "Đà Lạt",
+                        "Tour miền Bắc",
+                        "Du lịch sinh thái",
                       ].map((keyword, index) => (
                         <button
                           key={index}

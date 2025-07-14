@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 /**
  * Hook tùy chỉnh để tạo giá trị debounce
@@ -27,7 +27,7 @@ export const useDebounce = <T>(value: T, delay: number): T => {
   useEffect(() => {
     // Kiểm tra giá trị delay hợp lệ
     if (delay < 0) {
-      throw new Error('Delay phải là số dương');
+      throw new Error("Delay phải là số dương");
     }
 
     // Thiết lập timeout để cập nhật giá trị sau khoảng thời gian delay

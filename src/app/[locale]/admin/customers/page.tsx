@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { useTranslations } from 'next-intl';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Input } from '@/components/ui/input';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import React, { useState } from "react";
+import { useTranslations } from "next-intl";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Table,
   TableBody,
@@ -14,7 +14,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
+} from "@/components/ui/table";
 import {
   Dialog,
   DialogContent,
@@ -22,8 +22,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog';
-import { Plus, Search, Eye, Mail, Phone, MapPin, Calendar } from 'lucide-react';
+} from "@/components/ui/dialog";
+import { Plus, Search, Eye, Mail, Phone, MapPin, Calendar } from "lucide-react";
 
 interface Customer {
   id: string;
@@ -34,85 +34,85 @@ interface Customer {
   joinDate: string;
   totalBookings: number;
   totalSpent: number;
-  status: 'active' | 'inactive';
+  status: "active" | "inactive";
   lastBooking: string;
   avatar?: string;
 }
 
 export default function CustomersManagement() {
-  const t = useTranslations('admin.customers');
-  const [searchTerm, setSearchTerm] = useState('');
+  const t = useTranslations("admin.customers");
+  const [searchTerm, setSearchTerm] = useState("");
 
   // Mock data
   const customers: Customer[] = [
     {
-      id: 'CUS001',
-      name: 'Nguyễn Văn A',
-      email: 'nguyenvana@email.com',
-      phone: '0901234567',
-      address: 'Hà Nội',
-      joinDate: '2024-01-15',
+      id: "CUS001",
+      name: "Nguyễn Văn A",
+      email: "nguyenvana@email.com",
+      phone: "0901234567",
+      address: "Hà Nội",
+      joinDate: "2024-01-15",
       totalBookings: 5,
       totalSpent: 25000000,
-      status: 'active',
-      lastBooking: '2024-12-20',
+      status: "active",
+      lastBooking: "2024-12-20",
     },
     {
-      id: 'CUS002',
-      name: 'Trần Thị B',
-      email: 'tranthib@email.com',
-      phone: '0902345678',
-      address: 'TP.HCM',
-      joinDate: '2024-03-22',
+      id: "CUS002",
+      name: "Trần Thị B",
+      email: "tranthib@email.com",
+      phone: "0902345678",
+      address: "TP.HCM",
+      joinDate: "2024-03-22",
       totalBookings: 3,
       totalSpent: 15500000,
-      status: 'active',
-      lastBooking: '2024-12-22',
+      status: "active",
+      lastBooking: "2024-12-22",
     },
     {
-      id: 'CUS003',
-      name: 'Lê Văn C',
-      email: 'levanc@email.com',
-      phone: '0903456789',
-      address: 'Đà Nẵng',
-      joinDate: '2024-06-10',
+      id: "CUS003",
+      name: "Lê Văn C",
+      email: "levanc@email.com",
+      phone: "0903456789",
+      address: "Đà Nẵng",
+      joinDate: "2024-06-10",
       totalBookings: 2,
       totalSpent: 8700000,
-      status: 'active',
-      lastBooking: '2024-12-25',
+      status: "active",
+      lastBooking: "2024-12-25",
     },
     {
-      id: 'CUS004',
-      name: 'Phạm Thị D',
-      email: 'phamthid@email.com',
-      phone: '0904567890',
-      address: 'Cần Thơ',
-      joinDate: '2024-08-18',
+      id: "CUS004",
+      name: "Phạm Thị D",
+      email: "phamthid@email.com",
+      phone: "0904567890",
+      address: "Cần Thơ",
+      joinDate: "2024-08-18",
       totalBookings: 1,
       totalSpent: 3600000,
-      status: 'inactive',
-      lastBooking: '2024-09-15',
+      status: "inactive",
+      lastBooking: "2024-09-15",
     },
     {
-      id: 'CUS005',
-      name: 'Hoàng Văn E',
-      email: 'hoangvane@email.com',
-      phone: '0905678901',
-      address: 'Hải Phòng',
-      joinDate: '2024-11-05',
+      id: "CUS005",
+      name: "Hoàng Văn E",
+      email: "hoangvane@email.com",
+      phone: "0905678901",
+      address: "Hải Phòng",
+      joinDate: "2024-11-05",
       totalBookings: 7,
       totalSpent: 42300000,
-      status: 'active',
-      lastBooking: '2024-12-28',
+      status: "active",
+      lastBooking: "2024-12-28",
     },
   ];
 
   const getStatusBadge = (status: string) => {
     switch (status) {
-      case 'active':
-        return <Badge className="bg-green-100 text-green-800">{t('active')}</Badge>;
-      case 'inactive':
-        return <Badge className="bg-red-100 text-red-800">{t('inactive')}</Badge>;
+      case "active":
+        return <Badge className="bg-green-100 text-green-800">{t("active")}</Badge>;
+      case "inactive":
+        return <Badge className="bg-red-100 text-red-800">{t("inactive")}</Badge>;
       default:
         return <Badge>{status}</Badge>;
     }
@@ -120,9 +120,9 @@ export default function CustomersManagement() {
 
   const getInitials = (name: string) => {
     return name
-      .split(' ')
+      .split(" ")
       .map((word) => word[0])
-      .join('')
+      .join("")
       .toUpperCase()
       .slice(0, 2);
   };
@@ -136,30 +136,30 @@ export default function CustomersManagement() {
   );
 
   const totalCustomers = customers.length;
-  const activeCustomers = customers.filter((c) => c.status === 'active').length;
+  const activeCustomers = customers.filter((c) => c.status === "active").length;
   const totalRevenue = customers.reduce((sum, customer) => sum + customer.totalSpent, 0);
   const averageSpending = totalRevenue / totalCustomers;
 
   const stats = [
     {
-      title: t('totalCustomers'),
+      title: t("totalCustomers"),
       value: totalCustomers,
-      color: 'blue',
+      color: "blue",
     },
     {
-      title: t('activeCustomers'),
+      title: t("activeCustomers"),
       value: activeCustomers,
-      color: 'green',
+      color: "green",
     },
     {
-      title: t('totalRevenue'),
-      value: `${totalRevenue.toLocaleString('vi-VN')} VNĐ`,
-      color: 'purple',
+      title: t("totalRevenue"),
+      value: `${totalRevenue.toLocaleString("vi-VN")} VNĐ`,
+      color: "purple",
     },
     {
-      title: t('averageSpending'),
-      value: `${Math.round(averageSpending).toLocaleString('vi-VN')} VNĐ`,
-      color: 'orange',
+      title: t("averageSpending"),
+      value: `${Math.round(averageSpending).toLocaleString("vi-VN")} VNĐ`,
+      color: "orange",
     },
   ];
 
@@ -168,14 +168,14 @@ export default function CustomersManagement() {
       {/* Page Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('title')}</h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">{t('subtitle')}</p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t("title")}</h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-1">{t("subtitle")}</p>
         </div>
         <Dialog>
           <DialogTrigger asChild>
             <Button>
               <Plus className="mr-2 h-4 w-4" />
-              {t('addNew')}
+              {t("addNew")}
             </Button>
           </DialogTrigger>
           <DialogContent>
@@ -287,14 +287,14 @@ export default function CustomersManagement() {
                   <TableCell>
                     <div className="flex items-center">
                       <Calendar className="h-4 w-4 mr-1 text-gray-400" />
-                      {new Date(customer.joinDate).toLocaleDateString('vi-VN')}
+                      {new Date(customer.joinDate).toLocaleDateString("vi-VN")}
                     </div>
                   </TableCell>
                   <TableCell className="text-center font-medium">
                     {customer.totalBookings}
                   </TableCell>
                   <TableCell className="font-medium">
-                    {customer.totalSpent.toLocaleString('vi-VN')} VNĐ
+                    {customer.totalSpent.toLocaleString("vi-VN")} VNĐ
                   </TableCell>
                   <TableCell>{getStatusBadge(customer.status)}</TableCell>
                   <TableCell>

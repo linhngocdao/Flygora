@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { useLocale } from 'next-intl';
-import { useRouter, usePathname } from 'next/navigation';
-import { Button } from '@/components/ui/button';
+import React from "react";
+import { useLocale } from "next-intl";
+import { useRouter, usePathname } from "next/navigation";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,8 +11,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Globe, Check, ChevronDown } from 'lucide-react';
+} from "@/components/ui/dropdown-menu";
+import { Globe, Check, ChevronDown } from "lucide-react";
 
 interface Language {
   code: string;
@@ -23,16 +23,16 @@ interface Language {
 
 const languages: Language[] = [
   {
-    code: 'vi',
-    name: 'Vietnamese',
-    nativeName: 'Tiếng Việt',
-    flag: '🇻🇳',
+    code: "vi",
+    name: "Vietnamese",
+    nativeName: "Tiếng Việt",
+    flag: "🇻🇳",
   },
   {
-    code: 'en',
-    name: 'English',
-    nativeName: 'English',
-    flag: '🇺🇸',
+    code: "en",
+    name: "English",
+    nativeName: "English",
+    flag: "🇺🇸",
   },
 ];
 
@@ -76,8 +76,8 @@ export default function AdminLanguageSwitcher() {
             onClick={() => handleLanguageChange(language.code)}
             className={`flex items-center justify-between cursor-pointer px-2 py-2 rounded-sm ${
               locale === language.code
-                ? 'bg-blue-50 dark:bg-blue-900/20'
-                : 'hover:bg-gray-50 dark:hover:bg-gray-700'
+                ? "bg-blue-50 dark:bg-blue-900/20"
+                : "hover:bg-gray-50 dark:hover:bg-gray-700"
             }`}
           >
             <div className="flex items-center space-x-3">

@@ -1,76 +1,76 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
-import Image from 'next/image';
+import { useEffect, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+import Image from "next/image";
 
 const tours = [
   {
     id: 1,
-    title: 'Tra Ang Excursion 1D',
-    level: 'Level 1 - Easy',
-    duration: '1 day',
+    title: "Tra Ang Excursion 1D",
+    level: "Level 1 - Easy",
+    duration: "1 day",
     rating: 4.9,
-    reviews: 'See Reviews',
-    price: 'VND 800,000/pax',
+    reviews: "See Reviews",
+    price: "VND 800,000/pax",
     image:
-      'https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp',
+      "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp",
   },
   {
     id: 2,
-    title: 'Phong Huong Adventure 1D',
-    level: 'Level 3 - Moderate',
-    duration: '1 day',
+    title: "Phong Huong Adventure 1D",
+    level: "Level 3 - Moderate",
+    duration: "1 day",
     rating: 4.9,
-    reviews: 'See Reviews',
-    price: 'VND 1,350,000/pax',
+    reviews: "See Reviews",
+    price: "VND 1,350,000/pax",
     image:
-      'https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp',
+      "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp",
   },
   {
     id: 3,
-    title: 'Elephant Cave & Ma Da Valley Jungle...',
-    level: 'Level 2 - Easy to Moderate',
-    duration: '1 day 1 night',
+    title: "Elephant Cave & Ma Da Valley Jungle...",
+    level: "Level 2 - Easy to Moderate",
+    duration: "1 day 1 night",
     rating: 4.9,
-    reviews: 'See Reviews',
-    price: 'VND 1,950,000/pax',
+    reviews: "See Reviews",
+    price: "VND 1,950,000/pax",
     image:
-      'https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp',
+      "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp",
   },
   {
     id: 4,
-    title: 'Phong Huong Excursion 2D1N',
-    level: 'Level 1 - Easy',
-    duration: '2 days 1 night',
+    title: "Phong Huong Excursion 2D1N",
+    level: "Level 1 - Easy",
+    duration: "2 days 1 night",
     rating: 4.9,
-    reviews: 'See Reviews',
-    price: 'VND 1,950,000/pax',
+    reviews: "See Reviews",
+    price: "VND 1,950,000/pax",
     image:
-      'https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp',
+      "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp",
   },
   {
     id: 5,
-    title: 'Phong Huong Adventure 2D1N',
-    level: 'Level 5 - Strenuous',
-    duration: '2 days 1 night',
+    title: "Phong Huong Adventure 2D1N",
+    level: "Level 5 - Strenuous",
+    duration: "2 days 1 night",
     rating: 4.9,
-    reviews: 'See Reviews',
-    price: 'VND 3,350,000/pax',
+    reviews: "See Reviews",
+    price: "VND 3,350,000/pax",
     image:
-      'https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp',
+      "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp",
   },
   {
     id: 6,
-    title: 'Phong Huong Adventure 2D1N',
-    level: 'Level 5 - Strenuous',
-    duration: '2 days 1 night',
+    title: "Phong Huong Adventure 2D1N",
+    level: "Level 5 - Strenuous",
+    duration: "2 days 1 night",
     rating: 4.9,
-    reviews: 'See Reviews',
-    price: 'VND 3,350,000/pax',
+    reviews: "See Reviews",
+    price: "VND 3,350,000/pax",
     image:
-      'https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp',
+      "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp",
   },
 ];
 
@@ -84,8 +84,8 @@ const AllAdventureTour = () => {
       setIsMobile(window.innerWidth < 1024);
     };
     handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
@@ -106,14 +106,14 @@ const AllAdventureTour = () => {
         {!isMobile && (
           <>
             <button
-              className={`cursor-pointer btn-slider advTourNavPrev absolute top-1/2 -translate-y-1/2 left-4 xl:left-8 z-10 flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ${isBeginning ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className={`cursor-pointer btn-slider advTourNavPrev absolute top-1/2 -translate-y-1/2 left-4 xl:left-8 z-10 flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ${isBeginning ? "opacity-50 cursor-not-allowed" : ""}`}
               aria-label="Previous slide"
               disabled={isBeginning}
             >
               <Image src="/images/homePage/pre.svg" alt="Next" width={18} height={12} />
             </button>
             <button
-              className={`cursor-pointer btn-slider advTourNavNext absolute top-1/2 -translate-y-1/2 right-4 xl:right-8 z-10 flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ${isEnd ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className={`cursor-pointer btn-slider advTourNavNext absolute top-1/2 -translate-y-1/2 right-4 xl:right-8 z-10 flex items-center justify-center w-12 h-12 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 ${isEnd ? "opacity-50 cursor-not-allowed" : ""}`}
               aria-label="Next slide"
               disabled={isEnd}
             >
@@ -131,8 +131,8 @@ const AllAdventureTour = () => {
         <Swiper
           modules={[Navigation, Pagination]}
           navigation={{
-            nextEl: '.advTourNavNext',
-            prevEl: '.advTourNavPrev',
+            nextEl: ".advTourNavNext",
+            prevEl: ".advTourNavPrev",
           }}
           onSlideChange={({ isBeginning, isEnd }) => {
             setIsBeginning(isBeginning);

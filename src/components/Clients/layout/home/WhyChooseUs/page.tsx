@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
-import ButtonPrimary from '@/components/Clients/ui/buttonPrimary';
-import Image from 'next/image';
-import PartnerCarousel from '@/components/Clients/layout/home/WhyChooseUs/PartnerCarousel';
+import React, { useEffect, useRef, useState } from "react";
+import ButtonPrimary from "@/components/Clients/ui/buttonPrimary";
+import Image from "next/image";
+import PartnerCarousel from "@/components/Clients/layout/home/WhyChooseUs/PartnerCarousel";
 
 const WhychooseUsSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -85,7 +85,7 @@ const WhychooseUsSection = () => {
                   <p>
                     We offer exclusive cave exploration and jungle treks for small groups and jungle
                     style team building activities in the UNESCO-listed Phong Nha-Ke Bang National
-                    Park and surrounding areas, including our newest tour to{' '}
+                    Park and surrounding areas, including our newest tour to{" "}
                     <a
                       href="https://junglebosstours.com/tour/do-quyen-waterfall-top-adventure-conquering-3d2n"
                       target="_blank"
@@ -93,7 +93,7 @@ const WhychooseUsSection = () => {
                     >
                       Conquering Do Queen Waterfall
                     </a>
-                    – the highest waterfall in South East Asia, and the legendary{' '}
+                    – the highest waterfall in South East Asia, and the legendary{" "}
                     <a href="/tour/kong-collapse-top-adventure-5d4n" target="_blank" rel="noopener">
                       Kong Collapse
                     </a>
@@ -126,7 +126,7 @@ const WhychooseUsSection = () => {
             height={267}
             className={`absolute top-[-100px] right-[-80px] transition-transform duration-700 ease-out
                                 w-[267px] h-[267px] max-md:w-[150px] max-md:h-[150px]
-                                ${isVisible ? 'translate-x-0 translate-y-0' : 'translate-x-full -translate-y-full'}`}
+                                ${isVisible ? "translate-x-0 translate-y-0" : "translate-x-full -translate-y-full"}`}
             loading="eager"
           />
           <Image
@@ -136,7 +136,7 @@ const WhychooseUsSection = () => {
             height={267}
             className={`absolute bottom-[-100px] left-[-90px] transition-transform duration-700 ease-out
                                 w-[267px] h-[267px] max-md:w-[150px] max-md:h-[150px]
-                                ${isVisible ? 'translate-x-0 translate-y-0' : '-translate-x-full translate-y-full'}`}
+                                ${isVisible ? "translate-x-0 translate-y-0" : "-translate-x-full translate-y-full"}`}
             loading="eager"
           />
         </div>

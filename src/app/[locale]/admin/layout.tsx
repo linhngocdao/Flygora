@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { usePathname } from 'next/navigation';
-import AdminSidebar from '@/app/[locale]/layout/admin/AdminSidebar';
-import AdminHeader from '@/app/[locale]/layout/admin/AdminHeader';
+import React from "react";
+import { usePathname } from "next/navigation";
+import AdminSidebar from "@/app/[locale]/layout/admin/AdminSidebar";
+import AdminHeader from "@/app/[locale]/layout/admin/AdminHeader";
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -13,7 +13,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   const pathname = usePathname();
 
   // Kiểm tra xem có phải trang login không
-  const isLoginPage = pathname.includes('/admin/login');
+  const isLoginPage = pathname.includes("/admin/login");
 
   // Nếu là trang login, chỉ render children không có header/sidebar
   if (isLoginPage) {

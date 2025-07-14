@@ -1,5 +1,5 @@
-import React from 'react';
-import ButtonPrimary from '@/components/Clients/ui/buttonPrimary';
+import React from "react";
+import ButtonPrimary from "@/components/Clients/ui/buttonPrimary";
 
 const SafetyCommitment = () => {
   return (

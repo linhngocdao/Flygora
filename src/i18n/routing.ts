@@ -1,13 +1,13 @@
-import { LocaleCode, LocaleList } from '@/utilities/constants';
-import { createNavigation } from 'next-intl/navigation';
-import { defineRouting } from 'next-intl/routing';
+import { LocaleCode, LocaleList } from "@/utilities/constants";
+import { createNavigation } from "next-intl/navigation";
+import { defineRouting } from "next-intl/routing";
 
 export const routing = defineRouting({
   // A list of all locales that are supported
   locales: LocaleList,
 
   // Used when no locale matches
-  defaultLocale: 'vi' as LocaleCode,
+  defaultLocale: "vi" as LocaleCode,
   localeDetection: true,
 });
 

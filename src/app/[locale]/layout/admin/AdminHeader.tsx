@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { useTranslations } from 'next-intl';
-import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import AdminLanguageSwitcher from '@/components/ui/AdminLanguageSwitcher';
+import React from "react";
+import { useTranslations } from "next-intl";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import AdminLanguageSwitcher from "@/components/ui/AdminLanguageSwitcher";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,11 +12,11 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Bell, Settings, LogOut, User } from 'lucide-react';
+} from "@/components/ui/dropdown-menu";
+import { Bell, Settings, LogOut, User } from "lucide-react";
 
 export default function AdminHeader() {
-  const t = useTranslations('admin.header');
+  const t = useTranslations("admin.header");
 
   return (
     <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 h-16 fixed top-0 left-0 right-0 z-50">
@@ -62,16 +62,16 @@ export default function AdminHeader() {
               <DropdownMenuSeparator />
               <DropdownMenuItem>
                 <User className="mr-2 h-4 w-4" />
-                <span>{t('profile')}</span>
+                <span>{t("profile")}</span>
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Settings className="mr-2 h-4 w-4" />
-                <span>{t('settings')}</span>
+                <span>{t("settings")}</span>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
                 <LogOut className="mr-2 h-4 w-4" />
-                <span>{t('logout')}</span>
+                <span>{t("logout")}</span>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

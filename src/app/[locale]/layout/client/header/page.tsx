@@ -1,8 +1,8 @@
-'use client';
-import React, { useEffect, useState } from 'react';
-import LanguageSwitcher from '@/components/Clients/ui/LanguageSwitcher';
-import SearchHeader from '@/components/Clients/ui/SearchHeader';
-import Link from 'next/link';
+"use client";
+import React, { useEffect, useState } from "react";
+import LanguageSwitcher from "@/components/Clients/ui/LanguageSwitcher";
+import SearchHeader from "@/components/Clients/ui/SearchHeader";
+import Link from "next/link";
 
 const HeaderGotravel = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -13,15 +13,15 @@ const HeaderGotravel = () => {
       setIsScrolled(scrollTop > 50);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <div>
       <header>
         <div
-          className={`fixed top-0 left-0 z-[1000] flex items-center w-full duration-700 ease-in-out header-wrapper ${isScrolled ? 'h-[50px] lg:h-[60px] bg-[#34430f] shadow-lg backdrop-blur-sm' : 'h-[70px] lg:h-24 max-lg:bg-[#34430f]'}`}
+          className={`fixed top-0 left-0 z-[1000] flex items-center w-full duration-700 ease-in-out header-wrapper ${isScrolled ? "h-[50px] lg:h-[60px] bg-[#34430f] shadow-lg backdrop-blur-sm" : "h-[70px] lg:h-24 max-lg:bg-[#34430f]"}`}
         >
           {/* Background overlay khi scroll */}
           {isScrolled && (
@@ -36,8 +36,8 @@ const HeaderGotravel = () => {
                 {/* Desktop menu button */}
                 <button className="hidden text-[#eef4b7] md:block">
                   <svg
-                    width={isScrolled ? '28' : '32'}
-                    height={isScrolled ? '28' : '32'}
+                    width={isScrolled ? "28" : "32"}
+                    height={isScrolled ? "28" : "32"}
                     viewBox="0 0 32 32"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -64,12 +64,12 @@ const HeaderGotravel = () => {
                 {/* Mobile menu button */}
                 <div className="md:hidden ml-4">
                   <button
-                    className={`text-[#eef4b7] transition-all duration-300 ${isScrolled ? 'w-7' : 'w-8'}`}
+                    className={`text-[#eef4b7] transition-all duration-300 ${isScrolled ? "w-7" : "w-8"}`}
                   >
                     <svg
                       data-v-ecb57835=""
-                      width={isScrolled ? '28' : '32'}
-                      height={isScrolled ? '28' : '32'}
+                      width={isScrolled ? "28" : "32"}
+                      height={isScrolled ? "28" : "32"}
                       viewBox="0 0 32 32"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -95,7 +95,7 @@ const HeaderGotravel = () => {
                   <Link href="/vi" aria-current="page">
                     <div className="relative w-full">
                       <div
-                        className={`duration-500 ease-in-out xl:max-w-[265px] md:max-w-[186px] max-w-[170px] ${isScrolled ? 'scale-100 opacity-0' : 'scale-100 opacity-100'}`}
+                        className={`duration-500 ease-in-out xl:max-w-[265px] md:max-w-[186px] max-w-[170px] ${isScrolled ? "scale-100 opacity-0" : "scale-100 opacity-100"}`}
                       >
                         <picture>
                           <source media="(max-width: 767px)" srcSet="/images/homePage/logo.webp" />
@@ -109,7 +109,7 @@ const HeaderGotravel = () => {
                         </picture>
                       </div>
                       <div
-                        className={`absolute flex items-center justify-center w-full mx-auto duration-1000 ease-in-out -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 ${isScrolled ? 'scale-100 opacity-100' : 'scale-0 opacity-0'}`}
+                        className={`absolute flex items-center justify-center w-full mx-auto duration-1000 ease-in-out -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 ${isScrolled ? "scale-100 opacity-100" : "scale-0 opacity-0"}`}
                       >
                         <picture>
                           <source
@@ -146,7 +146,7 @@ const HeaderGotravel = () => {
 
         {/* Overlay */}
         <div
-          className={`-translate-x-full fixed z-[51] w-screen h-screen overflow-hidden duration-500 ease-in-out bg-white ${isScrolled ? 'top-[60px] h-[calc(100vh-60px)]' : 'top-[70px] h-[calc(100vh-70px)]'}`}
+          className={`-translate-x-full fixed z-[51] w-screen h-screen overflow-hidden duration-500 ease-in-out bg-white ${isScrolled ? "top-[60px] h-[calc(100vh-60px)]" : "top-[70px] h-[calc(100vh-70px)]"}`}
         >
           <div className="absolute inset-0 w-full h-full">
             <picture>

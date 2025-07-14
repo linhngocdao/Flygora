@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { useTranslations } from 'next-intl';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import React from "react";
+import { useTranslations } from "next-intl";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -12,90 +12,90 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { BarChart3, Users, MapPin, Calendar, TrendingUp, DollarSign, Activity } from 'lucide-react';
+} from "@/components/ui/table";
+import { BarChart3, Users, MapPin, Calendar, TrendingUp, DollarSign, Activity } from "lucide-react";
 
 export default function AdminDashboard() {
-  const t = useTranslations('admin.dashboard');
+  const t = useTranslations("admin.dashboard");
 
   // Mock data
   const stats = [
     {
-      title: t('totalRevenue'),
-      value: '2,450,000,000',
-      unit: 'VNĐ',
-      change: '+12.5%',
+      title: t("totalRevenue"),
+      value: "2,450,000,000",
+      unit: "VNĐ",
+      change: "+12.5%",
       icon: DollarSign,
-      trend: 'up',
+      trend: "up",
     },
     {
-      title: t('totalBookings'),
-      value: '1,234',
-      unit: 'booking',
-      change: '+8.2%',
+      title: t("totalBookings"),
+      value: "1,234",
+      unit: "booking",
+      change: "+8.2%",
       icon: Calendar,
-      trend: 'up',
+      trend: "up",
     },
     {
-      title: t('newCustomers'),
-      value: '456',
-      unit: 'người',
-      change: '+15.3%',
+      title: t("newCustomers"),
+      value: "456",
+      unit: "người",
+      change: "+15.3%",
       icon: Users,
-      trend: 'up',
+      trend: "up",
     },
     {
-      title: t('activeTours'),
-      value: '89',
-      unit: 'tour',
-      change: '+5.1%',
+      title: t("activeTours"),
+      value: "89",
+      unit: "tour",
+      change: "+5.1%",
       icon: MapPin,
-      trend: 'up',
+      trend: "up",
     },
   ];
 
   const recentBookings = [
     {
-      id: 'BK001',
-      customer: 'Nguyễn Văn A',
-      tour: 'Phú Quốc Adventure',
-      date: '2025-01-15',
-      status: 'confirmed',
-      amount: '12,500,000',
+      id: "BK001",
+      customer: "Nguyễn Văn A",
+      tour: "Phú Quốc Adventure",
+      date: "2025-01-15",
+      status: "confirmed",
+      amount: "12,500,000",
     },
     {
-      id: 'BK002',
-      customer: 'Trần Thị B',
-      tour: 'Sapa Trekking',
-      date: '2025-01-18',
-      status: 'pending',
-      amount: '8,900,000',
+      id: "BK002",
+      customer: "Trần Thị B",
+      tour: "Sapa Trekking",
+      date: "2025-01-18",
+      status: "pending",
+      amount: "8,900,000",
     },
     {
-      id: 'BK003',
-      customer: 'Lê Văn C',
-      tour: 'Hạ Long Bay Cruise',
-      date: '2025-01-20',
-      status: 'confirmed',
-      amount: '15,700,000',
+      id: "BK003",
+      customer: "Lê Văn C",
+      tour: "Hạ Long Bay Cruise",
+      date: "2025-01-20",
+      status: "confirmed",
+      amount: "15,700,000",
     },
     {
-      id: 'BK004',
-      customer: 'Phạm Thị D',
-      tour: 'Dalat Cycling',
-      date: '2025-01-22',
-      status: 'cancelled',
-      amount: '6,200,000',
+      id: "BK004",
+      customer: "Phạm Thị D",
+      tour: "Dalat Cycling",
+      date: "2025-01-22",
+      status: "cancelled",
+      amount: "6,200,000",
     },
   ];
 
   const getStatusBadge = (status: string) => {
     switch (status) {
-      case 'confirmed':
+      case "confirmed":
         return <Badge className="bg-green-100 text-green-800">Đã xác nhận</Badge>;
-      case 'pending':
+      case "pending":
         return <Badge className="bg-yellow-100 text-yellow-800">Chờ xử lý</Badge>;
-      case 'cancelled':
+      case "cancelled":
         return <Badge className="bg-red-100 text-red-800">Đã hủy</Badge>;
       default:
         return <Badge>{status}</Badge>;
@@ -107,12 +107,12 @@ export default function AdminDashboard() {
       {/* Page Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('title')}</h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">{t('subtitle')}</p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t("title")}</h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-1">{t("subtitle")}</p>
         </div>
         <Button>
           <BarChart3 className="mr-2 h-4 w-4" />
-          {t('viewReports')}
+          {t("viewReports")}
         </Button>
       </div>
 
@@ -157,7 +157,7 @@ export default function AdminDashboard() {
           <CardHeader>
             <CardTitle className="flex items-center">
               <Activity className="mr-2 h-5 w-5" />
-              {t('recentBookings')}
+              {t("recentBookings")}
             </CardTitle>
             <CardDescription>Danh sách booking mới nhất trong hệ thống</CardDescription>
           </CardHeader>
@@ -193,25 +193,25 @@ export default function AdminDashboard() {
         {/* Quick Actions */}
         <Card>
           <CardHeader>
-            <CardTitle>{t('quickActions')}</CardTitle>
+            <CardTitle>{t("quickActions")}</CardTitle>
             <CardDescription>Các chức năng thường sử dụng</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <Button className="w-full justify-start" variant="outline">
               <MapPin className="mr-2 h-4 w-4" />
-              {t('createTour')}
+              {t("createTour")}
             </Button>
             <Button className="w-full justify-start" variant="outline">
               <Calendar className="mr-2 h-4 w-4" />
-              {t('manageSchedule')}
+              {t("manageSchedule")}
             </Button>
             <Button className="w-full justify-start" variant="outline">
               <Users className="mr-2 h-4 w-4" />
-              {t('addCustomer')}
+              {t("addCustomer")}
             </Button>
             <Button className="w-full justify-start" variant="outline">
               <BarChart3 className="mr-2 h-4 w-4" />
-              {t('viewReports')}
+              {t("viewReports")}
             </Button>
           </CardContent>
         </Card>

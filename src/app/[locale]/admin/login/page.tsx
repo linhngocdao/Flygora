@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Eye, EyeOff, Lock, Mail } from 'lucide-react';
+import React, { useState } from "react";
+import { useRouter, usePathname } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Eye, EyeOff, Lock, Mail } from "lucide-react";
 
 export default function AdminLogin() {
   const router = useRouter();
   const pathname = usePathname();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
   const [isLoading, setIsLoading] = useState(false);
 
@@ -27,7 +27,7 @@ export default function AdminLogin() {
       // For demo purposes, accept any email/password
       if (formData.email && formData.password) {
         // Get current locale from pathname
-        const locale = pathname.split('/')[1]; // /vi/admin/login -> vi
+        const locale = pathname.split("/")[1]; // /vi/admin/login -> vi
         // Redirect to admin dashboard with correct locale
         router.push(`/${locale}/admin`);
       }
@@ -84,7 +84,7 @@ export default function AdminLogin() {
                 <Input
                   id="password"
                   name="password"
-                  type={showPassword ? 'text' : 'password'}
+                  type={showPassword ? "text" : "password"}
                   placeholder="Nhập mật khẩu"
                   value={formData.password}
                   onChange={handleInputChange}
@@ -105,7 +105,7 @@ export default function AdminLogin() {
 
             {/* Login Button */}
             <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? 'Đang đăng nhập...' : 'Đăng nhập'}
+              {isLoading ? "Đang đăng nhập..." : "Đăng nhập"}
             </Button>
           </form>
 

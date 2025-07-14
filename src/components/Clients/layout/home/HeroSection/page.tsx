@@ -1,5 +1,5 @@
-import React from 'react';
-import Image from 'next/image';
+import React from "react";
+import Image from "next/image";
 
 const HeroSection = () => {
   return (
@@ -40,7 +40,7 @@ const HeroSection = () => {
                   alt="search icon"
                   style={{
                     filter:
-                      'invert(83%) sepia(10%) saturate(241%) hue-rotate(47deg) brightness(97%) contrast(85%)',
+                      "invert(83%) sepia(10%) saturate(241%) hue-rotate(47deg) brightness(97%) contrast(85%)",
                   }}
                 />
               </div>
@@ -51,8 +51,8 @@ const HeroSection = () => {
           <div
             className="md:flex rounded-[16px] border-4 bg-white xl:px-20 md:px-12 px-8 py-4 relative max-lg:hidden"
             style={{
-              boxShadow: 'rgba(0, 0, 0, 0.15) 0px 4px 8px 0px',
-              borderColor: 'rgb(214 226 80 / 1)',
+              boxShadow: "rgba(0, 0, 0, 0.15) 0px 4px 8px 0px",
+              borderColor: "rgb(214 226 80 / 1)",
             }}
           >
             <div className="xl:space-x-16 md:space-x-8 md:flex md:items-center md:flex-grow md:justify-center max-md:space-y-8">
@@ -135,7 +135,7 @@ const HeroSection = () => {
                     alt="search icon"
                     style={{
                       filter:
-                        'invert(83%) sepia(10%) saturate(241%) hue-rotate(47deg) brightness(97%) contrast(85%)',
+                        "invert(83%) sepia(10%) saturate(241%) hue-rotate(47deg) brightness(97%) contrast(85%)",
                     }}
                   />
                 </div>

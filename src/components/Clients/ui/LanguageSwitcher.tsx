@@ -1,8 +1,8 @@
-'use client';
-import { useState, useRef, useEffect } from 'react';
-import { useLocale } from 'next-intl';
-import { Link, usePathname } from '@/i18n/routing';
-import Image from 'next/image';
+"use client";
+import { useState, useRef, useEffect } from "react";
+import { useLocale } from "next-intl";
+import { Link, usePathname } from "@/i18n/routing";
+import Image from "next/image";
 
 const LanguageSwitcher = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -18,28 +18,28 @@ const LanguageSwitcher = () => {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   // Thông tin ngôn ngữ
   const languages = {
     vi: {
-      flag: '/images/homePage/flag-vi.webp',
-      code: 'VI',
-      name: 'Tiếng Việt',
+      flag: "/images/homePage/flag-vi.webp",
+      code: "VI",
+      name: "Tiếng Việt",
     },
     en: {
-      flag: '/images/homePage/flag-en.webp',
-      code: 'EN',
-      name: 'English',
+      flag: "/images/homePage/flag-en.webp",
+      code: "EN",
+      name: "English",
     },
   };
 
   // Ngôn ngữ hiện tại và ngôn ngữ khác
   const currentLang = languages[locale as keyof typeof languages];
-  const otherLang = locale === 'vi' ? languages.en : languages.vi;
-  const otherLocale = locale === 'vi' ? 'en' : 'vi';
+  const otherLang = locale === "vi" ? languages.en : languages.vi;
+  const otherLocale = locale === "vi" ? "en" : "vi";
 
   const handleToggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -75,7 +75,7 @@ const LanguageSwitcher = () => {
             src="/images/homePage/ic-arrow-down.svg"
             alt="arrow down"
             className={`object-cover w-full h-full transition-all duration-300 ${
-              isDropdownOpen ? 'rotate-180' : ''
+              isDropdownOpen ? "rotate-180" : ""
             } group-hover:opacity-80`}
           />
         </div>
@@ -85,8 +85,8 @@ const LanguageSwitcher = () => {
       <div
         className={`absolute top-0 w-[80px] -translate-x-1/2 left-1/2 duration-300 ease-in-out pt-12 z-50 ${
           isDropdownOpen
-            ? 'opacity-100 visible translate-y-0'
-            : 'opacity-0 invisible -translate-y-2'
+            ? "opacity-100 visible translate-y-0"
+            : "opacity-0 invisible -translate-y-2"
         }`}
       >
         {/* Dropdown Content với background đẹp */}

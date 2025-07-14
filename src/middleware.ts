@@ -1,6 +1,6 @@
-import { routing } from '@/i18n/routing';
-import createIntlMiddleware from 'next-intl/middleware';
-import { NextRequest } from 'next/server';
+import { routing } from "@/i18n/routing";
+import createIntlMiddleware from "next-intl/middleware";
+import { NextRequest } from "next/server";
 
 export const intlMiddleware = createIntlMiddleware(routing);
 
@@ -9,5 +9,5 @@ export default function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!api|_next|.*\\..*).*)'],
+  matcher: ["/((?!api|_next|.*\\..*).*)"],
 };

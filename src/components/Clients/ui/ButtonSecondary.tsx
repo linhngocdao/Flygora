@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image from "next/image";
 
 interface ButtonPrimaryProps {
   name?: string;
@@ -23,7 +23,7 @@ const ButtonSecondary = ({ name, href }: ButtonPrimaryProps) => {
 
         <div className="relative z-10 flex items-center justify-center w-full h-full spin-animation">
           <span className="text-white font-semibold   transition-colors duration-300">
-            {name ? name : 'No Name Provided'}
+            {name ? name : "No Name Provided"}
           </span>
         </div>
       </button>

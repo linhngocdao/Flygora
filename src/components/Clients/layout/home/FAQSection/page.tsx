@@ -1,53 +1,53 @@
-import Image from 'next/image';
-import { useState, useRef, useEffect, useCallback } from 'react';
-import ButtonPrimary from '@/components/Clients/ui/buttonPrimary';
+import Image from "next/image";
+import { useState, useRef, useEffect, useCallback } from "react";
+import ButtonPrimary from "@/components/Clients/ui/buttonPrimary";
 
 const faqData = [
   {
-    id: '01',
-    question: 'What happens if bad weather causes a tour cancellation?',
+    id: "01",
+    question: "What happens if bad weather causes a tour cancellation?",
     answer:
-      'If we have to cancel a tour due to weather, we will inform you as soon as possible and provide alternative options without extra costs, such as an alternate tour, new date, or a full refund.',
+      "If we have to cancel a tour due to weather, we will inform you as soon as possible and provide alternative options without extra costs, such as an alternate tour, new date, or a full refund.",
   },
   {
-    id: '02',
-    question: 'How to avoid thunderstorms & lightning during the tours?',
+    id: "02",
+    question: "How to avoid thunderstorms & lightning during the tours?",
     answer:
-      'We acknowledge the potential risks associated with thunderstorms and lightning strikes...',
+      "We acknowledge the potential risks associated with thunderstorms and lightning strikes...",
   },
   {
-    id: '03',
-    question: 'Is there any toilet during the tours?',
-    answer: 'Jungle Boss uses composting toilets for all adventure tours...',
+    id: "03",
+    question: "Is there any toilet during the tours?",
+    answer: "Jungle Boss uses composting toilets for all adventure tours...",
   },
   {
-    id: '04',
-    question: 'What kind of food provided during the tours?',
+    id: "04",
+    question: "What kind of food provided during the tours?",
     answer:
-      'During our tours, Jungle Boss offers a diverse range of Vietnamese-style food options...',
+      "During our tours, Jungle Boss offers a diverse range of Vietnamese-style food options...",
   },
   {
-    id: '05',
-    question: 'Do I have to bring my own caving gears and camping gears?',
+    id: "05",
+    question: "Do I have to bring my own caving gears and camping gears?",
     answer:
       "You don't need to bring your own caving or camping gear as Jungle Boss provides all necessary safety equipment...",
   },
   {
-    id: '06',
-    question: 'Am I allowed to join tours if I can not swim?',
+    id: "06",
+    question: "Am I allowed to join tours if I can not swim?",
     answer:
-      'Absolutely, you will be provided with a life jacket for your safety during the adventure...',
+      "Absolutely, you will be provided with a life jacket for your safety during the adventure...",
   },
   {
-    id: '07',
-    question: 'What kind of skills do I need to have?',
+    id: "07",
+    question: "What kind of skills do I need to have?",
     answer:
       "While having prior caving, hiking, and camping experience can be advantageous, it's not mandatory...",
   },
   {
-    id: '08',
-    question: 'What are the different levels of Adventure tours?',
-    answer: 'Our tours span a spectrum from relaxed to highly adventurous...',
+    id: "08",
+    question: "What are the different levels of Adventure tours?",
+    answer: "Our tours span a spectrum from relaxed to highly adventurous...",
   },
 ];
 
@@ -62,11 +62,11 @@ export default function FaqSection() {
   useEffect(() => {
     if (activeIndex !== null && contentRefs.current[activeIndex]) {
       contentRefs.current[activeIndex]!.style.maxHeight =
-        contentRefs.current[activeIndex]!.scrollHeight + 'px';
+        contentRefs.current[activeIndex]!.scrollHeight + "px";
     }
     contentRefs.current.forEach((el, idx) => {
       if (idx !== activeIndex && el) {
-        el.style.maxHeight = '0px';
+        el.style.maxHeight = "0px";
       }
     });
   }, [activeIndex]);
@@ -100,8 +100,8 @@ export default function FaqSection() {
                       <div
                         className={`title-3 duration-150 ${
                           isActive
-                            ? 'text-[#728C2F] font-semibold'
-                            : 'text-gray-500 group-hover:text-[#728C2F]'
+                            ? "text-[#728C2F] font-semibold"
+                            : "text-gray-500 group-hover:text-[#728C2F]"
                         }`}
                       >
                         {item.id}
@@ -109,8 +109,8 @@ export default function FaqSection() {
                       <div
                         className={`title-3 duration-150 ${
                           isActive
-                            ? 'text-[#728C2F] font-semibold'
-                            : 'text-[#333] group-hover:text-[#728C2F]'
+                            ? "text-[#728C2F] font-semibold"
+                            : "text-[#333] group-hover:text-[#728C2F]"
                         }`}
                       >
                         {item.question}
@@ -122,7 +122,7 @@ export default function FaqSection() {
                       src="/images/homePage/ic-arrow-down-black.svg"
                       alt="arrow down"
                       className={`transition-transform duration-300 ${
-                        isActive ? 'rotate-180' : ''
+                        isActive ? "rotate-180" : ""
                       }`}
                     />
                   </div>

@@ -1,6 +1,6 @@
-'use client';
-import React, { useEffect, useRef } from 'react';
-import ButtonPrimary from '@/components/Clients/ui/buttonPrimary';
+"use client";
+import React, { useEffect, useRef } from "react";
+import ButtonPrimary from "@/components/Clients/ui/buttonPrimary";
 
 const TeamBuilding = () => {
   const galleryRef = useRef<HTMLDivElement>(null);
@@ -13,11 +13,11 @@ const TeamBuilding = () => {
     if (!gallery || !section) return;
 
     // Tạo wrapper container cho horizontal scroll
-    const wrapper = document.createElement('div');
-    wrapper.className = 'overflow-x-auto overflow-y-hidden scrollbar-hide';
-    wrapper.style.scrollbarWidth = 'none';
+    const wrapper = document.createElement("div");
+    wrapper.className = "overflow-x-auto overflow-y-hidden scrollbar-hide";
+    wrapper.style.scrollbarWidth = "none";
     // Fix TypeScript error for msOverflowStyle
-    (wrapper.style as any).msOverflowStyle = 'none';
+    (wrapper.style as any).msOverflowStyle = "none";
 
     // Wrap gallery trong scrollable container
     const parentNode = gallery.parentNode;
@@ -46,7 +46,7 @@ const TeamBuilding = () => {
         // Smooth scroll to position
         wrapper.scrollTo({
           left: targetScrollLeft,
-          behavior: 'smooth',
+          behavior: "smooth",
         });
       }
     };
@@ -59,7 +59,7 @@ const TeamBuilding = () => {
     };
 
     // Add CSS để ẩn webkit scrollbar
-    const style = document.createElement('style');
+    const style = document.createElement("style");
     style.textContent = `
             .scrollbar-hide::-webkit-scrollbar {
                 display: none;
@@ -68,13 +68,13 @@ const TeamBuilding = () => {
     document.head.appendChild(style);
 
     // Event listeners
-    window.addEventListener('scroll', handleScroll);
-    wrapper.addEventListener('wheel', handleWheel, { passive: false });
+    window.addEventListener("scroll", handleScroll);
+    wrapper.addEventListener("wheel", handleWheel, { passive: false });
 
     // Cleanup function
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      wrapper.removeEventListener('wheel', handleWheel);
+      window.removeEventListener("scroll", handleScroll);
+      wrapper.removeEventListener("wheel", handleWheel);
       if (document.head.contains(style)) {
         document.head.removeChild(style);
       }
@@ -125,18 +125,18 @@ const TeamBuilding = () => {
           id="needToMove"
         >
           {[
-            '83bd39bf-107a-474f-95d2-561a9950b543',
-            'af730d8d-dbd1-4991-a6f6-96a763a99baa',
-            '043ca800-98fc-46da-a7e4-9161dad21989',
-            'fe88327e-7382-49e2-b320-d3f637a6e0fe',
-            '279ed19c-0f05-4d18-909c-d7f0fd10454c',
-            'dace4dff-255e-4197-8b7a-5d0c7260583e',
-            '501c8981-a4cd-43f4-a3d8-962b96433382',
-            '145a9bc5-473f-406c-bb53-37dcdac8f333',
+            "83bd39bf-107a-474f-95d2-561a9950b543",
+            "af730d8d-dbd1-4991-a6f6-96a763a99baa",
+            "043ca800-98fc-46da-a7e4-9161dad21989",
+            "fe88327e-7382-49e2-b320-d3f637a6e0fe",
+            "279ed19c-0f05-4d18-909c-d7f0fd10454c",
+            "dace4dff-255e-4197-8b7a-5d0c7260583e",
+            "501c8981-a4cd-43f4-a3d8-962b96433382",
+            "145a9bc5-473f-406c-bb53-37dcdac8f333",
           ].map((id, index) => (
             <div
               key={index}
-              className={`lg:w-[400px] md:w-[300px] lg:h-[266px] md:h-[150px] w-[175px] h-[95px] rounded-[8px] overflow-hidden ${index % 2 !== 0 ? 'self-end' : ''}`}
+              className={`lg:w-[400px] md:w-[300px] lg:h-[266px] md:h-[150px] w-[175px] h-[95px] rounded-[8px] overflow-hidden ${index % 2 !== 0 ? "self-end" : ""}`}
             >
               <picture>
                 <source

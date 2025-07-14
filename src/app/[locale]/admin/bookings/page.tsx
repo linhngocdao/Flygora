@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { useTranslations } from 'next-intl';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Input } from '@/components/ui/input';
+import React, { useState } from "react";
+import { useTranslations } from "next-intl";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 import {
   Table,
   TableBody,
@@ -13,8 +13,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table';
-import { Calendar, Search, Eye, Download, Filter } from 'lucide-react';
+} from "@/components/ui/table";
+import { Calendar, Search, Eye, Download, Filter } from "lucide-react";
 
 interface Booking {
   id: string;
@@ -30,101 +30,101 @@ interface Booking {
   };
   participants: number;
   totalAmount: number;
-  status: 'confirmed' | 'pending' | 'cancelled' | 'completed';
+  status: "confirmed" | "pending" | "cancelled" | "completed";
   bookingDate: string;
-  paymentStatus: 'paid' | 'pending' | 'refunded';
+  paymentStatus: "paid" | "pending" | "refunded";
 }
 
 export default function BookingsManagement() {
-  const t = useTranslations('admin.bookings');
-  const [searchTerm, setSearchTerm] = useState('');
+  const t = useTranslations("admin.bookings");
+  const [searchTerm, setSearchTerm] = useState("");
 
   // Mock data
   const bookings: Booking[] = [
     {
-      id: 'BK001',
+      id: "BK001",
       customer: {
-        name: 'Nguyễn Văn A',
-        email: 'nguyenvana@email.com',
-        phone: '0901234567',
+        name: "Nguyễn Văn A",
+        email: "nguyenvana@email.com",
+        phone: "0901234567",
       },
       tour: {
-        name: 'Phú Quốc Adventure Tour',
-        date: '2025-01-15',
-        duration: '3 ngày 2 đêm',
+        name: "Phú Quốc Adventure Tour",
+        date: "2025-01-15",
+        duration: "3 ngày 2 đêm",
       },
       participants: 2,
       totalAmount: 5000000,
-      status: 'confirmed',
-      bookingDate: '2024-12-20',
-      paymentStatus: 'paid',
+      status: "confirmed",
+      bookingDate: "2024-12-20",
+      paymentStatus: "paid",
     },
     {
-      id: 'BK002',
+      id: "BK002",
       customer: {
-        name: 'Trần Thị B',
-        email: 'tranthib@email.com',
-        phone: '0902345678',
+        name: "Trần Thị B",
+        email: "tranthib@email.com",
+        phone: "0902345678",
       },
       tour: {
-        name: 'Sapa Trekking Experience',
-        date: '2025-01-18',
-        duration: '2 ngày 1 đêm',
+        name: "Sapa Trekking Experience",
+        date: "2025-01-18",
+        duration: "2 ngày 1 đêm",
       },
       participants: 4,
       totalAmount: 7200000,
-      status: 'pending',
-      bookingDate: '2024-12-22',
-      paymentStatus: 'pending',
+      status: "pending",
+      bookingDate: "2024-12-22",
+      paymentStatus: "pending",
     },
     {
-      id: 'BK003',
+      id: "BK003",
       customer: {
-        name: 'Lê Văn C',
-        email: 'levanc@email.com',
-        phone: '0903456789',
+        name: "Lê Văn C",
+        email: "levanc@email.com",
+        phone: "0903456789",
       },
       tour: {
-        name: 'Hạ Long Bay Cruise',
-        date: '2025-01-20',
-        duration: '1 ngày',
+        name: "Hạ Long Bay Cruise",
+        date: "2025-01-20",
+        duration: "1 ngày",
       },
       participants: 1,
       totalAmount: 3200000,
-      status: 'confirmed',
-      bookingDate: '2024-12-25',
-      paymentStatus: 'paid',
+      status: "confirmed",
+      bookingDate: "2024-12-25",
+      paymentStatus: "paid",
     },
     {
-      id: 'BK004',
+      id: "BK004",
       customer: {
-        name: 'Phạm Thị D',
-        email: 'phamthid@email.com',
-        phone: '0904567890',
+        name: "Phạm Thị D",
+        email: "phamthid@email.com",
+        phone: "0904567890",
       },
       tour: {
-        name: 'Dalat Cycling Tour',
-        date: '2025-01-22',
-        duration: '1 ngày',
+        name: "Dalat Cycling Tour",
+        date: "2025-01-22",
+        duration: "1 ngày",
       },
       participants: 3,
       totalAmount: 3600000,
-      status: 'cancelled',
-      bookingDate: '2024-12-18',
-      paymentStatus: 'refunded',
+      status: "cancelled",
+      bookingDate: "2024-12-18",
+      paymentStatus: "refunded",
     },
   ];
 
   const getStatusBadge = (status: string) => {
     switch (status) {
-      case 'confirmed':
-        return <Badge className="bg-green-100 text-green-800">{t('confirmed')}</Badge>;
-      case 'pending':
-        return <Badge className="bg-yellow-100 text-yellow-800">{t('pending')}</Badge>;
-      case 'cancelled':
-        return <Badge className="bg-red-100 text-red-800">{t('cancelled')}</Badge>;
-      case 'completed':
-        return <Badge className="bg-blue-100 text-blue-800">{t('completed')}</Badge>;
+      case "confirmed":
+        return <Badge className="bg-green-100 text-green-800">{t("confirmed")}</Badge>;
+      case "pending":
+        return <Badge className="bg-yellow-100 text-yellow-800">{t("pending")}</Badge>;
+      case "cancelled":
+        return <Badge className="bg-red-100 text-red-800">{t("cancelled")}</Badge>;
+      case "completed":
+        return <Badge className="bg-blue-100 text-blue-800">{t("completed")}</Badge>;
       default:
         return <Badge>{status}</Badge>;
     }
@@ -132,12 +132,12 @@ export default function BookingsManagement() {
 
   const getPaymentStatusBadge = (status: string) => {
     switch (status) {
-      case 'paid':
-        return <Badge className="bg-green-100 text-green-800">{t('paid')}</Badge>;
-      case 'pending':
-        return <Badge className="bg-yellow-100 text-yellow-800">{t('unpaid')}</Badge>;
-      case 'refunded':
-        return <Badge className="bg-gray-100 text-gray-800">{t('refunded')}</Badge>;
+      case "paid":
+        return <Badge className="bg-green-100 text-green-800">{t("paid")}</Badge>;
+      case "pending":
+        return <Badge className="bg-yellow-100 text-yellow-800">{t("unpaid")}</Badge>;
+      case "refunded":
+        return <Badge className="bg-gray-100 text-gray-800">{t("refunded")}</Badge>;
       default:
         return <Badge>{status}</Badge>;
     }
@@ -151,29 +151,29 @@ export default function BookingsManagement() {
   );
 
   const totalRevenue = bookings
-    .filter((booking) => booking.paymentStatus === 'paid')
+    .filter((booking) => booking.paymentStatus === "paid")
     .reduce((sum, booking) => sum + booking.totalAmount, 0);
 
   const stats = [
     {
-      title: t('totalBookings'),
+      title: t("totalBookings"),
       value: bookings.length,
-      color: 'blue',
+      color: "blue",
     },
     {
-      title: t('confirmed'),
-      value: bookings.filter((b) => b.status === 'confirmed').length,
-      color: 'green',
+      title: t("confirmed"),
+      value: bookings.filter((b) => b.status === "confirmed").length,
+      color: "green",
     },
     {
-      title: t('pending'),
-      value: bookings.filter((b) => b.status === 'pending').length,
-      color: 'yellow',
+      title: t("pending"),
+      value: bookings.filter((b) => b.status === "pending").length,
+      color: "yellow",
     },
     {
-      title: 'Doanh thu',
-      value: `${totalRevenue.toLocaleString('vi-VN')} VNĐ`,
-      color: 'purple',
+      title: "Doanh thu",
+      value: `${totalRevenue.toLocaleString("vi-VN")} VNĐ`,
+      color: "purple",
     },
   ];
 
@@ -182,17 +182,17 @@ export default function BookingsManagement() {
       {/* Page Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('title')}</h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">{t('subtitle')}</p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t("title")}</h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-1">{t("subtitle")}</p>
         </div>
         <div className="flex items-center space-x-2">
           <Button variant="outline">
             <Download className="mr-2 h-4 w-4" />
-            {t('exportExcel')}
+            {t("exportExcel")}
           </Button>
           <Button>
             <Calendar className="mr-2 h-4 w-4" />
-            {t('calendar')}
+            {t("calendar")}
           </Button>
         </div>
       </div>
@@ -281,7 +281,7 @@ export default function BookingsManagement() {
                   </TableCell>
                   <TableCell className="text-center">{booking.participants}</TableCell>
                   <TableCell className="font-medium">
-                    {booking.totalAmount.toLocaleString('vi-VN')} VNĐ
+                    {booking.totalAmount.toLocaleString("vi-VN")} VNĐ
                   </TableCell>
                   <TableCell>{getStatusBadge(booking.status)}</TableCell>
                   <TableCell>{getPaymentStatusBadge(booking.paymentStatus)}</TableCell>

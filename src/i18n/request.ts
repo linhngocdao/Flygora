@@ -1,6 +1,6 @@
-import { getRequestConfig } from 'next-intl/server';
-import { notFound } from 'next/navigation';
-import { routing } from './routing';
+import { getRequestConfig } from "next-intl/server";
+import { notFound } from "next/navigation";
+import { routing } from "./routing";
 
 export default getRequestConfig(async ({ requestLocale }) => {
   // Provide a static locale, fetch a user setting,

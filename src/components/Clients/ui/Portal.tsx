@@ -1,6 +1,6 @@
-'use client';
-import { useEffect, useRef, useState } from 'react';
-import { createPortal } from 'react-dom';
+"use client";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 /**
  * `Portal` là một component giúp render nội dung con (children) ra ngoài cây DOM hiện tại,

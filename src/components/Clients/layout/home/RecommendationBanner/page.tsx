@@ -1,7 +1,7 @@
-'use client';
-import React, { useEffect, useRef, useState } from 'react';
-import ButtonPrimary from '@/components/Clients/ui/buttonPrimary';
-import Image from 'next/image';
+"use client";
+import React, { useEffect, useRef, useState } from "react";
+import ButtonPrimary from "@/components/Clients/ui/buttonPrimary";
+import Image from "next/image";
 
 const RecommendationBanner = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -37,7 +37,7 @@ const RecommendationBanner = () => {
           height={267}
           className={`absolute top-[-100px] right-[-80px] transition-transform duration-700 ease-out
                                 w-[267px] h-[267px] max-md:w-[150px] max-md:h-[150px]
-                                ${isVisible ? 'translate-x-0 translate-y-0' : 'translate-x-full -translate-y-full'}`}
+                                ${isVisible ? "translate-x-0 translate-y-0" : "translate-x-full -translate-y-full"}`}
           loading="eager"
         />
         <Image
@@ -47,7 +47,7 @@ const RecommendationBanner = () => {
           height={267}
           className={`absolute bottom-[-100px] left-[-90px] transition-transform duration-700 ease-out
                                 w-[267px] h-[267px] max-md:w-[150px] max-md:h-[150px]
-                                ${isVisible ? 'translate-x-0 translate-y-0' : '-translate-x-full translate-y-full'}`}
+                                ${isVisible ? "translate-x-0 translate-y-0" : "-translate-x-full translate-y-full"}`}
           loading="eager"
         />
         <div className="container space-y-4">
