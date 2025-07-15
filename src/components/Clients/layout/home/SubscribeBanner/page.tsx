@@ -1,0 +1,107 @@
+"use client";
+
+import React, { useState } from "react";
+import { useTranslations } from "next-intl";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import ButtonPrimary from "@/components/Clients/ui/buttonPrimary";
+
+// Định nghĩa kiểu dữ liệu cho form đăng ký
+interface SubscribeFormData {
+  email: string;
+}
+
+// Schema validation cho form đăng ký
+const subscribeSchema = yup.object({
+  email: yup
+    .string()
+    .required("subscribe.form.validation.emailRequired")
+    .email("subscribe.form.validation.emailInvalid"),
+});
+
+const SubscribeBanner = () => {
+  // Sử dụng hook đa ngôn ngữ
+  const t = useTranslations("common.subscribe");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+
+  // Khởi tạo React Hook Form với validation schema
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<SubscribeFormData>({
+    resolver: yupResolver(subscribeSchema),
+  });
+
+  // Xử lý khi form được submit
+  const onSubmit = async (data: SubscribeFormData) => {
+    try {
+      setIsSubmitting(true);
+      // TODO: Gửi dữ liệu đăng ký đến API
+      console.log("Form submitted with email:", data.email);
+
+      // Giả lập API call thành công
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      setSubmitSuccess(true);
+      reset(); // Reset form sau khi submit thành công
+
+      // Ẩn thông báo thành công sau 3 giây
+      setTimeout(() => setSubmitSuccess(false), 3000);
+    } catch (error) {
+      console.error("Lỗi khi đăng ký:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <section className="email-signup mb-8 lg:mb-16 md:mb-12">
+      <div className="container">
+        <div className="lg:p-8 p-6 bg-[url('/images/homepage/section-10-bg.webp')] bg-cover rounded-lg">
+          {/* Tiêu đề và mô tả */}
+          <h2 className="mb-4 text-2xl font-bold headline-[125%] text-[#ede52a]">{t("title")}</h2>
+          <p className="mb-6 text-[#ede52a]">{t("description")}</p>
+
+          {/* Form đăng ký nhận thông tin */}
+          <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
+            <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-2">
+              <div className="flex-grow">
+                <input
+                  {...register("email")}
+                  type="email"
+                  name="email"
+                  placeholder={t("form.emailPlaceholder")}
+                  className={`w-full px-4 py-2 border bg-white ${
+                    errors.email
+                      ? "border-red-500 focus:ring-red-500"
+                      : "border-green-300 focus:ring-green-500"
+                  } rounded-md focus:outline-none focus:ring-2`}
+                  disabled={isSubmitting}
+                />
+                {errors.email && (
+                  <p className="mt-1 text-sm text-red-500">{t(errors.email.message as string)}</p>
+                )}
+              </div>
+              <div className="max-md:flex max-md:justify-center">
+                <ButtonPrimary name={isSubmitting ? t("form.submitting") : t("form.submit")} />
+              </div>
+            </div>
+
+            {/* Thông báo đăng ký thành công */}
+            {submitSuccess && (
+              <div className="mt-2 text-center text-green-600 font-medium">
+                {t("form.successMessage")}
+              </div>
+            )}
+          </form>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default SubscribeBanner;

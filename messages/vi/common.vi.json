@@ -1,3 +1,22 @@
 {
-  "hello": "xin chào"
+  "hello": "xin chào",
+  "policy": {
+    "banner": {
+      "title": "Ưu đãi đặc biệt ra mắt – Phiên bản mới của Đỗ Quyên"
+    }
+  },
+  "subscribe": {
+    "title": "Đăng ký nhận thông tin từ Jungle Boss",
+    "description": "Nhận thông tin mới nhất về các tour du lịch và ưu đãi đặc biệt!",
+    "form": {
+      "emailPlaceholder": "Nhập email của bạn",
+      "submit": "Đăng ký",
+      "submitting": "Đang xử lý...",
+      "successMessage": "Đăng ký thành công! Cảm ơn bạn đã quan tâm.",
+      "validation": {
+        "emailRequired": "Vui lòng nhập địa chỉ email",
+        "emailInvalid": "Địa chỉ email không hợp lệ"
+      }
+    }
+  }
 }

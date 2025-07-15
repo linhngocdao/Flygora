@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function NotFoundPage() {
+const EmptyPage = () => {
   return (
     <div
       className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat"
@@ -43,4 +43,5 @@ export default function NotFoundPage() {
       </div>
     </div>
   );
-}
+};
+export default EmptyPage;

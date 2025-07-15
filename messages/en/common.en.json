@@ -1,8 +1,22 @@
 {
   "hello": "Hello",
-  "notFound": {
-    "imageAlt": "Page not found",
-    "description": "Oops! It looks like you're going the wrong way. Contact Jungle Boss via hotline <phone1>(+84) 917 800 805</phone1> or <phone2>(+84) 859 100 222</phone2> to help you find your way.",
-    "backToHome": "Back to Home"
+  "policy": {
+    "banner": {
+      "title": "Special launch offer – New version of Do Quyen"
+    }
+  },
+  "subscribe": {
+    "title": "Sign up for Jungle Boss updates",
+    "description": "Get the latest information about our tours and special offers!",
+    "form": {
+      "emailPlaceholder": "Enter your email",
+      "submit": "Sign Up",
+      "submitting": "Waiting...",
+      "successMessage": "Successfully subscribed! Thank you for your interest.",
+      "validation": {
+        "emailRequired": "Email is required",
+        "emailInvalid": "Invalid email address"
+      }
+    }
   }
 }
