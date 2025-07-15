@@ -1,3 +1,5 @@
+"use client";
+import TourSlider from "@/components/Clients/ui/TourSlider";
 import Image from "next/image";
 import React from "react";
 
@@ -48,7 +50,8 @@ const TourPageGoTravel = () => {
                   <div className="text-gray-700 body-1">For a day trip, overnighter or longer</div>
                 </div>
               </div>
-              <div className="relative max-md:pl-4">dsadsads</div>
+              <div className="relative max-md:pl-4"></div>
+              <TourSlider />
             </div>
           </div>
         </section>

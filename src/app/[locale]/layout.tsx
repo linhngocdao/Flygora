@@ -40,7 +40,7 @@ const svnKingston = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "GO TRAVEL",
+  title: process.env.NEXT_PUBLIC_WEBSITE_NAME,
   description: "Go Travel - Khám phá thế giới cùng chúng tôi",
   icons: {
     icon: [{ url: "/favicon.ico" }, { url: "/icon.png", sizes: "32x32", type: "image/png" }],
