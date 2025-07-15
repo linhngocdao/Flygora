@@ -1,42 +1,4 @@
-[build]
-  command = "npm run build"
-  publish = ".next"
-
-[build.environment]
-  NEXT_USE_NETLIFY_EDGE = "true"
-  NODE_VERSION = "22.16.0"
-
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
-
 [[redirects]]
   from = "/*"
-  to = "/_ipx"
+  to = "/index.html"
   status = 200
-  force = true
-  conditions = {Path = ["/_next/image*"]}
-
-# Cấu hình chuyển hướng cho i18n
-[[redirects]]
-  from = "/"
-  to = "/vi"
-  status = 302
-  force = true
-  conditions = {Language = ["vi"]}
-
-[[redirects]]
-  from = "/"
-  to = "/en"
-  status = 302
-  force = true
-
-# Xử lý 404 cho từng ngôn ngữ
-[[redirects]]
-  from = "/vi/*"
-  to = "/vi/not-found"
-  status = 404
-
-[[redirects]]
-  from = "/en/*"
-  to = "/en/not-found"
-  status = 404
