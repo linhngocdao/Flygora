@@ -58,6 +58,96 @@
     }
   },
   "faq": {
-    "title": "Frequently Asked Question"
+    "title": "Frequently Asked Questions",
+    "categories": {
+      "security-management": {
+        "title": "Security & Management",
+        "items": {
+          "thunderstorms-lightning": {
+            "question": "How to avoid thunderstorms & lightning during the tour?",
+            "answer": "We constantly monitor weather conditions and have established safety protocols. Tours may be postponed or rescheduled if dangerous weather conditions are predicted. Our guides are trained to recognize weather patterns and will move groups to safe areas if needed."
+          },
+          "departure-cancellation": {
+            "question": "If I can change the departure date or cancel the tour, what are the policies?",
+            "answer": "Cancellation policies vary by tour type and timing. Generally, cancellations made 48+ hours in advance receive a full refund, 24-48 hours receive 50% refund, and less than 24 hours receive no refund. Weather-related cancellations always receive full refund or reschedule options."
+          },
+          "join-cannot-swim": {
+            "question": "Am I allowed to join tours if I can not swim?",
+            "answer": "Yes, you can join most tours even if you cannot swim. We provide life jackets for all water activities and have trained guides to assist. However, some advanced water-based tours may require basic swimming skills, which will be clearly indicated in tour descriptions."
+          },
+          "skills-needed": {
+            "question": "What kind of skills do I need to have?",
+            "answer": "Most tours are designed for beginners and require no special skills. Basic fitness levels and willingness to follow safety instructions are typically sufficient. Advanced tours will specify required skills in their descriptions."
+          },
+          "adventure-levels": {
+            "question": "What are the different levels of Adventure tours?",
+            "answer": "We offer tours from Level 1 (Beginner - suitable for families) to Level 5 (Expert - requiring advanced skills). Each tour is clearly marked with its difficulty level, duration, and physical requirements."
+          }
+        }
+      },
+      "general-faq": {
+        "title": "General FAQ",
+        "items": {
+          "chemical-shampoo": {
+            "question": "Am I allowed to use chemical shampoo?",
+            "answer": "We encourage the use of biodegradable, eco-friendly shampoos to protect the natural environment. Chemical shampoos can harm local ecosystems, especially near water sources. We can recommend suitable alternatives."
+          },
+          "shower-place": {
+            "question": "Is the a place for showers during the tours?",
+            "answer": "Shower facilities vary by tour type. Day tours typically don't include shower facilities, while overnight tours often include basic washing areas or access to natural swimming spots. Check your specific tour details."
+          },
+          "toilet-facilities": {
+            "question": "Is there any toilet during the tours?",
+            "answer": "Basic toilet facilities or designated areas are available on most tours. For wilderness tours, we practice Leave No Trace principles and provide guidance on proper waste disposal."
+          },
+          "food-provided": {
+            "question": "What kind of food provided during the tours?",
+            "answer": "We provide nutritious local cuisine including Vietnamese specialties, fresh fruits, and energy-rich snacks. Vegetarian options are available with advance notice. All food is prepared following hygiene standards."
+          },
+          "bring-camping-gear": {
+            "question": "Do I have to bring my own caving gears and camping gears?",
+            "answer": "All necessary safety equipment including helmets, headlamps, ropes, and camping gear are provided. You only need to bring personal items like clothing, toiletries, and any specific personal preferences."
+          }
+        }
+      },
+      "tour-information": {
+        "title": "Tour Information",
+        "items": {
+          "what-to-notice": {
+            "question": "What should I notice during the tours?",
+            "answer": "Follow your guide's instructions at all times, stay with the group, wear provided safety equipment, respect local customs and environment, stay hydrated, and inform guides of any health concerns immediately."
+          },
+          "leeches-jungle": {
+            "question": "Are there leeches in the jungle?",
+            "answer": "Leeches may be present in some jungle areas, especially during rainy season. We provide guidance on prevention and removal. They're harmless but can be prevented with proper clothing and repellent."
+          },
+          "medical-condition": {
+            "question": "What if I have a medical condition? Can I still join the tour?",
+            "answer": "Please inform us of any medical conditions when booking. Our guides are first-aid trained, and we can accommodate many conditions with proper preparation. Some severe conditions may prevent participation for safety reasons."
+          },
+          "what-to-pack": {
+            "question": "What should I pack on the tours?",
+            "answer": "Pack lightweight, quick-dry clothing, sturdy hiking boots, rain gear, sunscreen, insect repellent, personal toiletries, any medications, and a waterproof bag for electronics. We'll provide a detailed packing list upon booking."
+          }
+        }
+      },
+      "policy": {
+        "title": "Policy",
+        "items": {
+          "bad-weather-cancellation": {
+            "question": "What happens if bad weather causes a tour cancellation?",
+            "answer": "If weather conditions are deemed unsafe, tours will be cancelled or postponed. You'll receive a full refund or the option to reschedule. Safety is our top priority, and we monitor weather conditions continuously."
+          },
+          "payment-booking": {
+            "question": "When do I need to make full payment to confirm my one-day tour booking?",
+            "answer": "Full payment is required at least 24 hours before the tour date for day tours. For multi-day tours, a 50% deposit secures your booking with full payment due 48 hours before departure."
+          },
+          "change-departure-date": {
+            "question": "If I can change the departure date or cancel the tour, what are the policies?",
+            "answer": "Changes to departure dates are subject to availability and may incur fees. Cancellation policies: 48+ hours = full refund, 24-48 hours = 50% refund, less than 24 hours = no refund. Weather cancellations always receive full refund."
+          }
+        }
+      }
+    }
   }
 }

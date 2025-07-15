@@ -38,7 +38,6 @@ const ContactForm = () => {
   const [phonePrefix, setPhonePrefix] = useState("");
   const [searchPhoneCode, setSearchPhoneCode] = useState("");
 
-  // React Hook Form
   const {
     register,
     handleSubmit,

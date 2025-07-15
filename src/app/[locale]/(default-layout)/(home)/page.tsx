@@ -15,7 +15,7 @@ import FooterIntroPage from "@/components/Clients/layout/home/FooterIntro/page";
 export default function Home() {
   return (
     <div>
-      <main className="homepage max-lg:pt-[68px]">
+      <main className="homepage max-lg:pt-[35px]">
         {/* HeroSection */}
         <HeroSection />
 
