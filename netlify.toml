@@ -4,7 +4,7 @@
 
 [build.environment]
   NEXT_USE_NETLIFY_EDGE = "true"
-  NODE_VERSION = "18" # Hoặc phiên bản Node.js mà dự án của bạn sử dụng
+  NODE_VERSION = "22.16.0"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
