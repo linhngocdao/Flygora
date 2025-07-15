@@ -24,10 +24,6 @@ import {
 } from "@/components/ui/dialog";
 import { Plus, Search, Edit, Trash2, MapPin, Calendar, Users, Star } from "lucide-react";
 
-export function generateStaticParams() {
-  return [{ locale: "vi" }, { locale: "en" }];
-}
-
 interface Tour {
   id: string;
   name: string;
@@ -45,9 +41,6 @@ export default function ToursManagement() {
   const t = useTranslations("admin.tours");
   const [searchTerm, setSearchTerm] = useState("");
 
-  //TODO: viết cho tôi 1 đoạn call api sử dụng react query
-
-  // Mock data
   const tours: Tour[] = [
     {
       id: "T001",
