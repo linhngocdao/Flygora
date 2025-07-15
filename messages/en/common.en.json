@@ -18,5 +18,46 @@
         "emailInvalid": "Invalid email address"
       }
     }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "keepInTouch": "Keep in Touch",
+    "connectWithJungleBoss": "CONNECT WITH JUNGLE BOSS",
+    "infoAboutTours": "You want to get information about Jungle Boss tours.",
+    "fillFormBelow": "Don't hesitate provide your details by filling out the form below.",
+    "form": {
+      "firstName": "First Name",
+      "firstNamePlaceholder": "Enter First Name",
+      "firstNameRequired": "First name is required",
+
+      "lastName": "Last Name",
+      "lastNamePlaceholder": "Enter Last Name",
+      "lastNameRequired": "Last name is required",
+
+      "email": "Email",
+      "emailPlaceholder": "Enter Email",
+      "emailInvalid": "Please enter a valid email address",
+
+      "mobilePhone": "Mobile Phone",
+      "phoneNumberPlaceholder": "Enter Mobile Phone",
+      "phoneNumberRequired": "Phone number is required",
+      "phonePrefixRequired": "Please select a country code",
+
+      "message": "Message",
+      "messagePlaceholder": "Enter your requires or any information about our tours.",
+
+      "select": "Select",
+      "search": "Search",
+      "allCountries": "All Countries",
+
+      "sendRequest": "Send Request",
+      "sending": "Sending...",
+
+      "submitSuccess": "Thank you for your message! We'll get back to you shortly.",
+      "submitError": "Sorry, there was an error submitting your form. Please try again."
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Question"
   }
 }

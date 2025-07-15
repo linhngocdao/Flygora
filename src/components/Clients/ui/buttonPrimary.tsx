@@ -4,12 +4,18 @@ interface ButtonPrimaryProps {
   name?: string;
   href?: string;
   className?: string;
+  type?: "button" | "submit" | "reset";
+  disabled?: any;
 }
 
-const ButtonPrimary = ({ name, href }: ButtonPrimaryProps) => {
+const ButtonPrimary = ({ name, href, type, disabled }: ButtonPrimaryProps) => {
   return (
     <a href={href} className="inline-block">
-      <button className="relative px-8 h-[40px] cursor-pointer overflow-hidden">
+      <button
+        type={type}
+        disabled={disabled}
+        className="relative px-8 h-[40px] cursor-pointer overflow-hidden"
+      >
         <div className="absolute inset-0 w-full h-full z-0 ">
           <Image
             src="/images/homePage/BackBtn.svg"

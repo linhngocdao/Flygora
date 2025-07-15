@@ -18,5 +18,46 @@
         "emailInvalid": "Địa chỉ email không hợp lệ"
       }
     }
+  },
+  "contact": {
+    "title": "Liên hệ voi chúng tôi",
+    "keepInTouch": "Giữ liên lạc",
+    "connectWithJungleBoss": "KẾT NỐI VỚI JUNGLE BOSS",
+    "infoAboutTours": "Bạn muốn biết thông tin về các tour của Jungle Boss.",
+    "fillFormBelow": "Đừng ngần ngại cung cấp thông tin chi tiết của bạn bằng cách điền vào biểu mẫu bên dưới.",
+    "form": {
+      "firstName": "Họ",
+      "firstNamePlaceholder": "Nhập họ của bạn",
+      "firstNameRequired": "Vui lòng nhập họ",
+
+      "lastName": "Tên",
+      "lastNamePlaceholder": "Nhập tên của bạn",
+      "lastNameRequired": "Vui lòng nhập tên",
+
+      "email": "Email",
+      "emailPlaceholder": "Nhập địa chỉ email",
+      "emailInvalid": "Vui lòng nhập địa chỉ email hợp lệ",
+
+      "mobilePhone": "Số điện thoại",
+      "phoneNumberPlaceholder": "Nhập số điện thoại",
+      "phoneNumberRequired": "Vui lòng nhập số điện thoại",
+      "phonePrefixRequired": "Vui lòng chọn mã quốc gia",
+
+      "message": "Tin nhắn",
+      "messagePlaceholder": "Nhập yêu cầu của bạn hoặc bất kỳ thông tin nào về các tour của chúng tôi.",
+
+      "select": "Chọn",
+      "search": "Tìm kiếm",
+      "allCountries": "Tất cả quốc gia",
+
+      "sendRequest": "Gửi yêu cầu",
+      "sending": "Đang gửi...",
+
+      "submitSuccess": "Cảm ơn bạn đã gửi tin nhắn! Chúng tôi sẽ liên hệ lại với bạn trong thời gian sớm nhất.",
+      "submitError": "Xin lỗi, đã xảy ra lỗi khi gửi biểu mẫu. Vui lòng thử lại."
+    }
+  },
+  "faq": {
+    "title": "Câu hỏi thường gặp"
   }
 }
