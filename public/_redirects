@@ -1,0 +1,13 @@
+# Redirect from www to non-www
+
+https://www.gotravel.com/* https://gotravel.com/:splat 301!
+
+# Default language redirect
+
+/ /vi 302 Language=vi
+/ /en 302
+
+# Handle 404 errors for each language
+
+/vi/_ /vi/not-found 404
+/en/_ /en/not-found 404
