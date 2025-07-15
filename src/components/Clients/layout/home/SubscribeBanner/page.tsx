@@ -3,26 +3,24 @@
 import React, { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import ButtonPrimary from "@/components/Clients/ui/buttonPrimary";
-
-// Định nghĩa kiểu dữ liệu cho form đăng ký
-interface SubscribeFormData {
-  email: string;
-}
-
-// Schema validation cho form đăng ký
-const subscribeSchema = yup.object({
-  email: yup
-    .string()
-    .required("subscribe.form.validation.emailRequired")
-    .email("subscribe.form.validation.emailInvalid"),
-});
 
 const SubscribeBanner = () => {
   // Sử dụng hook đa ngôn ngữ
   const t = useTranslations("common.subscribe");
+
+  // Định nghĩa schema validation cho form đăng ký bằng zod
+  const subscribeSchema = z.object({
+    email: z
+      .string()
+      .min(1, { message: t("form.validation.emailRequired") })
+      .email({ message: t("form.validation.emailInvalid") }),
+  });
+
+  // Trích xuất kiểu dữ liệu từ schema zod
+  type SubscribeFormData = z.infer<typeof subscribeSchema>;
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
@@ -33,7 +31,9 @@ const SubscribeBanner = () => {
     formState: { errors },
     reset,
   } = useForm<SubscribeFormData>({
-    resolver: yupResolver(subscribeSchema),
+    resolver: zodResolver(subscribeSchema),
+    // Xác định schema sau khi đã có biến t
+    context: { t },
   });
 
   // Xử lý khi form được submit
@@ -83,7 +83,7 @@ const SubscribeBanner = () => {
                   disabled={isSubmitting}
                 />
                 {errors.email && (
-                  <p className="mt-1 text-sm text-red-500">{t(errors.email.message as string)}</p>
+                  <p className="mt-1 text-sm text-red-500">{errors.email.message as string}</p>
                 )}
               </div>
               <div className="max-md:flex max-md:justify-center">
