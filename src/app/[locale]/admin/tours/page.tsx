@@ -24,6 +24,10 @@ import {
 } from "@/components/ui/dialog";
 import { Plus, Search, Edit, Trash2, MapPin, Calendar, Users, Star } from "lucide-react";
 
+export function generateStaticParams() {
+  return [{ locale: "vi" }, { locale: "en" }];
+}
+
 interface Tour {
   id: string;
   name: string;
