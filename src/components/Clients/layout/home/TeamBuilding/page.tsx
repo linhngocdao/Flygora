@@ -1,8 +1,10 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import ButtonPrimary from "@/components/Clients/ui/buttonPrimary";
+import { useTranslations } from "next-intl";
 
 const TeamBuilding = () => {
+  const t = useTranslations("common.teamBuilding");
   const galleryRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -90,31 +92,15 @@ const TeamBuilding = () => {
       >
         {/* Section Header */}
         <div className="container space-y-4">
-          <h2 className="text-center pre-header text-[#6c8a1f]">Team Building Tour</h2>
+          <h2 className="text-center pre-header text-[#6c8a1f]">{t("title")}</h2>
           <div className="text-center uppercase text-[1.5rem] font-[600] leading-[125%] lg:text-[2.5rem] text-[#004750]">
-            Jumpstart Team Synergy <br /> with Exhilarating Challenges
+            {t("subtitle")}
           </div>
 
           {/* Team Building Description */}
           <div className="text-center pb-[50px] text-[#666] leading-[145%] text-[0.8rem] lg:text-[1rem] max-w-[800px] mx-auto">
-            <p>
-              Immerse your team in an unparalleled adventure amid the awe-inspiring jungles of Phong
-              Nha – Ke Bang National Park. Jungle Boss Team building is a transformative journey
-              marked by unique and challenging games, setting us apart from the conventional team
-              building landscape in Vietnam. Escape the mundane and seize the extraordinary as your
-              team engages in missions that demand collaboration, creativity, and camaraderie. Our
-              jungle setting serves as the ultimate canvas for fostering teamwork, creating an
-              atmosphere that is not only thrilling but also indelibly unforgettable.
-            </p>
-            <p>
-              Embrace a one-of-a-kind adventure with us – a promise to not only fortify your team
-              bonds but also create lasting memories of an exceptionally extraordinary experience.
-              At Jungle Boss, we redefine team building, making it an immersive and thrilling
-              escapade that transcends the ordinary, leaving an enduring mark on your team
-              collective journey. There are different team building options from 1 day to multiple
-              days. Leave us a request and we can help you tailor a unique Jungle Team building that
-              suits your needs!
-            </p>
+            <p>{t("description.paragraph1")}</p>
+            <p>{t("description.paragraph2")}</p>
           </div>
         </div>
 

@@ -1,9 +1,13 @@
 "use client";
 import TourSlider from "@/components/Clients/ui/TourSlider";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import React from "react";
 
 const TourPageGoTravel = () => {
+  // Hook đa ngôn ngữ cho Tour page
+  const t = useTranslations("common.tourPage");
+
   return (
     <div>
       <main>
@@ -20,12 +24,9 @@ const TourPageGoTravel = () => {
           <div className="absolute inset-x-0 z-10 xl:bottom-20 md:bottom-14 bottom-10">
             <div className="container space-y-1 text-center md:space-y-2 xl:space-y-2.5">
               <h1 className="text-2xl font-bold text-[#ede52a] md:text-5xl lg:text-6xl">
-                ADVENTURE TOURS
+                {t("header.title")}
               </h1>
-              <div className="body-1 text-base text-white md:text-lg">
-                Jungle Boss builds teamwork through adventure in Phong Nha-Ke Bang National Park.
-                Challenge your team with games in the jungle.
-              </div>
+              <div className="body-1 text-base text-white md:text-lg">{t("header.subtitle")}</div>
             </div>
           </div>
         </section>
@@ -46,8 +47,10 @@ const TourPageGoTravel = () => {
                   />
                 </div>
                 <div className="space-y-1 md:space-y-2">
-                  <h2 className="uppercase headline-1 text-primary-darker">Day Tours</h2>
-                  <div className="text-gray-700 body-1">For a day trip, overnighter or longer</div>
+                  <h2 className="uppercase headline-1 text-primary-darker">
+                    {t("dayTours.title")}
+                  </h2>
+                  <div className="text-gray-700 body-1">{t("dayTours.subtitle")}</div>
                 </div>
               </div>
               <div className="relative max-md:pl-4"></div>

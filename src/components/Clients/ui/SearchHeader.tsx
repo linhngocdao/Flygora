@@ -2,12 +2,14 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Portal from "@/components/Clients/ui/Portal";
+import { useTranslations } from "next-intl";
 
 interface SearchHeaderProps {
   isScrolled: boolean;
 }
 
 const SearchHeader: React.FC<SearchHeaderProps> = ({ isScrolled }) => {
+  const t = useTranslations("common.search");
   const [value, setValue] = useState<string>("");
   const [showSearchPopup, setShowSearchPopup] = useState<boolean>(false);
 
@@ -79,7 +81,7 @@ const SearchHeader: React.FC<SearchHeaderProps> = ({ isScrolled }) => {
             >
               {/* Header với Close Button */}
               <div className="flex justify-between items-center p-6 border-b border-[#5a6b20]">
-                <h3 className="text-[#eef4b7] text-xl font-medium">Tìm kiếm</h3>
+                <h3 className="text-[#eef4b7] text-xl font-medium">{t("title")}</h3>
                 <button
                   onClick={handleClosePopup}
                   className="text-[#eef4b7] hover:text-white transition-colors duration-200 p-2 hover:bg-white/10 rounded-full"
@@ -126,7 +128,7 @@ const SearchHeader: React.FC<SearchHeaderProps> = ({ isScrolled }) => {
                     <input
                       onChange={handleChange}
                       value={value}
-                      placeholder="Nhập từ khóa tìm kiếm..."
+                      placeholder={t("searchPlaceholder")}
                       className="w-full h-14 pl-12 pr-12 text-gray-900 bg-white rounded-full outline-none focus:outline-none focus:ring-2 focus:ring-[#6c8a1f] text-lg placeholder:text-gray-500 shadow-lg"
                       autoFocus
                     />
@@ -164,7 +166,9 @@ const SearchHeader: React.FC<SearchHeaderProps> = ({ isScrolled }) => {
                 {value && (
                   <div className="mb-8">
                     <div className="bg-white rounded-xl shadow-lg p-6">
-                      <div className="text-gray-600 text-sm mb-4 font-medium">Gợi ý tìm kiếm:</div>
+                      <div className="text-gray-600 text-sm mb-4 font-medium">
+                        {t("suggestions")}:
+                      </div>
                       <div className="space-y-3">
                         <div className="p-3 hover:bg-gray-50 cursor-pointer rounded-lg text-gray-800 transition-colors duration-200 flex items-center space-x-3">
                           <svg
@@ -206,7 +210,9 @@ const SearchHeader: React.FC<SearchHeaderProps> = ({ isScrolled }) => {
                               clipRule="evenodd"
                             />
                           </svg>
-                          <span>{value} - Trải nghiệm</span>
+                          <span>
+                            {value} - {t("experience")}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -216,15 +222,17 @@ const SearchHeader: React.FC<SearchHeaderProps> = ({ isScrolled }) => {
                 {/* Popular Searches */}
                 {!value && (
                   <div>
-                    <div className="text-[#eef4b7] text-center mb-6 text-lg">Tìm kiếm phổ biến</div>
+                    <div className="text-[#eef4b7] text-center mb-6 text-lg">
+                      {t("popularSearches")}
+                    </div>
                     <div className="flex flex-wrap justify-center gap-3">
                       {[
-                        "Sapa",
-                        "Hạ Long",
-                        "Phú Quốc",
-                        "Đà Lạt",
-                        "Tour miền Bắc",
-                        "Du lịch sinh thái",
+                        t("popularKeywords.sapa"),
+                        t("popularKeywords.halong"),
+                        t("popularKeywords.phuquoc"),
+                        t("popularKeywords.dalat"),
+                        t("popularKeywords.northernTour"),
+                        t("popularKeywords.ecotourism"),
                       ].map((keyword, index) => (
                         <button
                           key={index}

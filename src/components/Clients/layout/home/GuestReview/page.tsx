@@ -1,8 +1,10 @@
 import React from "react";
 import ButtonSecondary from "@/components/Clients/ui/ButtonSecondary";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 const GuestReviewSection = () => {
+  const t = useTranslations("common.guestReview");
   return (
     <div>
       <section>
@@ -33,27 +35,20 @@ const GuestReviewSection = () => {
               </div>
             </div>
             <div className="space-y-4">
-              <h2 className="pre-header text-[#ede52a]">Jungle Boss Travelodge</h2>
+              <h2 className="pre-header text-[#ede52a]">{t("title")}</h2>
               <div className="space-y-2">
                 <h3 className="text-white uppercase lg:whitespace-pre-line max-md:hidden  text-[1.5rem] font-[600] leading-[125%] lg:text-[2rem]">
-                  A wonderful stopover when visiting Phong Nha - Ke Bang
+                  {t("subtitle")}
                 </h3>
                 <div className="text-white uppercase md:hidden title-dropline  text-[1.5rem] font-[600] leading-[125%] lg:text-[2rem]">
-                  A wonderful stopover when visiting Phong Nha - Ke Bang
+                  {t("subtitle")}
                 </div>
               </div>
               <div className="text-[#e0e0e0] leading-[155%] text-[0.8rem] lg:text-[1rem] experience">
-                <p style={{ textAlign: "justify" }}>
-                  Nestled amidst the immense rice fields of the Phong Nha - Ke Bang region, Jungle
-                  Boss Travelodge is an ideal place for you to unwind during your Quang Binh
-                  travels. This destination offers cozy accommodations with a full range of
-                  amenities, including aswimming pool, bar, BBQ area, high-speed Wi-Fi, and
-                  complimentary bicycles. Come here to experience peaceful, dreamy moments in the
-                  land of heritage.
-                </p>
+                <p style={{ textAlign: "justify" }}>{t("description")}</p>
               </div>
               <div className="relative items-center space-x-2 max-md:justify-center xl:space-x-4">
-                <ButtonSecondary name="Explore" />
+                <ButtonSecondary name={t("exploreButton")} />
               </div>
             </div>
           </div>

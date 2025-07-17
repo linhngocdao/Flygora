@@ -79,21 +79,22 @@ const ContactGotravel = () => {
           />
           <div className="container relative z-10">
             <div className="mb-4 xl:mb-8 md:mb-6">
-              <h2 className="mb-2 pre-header xl:mb-4 md:mb-3 text-primary">More Supportive</h2>
+              <h2 className="mb-2 pre-header xl:mb-4 md:mb-3 text-primary">
+                {t("moreSupportive.title")}
+              </h2>
               <div className="mb-2 font-bold headline-1 text-text-500 xl:mb-4 md:mb-3">
-                FIND HELPFUL LINKS YOU NEED
+                {t("moreSupportive.subtitle")}
               </div>
-              <div className="text-gray-900 body-1">
-                Reach our friendly support professionals via email, dedicated hotline, or downtown
-                location
-              </div>
+              <div className="text-gray-900 body-1">{t("moreSupportive.description")}</div>
             </div>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3 xl:gap-4 md:gap-3">
               <div className="flex flex-col justify-between p-4 bg-white rounded-lg xl:p-6 md:p-5">
                 <div>
-                  <div className="mb-2 font-bold text-gray-900 headline-2">VISIT OUR OFFICE</div>
+                  <div className="mb-2 font-bold text-gray-900 headline-2">
+                    {t("moreSupportive.office.title")}
+                  </div>
                   <div className="mb-4 text-gray-900 body-1">
-                    Visit Jungle Boss HQ and meet our team
+                    {t("moreSupportive.office.description")}
                   </div>
                   <div className="flex mb-4 space-x-2">
                     <Image
@@ -103,17 +104,19 @@ const ContactGotravel = () => {
                       height="20"
                       className="flex-shrink-0 w-5 h-5"
                     />
-                    <div className="text-primary label-1">
-                      Phong Nha Town, Bo Trach District, Quang Binh Province, Vietnam
-                    </div>
+                    <div className="text-primary label-1">{t("moreSupportive.office.address")}</div>
                   </div>
                 </div>
-                <ButtonPrimary name="Get Direction" />
+                <ButtonPrimary name={t("moreSupportive.office.button")} />
               </div>
               <div className="flex flex-col justify-between p-4 rounded-lg bg-[#e6ee95] xl:p-6 md:p-5">
                 <div>
-                  <div className="mb-2 font-bold text-gray-900 headline-2">ASK FOR SUPPORT</div>
-                  <div className="mb-4 text-gray-900 body-1">Have a question? Send us an email</div>
+                  <div className="mb-2 font-bold text-gray-900 headline-2">
+                    {t("moreSupportive.support.title")}
+                  </div>
+                  <div className="mb-4 text-gray-900 body-1">
+                    {t("moreSupportive.support.description")}
+                  </div>
                   <div className="flex items-center mb-4 space-x-2">
                     <Image
                       src="/images/contactUs/mail.png"
@@ -123,16 +126,20 @@ const ContactGotravel = () => {
                       className="flex-shrink-0 w-5 h-5"
                     />
                     <div className="break-all text-primary label-1">
-                      contact@junglebosstours.com
+                      {t("moreSupportive.support.email")}
                     </div>
                   </div>
                 </div>
-                <ButtonPrimary name="Email Us" />
+                <ButtonPrimary name={t("moreSupportive.support.button")} />
               </div>
               <div className="flex flex-col justify-between p-4 rounded-lg bg-[#4c5d36] xl:p-6 md:p-5">
                 <div>
-                  <div className="mb-2 font-bold text-accent-500 headline-2">CALL US TODAY</div>
-                  <div className="mb-4 text-gray-50 body-1">Give us a call for quick question</div>
+                  <div className="mb-2 font-bold text-accent-500 headline-2">
+                    {t("moreSupportive.call.title")}
+                  </div>
+                  <div className="mb-4 text-gray-50 body-1">
+                    {t("moreSupportive.call.description")}
+                  </div>
                   <div className="flex items-center mb-4 space-x-2">
                     <Image
                       src="/images/contactUs/phone.png"
@@ -143,15 +150,15 @@ const ContactGotravel = () => {
                     />
                     <div className="flex flex-wrap">
                       <div className="mr-1.5 text-accent-500 label-1 last:mr-0">
-                        (+84) 917 800 805 /
+                        {t("moreSupportive.call.phone1")} /
                       </div>
                       <div className="mr-1.5 text-accent-500 label-1 last:mr-0">
-                        (+84) 859 100 222
+                        {t("moreSupportive.call.phone2")}
                       </div>
                     </div>
                   </div>
                 </div>
-                <ButtonPrimary name="Call Hotline" />
+                <ButtonPrimary name={t("moreSupportive.call.button")} />
               </div>
             </div>
           </div>

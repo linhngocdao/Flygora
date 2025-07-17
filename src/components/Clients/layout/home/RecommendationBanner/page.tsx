@@ -1,9 +1,13 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import ButtonPrimary from "@/components/Clients/ui/buttonPrimary";
 import Image from "next/image";
 
 const RecommendationBanner = () => {
+  // Hook đa ngôn ngữ cho Recommendation Banner
+  const t = useTranslations("common");
+
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -53,15 +57,15 @@ const RecommendationBanner = () => {
         <div className="container space-y-4">
           <div className="space-y-2">
             <h2 className="text-center text-white uppercase text-[1.375rem] font-semibold">
-              Still Trying to Decide?
+              {t("title")}
             </h2>
             <h2 className="text-center uppercase text-[0.5rem] headline-[125%] font-[600] lg:text-[1.9rem] text-[#ede52a]">
-              Jungle Boss Passionate Team Always Ready Help You.
+              {t("subtitle")}
             </h2>
           </div>
           <div className="flex justify-center space-x-4">
-            <ButtonPrimary name="Call HotLine" href="/contact" />
-            <ButtonPrimary name="Request a Callback" href="/contact" />
+            <ButtonPrimary name={t("callButton")} href="/contact" />
+            <ButtonPrimary name={t("callbackButton")} href="/contact" />
           </div>
         </div>
       </section>

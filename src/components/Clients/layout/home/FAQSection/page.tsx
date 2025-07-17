@@ -1,59 +1,57 @@
 import Image from "next/image";
 import { useState, useRef, useEffect, useCallback } from "react";
+import { useTranslations } from "next-intl";
 import ButtonPrimary from "@/components/Clients/ui/buttonPrimary";
 
-const faqData = [
-  {
-    id: "01",
-    question: "What happens if bad weather causes a tour cancellation?",
-    answer:
-      "If we have to cancel a tour due to weather, we will inform you as soon as possible and provide alternative options without extra costs, such as an alternate tour, new date, or a full refund.",
-  },
-  {
-    id: "02",
-    question: "How to avoid thunderstorms & lightning during the tours?",
-    answer:
-      "We acknowledge the potential risks associated with thunderstorms and lightning strikes...",
-  },
-  {
-    id: "03",
-    question: "Is there any toilet during the tours?",
-    answer: "Jungle Boss uses composting toilets for all adventure tours...",
-  },
-  {
-    id: "04",
-    question: "What kind of food provided during the tours?",
-    answer:
-      "During our tours, Jungle Boss offers a diverse range of Vietnamese-style food options...",
-  },
-  {
-    id: "05",
-    question: "Do I have to bring my own caving gears and camping gears?",
-    answer:
-      "You don't need to bring your own caving or camping gear as Jungle Boss provides all necessary safety equipment...",
-  },
-  {
-    id: "06",
-    question: "Am I allowed to join tours if I can not swim?",
-    answer:
-      "Absolutely, you will be provided with a life jacket for your safety during the adventure...",
-  },
-  {
-    id: "07",
-    question: "What kind of skills do I need to have?",
-    answer:
-      "While having prior caving, hiking, and camping experience can be advantageous, it's not mandatory...",
-  },
-  {
-    id: "08",
-    question: "What are the different levels of Adventure tours?",
-    answer: "Our tours span a spectrum from relaxed to highly adventurous...",
-  },
-];
-
 export default function FaqSection() {
+  // Hook đa ngôn ngữ cho FAQ section
+  const t = useTranslations("common.faq");
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const contentRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  // Dữ liệu FAQ từ translation
+  const faqData = [
+    {
+      id: "01",
+      question: t("question1"),
+      answer: t("answer1"),
+    },
+    {
+      id: "02",
+      question: t("question2"),
+      answer: t("answer2"),
+    },
+    {
+      id: "03",
+      question: t("question3"),
+      answer: t("answer3"),
+    },
+    {
+      id: "04",
+      question: t("question4"),
+      answer: t("answer4"),
+    },
+    {
+      id: "05",
+      question: t("question5"),
+      answer: t("answer5"),
+    },
+    {
+      id: "06",
+      question: t("question6"),
+      answer: t("answer6"),
+    },
+    {
+      id: "07",
+      question: t("question7"),
+      answer: t("answer7"),
+    },
+    {
+      id: "08",
+      question: t("question8"),
+      answer: t("answer8"),
+    },
+  ];
 
   const toggleAccordion = (index: number) => {
     setActiveIndex(index === activeIndex ? null : index);
@@ -78,10 +76,10 @@ export default function FaqSection() {
   return (
     <section className="container lg:pt-[68px] lg:pb-[60px] md:py-[45px] py-[34px] space-y-8">
       <div className="space-y-4">
-        <h3 className="tracking-[1.4px] pre-header text-[#6c8a1f]">Answers Await</h3>
+        <h3 className="tracking-[1.4px] pre-header text-[#6c8a1f]">{t("preTitle")}</h3>
         <div className="space-y-2">
-          <h2 className="uppercase headline-1 text-[#004750]">Frequently Asked Question</h2>
-          <div className="text-gray-700 body-1">Important information for your trip</div>
+          <h2 className="uppercase headline-1 text-[#004750]">{t("newTitle")}</h2>
+          <div className="text-gray-700 body-1">{t("subtitle")}</div>
         </div>
       </div>
 
@@ -136,7 +134,7 @@ export default function FaqSection() {
               );
             })}
           </div>
-          <ButtonPrimary name="Contact Us" href="/contact" />
+          <ButtonPrimary name={t("contactButton")} href="/contact" />
         </div>
 
         <div className="flex-1 space-y-2">

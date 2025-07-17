@@ -1,5 +1,107 @@
 {
   "hello": "Hello",
+  "search": {
+    "searchPlaceholder": "Enter search keywords...",
+    "title": "Search",
+    "suggestions": "Search suggestions",
+    "experience": "Experience",
+    "popularSearches": "Popular Searches",
+    "popularKeywords": {
+      "sapa": "Sapa",
+      "halong": "Ha Long Bay",
+      "phuquoc": "Phu Quoc",
+      "dalat": "Da Lat",
+      "northernTour": "Northern Tour",
+      "ecotourism": "Eco Tourism"
+    }
+  },
+  "tourSlider": {
+    "tourImage": "Tour image",
+    "tourName": "Tra Ang Excursion 1D",
+    "duration": "1 day",
+    "price": "VND {amount}",
+    "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo neque cum, possimus deb"
+  },
+  "whyChooseUs": {
+    "title": "Jungle Boss",
+    "subtitle": "Leading certified adventure travel company",
+    "excellent": "Excellent",
+    "on": "on",
+    "viewReviews": "View {count} reviews",
+    "description": {
+      "intro": "We offer exclusive cave exploration and jungle treks for small groups and jungle style team building activities in the UNESCO-listed Phong Nha-Ke Bang National Park and surrounding areas, including our newest tour to",
+      "doQueen": "Conquering Do Queen Waterfall",
+      "highest": "– the highest waterfall in South East Asia, and the legendary",
+      "kongCollapse": "Kong Collapse",
+      "deepest": "– one of the deepest sinkholes on the planet."
+    },
+    "aboutUsButton": "About Us"
+  },
+  "heroSection": {
+    "findYourTrip": "Find your trip",
+    "tour": "Tour",
+    "chooseYourTour": "Choose your tour",
+    "bookingDate": "Booking Date",
+    "datePlaceholder": "--/--/--",
+    "participant": "Participant",
+    "participantPlaceholder": "--- pax"
+  },
+  "safetyCommitment": {
+    "title": "Safety In Adventure Tours",
+    "quote": "Your safety is our priority",
+    "description": "Jungle Boss has established strategic collaborations with esteemed organizations like the British Caves Research Association, National Speleological Society, and Vietnam Swimming & Life Saving. These partnerships aim to elevate Jungle Boss employees proficiency in caving techniques and rescue operations. Through an extensive training regimen, inclusive of tour guides, safety assistants, and the porter team, Jungle Boss ensures their readiness to tackle potential challenges. Notably, all Jungle Boss crew members and guests receive high-quality European-standard safety gear, prioritizing their safety throughout the adventure. Stringent maintenance protocols are consistently applied to all safety equipment housed within the caves and at the technical store. This proactive approach minimizes potential risks, upholding the highest safety standards. Specifically designed for the Kong Collapse Top Adventure, Jungle Boss has collaborated with global organizations to institute a comprehensive Safety Process. This meticulously crafted process has received official endorsement from the Quang Binh People Committee, validating its reliability and unwavering commitment to safety.",
+    "buttonText": "Environment Protection & Survival Rules"
+  },
+  "teamBuilding": {
+    "title": "Team Building Tour",
+    "subtitle": "Jumpstart Team Synergy with Exhilarating Challenges",
+    "description": {
+      "paragraph1": "Immerse your team in an unparalleled adventure amid the awe-inspiring jungles of Phong Nha – Ke Bang National Park. Jungle Boss Team building is a transformative journey marked by unique and challenging games, setting us apart from the conventional team building landscape in Vietnam. Escape the mundane and seize the extraordinary as your team engages in missions that demand collaboration, creativity, and camaraderie. Our jungle setting serves as the ultimate canvas for fostering teamwork, creating an atmosphere that is not only thrilling but also indelibly unforgettable.",
+      "paragraph2": "Embrace a one-of-a-kind adventure with us – a promise to not only fortify your team bonds but also create lasting memories of an exceptionally extraordinary experience. At Jungle Boss, we redefine team building, making it an immersive and thrilling escapade that transcends the ordinary, leaving an enduring mark on your team collective journey. There are different team building options from 1 day to multiple days. Leave us a request and we can help you tailor a unique Jungle Team building that suits your needs!"
+    }
+  },
+  "guestReview": {
+    "title": "Jungle Boss Travelodge",
+    "subtitle": "A wonderful stopover when visiting Phong Nha - Ke Bang",
+    "description": "Nestled amidst the immense rice fields of the Phong Nha - Ke Bang region, Jungle Boss Travelodge is an ideal place for you to unwind during your Quang Binh travels. This destination offers cozy accommodations with a full range of amenities, including a swimming pool, bar, BBQ area, high-speed Wi-Fi, and complimentary bicycles. Come here to experience peaceful, dreamy moments in the land of heritage.",
+    "exploreButton": "Explore"
+  },
+  "featuredTour": {
+    "title": "Top Adventure Tour",
+    "tourName": "Kong Collapse Top Adventure 5D4N",
+    "duration": "Duration",
+    "durationValue": "5 days 4 nights",
+    "participant": "Participant",
+    "participantValue": "Up to 10 pax",
+    "difficulty": "Difficulty",
+    "difficultyValue": "Level 7 - Extremely Strenuous",
+    "departureDay": "Departure Day",
+    "departureDayValue": "Tuesday, Friday"
+  },
+  "moreSupportive": {
+    "title": "More Supportive",
+    "subtitle": "FIND THE HELPFUL LINKS YOU NEED",
+    "description": "Contact our friendly support experts via email, dedicated hotlines, or central locations",
+    "office": {
+      "title": "VISIT OUR OFFICE",
+      "description": "Visit the Jungle Boss headquarters and meet our team",
+      "address": "Phong Nha Town, Bo Trach District, Quang Binh Province, Vietnam",
+      "button": "Get Direction"
+    },
+    "support": {
+      "title": "REQUEST SUPPORT",
+      "description": "Have questions? Drop us an email",
+      "email": "contact@junglebosstours.com",
+      "button": "Send Email"
+    },
+    "call": {
+      "title": "CALL US TODAY",
+      "description": "Give us a call for quick question",
+      "phone1": "(+84) 917 800 805",
+      "phone2": "(+84) 859 100 222",
+      "button": "Call Hotline"
+    }
+  },
   "policy": {
     "banner": {
       "title": "Special launch offer – New version of Do Quyen"
@@ -20,7 +122,7 @@
     }
   },
   "contact": {
-    "title": "Contact Us",
+    "title": "CONTACT US",
     "keepInTouch": "Keep in Touch",
     "connectWithJungleBoss": "CONNECT WITH JUNGLE BOSS",
     "infoAboutTours": "You want to get information about Jungle Boss tours.",
@@ -148,6 +250,76 @@
           }
         }
       }
+    },
+    "preTitle": "Answers Await",
+    "newTitle": "Frequently Asked Question",
+    "subtitle": "Important information for your trip",
+    "contactButton": "Contact Us",
+    "question1": "What happens if bad weather causes a tour cancellation?",
+    "answer1": "If we have to cancel a tour due to weather, we will inform you as soon as possible and provide alternative options without extra costs, such as an alternate tour, new date, or a full refund.",
+    "question2": "How to avoid thunderstorms & lightning during the tours?",
+    "answer2": "We acknowledge the potential risks associated with thunderstorms and lightning strikes and have strict safety protocols. We continuously monitor weather conditions and will postpone or relocate tours if there's any risk.",
+    "question3": "Is there any toilet during the tours?",
+    "answer3": "Jungle Boss uses composting toilets for all adventure tours. They are environmentally friendly and regularly maintained to ensure hygiene.",
+    "question4": "What kind of food provided during the tours?",
+    "answer4": "During our tours, Jungle Boss offers a diverse range of Vietnamese-style food options including local specialties, fresh fruits, and nutritious snacks.",
+    "question5": "Do I have to bring my own caving gears and camping gears?",
+    "answer5": "You don't need to bring your own caving or camping gear as Jungle Boss provides all necessary safety equipment including helmets, headlamps, and ropes.",
+    "question6": "Am I allowed to join tours if I can not swim?",
+    "answer6": "Absolutely, you will be provided with a life jacket for your safety during the adventure. Our guides are trained to assist non-swimmers.",
+    "question7": "What kind of skills do I need to have?",
+    "answer7": "While having prior caving, hiking, and camping experience can be advantageous, it's not mandatory. Our tours are designed for all skill levels.",
+    "question8": "What are the different levels of Adventure tours?",
+    "answer8": "Our tours span a spectrum from relaxed to highly adventurous, ranging from Level 1 (Family-friendly) to Level 5 (Expert - requiring advanced skills)."
+  },
+  "footerIntro": {
+    "description": "Discover the Enchantment of Phong Nha-Ke Bang: Unveiling mythical caves, ancient forests, and tranquil turquoise rivers. Embark on a Jungle Boss adventure to experience this enthralling wonderland, immerse yourself in local culture, and join us in preserving the natural wonders."
+  },
+  "adventureTours": {
+    "preTitle": "All Adventure Tour",
+    "title": "Start Your Ideal Adventure Tour!",
+    "subtitle": "For a day trip, overnighter or longer",
+    "priceLabel": "Price",
+    "seeReviews": "See Reviews",
+    "tour1": {
+      "title": "Tra Ang Excursion 1D",
+      "level": "Level 1 - Easy",
+      "duration": "1 day",
+      "price": "VND 800,000/pax"
+    },
+    "tour2": {
+      "title": "Phong Huong Adventure 1D",
+      "level": "Level 3 - Moderate",
+      "duration": "1 day",
+      "price": "VND 1,350,000/pax"
+    },
+    "tour3": {
+      "title": "Elephant Cave & Ma Da Valley Jungle Trek 1D",
+      "level": "Level 2 - Easy to Moderate",
+      "duration": "1 day 1 night",
+      "price": "VND 1,950,000/pax"
+    },
+    "tour4": {
+      "title": "Phong Huong Excursion 2D1N",
+      "level": "Level 1 - Easy",
+      "duration": "2 days 1 night",
+      "price": "VND 1,950,000/pax"
+    }
+  },
+  "recommendationBanner": {
+    "title": "Still Trying to Decide?",
+    "subtitle": "Jungle Boss Passionate Team Always Ready Help You.",
+    "callButton": "Call HotLine",
+    "callbackButton": "Request a Callback"
+  },
+  "tourPage": {
+    "header": {
+      "title": "ADVENTURE TOURS",
+      "subtitle": "Jungle Boss builds teamwork through adventure in Phong Nha-Ke Bang National Park. Challenge your team with games in the jungle."
+    },
+    "dayTours": {
+      "title": "Day Tours",
+      "subtitle": "For a day trip, overnighter or longer"
     }
   }
 }

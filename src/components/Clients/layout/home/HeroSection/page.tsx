@@ -1,7 +1,9 @@
 import React from "react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 const HeroSection = () => {
+  const t = useTranslations("common.heroSection");
   return (
     <div>
       <section className="relative z-40 lg:h-[calc(100vh-68px)] md:h-[calc(100vh-160px)]">
@@ -31,7 +33,7 @@ const HeroSection = () => {
           {/* Mobile Search Form */}
           <div className="rounded-[16px] border-4 border-primary-400 bg-white xl:px-20 md:px-12 px-8 py-4 relative lg:hidden">
             <div className="flex items-center justify-between button-1">
-              <div className="pt-1 text-gray-700 uppercase headline-3">Find your trip</div>
+              <div className="pt-1 text-gray-700 uppercase headline-3">{t("findYourTrip")}</div>
               <div className="flex items-center justify-center duration-300 ease-in-out rounded-full cursor-pointer bg-[#6c8a1f] lg:hover:bg-primary-darker w-10 h-10 md:flex-shrink-0">
                 <Image
                   src="/images/homePage/ic-search.svg"
@@ -58,10 +60,10 @@ const HeroSection = () => {
             <div className="xl:space-x-16 md:space-x-8 md:flex md:items-center md:flex-grow md:justify-center max-md:space-y-8">
               {/* Tour Selection */}
               <div className="flex-1 space-y-1 cursor-pointer max-md:border-b max-md:border-gray-200 max-md:pb-1">
-                <div className="text-gray-900 title-1">Tour</div>
+                <div className="text-gray-900 title-1">{t("tour")}</div>
                 <div className="flex items-center justify-between">
                   <div className="body-1 text-gray-500 lg:max-w-[180px] md:max-w-[130px] truncate">
-                    Choose your Tour
+                    {t("chooseYourTour")}
                   </div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -83,9 +85,9 @@ const HeroSection = () => {
 
               {/* Date Selection */}
               <div className="flex-1 space-y-1 cursor-pointer max-md:border-b max-md:border-gray-200 max-md:pb-1">
-                <div className="text-gray-900 title-1">Booking Date</div>
+                <div className="text-gray-900 title-1">{t("bookingDate")}</div>
                 <div className="flex items-center justify-between">
-                  <div className="text-gray-500 body-1">--/--/--</div>
+                  <div className="text-gray-500 body-1">{t("datePlaceholder")}</div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="15"
@@ -106,9 +108,9 @@ const HeroSection = () => {
 
               {/* Participant Selection */}
               <div className="flex-1 space-y-1 cursor-pointer max-md:border-b max-md:border-gray-200 max-md:pb-1">
-                <div className="text-gray-900 title-1">Participant</div>
+                <div className="text-gray-900 title-1">{t("participant")}</div>
                 <div className="flex items-center justify-between">
-                  <div className="text-gray-500 body-1">--- pax</div>
+                  <div className="text-gray-500 body-1">{t("participantPlaceholder")}</div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="15"

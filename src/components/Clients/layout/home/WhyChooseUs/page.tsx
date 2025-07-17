@@ -2,8 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import ButtonPrimary from "@/components/Clients/ui/buttonPrimary";
 import Image from "next/image";
 import PartnerCarousel from "@/components/Clients/layout/home/WhyChooseUs/PartnerCarousel";
+import { useTranslations } from "next-intl";
 
 const WhychooseUsSection = () => {
+  const t = useTranslations("common.whyChooseUs");
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -33,17 +35,17 @@ const WhychooseUsSection = () => {
             {/* Content */}
             <div className="flex flex-col justify-center flex-grow space-y-2">
               <h1 className="text-[4.75rem] text-[#004750] uppercase tracking-[-1.2px] font-[700]">
-                Jungle Boss
+                {t("title")}
               </h1>
               <div className="space-y-4">
                 <div className="uppercase headline-2 text-[1.75rem] text-[#004750] font-medium">
-                  Leading certified adventure travel company
+                  {t("subtitle")}
                 </div>
 
                 {/* Reviews Section */}
                 <div className="flex flex-wrap items-center justify-between">
                   <div className="flex items-center space-x-2">
-                    <div className="text-gray-900 title-1">Excellent</div>
+                    <div className="text-gray-900 title-1">{t("excellent")}</div>
                     <div className="flex items-center space-x-1">
                       {/* Star Rating */}
                       {Array(5)
@@ -60,7 +62,7 @@ const WhychooseUsSection = () => {
                           </svg>
                         ))}
                     </div>
-                    <div className="text-gray-900 title-1">on</div>
+                    <div className="text-gray-900 title-1">{t("on")}</div>
                     <Image
                       src="/images/homePage/section-2-tripadvisor.png"
                       alt="tripadvisor"
@@ -76,32 +78,30 @@ const WhychooseUsSection = () => {
                     rel="noopener noreferrer nofollow"
                     className="text-gray-900 label-1 lg:hover:text-primary lg:duration-150"
                   >
-                    View 995 (reviews)
+                    {t("viewReviews", { count: 995 })}
                   </a>
                 </div>
 
                 {/* Description */}
                 <div className="prose introduce">
                   <p>
-                    We offer exclusive cave exploration and jungle treks for small groups and jungle
-                    style team building activities in the UNESCO-listed Phong Nha-Ke Bang National
-                    Park and surrounding areas, including our newest tour to{" "}
+                    {t("description.intro")}{" "}
                     <a
                       href="https://junglebosstours.com/tour/do-quyen-waterfall-top-adventure-conquering-3d2n"
                       target="_blank"
                       rel="noopener"
                     >
-                      Conquering Do Queen Waterfall
+                      {t("description.doQueen")}
                     </a>
-                    – the highest waterfall in South East Asia, and the legendary{" "}
+                    {t("description.highest")}{" "}
                     <a href="/tour/kong-collapse-top-adventure-5d4n" target="_blank" rel="noopener">
-                      Kong Collapse
+                      {t("description.kongCollapse")}
                     </a>
-                    – one of the deepest sinkholes on the planet.
+                    {t("description.deepest")}
                   </p>
                 </div>
 
-                <ButtonPrimary name="About Us" href="/about-us" />
+                <ButtonPrimary name={t("aboutUsButton")} href="/about-us" />
               </div>
             </div>
 

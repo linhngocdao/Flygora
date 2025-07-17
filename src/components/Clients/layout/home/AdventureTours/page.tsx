@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 
 // Import Swiper styles
@@ -10,76 +11,58 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-const tours = [
-  {
-    id: 1,
-    title: "Tra Ang Excursion 1D",
-    level: "Level 1 - Easy",
-    duration: "1 day",
-    rating: 4.9,
-    reviews: "See Reviews",
-    price: "VND 800,000/pax",
-    image:
-      "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp",
-  },
-  {
-    id: 2,
-    title: "Phong Huong Adventure 1D",
-    level: "Level 3 - Moderate",
-    duration: "1 day",
-    rating: 4.9,
-    reviews: "See Reviews",
-    price: "VND 1,350,000/pax",
-    image:
-      "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp",
-  },
-  {
-    id: 3,
-    title: "Elephant Cave & Ma Da Valley Jungle Trek 1D",
-    level: "Level 2 - Easy to Moderate",
-    duration: "1 day 1 night",
-    rating: 4.9,
-    reviews: "See Reviews",
-    price: "VND 1,950,000/pax",
-    image:
-      "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp",
-  },
-  {
-    id: 4,
-    title: "Phong Huong Excursion 2D1N",
-    level: "Level 1 - Easy",
-    duration: "2 days 1 night",
-    rating: 4.9,
-    reviews: "See Reviews",
-    price: "VND 1,950,000/pax",
-    image:
-      "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp",
-  },
-  {
-    id: 5,
-    title: "Phong Huong Adventure 2D1N",
-    level: "Level 5 - Strenuous",
-    duration: "2 days 1 night",
-    rating: 4.9,
-    reviews: "See Reviews",
-    price: "VND 3,350,000/pax",
-    image:
-      "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp",
-  },
-  {
-    id: 6,
-    title: "Ma Da Valley Adventure 2D1N",
-    level: "Level 4 - Challenging",
-    duration: "2 days 1 night",
-    rating: 4.8,
-    reviews: "See Reviews",
-    price: "VND 2,850,000/pax",
-    image:
-      "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp",
-  },
-];
-
 const AllAdventureTour = () => {
+  // Hook đa ngôn ngữ cho Adventure Tours section
+  const t = useTranslations("common.adventureTours");
+
+  // Dữ liệu tours từ translation
+  const tours = [
+    {
+      id: 1,
+      title: t("tour1.title"),
+      level: t("tour1.level"),
+      duration: t("tour1.duration"),
+      rating: 4.9,
+      reviews: t("seeReviews"),
+      price: t("tour1.price"),
+      image:
+        "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp",
+    },
+    {
+      id: 2,
+      title: t("tour2.title"),
+      level: t("tour2.level"),
+      duration: t("tour2.duration"),
+      rating: 4.9,
+      reviews: t("seeReviews"),
+      price: t("tour2.price"),
+      image:
+        "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp",
+    },
+    {
+      id: 3,
+      title: t("tour3.title"),
+      level: t("tour3.level"),
+      duration: t("tour3.duration"),
+      rating: 4.9,
+      reviews: t("seeReviews"),
+      price: t("tour3.price"),
+      image:
+        "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp",
+    },
+    {
+      id: 4,
+      title: t("tour4.title"),
+      level: t("tour4.level"),
+      duration: t("tour4.duration"),
+      rating: 4.9,
+      reviews: t("seeReviews"),
+      price: t("tour4.price"),
+      image:
+        "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp",
+    },
+  ];
+
   const [isMobile, setIsMobile] = useState(false);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
@@ -111,14 +94,10 @@ const AllAdventureTour = () => {
     <section className="py-8 lg:py-16 bg-gray-50">
       {/* Header */}
       <div className="container mx-auto px-4 space-y-4 text-center lg:text-left">
-        <h2 className="text-[#6c8a1f] pre-header text-xl font-semibold italic">
-          All Adventure Tour
-        </h2>
+        <h2 className="text-[#6c8a1f] pre-header text-xl font-semibold italic">{t("preTitle")}</h2>
         <div>
-          <h1 className="text-3xl lg:text-4xl font-bold uppercase text-[#004750]">
-            Start Your Ideal Adventure Tour!
-          </h1>
-          <p className="text-gray-600">For a day trip, overnighter or longer</p>
+          <h1 className="text-3xl lg:text-4xl font-bold uppercase text-[#004750]">{t("title")}</h1>
+          <p className="text-gray-600">{t("subtitle")}</p>
         </div>
       </div>
 
@@ -292,7 +271,7 @@ const AllAdventureTour = () => {
 
                         <div className="flex justify-between items-center pt-1 sm:pt-2 border-t border-gray-100">
                           <span className="text-gray-600 font-medium text-xs sm:text-sm">
-                            Price
+                            {t("priceLabel")}
                           </span>
                           <span className="text-gray-900 font-semibold text-xs sm:text-sm lg:text-base">
                             {tour.price}

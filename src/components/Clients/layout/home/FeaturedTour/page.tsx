@@ -4,8 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar, Thumbs } from "swiper/modules";
 import ButtonPrimary from "@/components/Clients/ui/buttonPrimary";
+import { useTranslations } from "next-intl";
 
 const TopAdventureTour = () => {
+  const t = useTranslations("common.featuredTour");
   const [isVisible, setIsVisible] = useState(false);
   const section5Ref = useRef<HTMLDivElement>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -142,11 +144,9 @@ const TopAdventureTour = () => {
           {/* content */}
           <div className="container flex lg:flex-col flex-col-reverse lg:items-end justify-between h-full pt-[27px] max-lg:py-8 relative">
             <div className="xl:w-[568px] lg:w-1/2 space-y-4 lg:pl-4 xl:pl-0 lg:pb-[300px]">
-              <h2 className="pre-header text-[#6c8a1f] tracking-[1.4px]">Top Adventure Tour</h2>
+              <h2 className="pre-header text-[#6c8a1f] tracking-[1.4px]">{t("title")}</h2>
               <div className="space-y-4">
-                <h3 className="uppercase headline-1 text-[#004750] ">
-                  Kong Collapse Top Adventure 5D4N
-                </h3>
+                <h3 className="uppercase headline-1 text-[#004750] ">{t("tourName")}</h3>
                 <div className="text-gray-700 body-1 line-clamp-2">
                   <p>
                     The 05-day, 04-night journey to conquer Kong collapse will take you on an
@@ -167,10 +167,10 @@ const TopAdventureTour = () => {
                         width={21}
                         height={20}
                       />
-                      <div className="text-gray-700 label-1">Duration</div>
+                      <div className="text-gray-700 label-1">{t("duration")}</div>
                     </div>
                     <div className="space-x-1 text-right text-gray-900 title-3">
-                      <span>5 days 4 nights</span>
+                      <span>{t("durationValue")}</span>
                     </div>
                   </div>
                   <div className="flex justify-between space-x-4 lg:space-x-8 md:space-x-6">
@@ -181,10 +181,10 @@ const TopAdventureTour = () => {
                         width={21}
                         height={20}
                       />
-                      <div className="text-gray-700 label-1">Participant</div>
+                      <div className="text-gray-700 label-1">{t("participant")}</div>
                     </div>
                     <div className="space-x-1 text-right text-gray-900 title-3">
-                      <span>Up to 10 pax</span>
+                      <span>{t("participantValue")}</span>
                     </div>
                   </div>
                   <div className="flex justify-between space-x-4 lg:space-x-8 md:space-x-6">
@@ -195,10 +195,10 @@ const TopAdventureTour = () => {
                         width={21}
                         height={20}
                       />
-                      <div className="text-gray-700 label-1">Difficulty</div>
+                      <div className="text-gray-700 label-1">{t("difficulty")}</div>
                     </div>
                     <div className="space-x-1 text-right text-gray-900 title-3">
-                      <span>Level 7 - Extremely Strenuous </span>
+                      <span>{t("difficultyValue")}</span>
                     </div>
                   </div>
                   <div className="flex justify-between space-x-4 lg:space-x-8 md:space-x-6">
@@ -209,10 +209,10 @@ const TopAdventureTour = () => {
                         width={21}
                         height={20}
                       />
-                      <div className="text-gray-700 label-1">Departure Day</div>
+                      <div className="text-gray-700 label-1">{t("departureDay")}</div>
                     </div>
                     <div className="space-x-1 text-right text-gray-900 title-3">
-                      <span>Tuesday, Friday</span>
+                      <span>{t("departureDayValue")}</span>
                     </div>
                   </div>
                   <div className="flex justify-between space-x-4 lg:space-x-8 md:space-x-6">
