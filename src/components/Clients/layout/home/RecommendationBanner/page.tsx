@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const RecommendationBanner = () => {
   // Hook đa ngôn ngữ cho Recommendation Banner
-  const t = useTranslations("common");
+  const t = useTranslations("common.recommendationBanner");
 
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);

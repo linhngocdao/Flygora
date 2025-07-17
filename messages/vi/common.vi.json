@@ -300,12 +300,6 @@
     "footerIntro": {
       "description": "Khám phá sự mê hoặc của Phong Nha-Kẻ Bàng: Hé lộ những hang động huyền thoại, rừng cổ thụ và sông nước xanh trong vắt. Hãy bắt đầu cuộc phiêu lưu Jungle Boss để trải nghiệm xứ sở kỳ diệu quyến rũ này, hòa mình vào văn hóa địa phương và cùng chúng tôi bảo tồn những kỳ quan thiên nhiên."
     },
-    "recommendationBanner": {
-      "title": "Vẫn đang cố gắng quyết định?",
-      "subtitle": "Đội ngũ Jungle Boss đầy đam mê luôn sẵn sàng giúp đỡ bạn.",
-      "callButton": "Gọi đường dây nóng",
-      "callbackButton": "Yêu cầu gọi lại"
-    },
     "tourPage": {
       "header": {
         "title": "TOUR PHIÊU LƯU",
@@ -347,5 +341,11 @@
       "duration": "2 ngày 1 đêm",
       "price": "VND 1,950,000/người"
     }
+  },
+  "recommendationBanner": {
+    "title": "Vẫn đang cố gắng quyết định?",
+    "subtitle": "Đội ngũ Jungle Boss đầy đam mê luôn sẵn sàng giúp đỡ bạn.",
+    "callButton": "Gọi đường dây nóng",
+    "callbackButton": "Yêu cầu gọi lại"
   }
 }
