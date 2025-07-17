@@ -84,14 +84,12 @@ const PartnerCarousel = () => {
           alt="partner background"
           className="absolute inset-0 object-cover w-full h-full lg:object-bottom max-lg:object-right max-md:hidden"
           fill
-          priority
         />
         <Image
           src="/images/homePage/partner-background-mobile.webp"
           alt="partner background mobile"
           className="absolute inset-0 object-cover w-full h-full md:hidden"
           fill
-          priority
         />
       </div>
 

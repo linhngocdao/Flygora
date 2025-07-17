@@ -1,7 +1,7 @@
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
-import { FlatCompat } from '@eslint/eslintrc';
-import prettierPlugin from 'eslint-plugin-prettier';
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+import { FlatCompat } from "@eslint/eslintrc";
+import prettierPlugin from "eslint-plugin-prettier";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -13,19 +13,19 @@ const compat = new FlatCompat({
 const eslintConfig = [
   {
     ignores: [
-      '.next/**',
-      'node_modules/**',
-      'out/**',
-      'public/**',
-      'build/**',
-      'dist/**',
-      'coverage/**',
-      '**/.git/**',
+      ".next/**",
+      "node_modules/**",
+      "out/**",
+      "public/**",
+      "build/**",
+      "dist/**",
+      "coverage/**",
+      "**/.git/**",
     ],
   },
-  ...compat.extends('next/core-web-vitals', 'next/typescript', 'prettier'),
+  ...compat.extends("next/core-web-vitals", "next/typescript", "prettier"),
   {
-    files: ['**/*.ts', '**/*.tsx'],
+    files: ["**/*.ts", "**/*.tsx"],
     languageOptions: {
       parserOptions: {
         projectService: true,
@@ -34,9 +34,9 @@ const eslintConfig = [
       },
     },
     rules: {
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-implicit-any': 'off',
-      'prettier/prettier': ['error', {}, { usePrettierrc: true }],
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-implicit-any": "off",
+      "prettier/prettier": ["error", {}, { usePrettierrc: true }],
     },
     plugins: {
       prettier: prettierPlugin,

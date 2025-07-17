@@ -1,10 +1,10 @@
-@import 'tailwindcss';
-@import 'tw-animate-css';
+@import "tailwindcss";
+@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --font-geomanist: 'Geomanist', sans-serif;
+  --font-geomanist: "Geomanist", sans-serif;
   --radius: 0.625rem;
 
   /* Màu sắc chính của Go Travel */
@@ -92,7 +92,7 @@ body {
   margin-right: -50vw;
 }
 .bg-section-2 {
-  background-image: url('/images/homePage/section-2-bg.webp');
+  background-image: url("/images/homePage/section-2-bg.webp");
   background-position: 50%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -226,7 +226,7 @@ body {
 }
 
 .btn-hover-effect:before {
-  content: '';
+  content: "";
   position: absolute;
   z-index: -1;
   top: 0;

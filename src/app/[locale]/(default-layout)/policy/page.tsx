@@ -357,7 +357,6 @@ const Policy = () => {
               src="/images/GoTravel_policy/banner-policy.webp"
               alt="Người leo núi đá gần thác nước"
               className="object-cover w-full h-full"
-              priority
             />
           </div>
           <div className="absolute inset-0 w-full h-full bg-black/50"></div>

@@ -23,7 +23,6 @@ const ButtonPrimary = ({ name, href, type, disabled }: ButtonPrimaryProps) => {
             width={200}
             height={200}
             className="object-cover w-full h-full"
-            priority
           />
         </div>
 

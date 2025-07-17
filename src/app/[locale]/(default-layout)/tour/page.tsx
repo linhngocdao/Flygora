@@ -19,7 +19,6 @@ const TourPageGoTravel = () => {
             alt="banner tour"
             className="relative object-cover w-full h-full"
             loading="eager"
-            priority
           />
           <div className="absolute inset-x-0 z-10 xl:bottom-20 md:bottom-14 bottom-10">
             <div className="container space-y-1 text-center md:space-y-2 xl:space-y-2.5">
