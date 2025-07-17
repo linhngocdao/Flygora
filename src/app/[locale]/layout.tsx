@@ -39,15 +39,33 @@ const svnKingston = localFont({
   variable: "--font-kingston",
 });
 
-export const metadata: Metadata = {
-  title: process.env.NEXT_PUBLIC_WEBSITE_NAME,
-  description: "Go Travel - Khám phá thế giới cùng chúng tôi",
-  icons: {
-    icon: [{ url: "/favicon.ico" }, { url: "/icon.png", sizes: "32x32", type: "image/png" }],
-    shortcut: "/favicon.ico",
-    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: string };
+}): Promise<Metadata> {
+  const { locale } = await params;
+
+  const titles = {
+    vi: "Go Travel - Khám phá thế giới cùng chúng tôi",
+    en: "Go Travel - Explore the world with us",
+  };
+
+  const descriptions = {
+    vi: "Nền tảng đặt tour du lịch mạo hiểm hàng đầu Việt Nam. Khám phá những điểm đến độc đáo với Go Travel.",
+    en: "Leading adventure travel platform in Vietnam. Discover unique destinations with Go Travel.",
+  };
+
+  return {
+    title: titles[locale as keyof typeof titles] || titles.en,
+    description: descriptions[locale as keyof typeof descriptions] || descriptions.en,
+    icons: {
+      icon: [{ url: "/favicon.ico" }, { url: "/icon.png", sizes: "32x32", type: "image/png" }],
+      shortcut: "/favicon.ico",
+      apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+    },
+  };
+}
 
 export default async function RootLayout({
   children,

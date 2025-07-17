@@ -13,10 +13,8 @@ const queryClient = new QueryClient({
         }
         return failureCount < MAX_RETRY_QUERIES;
       },
-      // With SSR, we usually want to set some default staleTime
-      // above 0 to avoid refetching immediately on the client
       staleTime: 60 * 1000,
-      refetchOnWindowFocus: false, // default: true
+      refetchOnWindowFocus: false,
       throwOnError: true,
       retryDelay: 500,
     },
@@ -33,7 +31,6 @@ export default function QueryProvider({ children }: { children: React.ReactNode 
   return (
     <QueryClientProvider client={queryClient}>
       {children}
-      {/* Chỉ hiển thị devtools trong môi trường development */}
       {process.env.NODE_ENV === "development" && (
         <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-right" />
       )}

@@ -6,7 +6,9 @@ export default getRequestConfig(async ({ requestLocale }) => {
   // Provide a static locale, fetch a user setting,
   // read from `cookies()`, `headers()`, etc.
   const locale = await requestLocale;
-  if (!locale || !routing.locales.includes(locale as any)) notFound();
+  if (!locale || !routing.locales.includes(locale as any)) {
+    notFound();
+  }
 
   return {
     locale,
