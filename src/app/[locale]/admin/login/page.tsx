@@ -53,7 +53,7 @@ export default function AdminLogin() {
           <div>
             <CardTitle className="text-2xl font-bold">GoTravel Admin</CardTitle>
             <CardDescription className="mt-2">Đăng nhập vào hệ thống quản trị</CardDescription>
-          </div>
+          </div>  
         </CardHeader>
 
         <CardContent>
