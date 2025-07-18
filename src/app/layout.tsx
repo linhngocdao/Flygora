@@ -41,7 +41,7 @@ export default async function RootLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: { locale: string };
+  params: any;
 }) {
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
   const { locale } = await params;
