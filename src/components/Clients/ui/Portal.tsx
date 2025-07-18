@@ -1,11 +1,15 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
 /**
  * `Portal` là một component giúp render nội dung con (children) ra ngoài cây DOM hiện tại,
  * thường được sử dụng để hiển thị các thành phần như modal, popup, toast, dropdown...
  * một cách chính xác trên toàn màn hình, tránh bị ảnh hưởng bởi layout cha (z-index, overflow, position).
+ *
+ * Component này sử dụng pattern để tránh hydration mismatch:
+ * - Server-side: trả về null
+ * - Client-side: sau khi hydration hoàn tất, mới render portal
  *
  * @example
  * ```tsx
@@ -16,13 +20,17 @@ import { createPortal } from "react-dom";
  */
 
 export default function Portal({ children }: { children: React.ReactNode }) {
-  const ref = useRef<HTMLElement | null>(null);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    ref.current = document.body;
     setMounted(true);
+    return () => setMounted(false);
   }, []);
 
-  return mounted && ref.current ? createPortal(children, ref.current) : null;
+  // Tránh hydration mismatch bằng cách chỉ render portal sau khi component mounted trên client
+  if (!mounted) {
+    return null;
+  }
+
+  return createPortal(children, document.body);
 }

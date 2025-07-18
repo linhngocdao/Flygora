@@ -3,13 +3,55 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Script from "next/script";
+import localFont from "next/font/local";
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+const geomanist = localFont({
+  src: [
+    {
+      path: "../../public/fonts/Geomanist-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Geomanist-Book.woff2",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Geomanist-Medium.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Geomanist-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-geomanist",
+});
+
+const svnKingston = localFont({
+  src: "../../public/fonts/SVN-Kingston-Regular.woff2",
+  variable: "--font-kingston",
+});
+
+export default async function RootLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: { locale: string };
+}) {
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
-
+  const { locale } = await params;
   return (
-    <html className="scroll-smooth">
+    <html className="scroll-smooth" lang={locale}>
       <head>
+        <meta
+          name="google-site-verification"
+          content="VcvjRVy6m_ytCbrFg_zW87BsDG4lFd2RGQDYu8IX_JQ"
+        />
         {gaId && (
           <>
             <Script
@@ -27,7 +69,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </>
         )}
       </head>
-      <body>{children}</body>
+      <body className={`${geomanist.variable} ${svnKingston.variable} antialiased`}>
+        {children}
+      </body>
     </html>
   );
 }

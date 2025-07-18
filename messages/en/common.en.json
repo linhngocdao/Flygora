@@ -1,5 +1,6 @@
 {
   "hello": "Hello",
+  "backtoHome": "Back to Home",
   "search": {
     "searchPlaceholder": "Enter search keywords...",
     "title": "Search",

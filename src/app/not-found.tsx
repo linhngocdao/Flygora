@@ -1,7 +1,9 @@
+import ButtonPrimary from "@/components/Clients/ui/buttonPrimary";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
-import Link from "next/link";
 
 const EmptyPage = () => {
+  const t = useTranslations("common");
   return (
     <div
       className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat"
@@ -19,7 +21,7 @@ const EmptyPage = () => {
                 className="w-full h-full object-contain"
               />
             </div>
-            <div className="font-medium text-center text-gray-200 title-2">
+            <div className="text-center text-gray-200 text-[1rem] md:text-[1rem] lg:text-[1.2rem] font-bold">
               <span>Oops! Có vẻ như bạn đang đi nhầm hướng. Liên hệ Jungle Boss qua hotline </span>
               <a href="tel:+84917800805" className="lg:hover:text-primary lg:duration-150">
                 (+84) 917 800 805
@@ -31,12 +33,7 @@ const EmptyPage = () => {
               <span> để chúng tôi giúp bạn tìm đường.</span>
             </div>
             <div className="flex justify-center">
-              <Link
-                href="/"
-                className="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors duration-200"
-              >
-                Về trang chủ
-              </Link>
+              <ButtonPrimary name={t("backtoHome")} href="/" />
             </div>
           </div>
         </div>
