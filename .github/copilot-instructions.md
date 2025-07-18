@@ -1,4 +1,4 @@
-# GitHub Copilot Instructions cho Dự án Go Travel
+# GitHub Copilot Instructions cho Dự án Flygora
 
 ## QUY TẮC BẮT BUỘC
 

@@ -1,0 +1,17 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api
+
+# Googlebot
+User-agent: Googlebot
+Allow: /
+Disallow: /admin
+
+# Host
+Host: https://www.flygora.com
+
+# Sitemaps
+Sitemap: https://www.flygora.com/sitemap.xml
+Sitemap: https://gotravel.vn/sitemap.xml
