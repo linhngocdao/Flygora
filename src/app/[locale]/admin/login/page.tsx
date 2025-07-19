@@ -1,46 +1,94 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Eye, EyeOff, Lock, Mail } from "lucide-react";
+import { useLogin } from "@/hooks/useLogin";
+import { useAuthStore } from "@/store/auth.store";
+import { toast } from "sonner";
+
+const loginSchema = z.object({
+  email: z.string().min(1, "Email is required").email(),
+  password: z.string().min(1, "Password is required"),
+});
+
+type LoginForm = z.infer<typeof loginSchema>;
 
 export default function AdminLogin() {
   const router = useRouter();
   const pathname = usePathname();
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginForm>({
+    resolver: zodResolver(loginSchema),
   });
-  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
+  const { mutateAsync, isPending } = useLogin();
+  const token = useAuthStore((state) => state.token);
+  const user = useAuthStore((state) => state.user);
 
-    // Simulate login API call
-    setTimeout(() => {
-      // For demo purposes, accept any email/password
-      if (formData.email && formData.password) {
-        // Get current locale from pathname
-        const locale = pathname.split("/")[1]; // /vi/admin/login -> vi
-        // Redirect to admin dashboard with correct locale
-        router.push(`/${locale}/admin`);
+  useEffect(() => {
+    if (token) {
+      const locale = pathname.split("/")[1];
+      router.replace(`/${locale}/admin`);
+    }
+  }, [token, pathname, router]);
+
+  // Hiển thị thông tin user hiện tại (nếu có)
+  useEffect(() => {
+    if (user) {
+      console.log("User hiện tại:", user);
+    }
+  }, [user]);
+
+  const onSubmit = async (values: LoginForm) => {
+    try {
+      const response = await mutateAsync(values);
+
+      // Lấy thông tin từ response
+      const { access_token, user } = response;
+
+      // KHÔNG log sensitive data trong production
+      if (process.env.NODE_ENV === "development") {
+        console.log("Đăng nhập thành công:", {
+          user: {
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            role: user.role,
+          },
+          tokenPresent: !!access_token, // Chỉ log có token hay không
+        });
       }
-      setIsLoading(false);
-    }, 1000);
-  };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+      // Hiển thị thông báo với tên user
+      toast.success(`Chào mừng ${user.name}! Đăng nhập thành công.`);
+
+      // Tự động chuyển về admin dashboard
+      const locale = pathname.split("/")[1];
+      router.replace(`/${locale}/admin`);
+    } catch (error: any) {
+      if (process.env.NODE_ENV === "development") {
+        console.error("Lỗi đăng nhập:", error);
+      }
+
+      // Xử lý error message từ backend response
+      const errorMessage =
+        error?.response?.data?.message || error?.message || "Đã xảy ra lỗi khi đăng nhập";
+
+      toast.error(errorMessage);
+    }
   };
 
   return (
@@ -53,11 +101,11 @@ export default function AdminLogin() {
           <div>
             <CardTitle className="text-2xl font-bold">GoTravel Admin</CardTitle>
             <CardDescription className="mt-2">Đăng nhập vào hệ thống quản trị</CardDescription>
-          </div>  
+          </div>
         </CardHeader>
 
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             {/* Email Field */}
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
@@ -65,14 +113,14 @@ export default function AdminLogin() {
                 <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                 <Input
                   id="email"
-                  name="email"
                   type="email"
                   placeholder="admin@gotravel.com"
-                  value={formData.email}
-                  onChange={handleInputChange}
                   className="pl-10"
-                  required
+                  {...register("email")}
                 />
+                {errors.email && (
+                  <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+                )}
               </div>
             </div>
 
@@ -83,14 +131,14 @@ export default function AdminLogin() {
                 <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
                 <Input
                   id="password"
-                  name="password"
                   type={showPassword ? "text" : "password"}
                   placeholder="Nhập mật khẩu"
-                  value={formData.password}
-                  onChange={handleInputChange}
                   className="pl-10 pr-10"
-                  required
+                  {...register("password")}
                 />
+                {errors.password && (
+                  <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
+                )}
                 <Button
                   type="button"
                   variant="ghost"
@@ -104,8 +152,8 @@ export default function AdminLogin() {
             </div>
 
             {/* Login Button */}
-            <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? "Đang đăng nhập..." : "Đăng nhập"}
+            <Button type="submit" className="w-full" disabled={isPending}>
+              {isPending ? "Đang đăng nhập..." : "Đăng nhập"}
             </Button>
           </form>
 
@@ -117,6 +165,25 @@ export default function AdminLogin() {
             <p className="text-xs text-blue-600 dark:text-blue-300">Email: admin@gotravel.com</p>
             <p className="text-xs text-blue-600 dark:text-blue-300">Password: admin123</p>
           </div>
+
+          {/* Development Debug Info - CHỈ hiển thị thông tin an toàn */}
+          {process.env.NODE_ENV === "development" && user && (
+            <div className="mt-4 p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
+              <p className="text-sm text-green-800 dark:text-green-200 font-medium mb-1">
+                Debug - User Info (Safe):
+              </p>
+              <p className="text-xs text-green-600 dark:text-green-300">ID: {user.id}</p>
+              <p className="text-xs text-green-600 dark:text-green-300">Tên: {user.name}</p>
+              <p className="text-xs text-green-600 dark:text-green-300">Email: {user.email}</p>
+              <p className="text-xs text-green-600 dark:text-green-300">Role: {user.role}</p>
+              <p className="text-xs text-green-600 dark:text-green-300">
+                Token Status: {token ? "Authenticated ✓" : "Not Authenticated ✗"}
+              </p>
+              <p className="text-xs text-orange-600 dark:text-orange-300 mt-1">
+                ⚠️ Token details ẩn for security
+              </p>
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>

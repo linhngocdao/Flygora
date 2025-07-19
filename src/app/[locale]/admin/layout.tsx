@@ -1,9 +1,10 @@
 "use client";
 
-import React from "react";
-import { usePathname } from "next/navigation";
+import React, { useEffect } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import AdminSidebar from "@/app/[locale]/layout/admin/AdminSidebar";
 import AdminHeader from "@/app/[locale]/layout/admin/AdminHeader";
+import { useVerifyToken } from "@/hooks/useVerifyToken";
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -11,9 +12,19 @@ interface AdminLayoutProps {
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
   const pathname = usePathname();
+  const router = useRouter();
 
   // Kiểm tra xem có phải trang login không
   const isLoginPage = pathname.includes("/admin/login");
+
+  const { error } = useVerifyToken(!isLoginPage);
+
+  useEffect(() => {
+    if (error) {
+      const locale = pathname.split("/")[1];
+      router.replace(`/${locale}/admin/login`);
+    }
+  }, [error, pathname, router]);
 
   // Nếu là trang login, chỉ render children không có header/sidebar
   if (isLoginPage) {

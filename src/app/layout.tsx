@@ -4,6 +4,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Script from "next/script";
 import localFont from "next/font/local";
+import { Toaster } from "@/components/ui/sonner";
 
 const geomanist = localFont({
   src: [
@@ -71,6 +72,7 @@ export default async function RootLayout({
       </head>
       <body className={`${geomanist.variable} ${svnKingston.variable} antialiased`}>
         {children}
+        <Toaster position="top-right" />
       </body>
     </html>
   );
