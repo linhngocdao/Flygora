@@ -15,6 +15,7 @@ import {
   Settings,
   BarChart3,
   Package,
+  UserCog,
 } from "lucide-react";
 
 const sidebarItems = [
@@ -37,6 +38,11 @@ const sidebarItems = [
     icon: Users,
     label: "customers",
     href: "/admin/customers",
+  },
+  {
+    icon: UserCog,
+    label: "users",
+    href: "/admin/users",
   },
   {
     icon: Star,
