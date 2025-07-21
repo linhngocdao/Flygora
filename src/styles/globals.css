@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@import "./menu.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -47,6 +48,29 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px; /* Offset cho fixed header */
+}
+
+/* Custom scrollbar styles */
+.scroll-custom {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(108, 138, 31, 0.5) transparent;
+}
+
+.scroll-custom::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scroll-custom::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-custom::-webkit-scrollbar-thumb {
+  background: rgba(108, 138, 31, 0.5);
+  border-radius: 3px;
+}
+
+.scroll-custom::-webkit-scrollbar-thumb:hover {
+  background: rgba(108, 138, 31, 0.7);
 }
 
 /* Custom Scrollbar cho Go Travel */
