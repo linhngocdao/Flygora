@@ -24,27 +24,25 @@ const MenuContent: React.FC<MenuContentProps> = ({ activeMenuSection, onCloseMen
           title: "ADVENTURE TOURS",
           description:
             "Jungle Boss builds teamwork through adventure in Phong Nha – Ke Bang National Park. Challenge your team with games in the jungle.",
-          image: "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&h=450&fit=crop",
+          image: "https://junglebosstours.com/images/banner/banner-tour.webp", // Sử dụng hình jungle phù hợp
           alt: "Adventure Tours in Phong Nha Ke Bang",
           href: "/tour",
         };
       case "team-building":
         return {
-          title: "Unique & Different Team Building",
+          title: "TEAM BUILDING",
           description:
-            "Jungle Boss builds teamwork through adventure in Phong Nha – Ke Bang National Park. Challenge your team with games in the jungle.",
-          image:
-            "https://images.unsplash.com/photo-1530549387789-4c1017266635?w=800&h=450&fit=crop",
+            "Transform your team dynamics with our unique team building experiences in the heart of Vietnam's pristine jungle landscape.",
+          image: "https://junglebosstours.com/images/banner/banner-tour.webp",
           alt: "Team Building Activities in Vietnam",
           href: "/team-building",
         };
       case "about-us":
         return {
-          title: "Leading & Certificated Adventure Tourism Company in Vietnam",
+          title: "ABOUT US",
           description:
-            "Jungle Boss Exclusive guides to Vietnam's Phong Nha – Ke Bang Park. Discovering awe-inspiring caves, jungles & sinkholes with few access. Sustainable adventures!",
-          image:
-            "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=450&fit=crop",
+            "Discover our story and mission to provide safe, sustainable, and unforgettable adventures in Phong Nha-Ke Bang National Park.",
+          image: "https://junglebosstours.com/images/banner/banner-tour.webp",
           alt: "Vietnam Adventure Tourism Company",
           href: "/about-us",
         };
@@ -65,30 +63,37 @@ const MenuContent: React.FC<MenuContentProps> = ({ activeMenuSection, onCloseMen
           : "opacity-0 translate-x-10 invisible"
       }`}
     >
-      <div className="xl:px-[120px] md:px-[80px] px-[60px] xl:pt-[68px] md:pt-[48px] pt-[34px] pb-[45px] flex items-center h-full overflow-y-auto">
-        <div className="w-full space-y-6 xl:space-y-10 md:space-y-8">
-          <div className="space-y-4 text-white xl:space-y-6 md:space-y-5">
-            <h2 className="uppercase whitespace-pre-line text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
+      {/* Content Container với padding tối ưu */}
+      <div className="h-full flex items-center justify-center px-8 lg:px-12 xl:px-16 py-12">
+        <div className="w-full max-w-2xl space-y-8 text-center">
+          {/* Title Section */}
+          <div className="space-y-4">
+            <h2 className="text-white text-3xl lg:text-4xl xl:text-5xl font-bold tracking-wider leading-tight">
               {contentData.title}
             </h2>
-            <p className="text-lg lg:text-xl xl:text-2xl leading-relaxed max-w-4xl">
+            <p className="text-white/90 text-base lg:text-lg xl:text-xl leading-relaxed max-w-xl mx-auto">
               {contentData.description}
             </p>
           </div>
 
-          <div className="overflow-hidden rounded-xl aspect-video max-w-4xl">
-            <Image
-              width={200}
-              height={200}
-              src={contentData.image}
-              alt={contentData.alt}
-              className="object-cover w-full h-full duration-300 ease-in-out hover:scale-105 transition-transform"
-            />
+          {/* Image Section - Compact size */}
+          <div className="mx-auto max-w-lg lg:max-w-xl">
+            <div className="overflow-hidden rounded-2xl aspect-[4/3] shadow-2xl">
+              <Image
+                width={500}
+                height={375}
+                src={contentData.image}
+                alt={contentData.alt}
+                className="object-cover w-full h-full duration-300 ease-in-out hover:scale-105 transition-transform"
+                priority
+              />
+            </div>
           </div>
 
+          {/* Button Section */}
           <div>
             <Link href={contentData.href} onClick={onCloseMenu}>
-              <button className="px-10 py-4 text-white border-2 border-white rounded-lg bg-transparent hover:bg-white hover:text-green-800 transition-all duration-300 text-lg font-medium">
+              <button className="px-8 py-3 text-white border-2 border-white rounded-lg bg-transparent hover:bg-white hover:text-[#004750] transition-all duration-300 text-base font-medium tracking-wider">
                 Explore Now
               </button>
             </Link>

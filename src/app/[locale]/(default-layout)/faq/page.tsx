@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
-import SubscribeBanner from "@/components/Clients/layout/home/SubscribeBanner/page";
 import { ChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
@@ -11,6 +10,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import SubscribeBanner from "@/components/Clients/layout/home/SubscribeBanner/page";
 
 interface FAQItem {
   id: string;
@@ -192,7 +192,7 @@ const FAQ = () => {
     <>
       <main>
         {/* Header FAQ */}
-        <section className="relative md:h-[500px] h-[400px] max-h-screen">
+        <section className="relative md:h-[500px] h-[400px] max-h-screen ">
           <div className="absolute inset-0">
             <Image
               fill
@@ -317,7 +317,6 @@ const FAQ = () => {
             </div>
           </div>
         </section>
-
         <SubscribeBanner />
       </main>
     </>

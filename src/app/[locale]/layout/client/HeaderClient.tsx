@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import LanguageSwitcher from "@/components/Clients/ui/LanguageSwitcher";
 import SearchHeader from "@/components/Clients/ui/SearchHeader";
-import FullScreenMenu from "./FullScreenMenu";
+import FullScreenMenu from "./FullScreenMenu"; // Import menu gốc
 
 const HeaderGotravel: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
@@ -199,7 +199,7 @@ const HeaderGotravel: React.FC = () => {
         </div>
       </header>
 
-      {/* Full Screen Menu Component */}
+      {/* Jungle Boss FullScreen Menu Component */}
       <FullScreenMenu isMenuOpen={isMenuOpen} onCloseMenu={closeMenu} />
     </div>
   );

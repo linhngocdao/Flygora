@@ -157,7 +157,33 @@
       "sending": "Sending...",
 
       "submitSuccess": "Thank you for your message! We'll get back to you shortly.",
-      "submitError": "Sorry, there was an error submitting your form. Please try again."
+      "submitError": "Sorry, there was an error submitting your form. Please try again.",
+
+      "moreSupportive": {
+        "title": "More Supportive",
+        "subtitle": "FIND THE HELPFUL LINKS YOU NEED",
+        "description": "Contact our friendly support experts via email, dedicated hotlines, or central locations",
+        "office": {
+          "title": "VISIT OUR OFFICE",
+          "description": "Visit the Jungle Boss headquarters and meet our team",
+          "address": "Phong Nha Town, Bo Trach District, Quang Binh Province, Vietnam",
+          "button": "Get Direction"
+        },
+        "support": {
+          "title": "REQUEST SUPPORT",
+          "description": "Have questions? Drop us an email",
+          "email": "contact@junglebosstours.com",
+          "button": "Send Email"
+        },
+        "call": {
+          "title": "CALL US TODAY",
+          "description": "Give us a call for quick question",
+          "phone1": "(+84) 917 800 805",
+          "phone2": "(+84) 859 100 222",
+          "button": "Call Hotline"
+        }
+
+      }
     }
   },
   "faq": {

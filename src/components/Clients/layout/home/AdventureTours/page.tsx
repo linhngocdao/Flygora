@@ -200,7 +200,7 @@ const AllAdventureTour = () => {
             grabCursor={true}
             breakpoints={{
               320: {
-                slidesPerView: 1.3,
+                slidesPerView: 1.2,
                 spaceBetween: 12,
                 centeredSlides: true,
               },

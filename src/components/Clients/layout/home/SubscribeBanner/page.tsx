@@ -63,7 +63,7 @@ const SubscribeBanner = () => {
       <div className="container">
         <div
           className="lg:p-8 p-6 bg-cover rounded-lg"
-          style={{ backgroundImage: "url('images/homePage/section-10-bg.webp')" }}
+          style={{ backgroundImage: "url('/images/homePage/section-10-bg.webp')" }}
         >
           {/* Tiêu đề và mô tả */}
           <h2 className="mb-4 text-2xl font-bold headline-[125%] text-[#ede52a]">{t("title")}</h2>
@@ -81,7 +81,7 @@ const SubscribeBanner = () => {
                   className={`w-full px-4 py-2 border bg-white ${
                     errors.email
                       ? "border-red-500 focus:ring-red-500"
-                      : "border-green-600 focus:ring-green-700"
+                      : "border-green-300 focus:ring-green-500"
                   } rounded-md focus:outline-none focus:ring-2`}
                   disabled={isSubmitting}
                 />
