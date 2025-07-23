@@ -65,7 +65,7 @@ const HeaderGotravel: React.FC = () => {
           {isScrolled && (
             <div className="absolute inset-0 w-full h-full opacity-20">
               <div className="w-full h-full bg-gradient-to-r from-green-900/30 via-primary-900/50 to-green-800/30"></div>
-              <div className="absolute inset-0 w-full h-full bg-[url('/bg-texture.jpg')] bg-cover bg-center mix-blend-overlay opacity-30"></div>
+              <div className="absolute inset-0 w-full h-full bg-amber-300 mix-blend-overlay opacity-30"></div>
             </div>
           )}
 

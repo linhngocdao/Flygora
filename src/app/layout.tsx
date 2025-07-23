@@ -2,9 +2,11 @@ import "@/styles/globals.css";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import "swiper/css/thumbs";
 import Script from "next/script";
 import localFont from "next/font/local";
 import { Toaster } from "@/components/ui/sonner";
+import FloatButtonMenu from "@/components/Clients/ui/FloatButtonMenu";
 
 const geomanist = localFont({
   src: [
@@ -73,6 +75,7 @@ export default async function RootLayout({
       <body className={`${geomanist.variable} ${svnKingston.variable} antialiased`}>
         {children}
         <Toaster position="top-right" />
+        <FloatButtonMenu />
       </body>
     </html>
   );

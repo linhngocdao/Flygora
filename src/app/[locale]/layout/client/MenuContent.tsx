@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export interface MenuContentType {
   title: string;
@@ -76,7 +77,9 @@ const MenuContent: React.FC<MenuContentProps> = ({ activeMenuSection, onCloseMen
           </div>
 
           <div className="overflow-hidden rounded-xl aspect-video max-w-4xl">
-            <img
+            <Image
+              width={200}
+              height={200}
               src={contentData.image}
               alt={contentData.alt}
               className="object-cover w-full h-full duration-300 ease-in-out hover:scale-105 transition-transform"

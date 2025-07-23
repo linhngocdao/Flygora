@@ -265,6 +265,11 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
 }
+.bg-img {
+  background: url("/images/homePage/bg-icon.png") no-repeat;
+  background-position: 50%;
+  background-size: cover;
+}
 
 /* Typography classes */
 .title-2 {
