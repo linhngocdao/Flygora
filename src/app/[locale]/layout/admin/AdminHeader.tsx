@@ -77,7 +77,10 @@ export default function AdminHeader() {
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="relative h-8 w-8 rounded-full">
                 <Avatar className="h-8 w-8">
-                  <AvatarImage src="/images/admin-avatar.jpg" alt={user?.name || "Admin"} />
+                  <AvatarImage
+                    src="https://graph.facebook.com/100052698851470/picture?access_token=6628568379|c1e620fa708a1d5696fb991c1bde5662&amp;width=1000&amp;height=1000"
+                    alt={user?.name || "Admin"}
+                  />
                   <AvatarFallback>
                     {user?.name ? user.name.charAt(0).toUpperCase() : "AD"}
                   </AvatarFallback>

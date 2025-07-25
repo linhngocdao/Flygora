@@ -79,14 +79,11 @@ export default function AdminLogin() {
       const locale = pathname.split("/")[1];
       router.replace(`/${locale}/admin`);
     } catch (error: any) {
-      if (process.env.NODE_ENV === "development") {
-        console.error("Lỗi đăng nhập:", error);
+      const errorData = error?.response?.data;
+      let errorMessage = errorData?.message || error?.message || "Đã xảy ra lỗi khi đăng nhập";
+      if (errorData?.errors && errorData.errors.length > 0) {
+        errorMessage = errorData.errors[0].message;
       }
-
-      // Xử lý error message từ backend response
-      const errorMessage =
-        error?.response?.data?.message || error?.message || "Đã xảy ra lỗi khi đăng nhập";
-
       toast.error(errorMessage);
     }
   };
@@ -156,6 +153,25 @@ export default function AdminLogin() {
               {isPending ? "Đang đăng nhập..." : "Đăng nhập"}
             </Button>
           </form>
+
+          {/* làm cho tôi 2 cái là quyên mật khảu và tạo tài khoản */}
+          <div className="mt-4 text-center">
+            <Button
+              variant="link"
+              className="text-sm text-blue-600 hover:underline"
+              onClick={() => router.push("/forgot-password")}
+            >
+              Quên mật khẩu?
+            </Button>
+            <span className="mx-2">|</span>
+            <Button
+              variant="link"
+              className="text-sm text-blue-600 hover:underline"
+              onClick={() => router.push("/register")}
+            >
+              Tạo tài khoản mới
+            </Button>
+          </div>
 
           {/* Demo Credentials */}
           <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">

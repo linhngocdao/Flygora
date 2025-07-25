@@ -1,22 +1,20 @@
 "use client";
 
+import { ArrowUpFromDot } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
 
-  // Theo dõi scroll để show/hide button
   useEffect(() => {
     const toggleVisibility = () => {
-      // Hiển thị button khi scroll xuống 300px
-      if (window.scrollY > 300) {
+      if (window.scrollY > 1200) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
       }
     };
 
-    // Throttle scroll event để tối ưu performance
     let timeoutId: NodeJS.Timeout;
     const handleScroll = () => {
       clearTimeout(timeoutId);
@@ -31,7 +29,6 @@ const ScrollToTop = () => {
     };
   }, []);
 
-  // Smooth scroll to top
   const scrollToTop = useCallback(() => {
     window.scrollTo({
       top: 0,
@@ -47,39 +44,20 @@ const ScrollToTop = () => {
     <button
       onClick={scrollToTop}
       className={`
-        fixed bottom-24 right-4 md:right-6 md:bottom-32
+        fixed bottom-24 right-4 md:right-12 md:bottom-4
         z-[998] flex justify-center items-center
         w-12 h-12 md:w-14 md:h-14
-        rounded-full cursor-pointer
-        bg-gradient-to-r from-green-600 to-green-700
-        text-white hover:text-yellow-400
-        hover:from-green-700 hover:to-green-800
+        rounded-full cursor-pointer bg-img text-white
         transition-all duration-300 ease-in-out
         hover:scale-110 hover:shadow-lg
-        focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2
+        focus:outline-none focus:ring-2 focus:ring-green-800 focus:ring-offset-2
         transform ${isVisible ? "translate-y-0 opacity-100" : "translate-y-16 opacity-0"}
         shadow-lg backdrop-blur-sm
       `}
       aria-label="Scroll to top"
       title="Scroll to top"
     >
-      {/* Arrow up icon */}
-      <svg
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        className="transition-transform duration-300 group-hover:scale-110"
-      >
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M12 3.5L6.5 9H9V20H15V9H17.5L12 3.5Z"
-          fill="currentColor"
-        />
-      </svg>
-
-      {/* Ripple effect */}
+      <ArrowUpFromDot size={18} />
       <div className="absolute inset-0 rounded-full overflow-hidden">
         <div className="absolute inset-0 bg-white opacity-0 hover:opacity-20 transition-opacity duration-300 rounded-full"></div>
       </div>
