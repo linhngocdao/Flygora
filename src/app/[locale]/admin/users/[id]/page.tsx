@@ -24,7 +24,6 @@ import EditUserModal from "@/components/Admin/Users/EditUserModal";
 import ChangePasswordModal from "@/components/Admin/Users/ChangePasswordModal";
 import DeleteUserModal from "@/components/Admin/Users/DeleteUserModal";
 
-// Mock data chi tiết user - trong thực tế sẽ fetch từ API theo ID
 const getUserDetails = (id: string) => {
   const mockUsers = [
     {
@@ -39,7 +38,6 @@ const getUserDetails = (id: string) => {
       avatar: "/images/avatar/user1.jpg",
       address: "123 Nguyễn Huệ, Quận 1, TP.HCM",
       birthday: "1990-05-15",
-      permissions: ["users.read", "users.write", "tours.read", "tours.write", "bookings.read"],
       totalBookings: 25,
       totalRevenue: 125000000,
       loginHistory: [
@@ -60,7 +58,6 @@ const getUserDetails = (id: string) => {
       avatar: "/images/avatar/user2.jpg",
       address: "456 Lê Lợi, Quận 3, TP.HCM",
       birthday: "1995-08-20",
-      permissions: ["tours.read", "bookings.read", "bookings.write"],
       totalBookings: 15,
       totalRevenue: 75000000,
       loginHistory: [
@@ -261,20 +258,6 @@ const UserDetailPage = () => {
                   <span className="ml-2">{formatDate(user.lastLogin)}</span>
                 </div>
               </div>
-            </div>
-          </Card>
-
-          {/* Quyền hạn */}
-          <Card className="p-6">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
-              Quyền hạn và Phân quyền
-            </h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-              {user.permissions.map((permission, index) => (
-                <Badge key={index} variant="outline" className="justify-center py-2">
-                  {permission}
-                </Badge>
-              ))}
             </div>
           </Card>
 

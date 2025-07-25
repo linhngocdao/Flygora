@@ -93,8 +93,7 @@ const FloatButtonMenu = () => {
   ];
 
   return (
-    <div className="fixed bottom-[5.5rem] right-4 md:right-6 md:bottom-24 z-[998]">
-      {/* 🎭 STAGGERED ANIMATION - Float action buttons */}
+    <div className="fixed bottom-18 right-6 md:right-12 md:bottom-22 z-[998]">
       <div className="mb-4 space-y-3 transition-all duration-300 ease-out ">
         {floatActions.map((action, index) => (
           <div
@@ -106,11 +105,12 @@ const FloatButtonMenu = () => {
               transitionDelay: isOpen
                 ? `${index * 50}ms`
                 : `${(floatActions.length - index - 1) * 50}ms`,
+              pointerEvents: isOpen ? "auto" : "none",
             }}
           >
             <button
               onClick={action.action}
-              className="bg-img
+              className="bg-img cursor-pointer
                 group flex items-center justify-center
                 w-12 h-12 md:w-14 md:h-14
                 text-white rounded-full
@@ -124,7 +124,6 @@ const FloatButtonMenu = () => {
             >
               {action.icon}
 
-              {/* 💬TOOLTIP ANIMATION */}
               <div className="absolute right-full mr-3 px-2 py-1 bg-gray-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none ">
                 {action.label}
               </div>
@@ -133,7 +132,6 @@ const FloatButtonMenu = () => {
         ))}
       </div>
 
-      {/* 🎯 MAIN TOGGLE BUTTON với tất cả animations */}
       <button
         onClick={toggleMenu}
         className="bg-img  relative flex justify-center items-center w-12 h-12 md:w-[60px] md:h-[60px] rounded-full cursor-pointer"

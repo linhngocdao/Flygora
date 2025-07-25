@@ -115,4 +115,25 @@ axiosInstance.interceptors.response.use(
   }
 );
 
+export const sendGet = async <T>(url: string, params?: any): Promise<T> => {
+  const res = await axiosInstance.get(url, { params });
+  return res.data as T;
+};
+
+export const sendPost = <T>(
+  url: string,
+  params?: unknown,
+  queryParams?: Record<string, unknown>
+): Promise<T> =>
+  axiosInstance.post(url, params, { params: queryParams }).then((res) => res.data as T);
+
+export const sendPut = <T>(url: string, params?: unknown): Promise<T> =>
+  axiosInstance.put(url, params).then((res) => res.data as T);
+
+export const sendPatch = <T>(url: string, params?: unknown): Promise<T> =>
+  axiosInstance.patch(url, params).then((res) => res.data as T);
+
+export const sendDelete = <T>(url: string, params?: Record<string, unknown>): Promise<T> =>
+  axiosInstance.delete(url, { params }).then((res) => res.data as T);
+
 export default axiosInstance;
