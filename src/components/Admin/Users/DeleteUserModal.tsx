@@ -13,22 +13,12 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Trash2, AlertTriangle, X } from "lucide-react";
-
-interface UserData {
-  id: number;
-  name: string;
-  email: string;
-  phone: string;
-  role: string;
-  status: string;
-  totalBookings?: number;
-  totalRevenue?: number;
-}
+import { GetAllUserResponse } from "@/types/user.type";
 
 interface DeleteUserModalProps {
   isOpen: boolean;
   onClose: () => void;
-  user: UserData;
+  user: GetAllUserResponse;
   onConfirm: () => void;
 }
 
@@ -56,15 +46,6 @@ const DeleteUserModal = forwardRef<DeleteUserModalRef, DeleteUserModalProps>(
         setShowWarning(false);
       },
     }));
-
-    // Kiểm tra user có dữ liệu quan trọng không
-    const hasImportantData = () => {
-      return (
-        (user.totalBookings && user.totalBookings > 0) ||
-        (user.totalRevenue && user.totalRevenue > 0) ||
-        user.role === "admin"
-      );
-    };
 
     // Xử lý xác nhận xóa
     const handleConfirm = async () => {
@@ -97,14 +78,6 @@ const DeleteUserModal = forwardRef<DeleteUserModalRef, DeleteUserModalProps>(
         setShowWarning(false);
         onClose();
       }
-    };
-
-    // Format currency
-    const formatCurrency = (amount: number) => {
-      return new Intl.NumberFormat("vi-VN", {
-        style: "currency",
-        currency: "VND",
-      }).format(amount);
     };
 
     return (
@@ -145,60 +118,6 @@ const DeleteUserModal = forwardRef<DeleteUserModalRef, DeleteUserModalProps>(
                 </div>
               </div>
             </div>
-
-            {/* Thông tin user sẽ bị xóa */}
-            <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-              <h4 className="font-medium text-gray-900 mb-3">Thông tin sẽ bị xóa:</h4>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Tên:</span>
-                  <span className="font-medium">{user.name}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Email:</span>
-                  <span className="font-medium">{user.email}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Vai trò:</span>
-                  <span className="font-medium">{user.role}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Trạng thái:</span>
-                  <span className="font-medium">{user.status}</span>
-                </div>
-                {user.totalBookings && user.totalBookings > 0 && (
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Số booking:</span>
-                    <span className="font-medium text-orange-600">{user.totalBookings}</span>
-                  </div>
-                )}
-                {user.totalRevenue && user.totalRevenue > 0 && (
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Tổng doanh thu:</span>
-                    <span className="font-medium text-orange-600">
-                      {formatCurrency(user.totalRevenue)}
-                    </span>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Thông báo đặc biệt nếu có dữ liệu quan trọng */}
-            {hasImportantData() && (
-              <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
-                <div className="flex items-start gap-3">
-                  <AlertTriangle className="h-5 w-5 text-orange-600 mt-0.5" />
-                  <div className="text-sm">
-                    <p className="font-medium text-orange-800 mb-1">
-                      Người dùng có dữ liệu quan trọng!
-                    </p>
-                    <p className="text-orange-700">
-                      Khuyến nghị: Hãy cân nhắc vô hiệu hóa thay vì xóa để bảo toàn dữ liệu lịch sử.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
 
             {/* Form xác nhận */}
             <div className="space-y-3">

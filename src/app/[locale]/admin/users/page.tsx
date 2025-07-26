@@ -23,7 +23,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
-import { changeStatusUser, getAllUser } from "@/config/user/user.api";
+import {
+  changePasswordUserApi,
+  changeStatusUser,
+  deleteUser,
+  getAllUser,
+} from "@/config/user/user.api";
 import { useDebounce } from "@/hooks/useDebounce";
 import { GetAllUserResponse } from "@/types/user.type";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -39,6 +44,8 @@ import {
   UserPlus,
   Users,
   UserX,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
@@ -52,7 +59,7 @@ const UserManager = () => {
 
   const [filters, setFilters] = useState({
     page: 1,
-    limit: 10,
+    limit: 7,
     search: undefined as string | undefined,
     role: undefined as string | undefined,
     status: undefined as string | undefined,
@@ -97,7 +104,7 @@ const UserManager = () => {
   const totalPages = data?.meta?.totalPages || 0;
   const users = data?.data || [];
 
-  // Mutation to change the status of a user - FIXED VERSION
+  // Mutation to change user status
   const { mutate: toggleUserStatus, isPending: isTogglingStatus } = useMutation({
     mutationFn: ({ id, status }: { id: string; status: "active" | "inactive" }) =>
       changeStatusUser(id, status),
@@ -122,10 +129,38 @@ const UserManager = () => {
       toast.success("Trạng thái người dùng đã được cập nhật thành công!");
     },
     onError: (error: any) => {
-      console.error("Toggle user status error:", error);
       toast.error(
         error?.response?.data?.message || "Đã xảy ra lỗi khi thay đổi trạng thái người dùng."
       );
+    },
+  });
+
+  // Mutation to delete user
+  const { mutate: deleteUsers } = useMutation({
+    mutationFn: async (id: string) => {
+      await deleteUser(id);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["users"] });
+      toast.success("Xóa người dùng thành công!");
+      setIsDeleteModalOpen(false);
+    },
+    onError: (error: any) => {
+      toast.error(error?.response?.data?.message);
+    },
+  });
+
+  // Mutation to change user password
+  const { mutate: changeUserPassword } = useMutation({
+    mutationFn: async ({ id, new_password }: { id: string; new_password: string }) =>
+      await changePasswordUserApi(id, new_password),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["users"] });
+      toast.success("Đổi mật khẩu thành công!");
+      setIsPasswordModalOpen(false);
+    },
+    onError: (error: any) => {
+      toast.error(error?.response?.data?.message);
     },
   });
 
@@ -190,9 +225,10 @@ const UserManager = () => {
 
   // Modal handlers
   const handleAddUser = (newUserData: any) => {
-    setIsAddModalOpen(false);
-    queryClient.invalidateQueries({ queryKey: ["users"] });
-    toast.success("Đã thêm user mới thành công!");
+    // setIsAddModalOpen(false);
+    // queryClient.invalidateQueries({ queryKey: ["users"] });
+    // toast.success("Đã thêm user mới thành công!");
+    console.log(newUserData);
   };
 
   const handleEditUser = (user: GetAllUserResponse) => {
@@ -213,9 +249,9 @@ const UserManager = () => {
   };
 
   const handleSavePassword = (newPassword: string) => {
-    setIsPasswordModalOpen(false);
-    setSelectedUser(null);
-    toast.success(`Đã đổi mật khẩu cho ${selectedUser?.name} thành công!`);
+    if (selectedUser) {
+      changeUserPassword({ id: selectedUser.id, new_password: newPassword });
+    }
   };
 
   const handleDeleteUser = (user: GetAllUserResponse) => {
@@ -227,20 +263,140 @@ const UserManager = () => {
     if (selectedUser) {
       setIsDeleteModalOpen(false);
       setSelectedUser(null);
-      queryClient.invalidateQueries({ queryKey: ["users"] });
-      toast.success("Đã xóa user thành công!");
+      deleteUsers(selectedUser.id);
     }
   };
 
-  // FIXED: Toggle user status handler
   const handleToggleUserStatus = (user: GetAllUserResponse) => {
     const newStatus = user.status === "active" ? "inactive" : "active";
-
-    // Call mutation with object parameter matching mutationFn signature
     toggleUserStatus({
       id: user.id,
       status: newStatus,
     });
+  };
+
+  // Function để tạo array các trang cần hiển thị
+  const generatePageNumbers = (currentPage: number, totalPages: number) => {
+    const delta = 2; // Số trang hiển thị ở mỗi bên của trang hiện tại
+    const range = [];
+    const rangeWithDots = [];
+
+    // Nếu tổng số trang <= 7, hiển thị tất cả
+    if (totalPages <= 7) {
+      for (let i = 1; i <= totalPages; i++) {
+        rangeWithDots.push(i);
+      }
+      return rangeWithDots;
+    }
+
+    // Tính toán range cơ bản
+    for (
+      let i = Math.max(2, currentPage - delta);
+      i <= Math.min(totalPages - 1, currentPage + delta);
+      i++
+    ) {
+      range.push(i);
+    }
+
+    // Thêm trang đầu
+    if (currentPage - delta > 2) {
+      rangeWithDots.push(1, "...");
+    } else {
+      rangeWithDots.push(1);
+    }
+
+    // Thêm range chính
+    rangeWithDots.push(...range);
+
+    // Thêm trang cuối
+    if (currentPage + delta < totalPages - 1) {
+      rangeWithDots.push("...", totalPages);
+    } else if (totalPages > 1) {
+      rangeWithDots.push(totalPages);
+    }
+
+    return rangeWithDots;
+  };
+
+  // Component Pagination mới
+  const PaginationComponent = () => {
+    if (totalPages <= 1) return null;
+
+    const pageNumbers = generatePageNumbers(filters.page, totalPages);
+
+    return (
+      <div className="flex items-center justify-between">
+        {/* Thông tin hiển thị */}
+        <div className="text-sm text-gray-700 dark:text-gray-300">
+          Hiển thị <span className="font-medium">{(filters.page - 1) * filters.limit + 1}</span> đến{" "}
+          <span className="font-medium">{Math.min(filters.page * filters.limit, totalUsers)}</span>{" "}
+          trong tổng số <span className="font-medium">{totalUsers}</span> kết quả
+        </div>
+
+        {/* Điều khiển phân trang */}
+        <div className="flex items-center gap-1">
+          {/* Nút Previous */}
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handlePageChange(filters.page - 1)}
+            disabled={filters.page === 1}
+            className="flex items-center gap-1 px-3"
+          >
+            <ChevronLeft className="h-4 w-4" />
+            Trước
+          </Button>
+
+          <div className="flex items-center gap-1 mx-2">
+            {pageNumbers.map((pageNumber, index) => {
+              if (pageNumber === "...") {
+                return (
+                  <span
+                    key={`ellipsis-${index}`}
+                    className="px-3 py-2 text-gray-500 dark:text-gray-400"
+                  >
+                    ...
+                  </span>
+                );
+              }
+
+              const isCurrentPage = pageNumber === filters.page;
+
+              return (
+                <Button
+                  key={pageNumber}
+                  variant={isCurrentPage ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => handlePageChange(Number(pageNumber))}
+                  className={`
+                    min-w-[30px] h-8
+                    ${
+                      isCurrentPage
+                        ? "bg-primary text-white "
+                        : "hover:bg-gray-50 hover:text-gray-800 dark:hover:bg-gray-800"
+                    }
+                  `}
+                >
+                  {pageNumber}
+                </Button>
+              );
+            })}
+          </div>
+
+          {/* Nút Next */}
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handlePageChange(filters.page + 1)}
+            disabled={filters.page === totalPages}
+            className="flex items-center gap-1 px-3"
+          >
+            Sau
+            <ChevronRight className="h-4 w-4" />
+          </Button>
+        </div>
+      </div>
+    );
   };
 
   // Loading skeleton component
@@ -479,40 +635,7 @@ const UserManager = () => {
         )}
       </Card>
 
-      {/* Pagination */}
-      {!isLoading && users.length > 0 && (
-        <div className="flex items-center justify-between">
-          <div className="text-sm text-gray-700 dark:text-gray-300">
-            Hiển thị <span className="font-medium">{(filters.page - 1) * filters.limit + 1}</span>{" "}
-            đến{" "}
-            <span className="font-medium">
-              {Math.min(filters.page * filters.limit, totalUsers)}
-            </span>{" "}
-            trong tổng số <span className="font-medium">{totalUsers}</span> kết quả
-          </div>
-          <div className="flex gap-2">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => handlePageChange(filters.page - 1)}
-              disabled={filters.page === 1}
-            >
-              Trước
-            </Button>
-            <Button variant="outline" size="sm" className="bg-blue-50 text-blue-600">
-              {filters.page}
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => handlePageChange(filters.page + 1)}
-              disabled={filters.page === totalPages}
-            >
-              Sau
-            </Button>
-          </div>
-        </div>
-      )}
+      {!isLoading && users.length > 0 && <PaginationComponent />}
 
       {/* Modals */}
       <AddUserModal

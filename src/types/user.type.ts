@@ -4,9 +4,9 @@ export type UserStatus = "active" | "inactive";
 export interface GetPayload {
   page?: number;
   limit?: number;
-  search?: string | undefined;
-  role?: UserRole | undefined;
-  status?: UserStatus | undefined;
+  search?: string;
+  role?: UserRole;
+  status?: UserStatus;
 }
 export interface GetAllUserResponse {
   id: string;

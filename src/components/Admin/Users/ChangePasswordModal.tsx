@@ -17,7 +17,7 @@ import { Key, Save, X, Eye, EyeOff, AlertTriangle } from "lucide-react";
 interface ChangePasswordModalProps {
   isOpen: boolean;
   onClose: () => void;
-  userId: number;
+  userId: string;
   userName: string;
   onSave: (newPassword: string) => void;
 }
