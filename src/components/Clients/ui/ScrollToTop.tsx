@@ -44,7 +44,7 @@ const ScrollToTop = () => {
     <button
       onClick={scrollToTop}
       className={`
-        fixed bottom-24 right-4 md:right-12 md:bottom-4
+        fixed bottom-5 right-6 md:right-12 md:bottom-4
         z-[998] flex justify-center items-center
         w-12 h-12 md:w-14 md:h-14
         rounded-full cursor-pointer bg-img text-white

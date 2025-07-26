@@ -34,11 +34,11 @@ const WhychooseUsSection = () => {
           <div className="flex max-md:flex-col-reverse items-center container md:space-x-[37px] xl:pt-[119px] lg:pt-[100px] md:py-8 relative z-30">
             {/* Content */}
             <div className="flex flex-col justify-center flex-grow space-y-2">
-              <h1 className="text-[4.75rem] text-[#004750] uppercase tracking-[-1.2px] font-[700]">
+              <h1 className="text-[2rem] md:text-[4.5rem] text-[#004750] uppercase tracking-[-1.2px] font-[700]">
                 {t("title")}
               </h1>
               <div className="space-y-4">
-                <div className="uppercase headline-2 text-[1.75rem] text-[#004750] font-medium">
+                <div className="uppercase headline-2 text-[1.2rem] md:text-[1.75rem] text-[#004750] font-[600]">
                   {t("subtitle")}
                 </div>
 

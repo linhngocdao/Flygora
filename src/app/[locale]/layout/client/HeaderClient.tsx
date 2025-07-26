@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import LanguageSwitcher from "@/components/Clients/ui/LanguageSwitcher";
 import SearchHeader from "@/components/Clients/ui/SearchHeader";
-import FullScreenMenu from "./FullScreenMenu"; // Import menu gốc
+import FullScreenMenu from "./FullScreenMenu";
 
 const HeaderGotravel: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
@@ -55,20 +55,14 @@ const HeaderGotravel: React.FC = () => {
     <div>
       <header>
         <div
-          className={`fixed top-0 left-0 z-[1000] flex items-center w-full duration-700 ease-in-out header-wrapper ${
-            isScrolled
-              ? "h-[50px] lg:h-[60px] bg-[#34430f] shadow-lg backdrop-blur-sm"
-              : "h-[70px] lg:h-24 max-lg:bg-[#34430f]"
-          }`}
+          className={`fixed top-0 left-0 z-[1000] flex items-center w-full duration-700 ease-in-out header-wrapper
+    ${
+      isScrolled
+        ? "md:h-[60px] md:bg-[#34430f] md:shadow-lg md:backdrop-blur-sm md:transition-all md:duration-500"
+        : "md:h-24 md:transition-all md:duration-500"
+    }
+    h-[70px] max-md:bg-[#34430f]`}
         >
-          {/* Background overlay khi scroll */}
-          {isScrolled && (
-            <div className="absolute inset-0 w-full h-full opacity-20">
-              <div className="w-full h-full bg-gradient-to-r from-green-900/30 via-primary-900/50 to-green-800/30"></div>
-              <div className="absolute inset-0 w-full h-full bg-amber-300 mix-blend-overlay opacity-30"></div>
-            </div>
-          )}
-
           <div className="relative z-50 w-full">
             <div className="container">
               <div className="flex items-center justify-between w-full">
@@ -101,12 +95,10 @@ const HeaderGotravel: React.FC = () => {
                   </svg>
                 </button>
 
-                {/* Mobile menu button */}
+                {/* Mobile menu button - Kích thước cố định không thay đổi khi scroll */}
                 <div className="md:hidden ml-4">
                   <button
-                    className={`text-[#eef4b7] transition-all duration-300 hover:text-white ${
-                      isScrolled ? "w-7" : "w-8"
-                    }`}
+                    className="text-[#eef4b7] transition-all duration-300 hover:text-white w-8"
                     onClick={toggleMenu}
                     aria-label={isMenuOpen ? "Đóng menu mobile" : "Mở menu mobile"}
                   >
@@ -129,8 +121,8 @@ const HeaderGotravel: React.FC = () => {
                       </svg>
                     ) : (
                       <svg
-                        width={isScrolled ? "28" : "32"}
-                        height={isScrolled ? "28" : "32"}
+                        width="32"
+                        height="32"
                         viewBox="0 0 32 32"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
@@ -156,34 +148,52 @@ const HeaderGotravel: React.FC = () => {
                 <div>
                   <Link href="/vi" aria-current="page">
                     <div className="relative w-full">
-                      <div
-                        className={`duration-500 ease-in-out xl:max-w-[265px] md:max-w-[186px] max-w-[170px] ${
-                          isScrolled ? "scale-100 opacity-0" : "scale-100 opacity-100"
-                        }`}
-                      >
-                        <Image
-                          className="xl:max-w-[180px] md:max-w-[160px] max-w-[180px]"
-                          src="/images/homePage/logo.webp"
-                          alt="Jungle Boss Logo"
-                          width={180}
-                          height={60}
-                          priority
-                          loading="eager"
-                        />
+                      {/* Desktop: Logic cũ với 2 logo fade in/out */}
+                      <div className="hidden md:block">
+                        <div
+                          className={`duration-500 ease-in-out xl:max-w-[265px] md:max-w-[186px] ${
+                            isScrolled ? "scale-100 opacity-0" : "scale-100 opacity-100"
+                          }`}
+                        >
+                          <Image
+                            className="xl:max-w-[180px] md:max-w-[160px]"
+                            src="/images/homePage/logo.webp"
+                            alt="Jungle Boss Logo"
+                            width={180}
+                            height={60}
+                            priority
+                            loading="eager"
+                          />
+                        </div>
+                        <div
+                          className={`absolute flex items-center justify-center w-full mx-auto duration-1000 ease-in-out -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 ${
+                            isScrolled ? "scale-100 opacity-100" : "scale-0 opacity-0"
+                          }`}
+                        >
+                          <Image
+                            className="xl:max-w-[50px] md:max-w-[60px]"
+                            src="/images/homePage/logo-mobile.webp"
+                            alt="Jungle Boss Mobile Logo"
+                            width={50}
+                            height={50}
+                            priority
+                          />
+                        </div>
                       </div>
-                      <div
-                        className={`absolute flex items-center justify-center w-full mx-auto duration-1000 ease-in-out -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 ${
-                          isScrolled ? "scale-100 opacity-100" : "scale-0 opacity-0"
-                        }`}
-                      >
-                        <Image
-                          className="xl:max-w-[50px] md:max-w-[60px] max-w-[40px]"
-                          src="/images/homePage/logo-mobile.webp"
-                          alt="Jungle Boss Mobile Logo"
-                          width={50}
-                          height={50}
-                          priority
-                        />
+
+                      {/* Mobile: Logo đơn giản với kích thước cố định */}
+                      <div className="block md:hidden">
+                        <div className="max-w-[180px]">
+                          <Image
+                            className="max-w-[180px]"
+                            src="/images/homePage/logo.webp"
+                            alt="Jungle Boss Logo"
+                            width={180}
+                            height={60}
+                            priority
+                            loading="eager"
+                          />
+                        </div>
                       </div>
                     </div>
                   </Link>
