@@ -95,12 +95,12 @@ const AddUserModal = forwardRef<AddUserModalRef, AddUserModalProps>(
       watch,
       reset,
       trigger,
-    } = useForm<AddUserFormData>({
+    } = useForm<any>({
       resolver: zodResolver(addUserSchema),
       defaultValues: {
         name: "",
         email: "",
-        role: "admin", // Fix: Provide default value instead of undefined
+        role: "seo",
         status: "active",
         password: "",
         confirmPassword: "",
@@ -123,7 +123,7 @@ const AddUserModal = forwardRef<AddUserModalRef, AddUserModalProps>(
         reset({
           name: "",
           email: "",
-          role: "admin", // Fix: Provide default value instead of undefined
+          role: "seo",
           status: "active",
           password: "",
           confirmPassword: "",
@@ -133,15 +133,15 @@ const AddUserModal = forwardRef<AddUserModalRef, AddUserModalProps>(
       },
     }));
 
-    // Xử lý submit form
+    //handle form submission
     const onSubmit = async (data: AddUserFormData) => {
       setIsLoading(true);
       try {
-        await onSave(data); // Fix: Add await if onSave is async
+        onSave(data);
         reset({
           name: "",
           email: "",
-          role: "admin", // Fix: Provide default value instead of undefined
+          role: "seo",
           status: "active",
           password: "",
           confirmPassword: "",
@@ -161,7 +161,7 @@ const AddUserModal = forwardRef<AddUserModalRef, AddUserModalProps>(
         reset({
           name: "",
           email: "",
-          role: "admin", // Fix: Provide default value instead of undefined
+          role: "seo",
           status: "active",
           password: "",
           confirmPassword: "",
@@ -240,8 +240,8 @@ const AddUserModal = forwardRef<AddUserModalRef, AddUserModalProps>(
                     Họ và tên <span className="text-red-500">*</span>
                   </Label>
                   <Input id="name" placeholder="Nhập họ và tên" {...register("name")} />
-                  {errors.name && (
-                    <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+                  {errors.name?.message && (
+                    <p className="text-red-500 text-sm mt-1">{String(errors.name.message)}</p>
                   )}
                 </div>
 
@@ -257,7 +257,7 @@ const AddUserModal = forwardRef<AddUserModalRef, AddUserModalProps>(
                     {...register("email")}
                   />
                   {errors.email && (
-                    <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+                    <p className="text-red-500 text-sm mt-1">{String(errors.email.message)}</p>
                   )}
                 </div>
               </div>
@@ -288,7 +288,7 @@ const AddUserModal = forwardRef<AddUserModalRef, AddUserModalProps>(
                     </SelectContent>
                   </Select>
                   {errors.role && (
-                    <p className="text-red-500 text-sm mt-1">{errors.role.message}</p>
+                    <p className="text-red-500 text-sm mt-1">{String(errors.role.message)}</p>
                   )}
                 </div>
 
@@ -312,7 +312,7 @@ const AddUserModal = forwardRef<AddUserModalRef, AddUserModalProps>(
                     </SelectContent>
                   </Select>
                   {errors.status && (
-                    <p className="text-red-500 text-sm mt-1">{errors.status.message}</p>
+                    <p className="text-red-500 text-sm mt-1">{String(errors.status.message)}</p>
                   )}
                 </div>
               </div>
@@ -347,7 +347,7 @@ const AddUserModal = forwardRef<AddUserModalRef, AddUserModalProps>(
                     </Button>
                   </div>
                   {errors.password && (
-                    <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
+                    <p className="text-red-500 text-sm mt-1">{String(errors.password.message)}</p>
                   )}
                 </div>
 
@@ -379,7 +379,9 @@ const AddUserModal = forwardRef<AddUserModalRef, AddUserModalProps>(
                     </Button>
                   </div>
                   {errors.confirmPassword && (
-                    <p className="text-red-500 text-sm mt-1">{errors.confirmPassword.message}</p>
+                    <p className="text-red-500 text-sm mt-1">
+                      {String(errors.confirmPassword.message)}
+                    </p>
                   )}
                 </div>
               </div>

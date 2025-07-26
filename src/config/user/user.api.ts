@@ -54,3 +54,28 @@ export async function addUserApi(
   });
   return data;
 }
+
+/* Edit user */
+export async function editUserApi(
+  id: string,
+  name: string,
+  email: string,
+  role: "admin" | "seo",
+  status: "active" | "inactive"
+) {
+  const { data } = await axiosInstance.put<ApiResponse<{ id: string }>>(`/user/admin/users/${id}`, {
+    name,
+    email,
+    role,
+    status,
+  });
+  return data;
+}
+
+/* Get detail user */
+export async function getDetailUserApi(id: string) {
+  const { data } = await axiosInstance.get<ApiResponse<GetAllUserResponse>>(
+    `/user/admin/users/${id}`
+  );
+  return data;
+}

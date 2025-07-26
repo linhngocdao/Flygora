@@ -14,4 +14,3 @@ Host: https://www.flygora.com
 
 # Sitemaps
 Sitemap: https://www.flygora.com/sitemap.xml
-Sitemap: https://flygora.vn/sitemap.xml

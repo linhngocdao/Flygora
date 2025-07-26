@@ -24,9 +24,11 @@ import {
 } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
+  addUserApi,
   changePasswordUserApi,
   changeStatusUser,
   deleteUser,
+  editUserApi,
   getAllUser,
 } from "@/config/user/user.api";
 import { useDebounce } from "@/hooks/useDebounce";
@@ -94,9 +96,9 @@ const UserManager = () => {
   }, [debouncedSearch]);
 
   // Fetch users data
-  const { data, isLoading } = useQuery({
+  const { data, isLoading } = useQuery<any>({
     queryKey: ["users", filters],
-    queryFn: () => getAllUser(filters),
+    queryFn: () => getAllUser(filters as any),
   });
 
   // Calculate statistics from real data
@@ -164,6 +166,39 @@ const UserManager = () => {
     },
   });
 
+  //Mutation to add new user
+  const { mutate: addUser } = useMutation({
+    mutationFn: async (newUserData: any) => {
+      const { name, email, password, role } = newUserData;
+      return await addUserApi(name, email, password, role);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["users"] });
+      toast.success("Đã thêm user mới thành công!");
+      setIsAddModalOpen(false);
+    },
+    onError: (error: any) => {
+      toast.error(error?.response?.data?.message);
+    },
+  });
+
+  // Mutation to edit user
+  const { mutate: editUser } = useMutation({
+    mutationFn: async (updatedUserData: any) => {
+      const { id, name, email, role, status } = updatedUserData;
+      return await editUserApi(id, name, email, role, status);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["users"] });
+      toast.success("Cập nhật người dùng thành công!");
+      setIsEditModalOpen(false);
+      setSelectedUser(null);
+    },
+    onError: (error: any) => {
+      toast.error(error?.response?.data?.message);
+    },
+  });
+
   const handlePageChange = (newPage: number) => {
     setFilters((prev) => ({
       ...prev,
@@ -225,10 +260,8 @@ const UserManager = () => {
 
   // Modal handlers
   const handleAddUser = (newUserData: any) => {
-    // setIsAddModalOpen(false);
-    // queryClient.invalidateQueries({ queryKey: ["users"] });
-    // toast.success("Đã thêm user mới thành công!");
-    console.log(newUserData);
+    addUser(newUserData);
+    setIsAddModalOpen(false);
   };
 
   const handleEditUser = (user: GetAllUserResponse) => {
@@ -237,10 +270,9 @@ const UserManager = () => {
   };
 
   const handleSaveEditUser = (updatedUser: any) => {
+    editUser(updatedUser);
     setIsEditModalOpen(false);
     setSelectedUser(null);
-    queryClient.invalidateQueries({ queryKey: ["users"] });
-    toast.success("Đã cập nhật user thành công!");
   };
 
   const handleChangePassword = (user: GetAllUserResponse) => {
@@ -511,7 +543,7 @@ const UserManager = () => {
                   </td>
                 </tr>
               ) : (
-                users.map((user) => (
+                users.map((user: any) => (
                   <tr key={user.id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
