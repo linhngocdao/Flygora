@@ -74,8 +74,6 @@ module.exports = {
         disallow: ["/admin"], // Google có thể crawl api nhưng không crawl admin
       },
     ],
-    additionalSitemaps: [
-      "https://gotravel.vn/sitemap.xml", // Sitemap chính
-    ],
+    additionalSitemaps: ["https://www.flygora.com/sitemap.xml"],
   },
 };
