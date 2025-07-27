@@ -59,7 +59,7 @@ const SubscribeBanner = () => {
   };
 
   return (
-    <section className="email-signup mb-8 lg:mb-16 md:mb-12 pt-12">
+    <section className="email-signup mb-8 lg:mb-16 md:mb-12">
       <div className="container">
         <div
           className="lg:p-8 p-6 bg-cover rounded-lg"

@@ -1,24 +1,24 @@
 {
-  "hello": "Hello",
+  "hello": "hello",
   "backtoHome": "Back to Home",
   "search": {
     "searchPlaceholder": "Enter search keywords...",
     "title": "Search",
     "suggestions": "Search suggestions",
     "experience": "Experience",
-    "popularSearches": "Popular Searches",
+    "popularSearches": "Popular searches",
     "popularKeywords": {
       "sapa": "Sapa",
-      "halong": "Ha Long Bay",
+      "halong": "Ha Long",
       "phuquoc": "Phu Quoc",
       "dalat": "Da Lat",
       "northernTour": "Northern Tour",
-      "ecotourism": "Eco Tourism"
+      "ecotourism": "Ecotourism"
     }
   },
   "tourSlider": {
     "tourImage": "Tour image",
-    "tourName": "Tra Ang Excursion 1D",
+    "tourName": "Tra Ang 1 Day Tour",
     "duration": "1 day",
     "price": "VND {amount}",
     "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo neque cum, possimus deb"
@@ -30,78 +30,54 @@
     "on": "on",
     "viewReviews": "View {count} reviews",
     "description": {
-      "intro": "We offer exclusive cave exploration and jungle treks for small groups and jungle style team building activities in the UNESCO-listed Phong Nha-Ke Bang National Park and surrounding areas, including our newest tour to",
-      "doQueen": "Conquering Do Queen Waterfall",
-      "highest": "– the highest waterfall in South East Asia, and the legendary",
+      "intro": "We provide exclusive cave exploration and jungle mountain climbing tours for small groups and tropical forest-style team building activities in the UNESCO-recognized Phong Nha-Ke Bang National Park and surrounding areas, including our latest tour to",
+      "doQueen": "Conquer Do Quyen Waterfall",
+      "highest": "– the highest waterfall in Southeast Asia, and the legendary",
       "kongCollapse": "Kong Collapse",
       "deepest": "– one of the deepest sinkholes on the planet."
     },
-    "aboutUsButton": "About Us"
+    "aboutUsButton": "About us"
   },
   "heroSection": {
     "findYourTrip": "Find your trip",
     "tour": "Tour",
     "chooseYourTour": "Choose your tour",
-    "bookingDate": "Booking Date",
+    "bookingDate": "Booking date",
     "datePlaceholder": "--/--/--",
-    "participant": "Participant",
-    "participantPlaceholder": "--- pax"
+    "participant": "Participants",
+    "participantPlaceholder": "--- people"
   },
   "safetyCommitment": {
-    "title": "Safety In Adventure Tours",
-    "quote": "Your safety is our priority",
-    "description": "Jungle Boss has established strategic collaborations with esteemed organizations like the British Caves Research Association, National Speleological Society, and Vietnam Swimming & Life Saving. These partnerships aim to elevate Jungle Boss employees proficiency in caving techniques and rescue operations. Through an extensive training regimen, inclusive of tour guides, safety assistants, and the porter team, Jungle Boss ensures their readiness to tackle potential challenges. Notably, all Jungle Boss crew members and guests receive high-quality European-standard safety gear, prioritizing their safety throughout the adventure. Stringent maintenance protocols are consistently applied to all safety equipment housed within the caves and at the technical store. This proactive approach minimizes potential risks, upholding the highest safety standards. Specifically designed for the Kong Collapse Top Adventure, Jungle Boss has collaborated with global organizations to institute a comprehensive Safety Process. This meticulously crafted process has received official endorsement from the Quang Binh People Committee, validating its reliability and unwavering commitment to safety.",
-    "buttonText": "Environment Protection & Survival Rules"
+    "title": "Safety in adventure tours",
+    "quote": "Your safety is our top priority",
+    "description": "Jungle Boss has established strategic partnerships with prestigious organizations such as the British Cave Research Association, National Speleological Association, and Vietnam Swimming & Rescue. These partnerships aim to enhance the expertise of Jungle Boss staff in cave exploration techniques and rescue operations. Through a comprehensive training program, including tour guides, safety assistants and porter teams, Jungle Boss ensures readiness to deal with potential challenges. Notably, all Jungle Boss team members and guests are equipped with high-quality safety equipment to European standards, prioritizing their safety throughout the adventure. Strict maintenance protocols are consistently applied to all safety equipment stored in caves and at the technical shop. This proactive approach minimizes potential risks, maintaining the highest safety standards. Specially designed for Kong Collapse Top Adventure, Jungle Boss has partnered with global organizations to establish a comprehensive Safety Protocol. This meticulously crafted protocol has received official endorsement from the Quang Binh People's Committee, confirming reliability and unwavering commitment to safety.",
+    "buttonText": "Environmental Protection & Survival Rules"
   },
   "teamBuilding": {
-    "title": "Team Building Tour",
-    "subtitle": "Jumpstart Team Synergy with Exhilarating Challenges",
+    "title": "Team Building Tours",
+    "subtitle": "Kickstart team collaboration with exciting challenges",
     "description": {
-      "paragraph1": "Immerse your team in an unparalleled adventure amid the awe-inspiring jungles of Phong Nha – Ke Bang National Park. Jungle Boss Team building is a transformative journey marked by unique and challenging games, setting us apart from the conventional team building landscape in Vietnam. Escape the mundane and seize the extraordinary as your team engages in missions that demand collaboration, creativity, and camaraderie. Our jungle setting serves as the ultimate canvas for fostering teamwork, creating an atmosphere that is not only thrilling but also indelibly unforgettable.",
-      "paragraph2": "Embrace a one-of-a-kind adventure with us – a promise to not only fortify your team bonds but also create lasting memories of an exceptionally extraordinary experience. At Jungle Boss, we redefine team building, making it an immersive and thrilling escapade that transcends the ordinary, leaving an enduring mark on your team collective journey. There are different team building options from 1 day to multiple days. Leave us a request and we can help you tailor a unique Jungle Team building that suits your needs!"
+      "paragraph1": "Immerse your team in an unparalleled adventure among the stunning forests of Phong Nha - Ke Bang National Park. Jungle Boss team building is a transformative journey marked by unique and challenging games, setting us apart from conventional team building contexts in Vietnam. Escape the mundane and embrace the extraordinary as your team engages in missions requiring cooperation, creativity and camaraderie. Our jungle setting serves as the perfect canvas to foster team spirit, creating an atmosphere that is not only fun but also unforgettable.",
+      "paragraph2": "Experience a one-of-a-kind adventure with us – a promise that not only strengthens team relationships but also creates lasting memories of an extraordinarily special experience. At Jungle Boss, we redefine team building, turning it into an enchanting and exciting adventure that transcends the ordinary, leaving a lasting mark on your group's collective journey. There are various team building options from 1 day to multiple days. Leave your requirements with us and we can help you design a unique Jungle Team building that suits your needs!"
     }
   },
   "guestReview": {
     "title": "Jungle Boss Travelodge",
-    "subtitle": "A wonderful stopover when visiting Phong Nha - Ke Bang",
-    "description": "Nestled amidst the immense rice fields of the Phong Nha - Ke Bang region, Jungle Boss Travelodge is an ideal place for you to unwind during your Quang Binh travels. This destination offers cozy accommodations with a full range of amenities, including a swimming pool, bar, BBQ area, high-speed Wi-Fi, and complimentary bicycles. Come here to experience peaceful, dreamy moments in the land of heritage.",
+    "subtitle": "A great stopover when visiting Phong Nha - Ke Bang",
+    "description": "Nestled among the vast rice fields of Phong Nha - Ke Bang region, Jungle Boss Travelodge is the ideal place for you to relax throughout your Quang Binh trip. This destination provides cozy accommodation with full amenities, including swimming pool, bar, BBQ area, high-speed Wi-Fi and free bicycles. Come here to experience peaceful, dreamy moments on this heritage land.",
     "exploreButton": "Explore"
   },
   "featuredTour": {
-    "title": "Top Adventure Tour",
+    "title": "Top adventure tours",
     "tourName": "Kong Collapse Top Adventure 5D4N",
     "duration": "Duration",
     "durationValue": "5 days 4 nights",
-    "participant": "Participant",
-    "participantValue": "Up to 10 pax",
+    "participant": "Participants",
+    "participantValue": "Maximum 10 people",
     "difficulty": "Difficulty",
-    "difficultyValue": "Level 7 - Extremely Strenuous",
-    "departureDay": "Departure Day",
+    "difficultyValue": "Level 7 - Extremely difficult",
+    "departureDay": "Departure day",
     "departureDayValue": "Tuesday, Friday"
-  },
-  "moreSupportive": {
-    "title": "More Supportive",
-    "subtitle": "FIND THE HELPFUL LINKS YOU NEED",
-    "description": "Contact our friendly support experts via email, dedicated hotlines, or central locations",
-    "office": {
-      "title": "VISIT OUR OFFICE",
-      "description": "Visit the Jungle Boss headquarters and meet our team",
-      "address": "Phong Nha Town, Bo Trach District, Quang Binh Province, Vietnam",
-      "button": "Get Direction"
-    },
-    "support": {
-      "title": "REQUEST SUPPORT",
-      "description": "Have questions? Drop us an email",
-      "email": "contact@junglebosstours.com",
-      "button": "Send Email"
-    },
-    "call": {
-      "title": "CALL US TODAY",
-      "description": "Give us a call for quick question",
-      "phone1": "(+84) 917 800 805",
-      "phone2": "(+84) 859 100 222",
-      "button": "Call Hotline"
-    }
   },
   "policy": {
     "banner": {
@@ -109,243 +85,268 @@
     }
   },
   "subscribe": {
-    "title": "Sign up for Jungle Boss updates",
-    "description": "Get the latest information about our tours and special offers!",
+    "title": "Subscribe to receive information from Jungle Boss",
+    "description": "Get the latest information about tours and special offers!",
     "form": {
       "emailPlaceholder": "Enter your email",
-      "submit": "Sign Up",
-      "submitting": "Waiting...",
+      "submit": "Subscribe",
+      "submitting": "Processing...",
       "successMessage": "Successfully subscribed! Thank you for your interest.",
       "validation": {
-        "emailRequired": "Email is required",
+        "emailRequired": "Please enter email address",
         "emailInvalid": "Invalid email address"
       }
     }
   },
   "contact": {
     "title": "CONTACT US",
-    "keepInTouch": "Keep in Touch",
+    "keepInTouch": "Keep in touch",
     "connectWithJungleBoss": "CONNECT WITH JUNGLE BOSS",
-    "infoAboutTours": "You want to get information about Jungle Boss tours.",
-    "fillFormBelow": "Don't hesitate provide your details by filling out the form below.",
+    "infoAboutTours": "You want to know information about Jungle Boss tours.",
+    "fillFormBelow": "Don't hesitate to provide your details by filling out the form below.",
     "form": {
-      "firstName": "First Name",
-      "firstNamePlaceholder": "Enter First Name",
-      "firstNameRequired": "First name is required",
+      "firstName": "First name",
+      "firstNamePlaceholder": "Enter your first name",
+      "firstNameRequired": "Please enter first name",
 
-      "lastName": "Last Name",
-      "lastNamePlaceholder": "Enter Last Name",
-      "lastNameRequired": "Last name is required",
+      "lastName": "Last name",
+      "lastNamePlaceholder": "Enter your last name",
+      "lastNameRequired": "Please enter last name",
 
       "email": "Email",
-      "emailPlaceholder": "Enter Email",
+      "emailPlaceholder": "Enter email address",
       "emailInvalid": "Please enter a valid email address",
 
-      "mobilePhone": "Mobile Phone",
-      "phoneNumberPlaceholder": "Enter Mobile Phone",
-      "phoneNumberRequired": "Phone number is required",
-      "phonePrefixRequired": "Please select a country code",
+      "mobilePhone": "Phone number",
+      "phoneNumberPlaceholder": "Enter phone number",
+      "phoneNumberRequired": "Please enter phone number",
+      "phonePrefixRequired": "Please select country code",
 
       "message": "Message",
-      "messagePlaceholder": "Enter your requires or any information about our tours.",
+      "messagePlaceholder": "Enter your request or any information about our tours.",
 
       "select": "Select",
       "search": "Search",
-      "allCountries": "All Countries",
+      "allCountries": "All countries",
 
-      "sendRequest": "Send Request",
+      "sendRequest": "Send request",
       "sending": "Sending...",
 
-      "submitSuccess": "Thank you for your message! We'll get back to you shortly.",
-      "submitError": "Sorry, there was an error submitting your form. Please try again.",
-
-      "moreSupportive": {
-        "title": "More Supportive",
-        "subtitle": "FIND THE HELPFUL LINKS YOU NEED",
-        "description": "Contact our friendly support experts via email, dedicated hotlines, or central locations",
-        "office": {
-          "title": "VISIT OUR OFFICE",
-          "description": "Visit the Jungle Boss headquarters and meet our team",
-          "address": "Phong Nha Town, Bo Trach District, Quang Binh Province, Vietnam",
-          "button": "Get Direction"
-        },
-        "support": {
-          "title": "REQUEST SUPPORT",
-          "description": "Have questions? Drop us an email",
-          "email": "contact@junglebosstours.com",
-          "button": "Send Email"
-        },
-        "call": {
-          "title": "CALL US TODAY",
-          "description": "Give us a call for quick question",
-          "phone1": "(+84) 917 800 805",
-          "phone2": "(+84) 859 100 222",
-          "button": "Call Hotline"
-        }
+      "submitSuccess": "Thank you for sending your message! We will contact you as soon as possible.",
+      "submitError": "Sorry, an error occurred while sending the form. Please try again."
+    },
+    "moreSupportive": {
+      "title": "Additional support",
+      "subtitle": "FIND THE USEFUL LINKS YOU NEED",
+      "description": "Contact our friendly support experts via email, dedicated hotline or central location",
+      "office": {
+        "title": "VISIT OUR OFFICE",
+        "description": "Visit Jungle Boss headquarters and meet our team",
+        "address": "Phong Nha Town, Bo Trach District, Quang Binh Province, Vietnam",
+        "button": "Get directions"
+      },
+      "support": {
+        "title": "REQUEST SUPPORT",
+        "description": "Have questions? Send us an email",
+        "email": "contact@junglebosstours.com",
+        "button": "Send email"
+      },
+      "call": {
+        "title": "CALL US TODAY",
+        "description": "Call us for quick answers",
+        "phone1": "(+84) 917 800 805",
+        "phone2": "(+84) 859 100 222",
+        "button": "Call hotline"
       }
     }
   },
-  "faq": {
-    "title": "Frequently Asked Questions",
-    "categories": {
-      "security-management": {
-        "title": "Security & Management",
-        "items": {
-          "thunderstorms-lightning": {
-            "question": "How to avoid thunderstorms & lightning during the tour?",
-            "answer": "We constantly monitor weather conditions and have established safety protocols. Tours may be postponed or rescheduled if dangerous weather conditions are predicted. Our guides are trained to recognize weather patterns and will move groups to safe areas if needed."
-          },
-          "departure-cancellation": {
-            "question": "If I can change the departure date or cancel the tour, what are the policies?",
-            "answer": "Cancellation policies vary by tour type and timing. Generally, cancellations made 48+ hours in advance receive a full refund, 24-48 hours receive 50% refund, and less than 24 hours receive no refund. Weather-related cancellations always receive full refund or reschedule options."
-          },
-          "join-cannot-swim": {
-            "question": "Am I allowed to join tours if I can not swim?",
-            "answer": "Yes, you can join most tours even if you cannot swim. We provide life jackets for all water activities and have trained guides to assist. However, some advanced water-based tours may require basic swimming skills, which will be clearly indicated in tour descriptions."
-          },
-          "skills-needed": {
-            "question": "What kind of skills do I need to have?",
-            "answer": "Most tours are designed for beginners and require no special skills. Basic fitness levels and willingness to follow safety instructions are typically sufficient. Advanced tours will specify required skills in their descriptions."
-          },
-          "adventure-levels": {
-            "question": "What are the different levels of Adventure tours?",
-            "answer": "We offer tours from Level 1 (Beginner - suitable for families) to Level 5 (Expert - requiring advanced skills). Each tour is clearly marked with its difficulty level, duration, and physical requirements."
-          }
-        }
-      },
-      "general-faq": {
-        "title": "General FAQ",
-        "items": {
-          "chemical-shampoo": {
-            "question": "Am I allowed to use chemical shampoo?",
-            "answer": "We encourage the use of biodegradable, eco-friendly shampoos to protect the natural environment. Chemical shampoos can harm local ecosystems, especially near water sources. We can recommend suitable alternatives."
-          },
-          "shower-place": {
-            "question": "Is the a place for showers during the tours?",
-            "answer": "Shower facilities vary by tour type. Day tours typically don't include shower facilities, while overnight tours often include basic washing areas or access to natural swimming spots. Check your specific tour details."
-          },
-          "toilet-facilities": {
-            "question": "Is there any toilet during the tours?",
-            "answer": "Basic toilet facilities or designated areas are available on most tours. For wilderness tours, we practice Leave No Trace principles and provide guidance on proper waste disposal."
-          },
-          "food-provided": {
-            "question": "What kind of food provided during the tours?",
-            "answer": "We provide nutritious local cuisine including Vietnamese specialties, fresh fruits, and energy-rich snacks. Vegetarian options are available with advance notice. All food is prepared following hygiene standards."
-          },
-          "bring-camping-gear": {
-            "question": "Do I have to bring my own caving gears and camping gears?",
-            "answer": "All necessary safety equipment including helmets, headlamps, ropes, and camping gear are provided. You only need to bring personal items like clothing, toiletries, and any specific personal preferences."
-          }
-        }
-      },
-      "tour-information": {
-        "title": "Tour Information",
-        "items": {
-          "what-to-notice": {
-            "question": "What should I notice during the tours?",
-            "answer": "Follow your guide's instructions at all times, stay with the group, wear provided safety equipment, respect local customs and environment, stay hydrated, and inform guides of any health concerns immediately."
-          },
-          "leeches-jungle": {
-            "question": "Are there leeches in the jungle?",
-            "answer": "Leeches may be present in some jungle areas, especially during rainy season. We provide guidance on prevention and removal. They're harmless but can be prevented with proper clothing and repellent."
-          },
-          "medical-condition": {
-            "question": "What if I have a medical condition? Can I still join the tour?",
-            "answer": "Please inform us of any medical conditions when booking. Our guides are first-aid trained, and we can accommodate many conditions with proper preparation. Some severe conditions may prevent participation for safety reasons."
-          },
-          "what-to-pack": {
-            "question": "What should I pack on the tours?",
-            "answer": "Pack lightweight, quick-dry clothing, sturdy hiking boots, rain gear, sunscreen, insect repellent, personal toiletries, any medications, and a waterproof bag for electronics. We'll provide a detailed packing list upon booking."
-          }
-        }
-      },
-      "policy": {
-        "title": "Policy",
-        "items": {
-          "bad-weather-cancellation": {
-            "question": "What happens if bad weather causes a tour cancellation?",
-            "answer": "If weather conditions are deemed unsafe, tours will be cancelled or postponed. You'll receive a full refund or the option to reschedule. Safety is our top priority, and we monitor weather conditions continuously."
-          },
-          "payment-booking": {
-            "question": "When do I need to make full payment to confirm my one-day tour booking?",
-            "answer": "Full payment is required at least 24 hours before the tour date for day tours. For multi-day tours, a 50% deposit secures your booking with full payment due 48 hours before departure."
-          },
-          "change-departure-date": {
-            "question": "If I can change the departure date or cancel the tour, what are the policies?",
-            "answer": "Changes to departure dates are subject to availability and may incur fees. Cancellation policies: 48+ hours = full refund, 24-48 hours = 50% refund, less than 24 hours = no refund. Weather cancellations always receive full refund."
-          }
-        }
-      }
-    },
-    "preTitle": "Answers Await",
-    "newTitle": "Frequently Asked Question",
-    "subtitle": "Important information for your trip",
-    "contactButton": "Contact Us",
-    "question1": "What happens if bad weather causes a tour cancellation?",
-    "answer1": "If we have to cancel a tour due to weather, we will inform you as soon as possible and provide alternative options without extra costs, such as an alternate tour, new date, or a full refund.",
-    "question2": "How to avoid thunderstorms & lightning during the tours?",
-    "answer2": "We acknowledge the potential risks associated with thunderstorms and lightning strikes and have strict safety protocols. We continuously monitor weather conditions and will postpone or relocate tours if there's any risk.",
-    "question3": "Is there any toilet during the tours?",
-    "answer3": "Jungle Boss uses composting toilets for all adventure tours. They are environmentally friendly and regularly maintained to ensure hygiene.",
-    "question4": "What kind of food provided during the tours?",
-    "answer4": "During our tours, Jungle Boss offers a diverse range of Vietnamese-style food options including local specialties, fresh fruits, and nutritious snacks.",
-    "question5": "Do I have to bring my own caving gears and camping gears?",
-    "answer5": "You don't need to bring your own caving or camping gear as Jungle Boss provides all necessary safety equipment including helmets, headlamps, and ropes.",
-    "question6": "Am I allowed to join tours if I can not swim?",
-    "answer6": "Absolutely, you will be provided with a life jacket for your safety during the adventure. Our guides are trained to assist non-swimmers.",
-    "question7": "What kind of skills do I need to have?",
-    "answer7": "While having prior caving, hiking, and camping experience can be advantageous, it's not mandatory. Our tours are designed for all skill levels.",
-    "question8": "What are the different levels of Adventure tours?",
-    "answer8": "Our tours span a spectrum from relaxed to highly adventurous, ranging from Level 1 (Family-friendly) to Level 5 (Expert - requiring advanced skills)."
-  },
   "footerIntro": {
-    "description": "Discover the Enchantment of Phong Nha-Ke Bang: Unveiling mythical caves, ancient forests, and tranquil turquoise rivers. Embark on a Jungle Boss adventure to experience this enthralling wonderland, immerse yourself in local culture, and join us in preserving the natural wonders."
+    "description": "Discover the enchantment of Phong Nha-Ke Bang: Unveil legendary caves, ancient forests and crystal-clear rivers. Start your Jungle Boss adventure to experience this enchanting wonderland, immerse yourself in local culture and join us in preserving natural wonders."
+  },
+  "faq": {
+    "preTitle": "Answers are waiting",
+    "title": "Frequently Asked Questions",
+    "newTitle": "Frequently Asked Questions",
+    "subtitle": "Important information for your trip",
+    "contactButton": "Contact us",
+    "question1": "What happens if bad weather causes tour cancellation?",
+    "answer1": "If we have to cancel a tour due to weather, we will notify you as soon as possible and provide alternative options at no additional cost, such as alternative tours, new dates or full refunds.",
+    "question2": "How to avoid storms and lightning in tours?",
+    "answer2": "We are aware of the potential risks associated with storms and lightning and have strict safety procedures. We continuously monitor weather conditions and will postpone or relocate tours if there is a risk.",
+    "question3": "Are there toilets in the tours?",
+    "answer3": "Jungle Boss uses compost toilets for all adventure tours. They are environmentally friendly and regularly maintained to ensure hygiene.",
+    "question4": "What type of food is provided in the tours?",
+    "answer4": "In our tours, Jungle Boss provides a variety of Vietnamese food including local specialties, fresh fruits and nutritious snacks.",
+    "question5": "Do I need to bring my own cave exploration and camping gear?",
+    "answer5": "You don't need to bring your own cave exploration or camping gear as Jungle Boss provides all necessary safety equipment including helmets, flashlights and ropes.",
+    "question6": "Am I allowed to join the tour if I can't swim?",
+    "answer6": "Absolutely, you will be provided with life jackets to ensure safety during the adventure. Our guides are trained to assist non-swimmers.",
+    "question7": "What skills do I need?",
+    "answer7": "While prior experience in cave exploration, hiking and camping may be beneficial, it is not required. Our tours are designed for all skill levels.",
+    "question8": "What are the different levels of adventure tours?",
+    "answer8": "Our tours range from relaxing to extremely adventurous, from Level 1 (Family-friendly) to Level 5 (Expert - requiring advanced skills).",
+    "oldFaq": {
+      "title": "Frequently Asked Questions",
+      "categories": {
+        "security-management": {
+          "title": "Security & Management",
+          "items": {
+            "thunderstorms-lightning": {
+              "question": "How to avoid storms and lightning in tours?",
+              "answer": "We continuously monitor weather conditions and have established safety procedures. Tours may be postponed or rescheduled if dangerous weather conditions are forecast. Our guides are trained to recognize weather patterns and will move the group to a safe area if necessary."
+            },
+            "departure-cancellation": {
+              "question": "If I can change the departure date or cancel the tour, what are the policies?",
+              "answer": "Tour cancellation policies vary depending on tour type and timing. Generally, cancellations made 48+ hours in advance receive full refunds, 24-48 hours receive 50% refunds, and less than 24 hours receive no refunds. Weather-related cancellations always receive full refunds or rescheduling options."
+            },
+            "join-cannot-swim": {
+              "question": "Am I allowed to join the tour if I can't swim?",
+              "answer": "Yes, you can join most tours even if you can't swim. We provide life jackets for all water activities and have trained guides to assist. However, some advanced water tours may require basic swimming skills, which will be clearly indicated in the tour description."
+            },
+            "skills-needed": {
+              "question": "What skills do I need?",
+              "answer": "Most tours are designed for beginners and do not require special skills. Basic fitness level and willingness to follow safety instructions are usually sufficient. Advanced tours will specify required skills in their descriptions."
+            },
+            "adventure-levels": {
+              "question": "What are the different levels of adventure tours?",
+              "answer": "We offer tours from Level 1 (Beginner - family-friendly) to Level 5 (Expert - requiring advanced skills). Each tour is clearly marked with difficulty level, duration and physical requirements."
+            }
+          }
+        },
+        "general-faq": {
+          "title": "General FAQ",
+          "items": {
+            "chemical-shampoo": {
+              "question": "Am I allowed to use chemical shampoo?",
+              "answer": "We encourage the use of environmentally friendly, biodegradable shampoos to protect the natural environment. Chemical shampoos can harm local ecosystems, especially near water sources. We can suggest suitable alternatives."
+            },
+            "shower-place": {
+              "question": "Are there shower facilities during the tour?",
+              "answer": "Shower facilities vary depending on tour type. Day tours typically do not include shower facilities, while overnight tours usually include basic washing areas or access to natural swimming spots. Check your specific tour details."
+            },
+            "toilet-facilities": {
+              "question": "Are there toilets during the tour?",
+              "answer": "Basic toilet facilities or designated areas are available on most tours. For wilderness tours, we practice Leave No Trace principles and provide guidance on proper waste disposal."
+            },
+            "food-provided": {
+              "question": "What type of food is provided in the tour?",
+              "answer": "We provide nutritious local cuisine including Vietnamese specialties, fresh fruits and energy-rich snacks. Vegetarian options are available with advance notice. All food is prepared to hygiene standards."
+            },
+            "bring-camping-gear": {
+              "question": "Do I need to bring my own cave gear and camping equipment?",
+              "answer": "All necessary safety equipment including helmets, headlamps, ropes and camping gear are provided. You only need to bring personal items like clothing, toiletries and any specific personal preferences."
+            }
+          }
+        },
+        "tour-information": {
+          "title": "Tour information",
+          "items": {
+            "what-to-notice": {
+              "question": "What should I pay attention to in the tour?",
+              "answer": "Always follow guide instructions, stay with the group, wear provided safety equipment, respect local customs and environment, stay hydrated, and immediately notify guides of any health issues."
+            },
+            "leeches-jungle": {
+              "question": "Are there leeches in the jungle?",
+              "answer": "Leeches may be present in some forest areas, especially during rainy season. We provide guidance on prevention and removal. They are harmless but can be prevented with appropriate clothing and insect repellent."
+            },
+            "medical-condition": {
+              "question": "If I have a medical condition? Can I still join the tour?",
+              "answer": "Please inform us of any medical conditions when booking. Our guides are trained in first aid, and we can accommodate many conditions with proper preparation. Some serious conditions may prevent participation for safety reasons."
+            },
+            "what-to-pack": {
+              "question": "What should I pack for the tour?",
+              "answer": "Pack lightweight, quick-dry clothing, sturdy hiking shoes, rain gear, sunscreen, insect repellent, personal toiletries, any medications, and waterproof bags for electronics. We will provide a detailed packing list when booking."
+            }
+          }
+        },
+        "policy": {
+          "title": "Policy",
+          "items": {
+            "bad-weather-cancellation": {
+              "question": "What happens if bad weather causes tour cancellation?",
+              "answer": "If weather conditions are deemed unsafe, tours will be cancelled or postponed. You will receive a full refund or rescheduling option. Safety is our top priority, and we monitor weather conditions continuously."
+            },
+            "payment-booking": {
+              "question": "When do I need to pay in full to confirm a one-day tour booking?",
+              "answer": "Full payment is required at least 24 hours before the tour date for day tours. For multi-day tours, a 50% deposit secures your booking with full payment due 48 hours before departure."
+            },
+            "change-departure-date": {
+              "question": "If I can change the departure date or cancel the tour, what are the policies?",
+              "answer": "Departure date changes are subject to availability and may incur fees. Cancellation policy: 48+ hours = full refund, 24-48 hours = 50% refund, less than 24 hours = no refund. Weather cancellations always receive full refunds."
+            }
+          }
+        }
+      },
+      "preTitle": "Answers are waiting",
+      "title": "Frequently Asked Questions",
+      "subtitle": "Important information for your trip",
+      "contactButton": "Contact us",
+      "question1": "What happens if bad weather causes tour cancellation?",
+      "answer1": "If we have to cancel a tour due to weather, we will notify you as soon as possible and provide alternative options at no additional cost, such as alternative tours, new dates or full refunds.",
+      "question2": "How to avoid storms and lightning in tours?",
+      "answer2": "We are aware of the potential risks associated with storms and lightning and have strict safety procedures. We continuously monitor weather conditions and will postpone or relocate tours if there is a risk.",
+      "question3": "Are there toilets in the tours?",
+      "answer3": "Jungle Boss uses compost toilets for all adventure tours. They are environmentally friendly and regularly maintained to ensure hygiene.",
+      "question4": "What type of food is provided in the tours?",
+      "answer4": "In our tours, Jungle Boss provides a variety of Vietnamese food including local specialties, fresh fruits and nutritious snacks.",
+      "question5": "Do I need to bring my own cave exploration and camping gear?",
+      "answer5": "You don't need to bring your own cave exploration or camping gear as Jungle Boss provides all necessary safety equipment including helmets, flashlights and ropes.",
+      "question6": "Am I allowed to join the tour if I can't swim?",
+      "answer6": "Absolutely, you will be provided with life jackets to ensure safety during the adventure. Our guides are trained to assist non-swimmers.",
+      "question7": "What skills do I need?",
+      "answer7": "While prior experience in cave exploration, hiking and camping may be beneficial, it is not required. Our tours are designed for all skill levels.",
+      "question8": "What are the different levels of adventure tours?",
+      "answer8": "Our tours range from relaxing to extremely adventurous, from Level 1 (Family-friendly) to Level 5 (Expert - requiring advanced skills)."
+    },
+    "footerIntro": {
+      "description": "Discover the enchantment of Phong Nha-Ke Bang: Unveil legendary caves, ancient forests and crystal-clear rivers. Start your Jungle Boss adventure to experience this enchanting wonderland, immerse yourself in local culture and join us in preserving natural wonders."
+    },
+    "tourPage": {
+      "header": {
+        "title": "ADVENTURE TOURS",
+        "subtitle": "Jungle Boss builds team spirit through adventure in Phong Nha-Ke Bang National Park. Challenge your team with jungle games."
+      },
+      "dayTours": {
+        "title": "Day tours",
+        "subtitle": "For day trips, overnight or longer"
+      }
+    }
   },
   "adventureTours": {
-    "preTitle": "All Adventure Tour",
+    "preTitle": "All Adventure Tours",
     "title": "Start Your Ideal Adventure Tour!",
-    "subtitle": "For a day trip, overnighter or longer",
+    "subtitle": "For day trips, overnight or longer",
     "priceLabel": "Price",
-    "seeReviews": "See Reviews",
+    "seeReviews": "See reviews",
     "tour1": {
       "title": "Tra Ang Excursion 1D",
       "level": "Level 1 - Easy",
       "duration": "1 day",
-      "price": "VND 800,000/pax"
+      "price": "VND 800,000/person"
     },
     "tour2": {
       "title": "Phong Huong Adventure 1D",
       "level": "Level 3 - Moderate",
       "duration": "1 day",
-      "price": "VND 1,350,000/pax"
+      "price": "VND 1,350,000/person"
     },
     "tour3": {
       "title": "Elephant Cave & Ma Da Valley Jungle Trek 1D",
       "level": "Level 2 - Easy to Moderate",
       "duration": "1 day 1 night",
-      "price": "VND 1,950,000/pax"
+      "price": "VND 1,950,000/person"
     },
     "tour4": {
       "title": "Phong Huong Excursion 2D1N",
       "level": "Level 1 - Easy",
       "duration": "2 days 1 night",
-      "price": "VND 1,950,000/pax"
+      "price": "VND 1,950,000/person"
     }
   },
   "recommendationBanner": {
-    "title": "Still Trying to Decide?",
-    "subtitle": "Jungle Boss Passionate Team Always Ready Help You.",
-    "callButton": "Call HotLine",
-    "callbackButton": "Request a Callback"
-  },
-  "tourPage": {
-    "header": {
-      "title": "ADVENTURE TOURS",
-      "subtitle": "Jungle Boss builds teamwork through adventure in Phong Nha-Ke Bang National Park. Challenge your team with games in the jungle."
-    },
-    "dayTours": {
-      "title": "Day Tours",
-      "subtitle": "For a day trip, overnighter or longer"
-    }
+    "title": "Still trying to decide?",
+    "subtitle": "The passionate Jungle Boss team is always ready to help you.",
+    "callButton": "Call hotline",
+    "callbackButton": "Request callback"
   }
 }
