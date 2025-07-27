@@ -4,6 +4,7 @@ import AddUserModal from "@/components/Admin/Users/AddUserModal";
 import ChangePasswordModal from "@/components/Admin/Users/ChangePasswordModal";
 import DeleteUserModal from "@/components/Admin/Users/DeleteUserModal";
 import EditUserModal from "@/components/Admin/Users/EditUserModal";
+import TableFlygora from "@/components/ui/TableFlygora"; // Import TableFlygora component
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -22,7 +23,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Skeleton } from "@/components/ui/skeleton";
 import {
   addUserApi,
   changePasswordUserApi,
@@ -46,8 +46,6 @@ import {
   UserPlus,
   Users,
   UserX,
-  ChevronLeft,
-  ChevronRight,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
@@ -111,15 +109,11 @@ const UserManager = () => {
     mutationFn: ({ id, status }: { id: string; status: "active" | "inactive" }) =>
       changeStatusUser(id, status),
     onSuccess: (data, variables) => {
-      // Invalidate and refetch users data
       queryClient.invalidateQueries({
         queryKey: ["users"],
       });
-
-      // You can also update the cache optimistically
       queryClient.setQueryData(["users", filters], (oldData: any) => {
         if (!oldData) return oldData;
-
         return {
           ...oldData,
           data: oldData.data.map((user: GetAllUserResponse) =>
@@ -127,7 +121,6 @@ const UserManager = () => {
           ),
         };
       });
-
       toast.success("Trạng thái người dùng đã được cập nhật thành công!");
     },
     onError: (error: any) => {
@@ -166,7 +159,7 @@ const UserManager = () => {
     },
   });
 
-  //Mutation to add new user
+  // Mutation to add new user
   const { mutate: addUser } = useMutation({
     mutationFn: async (newUserData: any) => {
       const { name, email, password, role } = newUserData;
@@ -307,148 +300,137 @@ const UserManager = () => {
     });
   };
 
-  // Function để tạo array các trang cần hiển thị
-  const generatePageNumbers = (currentPage: number, totalPages: number) => {
-    const delta = 2; // Số trang hiển thị ở mỗi bên của trang hiện tại
-    const range = [];
-    const rangeWithDots = [];
-
-    // Nếu tổng số trang <= 7, hiển thị tất cả
-    if (totalPages <= 7) {
-      for (let i = 1; i <= totalPages; i++) {
-        rangeWithDots.push(i);
-      }
-      return rangeWithDots;
-    }
-
-    // Tính toán range cơ bản
-    for (
-      let i = Math.max(2, currentPage - delta);
-      i <= Math.min(totalPages - 1, currentPage + delta);
-      i++
-    ) {
-      range.push(i);
-    }
-
-    // Thêm trang đầu
-    if (currentPage - delta > 2) {
-      rangeWithDots.push(1, "...");
-    } else {
-      rangeWithDots.push(1);
-    }
-
-    // Thêm range chính
-    rangeWithDots.push(...range);
-
-    // Thêm trang cuối
-    if (currentPage + delta < totalPages - 1) {
-      rangeWithDots.push("...", totalPages);
-    } else if (totalPages > 1) {
-      rangeWithDots.push(totalPages);
-    }
-
-    return rangeWithDots;
-  };
-
-  // Component Pagination mới
-  const PaginationComponent = () => {
-    if (totalPages <= 1) return null;
-
-    const pageNumbers = generatePageNumbers(filters.page, totalPages);
-
-    return (
-      <div className="flex items-center justify-between">
-        {/* Thông tin hiển thị */}
-        <div className="text-sm text-gray-700 dark:text-gray-300">
-          Hiển thị <span className="font-medium">{(filters.page - 1) * filters.limit + 1}</span> đến{" "}
-          <span className="font-medium">{Math.min(filters.page * filters.limit, totalUsers)}</span>{" "}
-          trong tổng số <span className="font-medium">{totalUsers}</span> kết quả
-        </div>
-
-        {/* Điều khiển phân trang */}
-        <div className="flex items-center gap-1">
-          {/* Nút Previous */}
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => handlePageChange(filters.page - 1)}
-            disabled={filters.page === 1}
-            className="flex items-center gap-1 px-3"
-          >
-            <ChevronLeft className="h-4 w-4" />
-            Trước
-          </Button>
-
-          <div className="flex items-center gap-1 mx-2">
-            {pageNumbers.map((pageNumber, index) => {
-              if (pageNumber === "...") {
-                return (
-                  <span
-                    key={`ellipsis-${index}`}
-                    className="px-3 py-2 text-gray-500 dark:text-gray-400"
-                  >
-                    ...
-                  </span>
-                );
-              }
-
-              const isCurrentPage = pageNumber === filters.page;
-
-              return (
-                <Button
-                  key={pageNumber}
-                  variant={isCurrentPage ? "default" : "outline"}
-                  size="sm"
-                  onClick={() => handlePageChange(Number(pageNumber))}
-                  className={`
-                    min-w-[30px] h-8
-                    ${
-                      isCurrentPage
-                        ? "bg-primary text-white "
-                        : "hover:bg-gray-50 hover:text-gray-800 dark:hover:bg-gray-800"
-                    }
-                  `}
-                >
-                  {pageNumber}
-                </Button>
-              );
-            })}
+  // Define table columns
+  const columns = [
+    {
+      key: "name",
+      title: t("name"),
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      render: (value: string, _record: GetAllUserResponse) => (
+        <div className="flex items-center">
+          <Avatar className="h-10 w-10 mr-3">
+            <div className="h-10 w-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold">
+              {value.charAt(0).toUpperCase()}
+            </div>
+          </Avatar>
+          <div>
+            <div className="text-sm font-medium text-gray-900 dark:text-white">
+              {debouncedSearch ? (
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: value.replace(
+                      new RegExp(`(${debouncedSearch})`, "gi"),
+                      "<mark>$1</mark>"
+                    ),
+                  }}
+                />
+              ) : (
+                value
+              )}
+            </div>
           </div>
-
-          {/* Nút Next */}
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => handlePageChange(filters.page + 1)}
-            disabled={filters.page === totalPages}
-            className="flex items-center gap-1 px-3"
-          >
-            Sau
-            <ChevronRight className="h-4 w-4" />
-          </Button>
         </div>
-      </div>
-    );
+      ),
+    },
+    {
+      key: "email",
+      title: t("email"),
+      render: (value: string) => (
+        <span className="text-sm text-gray-900 dark:text-white">
+          {debouncedSearch ? (
+            <span
+              dangerouslySetInnerHTML={{
+                __html: value.replace(new RegExp(`(${debouncedSearch})`, "gi"), "<mark>$1</mark>"),
+              }}
+            />
+          ) : (
+            value
+          )}
+        </span>
+      ),
+    },
+    {
+      key: "role",
+      title: t("role"),
+      render: (value: string) => (
+        <Badge variant="secondary" className={getRoleBadge(value).color}>
+          {getRoleBadge(value).text}
+        </Badge>
+      ),
+    },
+    {
+      key: "status",
+      title: t("status"),
+      render: (value: string) => (
+        <Badge variant="secondary" className={getStatusBadge(value).color}>
+          {getStatusBadge(value).text}
+        </Badge>
+      ),
+    },
+    {
+      key: "created_at",
+      title: t("joinedDate"),
+      render: (value: string) => (
+        <span className="text-sm text-gray-500 dark:text-gray-400">{formatDate(value || "")}</span>
+      ),
+    },
+    {
+      key: "actions",
+      title: t("actions"),
+      align: "right" as const,
+      render: (_: any, record: GetAllUserResponse) => (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="icon">
+              <MoreHorizontal className="h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem onClick={() => viewUserDetail(record.id)}>
+              <Eye className="mr-2 h-4 w-4" />
+              {t("viewDetails")}
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleEditUser(record)}>
+              <Edit className="mr-2 h-4 w-4" />
+              {t("edit")}
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => handleChangePassword(record)}>
+              <Key className="mr-2 h-4 w-4" />
+              {t("resetPassword")}
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => handleToggleUserStatus(record)}
+              disabled={isTogglingStatus}
+            >
+              {record.status === "active" ? (
+                <>
+                  <UserX className="mr-2 h-4 w-4" />
+                  {isTogglingStatus ? "Đang vô hiệu hóa..." : t("deactivate")}
+                </>
+              ) : (
+                <>
+                  <UserCheck className="mr-2 h-4 w-4" />
+                  {isTogglingStatus ? "Đang kích hoạt..." : t("activate")}
+                </>
+              )}
+            </DropdownMenuItem>
+            <DropdownMenuItem className="text-red-600" onClick={() => handleDeleteUser(record)}>
+              <Trash2 className="mr-2 h-4 w-4" />
+              {t("delete")}
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      ),
+    },
+  ];
+
+  // Pagination data
+  const pagination = {
+    current: filters.page,
+    pageSize: filters.limit,
+    total: totalUsers,
+    totalPages: totalPages,
   };
-
-  // Loading skeleton component
-  const TableSkeleton = () => (
-    <div className="space-y-4">
-      {[...Array(5)].map((_, index) => (
-        <div key={index} className="flex items-center space-x-4 p-4">
-          <Skeleton className="h-12 w-12 rounded-full" />
-          <div className="space-y-2 flex-1">
-            <Skeleton className="h-4 w-[200px]" />
-            <Skeleton className="h-4 w-[150px]" />
-          </div>
-          <Skeleton className="h-6 w-[80px]" />
-          <Skeleton className="h-6 w-[80px]" />
-          <Skeleton className="h-4 w-[100px]" />
-          <Skeleton className="h-8 w-8" />
-        </div>
-      ))}
-    </div>
-  );
 
   return (
     <div className="space-y-6">
@@ -509,165 +491,24 @@ const UserManager = () => {
         </div>
       </Card>
 
-      {/* Users Table */}
-      <Card>
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead className="bg-gray-50 dark:bg-gray-800">
-              <tr>
-                <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                  {t("name")}
-                </th>
-                <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                  {t("email")}
-                </th>
-                <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                  {t("role")}
-                </th>
-                <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                  {t("status")}
-                </th>
-                <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                  {t("joinedDate")}
-                </th>
-                <th className="px-6 py-4 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                  {t("actions")}
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
-              {isLoading ? (
-                <tr>
-                  <td colSpan={6}>
-                    <TableSkeleton />
-                  </td>
-                </tr>
-              ) : (
-                users.map((user: any) => (
-                  <tr key={user.id} className="hover:bg-gray-50 dark:hover:bg-gray-800">
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center">
-                        <Avatar className="h-10 w-10 mr-3">
-                          <div className="h-10 w-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold">
-                            {user.name.charAt(0).toUpperCase()}
-                          </div>
-                        </Avatar>
-                        <div>
-                          <div className="text-sm font-medium text-gray-900 dark:text-white">
-                            {/* Add highlighting for search term if needed */}
-                            {debouncedSearch ? (
-                              <span
-                                dangerouslySetInnerHTML={{
-                                  __html: user.name.replace(
-                                    new RegExp(`(${debouncedSearch})`, "gi"),
-                                    "<mark>$1</mark>"
-                                  ),
-                                }}
-                              />
-                            ) : (
-                              user.name
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-white">
-                      {/* Add highlighting for search term if needed */}
-                      {debouncedSearch ? (
-                        <span
-                          dangerouslySetInnerHTML={{
-                            __html: user.email.replace(
-                              new RegExp(`(${debouncedSearch})`, "gi"),
-                              "<mark>$1</mark>"
-                            ),
-                          }}
-                        />
-                      ) : (
-                        user.email
-                      )}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <Badge variant="secondary" className={getRoleBadge(user.role).color}>
-                        {getRoleBadge(user.role).text}
-                      </Badge>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <Badge variant="secondary" className={getStatusBadge(user.status).color}>
-                        {getStatusBadge(user.status).text}
-                      </Badge>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">
-                      {formatDate(user.created_at || "")}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button variant="ghost" size="icon">
-                            <MoreHorizontal className="h-4 w-4" />
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          <DropdownMenuItem onClick={() => viewUserDetail(user.id)}>
-                            <Eye className="mr-2 h-4 w-4" />
-                            {t("viewDetails")}
-                          </DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => handleEditUser(user)}>
-                            <Edit className="mr-2 h-4 w-4" />
-                            {t("edit")}
-                          </DropdownMenuItem>
-                          <DropdownMenuItem onClick={() => handleChangePassword(user)}>
-                            <Key className="mr-2 h-4 w-4" />
-                            {t("resetPassword")}
-                          </DropdownMenuItem>
-                          <DropdownMenuItem
-                            onClick={() => handleToggleUserStatus(user)}
-                            disabled={isTogglingStatus}
-                          >
-                            {user.status === "active" ? (
-                              <>
-                                <UserX className="mr-2 h-4 w-4" />
-                                {isTogglingStatus ? "Đang vô hiệu hóa..." : t("deactivate")}
-                              </>
-                            ) : (
-                              <>
-                                <UserCheck className="mr-2 h-4 w-4" />
-                                {isTogglingStatus ? "Đang kích hoạt..." : t("activate")}
-                              </>
-                            )}
-                          </DropdownMenuItem>
-
-                          <DropdownMenuItem
-                            className="text-red-600"
-                            onClick={() => handleDeleteUser(user)}
-                          >
-                            <Trash2 className="mr-2 h-4 w-4" />
-                            {t("delete")}
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Empty State */}
-        {!isLoading && users.length === 0 && (
-          <div className="text-center py-12">
-            <Users className="mx-auto h-12 w-12 text-gray-400" />
-            <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-white">
-              Không tìm thấy người dùng
-            </h3>
-            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-              Thử thay đổi bộ lọc hoặc từ khóa tìm kiếm
-            </p>
-          </div>
-        )}
-      </Card>
-
-      {!isLoading && users.length > 0 && <PaginationComponent />}
+      {/* Table with TableFlygora component */}
+      <TableFlygora
+        columns={columns}
+        data={users}
+        loading={isLoading}
+        pagination={pagination}
+        onPageChange={handlePageChange}
+        emptyText="Không tìm thấy người dùng"
+        emptyIcon={<Users className="h-12 w-12 text-gray-400" />}
+        rowKey="id"
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        onRow={(record, _) => ({
+          onClick: () => {
+            router.push(`/admin/users/${record.id}`);
+          },
+          className: "cursor-pointer ",
+        })}
+      />
 
       {/* Modals */}
       <AddUserModal
