@@ -1,1 +1,1 @@
-export { default as CategoryModal } from "./CategoryModal";
+export { CategoryModal } from "./CategoryModal";
