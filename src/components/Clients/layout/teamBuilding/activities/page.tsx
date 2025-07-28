@@ -44,13 +44,10 @@ const ActivitiesPage = () => {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Tính toán transform dựa trên kích thước màn hình
   const getTransform = () => {
     if (isMobile) {
-      // Mobile: điều chỉnh cho phù hợp với viewport nhỏ
       return `translate(-50%, 0%) translate3d(${scrollPosition * 0.3}px, 0px, 0px)`;
     } else {
-      // Desktop: giữ nguyên logic cũ
       return `translate(-61.3136%, 0%) translate3d(${892.726 + scrollPosition * 0.5}px, 0px, 0px)`;
     }
   };

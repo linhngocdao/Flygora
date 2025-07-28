@@ -112,26 +112,6 @@ const LanguageSwitcher = () => {
           </Link>
         </div>
       </div>
-
-      {/* Mobile Language Switcher - Enhanced */}
-      <div className="md:hidden">
-        <Link
-          href={pathname}
-          locale={otherLocale}
-          className="flex items-center space-x-2 cursor-pointer p-2 rounded-lg hover:bg-white/10 transition-all duration-300"
-          onClick={handleLanguageChange}
-        >
-          <div className="w-6 h-6 border border-white/30 rounded overflow-hidden">
-            <Image
-              width={24}
-              height={24}
-              src={otherLang.flag}
-              alt={`flag ${otherLocale}`}
-              className="object-cover w-full h-full"
-            />
-          </div>
-        </Link>
-      </div>
     </div>
   );
 };

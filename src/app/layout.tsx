@@ -3,6 +3,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/thumbs";
+import "swiper/css/scrollbar";
 import Script from "next/script";
 import localFont from "next/font/local";
 import { Toaster } from "@/components/ui/sonner";

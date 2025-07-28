@@ -486,39 +486,16 @@ body {
     @apply bg-background text-foreground;
   }
 }
-/*
-.leaf-right-active {
-  transform: translate(50%, -25%) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x))
-    skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) !important;
+.swiper-pagination-current {
+  color: #272727 !important;
+  font-size: 22px !important;
+  font-weight: 500 !important;
 }
-
-.leaf-right {
-  aspect-ratio: 1;
-  position: absolute;
-  right: 0;
-  top: 0;
-  transform: translate(100%, -100%) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x))
-    skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  transition-duration: 0.5s;
-  width: 150px;
-  z-index: 20;
+.swiper-pagination-total {
+  color: #ccc !important;
+  font-size: 22px !important;
+  font-weight: 500 !important;
 }
-.leaf-left {
-  aspect-ratio: 1;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  transform: translate(-100%, 100%) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x))
-    skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-  transition-duration: 0.5s;
-  width: 150px;
-  z-index: 20;
-}
-
-.leaf-left-active {
-  transform: translate(-50%, 25%) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x))
-    skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)) !important;
-} */
 .slider-track {
   display: flex;
   gap: 2rem;
