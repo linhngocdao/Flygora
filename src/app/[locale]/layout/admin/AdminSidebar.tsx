@@ -10,12 +10,12 @@ import {
   MapPin,
   Calendar,
   Users,
-  FileText,
   Star,
   Settings,
   BarChart3,
   Package,
   UserCog,
+  BadgeDollarSign,
 } from "lucide-react";
 
 const sidebarItems = [
@@ -35,6 +35,11 @@ const sidebarItems = [
     href: "/admin/bookings",
   },
   {
+    icon: BadgeDollarSign,
+    label: "vouchers",
+    href: "/admin/vouchers",
+  },
+  {
     icon: Users,
     label: "customers",
     href: "/admin/customers",
@@ -44,20 +49,17 @@ const sidebarItems = [
     label: "users",
     href: "/admin/users",
   },
-  {
-    icon: Star,
-    label: "reviews",
-    href: "/admin/reviews",
-  },
+
   {
     icon: Package,
     label: "categories",
     href: "/admin/categories",
   },
+
   {
-    icon: FileText,
-    label: "content",
-    href: "/admin/content",
+    icon: Star,
+    label: "reviews",
+    href: "/admin/reviews",
   },
   {
     icon: BarChart3,
