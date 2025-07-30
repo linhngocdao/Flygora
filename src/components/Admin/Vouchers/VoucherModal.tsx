@@ -1,17 +1,16 @@
-import React, { forwardRef, useImperativeHandle } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Dialog,
   DialogContent,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import {
   Select,
   SelectContent,
@@ -19,24 +18,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Switch } from "@/components/ui/switch";
-import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { voucherPayloadCreate, voucherResponse } from "@/types/voucher.type";
-import { z } from "zod";
-import {
-  CalendarDays,
-  Percent,
-  DollarSign,
-  Users,
-  Settings,
-  Calendar as CalendarIcon,
-} from "lucide-react";
-import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import { voucherPayloadCreate, voucherResponse } from "@/types/voucher.type";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { vi } from "date-fns/locale";
+import { Calendar as CalendarIcon } from "lucide-react";
+import React, { forwardRef, useImperativeHandle } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 // Schema xác thực dữ liệu voucher
 const voucherSchema = z.object({
@@ -63,7 +56,6 @@ interface VoucherModalProps {
   duplicateMutation: any;
 }
 
-// Modal dùng chung cho thêm/sửa/duplicate voucher
 const VoucherModal = forwardRef<VoucherModalRef, VoucherModalProps>(
   ({ onSave, duplicateMutation }, ref) => {
     const [open, setOpen] = React.useState(false);
@@ -176,10 +168,8 @@ const VoucherModal = forwardRef<VoucherModalRef, VoucherModalProps>(
     // expose các hàm cho parent
     useImperativeHandle(ref, () => ({ openModal, openDuplicateModal }));
 
-    // Xử lý submit form
     const onSubmit = async (data: voucherPayloadCreate) => {
       try {
-        // Cập nhật is_active từ state và dates
         const submitData = {
           ...data,
           is_active: isActiveState,
@@ -203,7 +193,6 @@ const VoucherModal = forwardRef<VoucherModalRef, VoucherModalProps>(
         await onSave(submitData, editingVoucher);
         setOpen(false);
       } catch (error) {
-        // Error đã được handle ở mutation
         console.error("Submit error:", error);
       }
     };
@@ -229,20 +218,11 @@ const VoucherModal = forwardRef<VoucherModalRef, VoucherModalProps>(
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-xl">
               {isDuplicate ? (
-                <>
-                  <Users className="h-6 w-6" />
-                  Tạo bản sao voucher
-                </>
+                <>Tạo bản sao voucher</>
               ) : editingVoucher ? (
-                <>
-                  <Settings className="h-6 w-6" />
-                  Chỉnh sửa voucher
-                </>
+                <>Chỉnh sửa voucher</>
               ) : (
-                <>
-                  <DollarSign className="h-6 w-6" />
-                  Thêm voucher mới
-                </>
+                <>Thêm voucher mới</>
               )}
             </DialogTitle>
           </DialogHeader>
@@ -300,7 +280,6 @@ const VoucherModal = forwardRef<VoucherModalRef, VoucherModalProps>(
             <Card>
               <CardContent className="p-4">
                 <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                  <Percent className="h-5 w-5" />
                   Thông tin giảm giá
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -318,16 +297,10 @@ const VoucherModal = forwardRef<VoucherModalRef, VoucherModalProps>(
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="percentage">
-                          <div className="flex items-center gap-2">
-                            <Percent className="h-4 w-4" />
-                            Phần trăm (%)
-                          </div>
+                          <div className="flex items-center gap-2">Phần trăm (%)</div>
                         </SelectItem>
                         <SelectItem value="fixed_amount">
-                          <div className="flex items-center gap-2">
-                            <DollarSign className="h-4 w-4" />
-                            Số tiền cố định (₫)
-                          </div>
+                          <div className="flex items-center gap-2">Số tiền cố định (₫)</div>
                         </SelectItem>
                       </SelectContent>
                     </Select>
@@ -400,7 +373,6 @@ const VoucherModal = forwardRef<VoucherModalRef, VoucherModalProps>(
             <Card>
               <CardContent className="p-4">
                 <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                  <CalendarDays className="h-5 w-5" />
                   Thời gian & Sử dụng
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
