@@ -20,6 +20,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import TableFlygora from "@/components/ui/TableFlygora";
+import { ApiResponse } from "@/config/auth/auth.api";
 import {
   createVoucher,
   deleteVoucher,
@@ -58,7 +59,7 @@ const VoucherManager = () => {
     discount_type: undefined,
   });
   // Query lấy thống kê voucher bằng react-query
-  const { data: statistics } = useQuery<StatisticalVoucher>({
+  const { data: statistics } = useQuery<ApiResponse<StatisticalVoucher>>({
     queryKey: ["voucher-statistics"],
     queryFn: async () => {
       return await getVoucherStatistics();
@@ -341,7 +342,7 @@ const VoucherManager = () => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={() => handleViewDetail(record)}>
+            <DropdownMenuItem onClick={() => handleViewDetail()}>
               <Eye className="mr-2 h-4 w-4" />
               Xem chi tiết
             </DropdownMenuItem>

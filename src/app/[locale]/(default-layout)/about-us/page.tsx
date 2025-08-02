@@ -127,7 +127,8 @@ const AboutPage = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 col-span-full xl:gap-x-16 md:gap-x-11 gap-y-8 gap-x-4">
               <div className="xl:space-y-[14px] md:space-y-[10px] space-y-[7px]">
                 <div className="max-w-[100px] w-full mx-auto">
-                  <img
+                  <Image
+                    fill
                     src="/images/about/item-1.png"
                     alt="unique experience"
                     className="object-cover w-full h-full"
@@ -137,7 +138,8 @@ const AboutPage = () => {
               </div>
               <div className="xl:space-y-[14px] md:space-y-[10px] space-y-[7px]">
                 <div className="max-w-[100px] w-full mx-auto">
-                  <img
+                  <Image
+                    fill
                     src="/images/about/item-2.png"
                     alt="exclusive tour"
                     className="object-cover w-full h-full"
@@ -147,7 +149,8 @@ const AboutPage = () => {
               </div>
               <div className="xl:space-y-[14px] md:space-y-[10px] space-y-[7px]">
                 <div className="max-w-[100px] w-full mx-auto">
-                  <img
+                  <Image
+                    fill
                     src="/images/about/item-3.png"
                     alt="safety adventure"
                     className="object-cover w-full h-full"
@@ -157,7 +160,8 @@ const AboutPage = () => {
               </div>
               <div className="xl:space-y-[14px] md:space-y-[10px] space-y-[7px]">
                 <div className="max-w-[100px] w-full mx-auto">
-                  <img
+                  <Image
+                    fill
                     src="/images/about/item-4.png"
                     alt="sustainable development"
                     className="object-cover w-full h-full"
