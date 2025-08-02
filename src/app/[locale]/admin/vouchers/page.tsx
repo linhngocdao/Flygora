@@ -208,7 +208,7 @@ const VoucherManager = () => {
   }, []);
 
   // Handler xem chi tiết voucher
-  const handleViewDetail = () => {
+  const handleViewDetail = (record: voucherResponse) => {
     toast.info("Đang thực hiện chức năng xem chi tiết voucher");
   };
 

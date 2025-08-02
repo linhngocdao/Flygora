@@ -46,7 +46,7 @@ export interface voucherResponse {
   updated_by: string;
   created_at: string;
   updated_at: string;
-  applicable_tour_ids: string[];
+  applicable_tour_ids?: string[];
   creator: {
     id: string;
     name: string;
