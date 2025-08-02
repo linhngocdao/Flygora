@@ -210,6 +210,7 @@ const VoucherManager = () => {
   // Handler xem chi tiết voucher
   const handleViewDetail = (record: voucherResponse) => {
     toast.info("Đang thực hiện chức năng xem chi tiết voucher");
+    console.log("View detail for voucher:", record);
   };
 
   // Handler filter trạng thái
@@ -342,7 +343,7 @@ const VoucherManager = () => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuItem onClick={() => handleViewDetail()}>
+            <DropdownMenuItem onClick={() => handleViewDetail(record)}>
               <Eye className="mr-2 h-4 w-4" />
               Xem chi tiết
             </DropdownMenuItem>
