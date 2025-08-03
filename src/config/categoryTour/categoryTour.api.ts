@@ -10,6 +10,17 @@ export async function getCategory(payload: QueryGetCategories) {
   return data;
 }
 
+/* Get All categories without pagination */
+export async function getAllCategories() {
+  const { data } = await axiosInstance.get<ApiResponse<{ categories: Category[] }>>(
+    "/categories/tour",
+    {
+      params: { limit: 100 },
+    }
+  );
+  return data;
+}
+
 // Get category by ID
 export async function getCategoryById(id: string) {
   const { data } = await axiosInstance.get<ApiResponse<Category>>(`/categories/tour/${id}`);

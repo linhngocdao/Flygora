@@ -43,7 +43,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
         {/* Main Content */}
         <main className="flex-1 ml-64 p-6 mt-16">
-          <div className="max-w-7xl mx-auto">{children}</div>
+          <div className="scroll-auto mx-auto">{children}</div>
         </main>
       </div>
     </div>
