@@ -9,6 +9,7 @@ import FullScreenMenu from "./FullScreenMenu";
 const HeaderGotravel: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const handleScroll = (): void => {
@@ -25,10 +26,11 @@ const HeaderGotravel: React.FC = () => {
     const handleEscape = (e: KeyboardEvent): void => {
       if (e.key === "Escape") {
         setIsMenuOpen(false);
+        setIsSearchOpen(false);
       }
     };
 
-    if (isMenuOpen) {
+    if (isMenuOpen || isSearchOpen) {
       document.addEventListener("keydown", handleEscape);
       document.body.style.overflow = "hidden";
     } else {
@@ -39,11 +41,14 @@ const HeaderGotravel: React.FC = () => {
       document.removeEventListener("keydown", handleEscape);
       document.body.style.overflow = "unset";
     };
-  }, [isMenuOpen]);
+  }, [isMenuOpen, isSearchOpen]);
 
   // Toggle menu
   const toggleMenu = (): void => {
     setIsMenuOpen(!isMenuOpen);
+  };
+  const toggleSearch = (): void => {
+    setIsSearchOpen(!isSearchOpen);
   };
 
   // Đóng menu
@@ -53,11 +58,11 @@ const HeaderGotravel: React.FC = () => {
 
   return (
     <div>
-      <header>
+      <header className="z-[9999]">
         <div
           className={`fixed top-0 left-0 z-[1000] flex items-center w-full duration-700 ease-in-out header-wrapper
     ${
-      isScrolled
+      isScrolled || isSearchOpen
         ? "md:h-[60px] md:bg-[#34430f] md:shadow-lg md:backdrop-blur-sm md:transition-all md:duration-500"
         : "md:h-24 md:transition-all md:duration-500"
     }
@@ -200,7 +205,11 @@ const HeaderGotravel: React.FC = () => {
                 </div>
 
                 <div className="flex items-center justify-between space-x-[22px]">
-                  <SearchHeader isScrolled={isScrolled} />
+                  <SearchHeader
+                    isScrolled={isScrolled}
+                    isSearchOpen={isSearchOpen}
+                    toggleSearch={toggleSearch}
+                  />
                   <LanguageSwitcher />
                 </div>
               </div>
