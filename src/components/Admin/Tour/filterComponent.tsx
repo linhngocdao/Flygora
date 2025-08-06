@@ -1,14 +1,24 @@
 "use client";
 
-import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Search, X, Filter, DollarSign, Calendar, Tag } from "lucide-react";
+import {
+  Calendar,
+  ChevronDown,
+  DollarSign,
+  Filter,
+  Search,
+  Tag,
+  X,
+  Minus,
+  Check,
+} from "lucide-react";
+import { useState } from "react";
 
 // Components
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -19,20 +29,27 @@ import {
 } from "@/components/ui/select";
 
 // APIs & Types
-import { getAllCategories } from "@/config/categoryTour/categoryTour.api";
-import { formatCurrency } from "@/utilities/currency";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { getCategory } from "@/config/categoryTour/categoryTour.api";
 import { useTourStore } from "@/store/tour.store";
+import { formatCurrency } from "@/utilities/currency";
+import { Category } from "@/types/categories.type";
 
 const FilterComponent = () => {
   const { filters, setFilters, resetFilters } = useTourStore();
+  const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
 
   // Fetch categories
   const { data: categoriesData } = useQuery({
     queryKey: ["categories"],
-    queryFn: getAllCategories,
+    queryFn: () => getCategory({ limit: 100 }),
   });
 
-  const categories = categoriesData?.data?.categories || [];
+  const categories: Category[] = Array.isArray(categoriesData?.data)
+    ? categoriesData.data
+    : categoriesData?.data
+      ? [categoriesData.data]
+      : [];
 
   // Handlers để cập nhật filters theo đúng interface QueryGetTours
   const handleSearchChange = (value: string) => {
@@ -76,7 +93,18 @@ const FilterComponent = () => {
 
   // Clear individual filters
   const clearFilter = (filterKey: keyof typeof filters) => {
-    setFilters({ [filterKey]: undefined, page: 1 });
+    console.log("Clearing filter:", filterKey);
+
+    const newFilters = { ...filters };
+    delete newFilters[filterKey];
+    setFilters({ ...newFilters, page: 1 });
+  };
+
+  // Clear multiple filters at once
+  const clearFilters = (filterKeys: (keyof typeof filters)[]) => {
+    const newFilters = { ...filters };
+    filterKeys.forEach((key) => delete newFilters[key]);
+    setFilters({ ...newFilters, page: 1 });
   };
 
   // Get active filters count
@@ -95,130 +123,46 @@ const FilterComponent = () => {
   const activeFiltersCount = getActiveFiltersCount();
 
   return (
-    <Card className="mb-6">
-      <CardContent className="p-6">
-        <div className="space-y-4">
-          {/* Header */}
+    <Card className="mb-4">
+      <CardContent>
+        <div className="space-y-2">
+          {/* Header - Compact */}
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <Filter className="h-5 w-5" />
-              <h3 className="text-lg font-semibold">Bộ lọc tìm kiếm</h3>
+              <Filter className="h-4 w-4 text-muted-foreground" />
+              <h3 className="text-base font-medium">Bộ lọc tìm kiếm</h3>
               {activeFiltersCount > 0 && (
-                <Badge variant="secondary">{activeFiltersCount} bộ lọc</Badge>
+                <Badge variant="secondary" className="h-5 text-xs px-2">
+                  {activeFiltersCount}
+                </Badge>
               )}
             </div>
             {activeFiltersCount > 0 && (
-              <Button variant="outline" size="sm" onClick={resetFilters}>
-                <X className="h-4 w-4 mr-2" />
-                Xóa tất cả
+              <Button variant="ghost" size="sm" onClick={resetFilters} className="h-7 px-2">
+                <X className="h-3 w-3 mr-1" />
+                <span className="text-xs">Xóa tất cả</span>
               </Button>
             )}
           </div>
 
-          {/* Search */}
+          {/* Search - Always visible */}
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
             <Input
               placeholder="Tìm kiếm theo tên tour..."
               value={filters.query || ""}
               onChange={(e) => handleSearchChange(e.target.value)}
-              className="pl-10"
+              className="pl-10 h-9"
             />
           </div>
 
-          {/* Filters Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            {/* Price Range */}
-            <div className="space-y-2">
-              <Label className="flex items-center gap-2">
-                <DollarSign className="h-4 w-4" />
-                Khoảng giá
-              </Label>
-              <div className="flex gap-2">
-                <Input
-                  type="number"
-                  placeholder="Từ"
-                  value={filters.price_min || ""}
-                  onChange={(e) => handlePriceChange("min", e.target.value)}
-                  className="text-sm"
-                />
-                <Input
-                  type="number"
-                  placeholder="Đến"
-                  value={filters.price_max || ""}
-                  onChange={(e) => handlePriceChange("max", e.target.value)}
-                  className="text-sm"
-                />
-              </div>
-            </div>
-
-            {/* Duration Range */}
-            <div className="space-y-2">
-              <Label className="flex items-center gap-2">
-                <Calendar className="h-4 w-4" />
-                Số ngày
-              </Label>
-              <div className="flex gap-2">
-                <Input
-                  type="number"
-                  placeholder="Từ"
-                  value={filters.duration_min || ""}
-                  onChange={(e) => handleDurationChange("min", e.target.value)}
-                  className="text-sm"
-                />
-                <Input
-                  type="number"
-                  placeholder="Đến"
-                  value={filters.duration_max || ""}
-                  onChange={(e) => handleDurationChange("max", e.target.value)}
-                  className="text-sm"
-                />
-              </div>
-            </div>
-
-            {/* Category Filter */}
-            <div className="space-y-2">
-              <Label className="flex items-center gap-2">
-                <Tag className="h-4 w-4" />
-                Danh mục
-              </Label>
-              <Select value={filters.category_id || "all"} onValueChange={handleCategoryChange}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Chọn danh mục" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Tất cả danh mục</SelectItem>
-                  {categories.map((category) => (
-                    <SelectItem key={category.id} value={category.id}>
-                      {category.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            {/* Status Filter */}
-            <div className="space-y-2">
-              <Label>Trạng thái</Label>
-              <Select value={filters.status || "all"} onValueChange={handleStatusChange}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Chọn trạng thái" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Tất cả</SelectItem>
-                  <SelectItem value="published">Đã xuất bản</SelectItem>
-                  <SelectItem value="unpublished">Nháp</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-          </div>
-
-          {/* Additional Filters */}
-          <div className="flex gap-4">
+          {/* Quick Filters - Compact row */}
+          <div className="flex items-center gap-2 flex-wrap">
             <Button
               variant={filters.is_featured ? "default" : "outline"}
               size="sm"
               onClick={handleFeaturedToggle}
+              className="h-7 px-3 text-xs"
             >
               Nổi bật
             </Button>
@@ -226,79 +170,216 @@ const FilterComponent = () => {
               variant={filters.is_top ? "default" : "outline"}
               size="sm"
               onClick={handleTopToggle}
+              className="h-7 px-3 text-xs"
             >
               TOP
             </Button>
+
+            {/* Advanced toggle */}
+            <Collapsible open={isAdvancedOpen} onOpenChange={setIsAdvancedOpen}>
+              <CollapsibleTrigger asChild>
+                <Button variant="outline" size="sm" className="h-7 px-3 text-xs ml-auto">
+                  Lọc nâng cao
+                  <ChevronDown
+                    className={`h-3 w-3 ml-1 transition-transform ${isAdvancedOpen ? "rotate-180" : ""}`}
+                  />
+                </Button>
+              </CollapsibleTrigger>
+
+              <CollapsibleContent className="space-y-2 mt-2">
+                {/* Advanced Filters Grid - More compact */}
+                <div className="flex justify-center gap-6">
+                  {/* Price Range */}
+                  <div className="space-y-1">
+                    <Label className="flex items-center gap-1.5 text-xs font-medium">
+                      <DollarSign className="h-3 w-3 text-green-600" />
+                      Khoảng giá
+                    </Label>
+                    <div className="flex items-center gap-2">
+                      <div className="relative flex-1">
+                        <DollarSign className="absolute left-2 top-1/2 transform -translate-y-1/2 h-3 w-3 text-muted-foreground" />
+                        <Input
+                          type="number"
+                          placeholder="Từ"
+                          value={filters.price_min || ""}
+                          onChange={(e) => handlePriceChange("min", e.target.value)}
+                          className="text-xs h-8 pl-7"
+                        />
+                      </div>
+                      <div className="flex items-center justify-center w-4 h-8">
+                        <Minus className="h-3 w-3 text-muted-foreground" />
+                      </div>
+                      <div className="relative flex-1">
+                        <DollarSign className="absolute left-2 top-1/2 transform -translate-y-1/2 h-3 w-3 text-muted-foreground" />
+                        <Input
+                          type="number"
+                          placeholder="Đến"
+                          value={filters.price_max || ""}
+                          onChange={(e) => handlePriceChange("max", e.target.value)}
+                          className="text-xs h-8 pl-7"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Duration Range */}
+                  <div className="space-y-1">
+                    <Label className="flex items-center gap-1.5 text-xs font-medium">
+                      <Calendar className="h-3 w-3 text-blue-600" />
+                      Số ngày
+                    </Label>
+                    <div className="flex items-center gap-2">
+                      <div className="relative flex-1">
+                        <Calendar className="absolute left-2 top-1/2 transform -translate-y-1/2 h-3 w-3 text-muted-foreground" />
+                        <Input
+                          type="number"
+                          placeholder="Từ"
+                          value={filters.duration_min || ""}
+                          onChange={(e) => handleDurationChange("min", e.target.value)}
+                          className="text-xs h-8 pl-7"
+                        />
+                      </div>
+                      <div className="flex items-center justify-center w-4 h-8">
+                        <Minus className="h-3 w-3 text-muted-foreground" />
+                      </div>
+                      <div className="relative flex-1">
+                        <Calendar className="absolute left-2 top-1/2 transform -translate-y-1/2 h-3 w-3 text-muted-foreground" />
+                        <Input
+                          type="number"
+                          placeholder="Đến"
+                          value={filters.duration_max || ""}
+                          onChange={(e) => handleDurationChange("max", e.target.value)}
+                          className="text-xs h-8 pl-7"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Category Filter */}
+                  <div className="space-y-1">
+                    <Label className="flex items-center gap-1.5 text-xs font-medium">
+                      <Tag className="h-3 w-3 text-purple-600" />
+                      Danh mục
+                    </Label>
+                    <Select
+                      value={filters.category_id || "all"}
+                      onValueChange={handleCategoryChange}
+                    >
+                      <SelectTrigger className="h-8 text-xs">
+                        <SelectValue placeholder="Chọn danh mục" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">Tất cả danh mục</SelectItem>
+                        {categories.map((category: Category) => (
+                          <SelectItem key={category.id} value={category.id}>
+                            {category.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  {/* Status Filter */}
+                  <div className="space-y-1">
+                    <Label className="text-xs font-medium">
+                      <Check className="h-3 w-3 text-muted-foreground" />
+                      Trạng thái
+                    </Label>
+                    <Select value={filters.status || "all"} onValueChange={handleStatusChange}>
+                      <SelectTrigger className="h-8 text-xs">
+                        <SelectValue placeholder="Chọn trạng thái" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="all">Tất cả</SelectItem>
+                        <SelectItem value="published">Đã xuất bản</SelectItem>
+                        <SelectItem value="unpublished">Nháp</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              </CollapsibleContent>
+            </Collapsible>
           </div>
 
-          {/* Active Filters Tags */}
+          {/* Active Filters Tags - Only show when filters are active */}
           {activeFiltersCount > 0 && (
-            <div className="flex flex-wrap gap-2 pt-2 border-t">
+            <div className="flex flex-wrap gap-1.5 pt-1.5 border-t border-border/50">
               {filters.query && (
-                <Badge variant="outline" className="gap-1">
-                  Tìm kiếm: &ldquo;{filters.query}&rdquo;
-                  <X className="h-3 w-3 cursor-pointer" onClick={() => clearFilter("query")} />
+                <Badge
+                  onClick={() => clearFilter("query")}
+                  variant="outline"
+                  className="h-6 text-xs px-2 gap-1 cursor-pointer hover:bg-destructive/10"
+                >
+                  <Search className="h-3 w-3 text-gray-600" />
+                  &ldquo;{filters.query}&rdquo;
+                  <X className="h-3 w-3 cursor-pointer hover:text-destructive" />
                 </Badge>
               )}
 
               {(filters.price_min || filters.price_max) && (
-                <Badge variant="outline" className="gap-1">
-                  Giá: {formatCurrency(filters.price_min || 0)} -{" "}
+                <Badge
+                  onClick={() => clearFilters(["price_min", "price_max"])}
+                  variant="outline"
+                  className="h-6 text-xs px-2 gap-1 cursor-pointer hover:bg-destructive/10"
+                >
+                  <DollarSign className="h-3 w-3 text-green-600" />
+                  {formatCurrency(filters.price_min || 0)} -{" "}
                   {formatCurrency(filters.price_max || 10000000)}
-                  <X
-                    className="h-3 w-3 cursor-pointer"
-                    onClick={() => {
-                      clearFilter("price_min");
-                      clearFilter("price_max");
-                    }}
-                  />
+                  <X className="h-3 w-3 cursor-pointer hover:text-destructive" />
                 </Badge>
               )}
 
               {(filters.duration_min || filters.duration_max) && (
-                <Badge variant="outline" className="gap-1">
-                  Thời gian: {filters.duration_min || 1} - {filters.duration_max || 30} ngày
-                  <X
-                    className="h-3 w-3 cursor-pointer"
-                    onClick={() => {
-                      clearFilter("duration_min");
-                      clearFilter("duration_max");
-                    }}
-                  />
+                <Badge
+                  variant="outline"
+                  className="h-6 text-xs px-2 gap-1 cursor-pointer hover:bg-destructive/10"
+                  onClick={() => clearFilters(["duration_min", "duration_max"])}
+                >
+                  <Calendar className="h-3 w-3 text-blue-600" />
+                  {filters.duration_min || 1} - {filters.duration_max || 30} ngày
+                  <X className="h-3 w-3 cursor-pointer hover:text-destructive" />
                 </Badge>
               )}
 
               {filters.category_id && (
-                <Badge variant="outline" className="gap-1">
-                  Danh mục: {categories.find((c) => c.id === filters.category_id)?.name || "N/A"}
-                  <X
-                    className="h-3 w-3 cursor-pointer"
-                    onClick={() => clearFilter("category_id")}
-                  />
+                <Badge
+                  variant="outline"
+                  className="h-6 text-xs px-2 gap-1 cursor-pointer hover:bg-destructive/10"
+                  onClick={() => clearFilter("category_id")}
+                >
+                  <Tag className="h-3 w-3 text-purple-600" />
+                  {categories.find((c: Category) => c.id === filters.category_id)?.name || "N/A"}
+                  <X className="h-3 w-3 cursor-pointer hover:text-destructive" />
                 </Badge>
               )}
 
               {filters.status && (
-                <Badge variant="outline" className="gap-1">
-                  Trạng thái: {filters.status === "published" ? "Đã xuất bản" : "Nháp"}
-                  <X className="h-3 w-3 cursor-pointer" onClick={() => clearFilter("status")} />
+                <Badge variant="outline" className="h-6 text-xs px-2 gap-1">
+                  {filters.status === "published" ? "Đã xuất bản" : "Nháp"}
+                  <X
+                    className="h-3 w-3 cursor-pointer hover:text-destructive"
+                    onClick={() => clearFilter("status")}
+                  />
                 </Badge>
               )}
 
               {filters.is_featured && (
-                <Badge variant="outline" className="gap-1">
+                <Badge variant="outline" className="h-6 text-xs px-2 gap-1">
                   Nổi bật
                   <X
-                    className="h-3 w-3 cursor-pointer"
+                    className="h-3 w-3 cursor-pointer hover:text-destructive"
                     onClick={() => clearFilter("is_featured")}
                   />
                 </Badge>
               )}
 
               {filters.is_top && (
-                <Badge variant="outline" className="gap-1">
+                <Badge variant="outline" className="h-6 text-xs px-2 gap-1">
                   TOP
-                  <X className="h-3 w-3 cursor-pointer" onClick={() => clearFilter("is_top")} />
+                  <X
+                    className="h-3 w-3 cursor-pointer hover:text-destructive"
+                    onClick={() => clearFilter("is_top")}
+                  />
                 </Badge>
               )}
             </div>

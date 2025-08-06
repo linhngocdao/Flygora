@@ -24,19 +24,33 @@
     "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo neque cum, possimus deb"
   },
   "whyChooseUs": {
-    "title": "Jungle Boss",
-    "subtitle": "Công ty du lịch mạo hiểm được chứng nhận hàng đầu",
+    "title": "FLYGORA TRAVEL",
+    "subtitle": "CÔNG TY DU LỊCH HÀNG ĐẦU VỀ ẨM THỰC ĐỊA PHƯƠNG",
     "excellent": "Xuất sắc",
     "on": "trên",
-    "viewReviews": "Xem {count} đánh giá",
-    "description": {
-      "intro": "Chúng tôi cung cấp các tour khám phá hang động và leo núi rừng độc quyền cho các nhóm nhỏ và các hoạt động team building phong cách rừng nhiệt đới trong Vườn Quốc gia Phong Nha-Kẻ Bàng được UNESCO công nhận và các khu vực xung quanh, bao gồm tour mới nhất của chúng tôi đến",
-      "doQueen": "Chinh phục thác Đỗ Quyên",
-      "highest": "– thác nước cao nhất ở Đông Nam Á, và huyền thoại",
-      "kongCollapse": "Kong Collapse",
-      "deepest": "– một trong những hố sụt sâu nhất hành tinh."
-    },
-    "aboutUsButton": "Về chúng tôi"
+    "viewReviews": "[Customer Review]",
+    "description": "Tại Flygora, chúng tôi kiến tạo những hành trình khám phá ẩm thực Việt Nam dành riêng cho các nhóm nhỏ và hoạt động teambuilding. Chúng tôi sẽ đưa bạn đi sâu vào nền văn hóa bản địa, thưởng thức những món ăn độc đáo và tinh túy mà không phải du khách nào cũng biết đến. Với cam kết về du lịch xanh, bền vững cùng tiêu chuẩn dịch vụ 5 sao, Flygora đảm bảo mang đến cho bạn một trải nghiệm không chỉ ngon miệng mà còn đẳng cấp và đầy ý nghĩa.",
+    "aboutUsButton": "Về chúng tôi",
+    "Our_Advantage":{
+      "headTitle": " Lợi thế của chúng tôi",
+      "title": "Tại sao Flygora lại là lựa chọn tốt nhất cho du lịch ẩm thực tại Việt Nam ?",
+      "UniqueExperience": {
+        "title" : "Trải nghiệm độc đáo",
+        "content" :"Khám phá bản sắc ẩm thực địa phương qua những món ăn được tuyển chọn kỹ lưỡng, nơi mỗi hương vị là một bất ngờ thú vị, hòa quyện cùng dịch vụ chăm sóc tinh tế và chu đáo."
+      },
+      "ExclusiveTour" :{
+        "title" : "Chuyến tham quan độc quyền",
+        "content": "Mỗi hành trình cùng Flygora là một trải nghiệm độc đáo không lặp lại. Chúng tôi sẽ dẫn lối bạn đến với những 'viên ngọc ẩn' của ẩm thực địa phương – những món ngon tuyệt hảo không hề có tên trên bản đồ du lịch thông thường"
+      },
+      "FoodSafety": {
+        "title": "An toàn thực phẩm",
+        "content": "We are committed to food safety, using fresh, clean ingredients with transparent origins. Please inform us in advance of any allergies or special dietary requirements."
+      },
+      "SustainableDevelopment":{
+        "title":"Phát triển bền vững",
+        "content": "Chúng tôi cam kết bảo vệ môi trường và hỗ trợ cộng đồng địa phương thông qua các hoạt động bền vững."
+      }
+    }
   },
   "heroSection": {
     "findYourTrip": "Tìm chuyến đi của bạn",
@@ -186,7 +200,6 @@
     "question8": "Các cấp độ khác nhau của tour phiêu lưu là gì?",
     "answer8": "Các tour của chúng tôi trải dài từ thư giãn đến cực kỳ phiêu lưu, từ Cấp độ 1 (Thích hợp cho gia đình) đến Cấp độ 5 (Chuyên gia - yêu cầu kỹ năng nâng cao).",
     "oldFaq": {
-      "title": "Câu hỏi thường gặp",
       "categories": {
         "security-management": {
           "title": "Bảo mật & Quản lý",

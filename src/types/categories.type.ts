@@ -18,3 +18,21 @@ export interface CategoryPayload {
   description: string;
   status?: "active" | "inactive";
 }
+
+export interface CategoryApiResponse {
+  success: boolean;
+  message: string;
+  data: Category[];
+  pagination?: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+  };
+}
+
+export interface SingleCategoryApiResponse {
+  success: boolean;
+  message: string;
+  data: Category;
+}

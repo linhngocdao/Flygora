@@ -1,0 +1,159 @@
+/* Custom styles for QuillFlygora component */
+
+/* Đảm bảo layout flex column hoạt động đúng */
+.quill-flygora-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Toolbar luôn ở trên cùng */
+.quill-flygora-container .ql-toolbar {
+  order: -1;
+  flex-shrink: 0;
+  border-left: none !important;
+  border-right: none !important;
+  border-top: none !important;
+  border-bottom: 1px solid hsl(var(--border)) !important;
+}
+
+/* Container chứa editor */
+.quill-flygora-container .ql-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border: none !important;
+}
+
+/* Editor area */
+.quill-flygora-container .ql-editor {
+  flex: 1;
+  min-height: 100px;
+  padding: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Scroll modes */
+.quill-flygora-wrapper.resize-fixed .ql-editor {
+  overflow-y: auto;
+  max-height: calc(100% - 42px); /* Subtract toolbar height */
+}
+
+.quill-flygora-wrapper.resize-constrained .ql-editor {
+  overflow-y: auto;
+}
+
+.quill-flygora-wrapper.resize-auto .ql-editor {
+  overflow-y: hidden;
+  resize: none;
+}
+
+/* Scrollbar styling */
+.quill-flygora-container .ql-editor::-webkit-scrollbar {
+  width: 8px;
+}
+
+.quill-flygora-container .ql-editor::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+  border-radius: 4px;
+}
+
+.quill-flygora-container .ql-editor::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground));
+  border-radius: 4px;
+}
+
+.quill-flygora-container .ql-editor::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--foreground));
+}
+
+/* Placeholder styling */
+.quill-flygora-container .ql-editor.ql-blank::before {
+  color: hsl(var(--muted-foreground));
+  font-style: normal;
+  left: 12px;
+  right: 12px;
+}
+
+/* Toolbar button improvements */
+.quill-flygora-container .ql-toolbar .ql-formats {
+  margin-right: 16px;
+}
+
+.quill-flygora-container .ql-toolbar button {
+  height: 32px;
+  width: 32px;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.quill-flygora-container .ql-toolbar button:hover {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+.quill-flygora-container .ql-toolbar button.ql-active {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+/* Picker (dropdown) styling */
+.quill-flygora-container .ql-toolbar .ql-picker {
+  height: 32px;
+  transition: all 0.2s ease;
+}
+
+.quill-flygora-container .ql-toolbar .ql-picker:hover {
+  background-color: hsl(var(--accent));
+}
+
+.quill-flygora-container .ql-toolbar .ql-picker-label {
+  height: 32px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  line-height: 24px;
+}
+
+.quill-flygora-container .ql-toolbar .ql-picker-options {
+  background-color: hsl(var(--popover));
+  border: 1px solid hsl(var(--border));
+  border-radius: 6px;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  z-index: 50;
+}
+
+.quill-flygora-container .ql-toolbar .ql-picker-item:hover {
+  background-color: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+}
+
+/* Focus states */
+.quill-flygora-wrapper:focus-within {
+  border-color: hsl(var(--ring));
+  box-shadow: 0 0 0 3px hsl(var(--ring) / 0.5);
+}
+
+/* Disabled state */
+.quill-flygora-wrapper.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Auto-resize mode */
+.quill-flygora-wrapper.auto-resize {
+  transition: height 0.2s ease;
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .quill-flygora-container .ql-editor {
+    color: hsl(var(--foreground));
+  }
+
+  .quill-flygora-container .ql-toolbar {
+    background-color: transparent;
+  }
+}

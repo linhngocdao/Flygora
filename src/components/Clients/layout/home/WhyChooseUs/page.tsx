@@ -66,7 +66,7 @@ const WhychooseUsSection = () => {
                     <Image
                       src="/images/homePage/section-2-tripadvisor.png"
                       alt="tripadvisor"
-                      className="h-7"
+                      className="h-7 w-auto"
                       width={100}
                       height={28}
                       loading="lazy"
@@ -84,21 +84,7 @@ const WhychooseUsSection = () => {
 
                 {/* Description */}
                 <div className="prose introduce">
-                  <p>
-                    {t("description.intro")}{" "}
-                    <a
-                      href="https://junglebosstours.com/tour/do-quyen-waterfall-top-adventure-conquering-3d2n"
-                      target="_blank"
-                      rel="noopener"
-                    >
-                      {t("description.doQueen")}
-                    </a>
-                    {t("description.highest")}{" "}
-                    <a href="/tour/kong-collapse-top-adventure-5d4n" target="_blank" rel="noopener">
-                      {t("description.kongCollapse")}
-                    </a>
-                    {t("description.deepest")}
-                  </p>
+                  <p>{t("description")} </p>
                 </div>
 
                 <ButtonPrimary name={t("aboutUsButton")} href="/about-us" />
@@ -148,10 +134,10 @@ const WhychooseUsSection = () => {
             {/* Section Header */}
             <div className="space-y-4">
               <h3 className="pre-header text-[#6c8a1f] tracking-[1.4px] text-center">
-                Our Advantage
+                {t("Our_Advantage.headTitle")}
               </h3>
               <h2 className="text-center uppercase headline-1 text-[#004750] text-[32px] font-bold max-xl:w-[80%] max-md:w-full mx-auto">
-                Why Jungle Boss Is The Top Choice For Adventure Tourism?
+                {t("Our_Advantage.title")}
               </h2>
             </div>
 
@@ -170,11 +156,10 @@ const WhychooseUsSection = () => {
                 </div>
                 <div className="md:space-y-2">
                   <div className="text-center text-[18px] title-2 text-[#6c8a1f]">
-                    Unique Experience
+                    {t("Our_Advantage.UniqueExperience.title")}
                   </div>
                   <div className="text-center text-gray-700 body-1">
-                    Discover thrilling adventures tailored by Jungle Boss to explore the best of
-                    jungle trekking and caving experience!
+                    {t("Our_Advantage.UniqueExperience.content")}
                   </div>
                 </div>
               </div>
@@ -192,11 +177,10 @@ const WhychooseUsSection = () => {
                 </div>
                 <div className="space-y-2">
                   <div className="text-center text-[18px] title-2 text-[#6c8a1f]">
-                    Exclusive Tour
+                    {t("Our_Advantage.ExclusiveTour.title")}
                   </div>
                   <div className="text-center text-gray-700 body-1">
-                    Every adventure tours of Jungle Boss is exclusive and unique. Includes the Kong
-                    Collapse Adventure, the #1 adventurous tour in Vietnam!
+                    {t("Our_Advantage.ExclusiveTour.content")}
                   </div>
                 </div>
               </div>
@@ -214,11 +198,10 @@ const WhychooseUsSection = () => {
                 </div>
                 <div className="space-y-2">
                   <div className="text-center text-[18px] title-2 text-[#6c8a1f]">
-                    Safe Adventure
+                    {t("Our_Advantage.FoodSafety.title")}
                   </div>
                   <div className="text-center text-gray-700 body-1">
-                    All tours adhere to strict safety protocols & are led by expert guides to ensure
-                    a safe jungle experience.
+                    {t("Our_Advantage.FoodSafety.content")}
                   </div>
                 </div>
               </div>
@@ -236,11 +219,10 @@ const WhychooseUsSection = () => {
                 </div>
                 <div className="space-y-2">
                   <div className="text-center text-[18px] title-2 text-[#6c8a1f]">
-                    Sustainable Development
+                    {t("Our_Advantage.SustainableDevelopment.title")}
                   </div>
                   <div className="text-center text-gray-700 body-1">
-                    We strive to protect the environment and support local communities through
-                    sustainable practices.
+                    {t("Our_Advantage.SustainableDevelopment.content")}
                   </div>
                 </div>
               </div>

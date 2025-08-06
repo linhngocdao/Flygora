@@ -24,19 +24,33 @@
     "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nemo neque cum, possimus deb"
   },
   "whyChooseUs": {
-    "title": "Jungle Boss",
-    "subtitle": "Leading certified adventure travel company",
+    "title": "FLYGORA TRAVEL",
+    "subtitle": "THE LEADING LOCAL FOOD TOUR COMPANY",
     "excellent": "Excellent",
     "on": "on",
-    "viewReviews": "View {count} reviews",
-    "description": {
-      "intro": "We provide exclusive cave exploration and jungle mountain climbing tours for small groups and tropical forest-style team building activities in the UNESCO-recognized Phong Nha-Ke Bang National Park and surrounding areas, including our latest tour to",
-      "doQueen": "Conquer Do Quyen Waterfall",
-      "highest": "– the highest waterfall in Southeast Asia, and the legendary",
-      "kongCollapse": "Kong Collapse",
-      "deepest": "– one of the deepest sinkholes on the planet."
-    },
-    "aboutUsButton": "About us"
+    "viewReviews": "[Customer Review]",
+    "description": "At Flygora, we craft Vietnamese culinary journeys designed exclusively for small groups and teambuilding activities. We will take you deep into the local culture, savoring unique and quintessential dishes that most tourists never discover. With a commitment to green, sustainable tourism and 5-star service standards, Flygora guarantees an experience that is not only delicious but also premium and meaningful.",
+    "aboutUsButton": "About us",
+    "Our_Advantage":{
+      "headTitle": " Our Advantage",
+      "title": "Why Flygora is Your Best Choice for Culinary Travel in Vietnam ?",
+      "UniqueExperience": {
+        "title" : "Unique Experience",
+        "content" :"Discover the identity of local cuisine through meticulously selected dishes, where every flavor is a delightful surprise, blended with refined and attentive service."
+      },
+      "ExclusiveTour" :{
+        "title" : "Exclusive Tour",
+        "content": "Every journey with Flygora is a one-of-a-kind experience. We lead you to the 'hidden gems' of local cuisine – exquisite delicacies that are not found on the typical tourist map."
+      },
+      "FoodSafety": {
+        "title": "Food Safety",
+        "content": "We are committed to food safety, using fresh, clean ingredients with transparent origins. Please inform us in advance of any allergies or special dietary requirements."
+      },
+      "SustainableDevelopment":{
+        "title":"Sustainable Development",
+        "content": "We are committed to protecting the environment and supporting local communities through sustainable practices."
+      }
+    }
   },
   "heroSection": {
     "findYourTrip": "Find your trip",
@@ -186,7 +200,6 @@
     "question8": "What are the different levels of adventure tours?",
     "answer8": "Our tours range from relaxing to extremely adventurous, from Level 1 (Family-friendly) to Level 5 (Expert - requiring advanced skills).",
     "oldFaq": {
-      "title": "Frequently Asked Questions",
       "categories": {
         "security-management": {
           "title": "Security & Management",

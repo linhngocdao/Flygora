@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import LanguageSwitcher from "@/components/Clients/ui/LanguageSwitcher";
 import SearchHeader from "@/components/Clients/ui/SearchHeader";
 import FullScreenMenu from "./FullScreenMenu";
@@ -58,15 +57,15 @@ const HeaderGotravel: React.FC = () => {
 
   return (
     <div>
-      <header className="z-[9999]">
+      <header className="z-[20]">
         <div
           className={`fixed top-0 left-0 z-[1000] flex items-center w-full duration-700 ease-in-out header-wrapper
     ${
       isScrolled || isSearchOpen
-        ? "md:h-[60px] md:bg-[#34430f] md:shadow-lg md:backdrop-blur-sm md:transition-all md:duration-500"
+        ? "md:h-[60px] md:bg-[#546b1a] md:shadow-lg md:backdrop-blur-sm md:transition-all md:duration-500"
         : "md:h-24 md:transition-all md:duration-500"
     }
-    h-[70px] max-md:bg-[#34430f]`}
+    h-[70px] max-md:bg-[#546b1a]`}
         >
           <div className="relative z-50 w-full">
             <div className="container">
@@ -160,7 +159,7 @@ const HeaderGotravel: React.FC = () => {
                             isScrolled ? "scale-100 opacity-0" : "scale-100 opacity-100"
                           }`}
                         >
-                          <Image
+                          {/* <Image
                             className="xl:max-w-[180px] md:max-w-[160px]"
                             src="/images/homePage/logo.webp"
                             alt="Jungle Boss Logo"
@@ -168,28 +167,38 @@ const HeaderGotravel: React.FC = () => {
                             height={60}
                             priority
                             loading="eager"
-                          />
+                          /> */}
+                          <div className="text-2xl text-center md:text-3xl font-bold text-yellow-400">
+                            FLYGORA TRAVEL
+                            <div className="text-xs text-yellow-300 tracking-wider">
+                              HaNoi Foodtours - Local dishes
+                            </div>
+                          </div>
                         </div>
                         <div
                           className={`absolute flex items-center justify-center w-full mx-auto duration-1000 ease-in-out -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 ${
                             isScrolled ? "scale-100 opacity-100" : "scale-0 opacity-0"
                           }`}
                         >
-                          <Image
+                          {/* <Image
                             className="xl:max-w-[50px] md:max-w-[60px]"
                             src="/images/homePage/logo-mobile.webp"
                             alt="Jungle Boss Mobile Logo"
                             width={50}
                             height={50}
                             priority
-                          />
+                          /> */}
+                          <div className="text-2xl text-center md:text-xl font-bold text-yellow-400">
+                            <div className="mt-2">FLYGORA</div>
+                            <div className="mb-2">TRAVEL</div>
+                          </div>
                         </div>
                       </div>
 
                       {/* Mobile: Logo đơn giản với kích thước cố định */}
                       <div className="block md:hidden">
                         <div className="max-w-[180px]">
-                          <Image
+                          {/* <Image
                             className="max-w-[180px]"
                             src="/images/homePage/logo.webp"
                             alt="Jungle Boss Logo"
@@ -197,7 +206,13 @@ const HeaderGotravel: React.FC = () => {
                             height={60}
                             priority
                             loading="eager"
-                          />
+                          /> */}
+                          <div className="text-[13px] text-center md:text-3xl font-bold text-yellow-400">
+                            FLYGORA TRAVEL
+                            <div className="text-[8px] text-yellow-300 tracking-wider">
+                              HaNoi Foodtours - Local dishes
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>

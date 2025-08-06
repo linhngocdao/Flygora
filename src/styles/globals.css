@@ -1,8 +1,5 @@
 @import "tailwindcss";
-@import "tw-animate-css";
-@import "./menu.css";
-
-@custom-variant dark (&:is(.dark *));
+@import "./custom.css";
 
 :root {
   --font-geomanist: "Geomanist", sans-serif;

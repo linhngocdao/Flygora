@@ -10,7 +10,6 @@ import {
   updateTour,
   updateTourStatus,
   deleteTour,
-  uploadTourImage,
 } from "@/config/tour/tour.api";
 import { QueryGetTours, TourPayload } from "@/types/tour.type";
 
@@ -158,27 +157,6 @@ export function useDeleteTour() {
     },
     onError: (error: any) => {
       const message = error?.response?.data?.message || error.message || "Lỗi khi xóa tour";
-      toast.error(message);
-    },
-  });
-}
-
-// Hook để upload hình ảnh tour
-export function useUploadTourImage() {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: ({ tourId, file, caption }: { tourId: string; file: File; caption?: string }) =>
-      uploadTourImage(tourId, file, caption),
-    onSuccess: (response, { tourId }) => {
-      // Invalidate tour detail để refetch images
-      queryClient.invalidateQueries({ queryKey: tourKeys.detail(tourId) });
-
-      toast.success("Upload hình ảnh thành công!");
-      return response;
-    },
-    onError: (error: any) => {
-      const message = error?.response?.data?.message || error.message || "Lỗi khi upload hình ảnh";
       toast.error(message);
     },
   });

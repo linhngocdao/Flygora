@@ -7,6 +7,7 @@ import "swiper/css/scrollbar";
 import Script from "next/script";
 import localFont from "next/font/local";
 import { Toaster } from "@/components/ui/sonner";
+import "quill/dist/quill.core.css";
 
 const geomanist = localFont({
   src: [

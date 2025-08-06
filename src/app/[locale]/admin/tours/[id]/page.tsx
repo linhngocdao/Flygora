@@ -34,6 +34,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getTourById } from "@/config/tour/tour.api";
 import { formatCurrency } from "@/utilities/currency";
 import { useTourStore } from "@/store/tour.store";
+import Image from "next/image";
 
 const TourDetailPage = () => {
   const params = useParams();
@@ -501,7 +502,8 @@ const TourDetailPage = () => {
                     {tour.tour_detail_images.map((image) => (
                       <div key={image.id} className="relative group">
                         <div className="w-full h-24 bg-gray-200 rounded-md overflow-hidden">
-                          <img
+                          <Image
+                            fill
                             src={image.image_url}
                             alt={image.caption || "Tour image"}
                             className="w-full h-full object-cover"
