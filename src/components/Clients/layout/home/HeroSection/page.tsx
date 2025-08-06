@@ -59,21 +59,23 @@ interface SearchFormProps {
   isMobile?: boolean;
   onClose?: () => void;
   onCalendarOpen?: () => void;
-  onCalendarClose?: () => void;
+  selectedDate?: Date;
+  onDateChange?: (date: Date) => void;
 }
 
 const SearchForm: React.FC<SearchFormProps> = ({
   isMobile = false,
   onClose,
   onCalendarOpen,
-  onCalendarClose,
+  selectedDate: externalSelectedDate,
+  onDateChange,
 }) => {
   const t = useTranslations("common.heroSection");
   const [selectedTour, setSelectedTour] = useState<string>("");
-  const [selectedDate, setSelectedDate] = useState<Date>();
   const [selectedParticipants, setSelectedParticipants] = useState<string>("1");
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-  const [isCalendarFullscreen, setIsCalendarFullscreen] = useState(false);
+
+  const selectedDate = externalSelectedDate;
 
   const handleSearch = () => {
     console.log({
@@ -89,7 +91,7 @@ const SearchForm: React.FC<SearchFormProps> = ({
   const formContent = (
     <div
       className={cn(
-        "bg-white  rounded-2xl border-4 border-[rgb(214,226,80)] p-4",
+        "bg-white rounded-2xl border-4 border-[rgb(214,226,80)] p-4",
         "shadow-[rgba(0,0,0,0.15)_0px_4px_8px_0px]",
         isMobile ? "w-full" : "xl:px-12 md:px-8"
       )}
@@ -135,7 +137,6 @@ const SearchForm: React.FC<SearchFormProps> = ({
             <Button
               variant="outline"
               onClick={() => {
-                setIsCalendarFullscreen(true);
                 onCalendarOpen?.();
               }}
               className={cn(
@@ -167,7 +168,7 @@ const SearchForm: React.FC<SearchFormProps> = ({
                   selected={selectedDate}
                   onSelect={(date) => {
                     console.log(date);
-                    setSelectedDate(date);
+                    onDateChange?.(date);
                     setIsCalendarOpen(false);
                   }}
                   disabled={(date) => date < new Date()}
@@ -233,47 +234,6 @@ const SearchForm: React.FC<SearchFormProps> = ({
           </Button>
         </div>
       </div>
-
-      {/* Fullscreen Calendar for Mobile */}
-      {isCalendarFullscreen && isMobile && (
-        <div className="fixed inset-0 z-[100002] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="relative">
-            <CustomCalendar
-              selected={selectedDate}
-              onSelect={(date) => {
-                console.log(date);
-                setSelectedDate(date);
-                setIsCalendarFullscreen(false);
-                onCalendarClose?.();
-              }}
-              disabled={(date) => date < new Date()}
-              isInModal={true}
-            />
-            {/* Close button */}
-            <button
-              onClick={() => {
-                setIsCalendarFullscreen(false);
-                onCalendarClose?.();
-              }}
-              className="absolute -top-2 -right-2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-all duration-200"
-            >
-              <svg
-                className="w-4 h-4 text-gray-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 
@@ -284,6 +244,7 @@ const HeroSection = () => {
   const t = useTranslations("common.heroSection");
   const [isMobileModalOpen, setIsMobileModalOpen] = useState(false);
   const [isCalendarMode, setIsCalendarMode] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<Date>();
 
   return (
     <div>
@@ -341,7 +302,7 @@ const HeroSection = () => {
                     />
 
                     {/* Modal Content */}
-                    <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md max-h-[90vh] overflow-hidden animate-in slide-in-from-bottom-4 duration-500 ease-out">
+                    <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md max-h-[90vh] overflow-hidden animate-in slide-in-from-bottom-4 duration-500 ease-out !bottom-[70px]">
                       {/* Modal Header */}
                       <div className="flex items-center justify-between p-6 border-b border-gray-100">
                         <h2 className="text-xl font-semibold text-gray-900">{t("findYourTrip")}</h2>
@@ -371,7 +332,8 @@ const HeroSection = () => {
                           isMobile={true}
                           onClose={() => setIsMobileModalOpen(false)}
                           onCalendarOpen={() => setIsCalendarMode(true)}
-                          onCalendarClose={() => setIsCalendarMode(false)}
+                          selectedDate={selectedDate}
+                          onDateChange={setSelectedDate}
                         />
                       </div>
                     </div>
@@ -383,10 +345,50 @@ const HeroSection = () => {
 
           {/* Desktop Search Form */}
           <div className="max-lg:hidden">
-            <SearchForm />
+            <SearchForm selectedDate={selectedDate} onDateChange={setSelectedDate} />
           </div>
         </div>
       </section>
+
+      {/* Fullscreen Calendar for Mobile */}
+      {isCalendarMode &&
+        typeof window !== "undefined" &&
+        createPortal(
+          <div className="fixed inset-0 z-[100003] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+            <div className="relative bottom-[100px]">
+              <CustomCalendar
+                selected={selectedDate}
+                onSelect={(date) => {
+                  console.log(date);
+                  setSelectedDate(date);
+                  setIsCalendarMode(false);
+                }}
+                disabled={(date) => date < new Date()}
+                isInModal={true}
+              />
+              {/* Close button */}
+              <button
+                onClick={() => setIsCalendarMode(false)}
+                className="absolute -top-2 -right-2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-all duration-200"
+              >
+                <svg
+                  className="w-4 h-4 text-gray-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>,
+          document.body
+        )}
     </div>
   );
 };
