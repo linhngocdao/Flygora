@@ -180,8 +180,7 @@ export const useCategoryStore = create<CategoryState>((set, get) => ({
       setLoading(true);
       setError(null);
 
-      const response = await categoryAPI.getCategory(filters);
-      console.log("response", response);
+      const response: any = await categoryAPI.getCategory(filters);
 
       if (response.success && response.data) {
         // Response.data luôn là array theo API structure
@@ -214,7 +213,7 @@ export const useCategoryStore = create<CategoryState>((set, get) => ({
       setLoading(true);
       setError(null);
 
-      const response = await categoryAPI.createCategory(data);
+      const response: any = await categoryAPI.createCategory(data);
 
       if (response.success && response.data) {
         addCategory(response.data);
@@ -237,7 +236,7 @@ export const useCategoryStore = create<CategoryState>((set, get) => ({
       setLoading(true);
       setError(null);
 
-      const response = await categoryAPI.updateCategory(id, data);
+      const response: any = await categoryAPI.updateCategory(id, data);
 
       if (response.success && response.data) {
         updateCategory(id, response.data);
@@ -260,7 +259,7 @@ export const useCategoryStore = create<CategoryState>((set, get) => ({
       setLoading(true);
       setError(null);
 
-      const response = await categoryAPI.deleteCategory(id);
+      const response: any = await categoryAPI.deleteCategory(id);
 
       if (response.success) {
         removeCategory(id);
