@@ -277,7 +277,7 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({
                       className={cn(
                         "px-1 sm:px-2 py-1 sm:py-2 text-xs sm:text-sm font-medium rounded-lg transition-all duration-200 hover:bg-[#6c8a1f]/10 text-center min-w-[36px] sm:min-w-[44px]",
                         currentYear === year &&
-                        "bg-[#6c8a1f] text-white font-semibold shadow-md ring-2 ring-[#6c8a1f]/30"
+                          "bg-[#6c8a1f] text-white font-semibold shadow-md ring-2 ring-[#6c8a1f]/30"
                       )}
                     >
                       {year}
@@ -341,17 +341,17 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({
 
                 // Today
                 todayClass &&
-                isCurrentMonth &&
-                !selectedClass &&
-                "bg-blue-50 text-blue-600 font-semibold ring-2 ring-blue-200",
+                  isCurrentMonth &&
+                  !selectedClass &&
+                  "bg-blue-50 text-blue-600 font-semibold ring-2 ring-blue-200",
 
                 // Selected
                 selectedClass && "bg-[#6c8a1f] text-white font-semibold shadow-lg",
 
                 // Disabled
                 disabledClass &&
-                isCurrentMonth &&
-                "text-gray-300 cursor-not-allowed hover:bg-transparent hover:scale-100",
+                  isCurrentMonth &&
+                  "text-gray-300 cursor-not-allowed hover:bg-transparent hover:scale-100",
 
                 // Animation delay for staggered effect
                 "animate-in fade-in duration-200"
