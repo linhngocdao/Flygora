@@ -17,80 +17,21 @@ const AllAdventureTour = () => {
   const tours = [
     {
       id: 1,
-      title: t("tour1.title"),
-      level: t("tour1.level"),
-      duration: t("tour1.duration"),
+      title: "Hanoi Exclusive Food Tour",
+      duration: "4-6 hours",
       rating: 4.9,
       reviews: t("seeReviews"),
-      price: t("tour1.price"),
-      image:
-        "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp",
+      price: "USD 35/person",
+      image: "/images/homePage/foodtour1.jpg",
     },
     {
       id: 2,
-      title: t("tour2.title"),
-      level: t("tour2.level"),
-      duration: t("tour2.duration"),
+      title: "Team building Ha Noi",
+      duration: "Everyday",
       rating: 4.9,
       reviews: t("seeReviews"),
-      price: t("tour2.price"),
-      image:
-        "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp",
-    },
-    {
-      id: 3,
-      title: t("tour3.title"),
-      level: t("tour3.level"),
-      duration: t("tour3.duration"),
-      rating: 4.9,
-      reviews: t("seeReviews"),
-      price: t("tour3.price"),
-      image:
-        "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp",
-    },
-    {
-      id: 4,
-      title: t("tour4.title"),
-      level: t("tour4.level"),
-      duration: t("tour4.duration"),
-      rating: 4.9,
-      reviews: t("seeReviews"),
-      price: t("tour4.price"),
-      image:
-        "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp",
-    },
-    {
-      id: 5,
-      title: t("tour4.title"),
-      level: t("tour4.level"),
-      duration: t("tour4.duration"),
-      rating: 4.9,
-      reviews: t("seeReviews"),
-      price: t("tour4.price"),
-      image:
-        "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp",
-    },
-    {
-      id: 6,
-      title: t("tour4.title"),
-      level: t("tour4.level"),
-      duration: t("tour4.duration"),
-      rating: 4.9,
-      reviews: t("seeReviews"),
-      price: t("tour4.price"),
-      image:
-        "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp",
-    },
-    {
-      id: 7,
-      title: t("tour4.title"),
-      level: t("tour4.level"),
-      duration: t("tour4.duration"),
-      rating: 4.9,
-      reviews: t("seeReviews"),
-      price: t("tour4.price"),
-      image:
-        "https://cms.junglebosstours.com/assets/d8f4f27a-d570-4fa9-8563-fab2c8df64c3?format=webp",
+      price: "Negotiation",
+      image: "/images/homePage/teambuilding3.jpg",
     },
   ];
 
@@ -261,7 +202,6 @@ const AllAdventureTour = () => {
                         {tour.title}
                       </h3>
                       <div className="space-y-1 text-sm text-gray-600">
-                        <p className="font-medium text-gray-700">{tour.level}</p>
                         <p className="font-medium text-gray-700">{tour.duration}</p>
                         <div className="flex items-center justify-between pt-1">
                           <div className="flex items-center gap-2">
