@@ -227,28 +227,25 @@ const FAQ = () => {
                   height={15}
                   src="/images/homePage/ic-arrow-down.svg"
                   alt="arrow down"
-                  className={`object-cover transition-all duration-300 ${
-                    isDropdownOpen ? "rotate-180" : ""
-                  }`}
+                  className={`object-cover transition-all duration-300 ${isDropdownOpen ? "rotate-180" : ""
+                    }`}
                 />
               </div>
 
               {/* Dropdown Content */}
               <div
-                className={`transition-all duration-300 ease-in-out ${
-                  isDropdownOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
-                } overflow-hidden`}
+                className={`transition-all duration-300 ease-in-out ${isDropdownOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
+                  } overflow-hidden`}
               >
                 <div className="border-t border-primary-700">
                   {faqCategories.map((category, index) => (
                     <div
                       key={category.id}
                       onClick={() => handleMobileSelect(category.id)}
-                      className={`px-4 py-3 border-b border-primary-700 last:border-b-0 cursor-pointer transition-colors duration-200 ${
-                        activeCategory === category.id
+                      className={`px-4 py-3 border-b border-primary-700 last:border-b-0 cursor-pointer transition-colors duration-200 ${activeCategory === category.id
                           ? "bg-white text-[#4c5d36] font-medium"
                           : "text-[#99BB40] hover:bg-primary-700 hover:text-white"
-                      }`}
+                        }`}
                     >
                       <div className="flex items-center justify-between">
                         <span className="text-sm leading-tight">{category.title}</span>
@@ -271,11 +268,10 @@ const FAQ = () => {
                       <li key={category.id} className="border-b border-[#99BB40] last:border-b-0">
                         <div
                           onClick={() => handleDesktopSelect(category.id)}
-                          className={`group flex cursor-pointer items-center justify-between px-3 py-4 font-medium transition-all duration-200 ${
-                            activeCategory === category.id
+                          className={`group flex cursor-pointer items-center justify-between px-3 py-4 font-medium transition-all duration-200 ${activeCategory === category.id
                               ? "text-[#FCFFDF]"
                               : "text-[#99BB40] hover:text-[#FCFFDF]"
-                          }`}
+                            }`}
                         >
                           <div className="flex-1 pr-3 text-[15px] leading-snug">
                             {category.title}

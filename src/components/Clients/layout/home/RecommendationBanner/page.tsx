@@ -64,8 +64,8 @@ const RecommendationBanner = () => {
             </h2>
           </div>
           <div className="flex justify-center space-x-4">
-            <ButtonPrimary name={t("callButton")} href="/contact" />
-            <ButtonPrimary name={t("callbackButton")} href="/contact" />
+            <ButtonPrimary name={t("callButton")} href="tel:+84793946789" />
+            <ButtonPrimary name={t("callbackButton")} href="/contact-us" />
           </div>
         </div>
       </section>

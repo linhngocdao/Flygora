@@ -31,23 +31,23 @@
     "viewReviews": "[Customer Review]",
     "description": "At Flygora, we craft Vietnamese culinary journeys designed exclusively for small groups and teambuilding activities. We will take you deep into the local culture, savoring unique and quintessential dishes that most tourists never discover. With a commitment to green, sustainable tourism and 5-star service standards, Flygora guarantees an experience that is not only delicious but also premium and meaningful.",
     "aboutUsButton": "About us",
-    "Our_Advantage":{
+    "Our_Advantage": {
       "headTitle": " Our Advantage",
       "title": "Why Flygora is Your Best Choice for Culinary Travel in Vietnam ?",
       "UniqueExperience": {
-        "title" : "Unique Experience",
-        "content" :"Discover the identity of local cuisine through meticulously selected dishes, where every flavor is a delightful surprise, blended with refined and attentive service."
+        "title": "Unique Experience",
+        "content": "Discover the identity of local cuisine through meticulously selected dishes, where every flavor is a delightful surprise, blended with refined and attentive service."
       },
-      "ExclusiveTour" :{
-        "title" : "Exclusive Tour",
+      "ExclusiveTour": {
+        "title": "Exclusive Tour",
         "content": "Every journey with Flygora is a one-of-a-kind experience. We lead you to the 'hidden gems' of local cuisine – exquisite delicacies that are not found on the typical tourist map."
       },
       "FoodSafety": {
         "title": "Food Safety",
         "content": "We are committed to food safety, using fresh, clean ingredients with transparent origins. Please inform us in advance of any allergies or special dietary requirements."
       },
-      "SustainableDevelopment":{
-        "title":"Sustainable Development",
+      "SustainableDevelopment": {
+        "title": "Sustainable Development",
         "content": "We are committed to protecting the environment and supporting local communities through sustainable practices."
       }
     }
@@ -71,8 +71,8 @@
     "title": "Team Building Tours",
     "subtitle": "Kickstart team collaboration with exciting challenges",
     "description": {
-      "paragraph1": "Immerse your team in an unparalleled adventure among the stunning forests of Phong Nha - Ke Bang National Park. Jungle Boss team building is a transformative journey marked by unique and challenging games, setting us apart from conventional team building contexts in Vietnam. Escape the mundane and embrace the extraordinary as your team engages in missions requiring cooperation, creativity and camaraderie. Our jungle setting serves as the perfect canvas to foster team spirit, creating an atmosphere that is not only fun but also unforgettable.",
-      "paragraph2": "Experience a one-of-a-kind adventure with us – a promise that not only strengthens team relationships but also creates lasting memories of an extraordinarily special experience. At Jungle Boss, we redefine team building, turning it into an enchanting and exciting adventure that transcends the ordinary, leaving a lasting mark on your group's collective journey. There are various team building options from 1 day to multiple days. Leave your requirements with us and we can help you design a unique Jungle Team building that suits your needs!"
+      "paragraph1": "Redefine what a teambuilding event can achieve. With Flygora Travel, your corporate retreat becomes a powerful strategic investment in your company's culture and success. Drawing on years of expertise, we meticulously design itineraries where luxury is the setting for real connection and growth.",
+      "paragraph2": "Our seamless, 24/7 logistical support ensures a flawless experience, allowing your team the freedom to innovate without distraction. Rewarding them with opulent 5-star accommodations and curated gourmet dining isn't just a perk—it's a powerful statement that you value excellence. Choose the VIP experience that delivers tangible returns in morale, motivation, and team cohesion."
     }
   },
   "guestReview": {
@@ -122,30 +122,23 @@
       "firstName": "First name",
       "firstNamePlaceholder": "Enter your first name",
       "firstNameRequired": "Please enter first name",
-
       "lastName": "Last name",
       "lastNamePlaceholder": "Enter your last name",
       "lastNameRequired": "Please enter last name",
-
       "email": "Email",
       "emailPlaceholder": "Enter email address",
       "emailInvalid": "Please enter a valid email address",
-
       "mobilePhone": "Phone number",
       "phoneNumberPlaceholder": "Enter phone number",
       "phoneNumberRequired": "Please enter phone number",
       "phonePrefixRequired": "Please select country code",
-
       "message": "Message",
       "messagePlaceholder": "Enter your request or any information about our tours.",
-
       "select": "Select",
       "search": "Search",
       "allCountries": "All countries",
-
       "sendRequest": "Send request",
       "sending": "Sending...",
-
       "submitSuccess": "Thank you for sending your message! We will contact you as soon as possible.",
       "submitError": "Sorry, an error occurred while sending the form. Please try again."
     },
@@ -191,14 +184,8 @@
     "answer3": "Jungle Boss uses compost toilets for all adventure tours. They are environmentally friendly and regularly maintained to ensure hygiene.",
     "question4": "What type of food is provided in the tours?",
     "answer4": "In our tours, Jungle Boss provides a variety of Vietnamese food including local specialties, fresh fruits and nutritious snacks.",
-    "question5": "Do I need to bring my own cave exploration and camping gear?",
-    "answer5": "You don't need to bring your own cave exploration or camping gear as Jungle Boss provides all necessary safety equipment including helmets, flashlights and ropes.",
-    "question6": "Am I allowed to join the tour if I can't swim?",
-    "answer6": "Absolutely, you will be provided with life jackets to ensure safety during the adventure. Our guides are trained to assist non-swimmers.",
-    "question7": "What skills do I need?",
-    "answer7": "While prior experience in cave exploration, hiking and camping may be beneficial, it is not required. Our tours are designed for all skill levels.",
-    "question8": "What are the different levels of adventure tours?",
-    "answer8": "Our tours range from relaxing to extremely adventurous, from Level 1 (Family-friendly) to Level 5 (Expert - requiring advanced skills).",
+    "question5": "What is your policy on tour cancellations and refunds?",
+    "answer5": "Our policy on tour cancellations and refunds is as follows: If you cancel the tour within a specified time frame, you will receive a full or partial refund depending on the cancellation time. However, if you cancel close to the departure date, a cancellation fee will apply. Please refer to the terms and conditions for each tour for more details.",
     "oldFaq": {
       "categories": {
         "security-management": {
@@ -358,8 +345,8 @@
   },
   "recommendationBanner": {
     "title": "Still trying to decide?",
-    "subtitle": "The passionate Jungle Boss team is always ready to help you.",
-    "callButton": "Call hotline",
+    "subtitle": "The passionate Flygora team is always ready to help you.",
+    "callButton": "Decision call",
     "callbackButton": "Request callback"
   }
 }
