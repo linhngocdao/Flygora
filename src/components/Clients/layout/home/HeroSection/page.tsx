@@ -21,19 +21,8 @@ import { format } from "date-fns";
 import CustomCalendar from "@/components/ui/CustomCalendar";
 
 const tours = [
-  { id: "do-quyen-waterfall-zipline", name: "Do Quyen Waterfall Zipline Experience" },
-  { id: "tra-ang-excursion", name: "Tra Ang Excursion 1D" },
-  { id: "phong-huong-adventure", name: "Phong Huong Adventure 1D" },
-  { id: "elephant-cave-ma-da-valley", name: "Elephant Cave & Ma Da Valley Jungle Trek 1D" },
-  { id: "phong-huong-excursion-2d1n", name: "Phong Huong Excursion 2D1N" },
-  { id: "phong-huong-adventure-2d1n", name: "Phong Huong Adventure 2D1N" },
-  { id: "ma-da-valley-jungle-camping", name: "Ma Da Valley Jungle Camping 2D1N" },
-  { id: "hang-pygmy-exploration", name: "Hang Pygmy Exploration 2D1N" },
-  { id: "phi-lieng-exploration", name: "Phi Lieng Exploration 2D1N" },
-  {
-    id: "do-quyen-waterfall-top-adventure",
-    name: "Do Quyen Waterfall Top Adventure Conquering 2D1N",
-  },
+  { id: "Hanoi-Exclusive-Food-Tour", name: "Hanoi Exclusive Food Tour" },
+  { id: "Team-Building-Ha-Noi", name: "Team Building Ha Noi" },
 ];
 
 const participantOptions = [
