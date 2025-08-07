@@ -43,8 +43,8 @@ const FullScreenMenu: React.FC<FullScreenMenuProps> = ({ isMenuOpen, onCloseMenu
 
   const menuItems: MenuItemType[] = [
     {
-      id: "adventure-tours",
-      label: "Adventure Tours",
+      id: "food-tours",
+      label: "Food Tours",
       href: "/tour",
     },
     {
@@ -213,25 +213,16 @@ const FullScreenMenu: React.FC<FullScreenMenuProps> = ({ isMenuOpen, onCloseMenu
                   </div>
 
                   {/* Social Media Icons - Responsive sizing */}
-                  <div className="flex space-x-1 lg:space-x-2">
+                  <div className="flex justify-center space-x-1 lg:space-x-2">
                     {[
                       {
-                        href: "https://tripadvisor.com/junglebosstours",
-                        icon: "icon-tripadvisor.png",
-                        label: "TripAdvisor",
-                      },
-                      {
-                        href: "https://facebook.com/junglebosstours",
+                        href: "https://www.facebook.com/flygora",
                         icon: "icon-facebook.png",
                         label: "Facebook",
                       },
+
                       {
-                        href: "https://youtube.com/@junglebosstours",
-                        icon: "icon-youtube.png",
-                        label: "YouTube",
-                      },
-                      {
-                        href: "https://instagram.com/junglebosstours",
+                        href: "https://www.instagram.com/flygora",
                         icon: "icon-instagram.png",
                         label: "Instagram",
                       },

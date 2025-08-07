@@ -49,37 +49,42 @@ const TopAdventureTour = () => {
     {
       id: "1",
       alt: "Kong Collapse Cave Adventure",
-      src: "https://images.unsplash.com/photo-1551632811-561732d1e306?w=1200&h=800&fit=crop&q=90",
+      src: "/images/homePage/foodtour1.jpg",
     },
     {
       id: "2",
       alt: "Underground Cave Exploration",
-      src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=800&fit=crop&q=90",
+      src: "/images/homePage/foodtour2.jpg",
     },
     {
       id: "3",
       alt: "Cave Water Adventure",
-      src: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&h=800&fit=crop&q=90",
+      src: "/images/homePage/foodtour3.jpg",
     },
     {
       id: "4",
       alt: "Rock Formation Climbing",
-      src: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1200&h=800&fit=crop&q=90",
+      src: "/images/homePage/foodtour4.jpg",
     },
     {
       id: "5",
       alt: "Cave Rappelling Adventure",
-      src: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1200&h=800&fit=crop&q=90",
+      src: "/images/homePage/foodtour5.jpg",
     },
     {
       id: "6",
       alt: "Underground River Exploration",
-      src: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&h=800&fit=crop&q=90",
+      src: "/images/homePage/foodtour6.jpg",
     },
     {
       id: "7",
       alt: "Cave Adventure Team",
-      src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&h=800&fit=crop&q=90",
+      src: "/images/homePage/foodtour17.jpg",
+    },
+    {
+      id: "8",
+      alt: "Cave Adventure Team",
+      src: "/images/homePage/foodtour8.jpg",
     },
   ];
 
@@ -245,11 +250,13 @@ const TopAdventureTour = () => {
               <div className="space-y-3">
                 <h2 className="pre-header text-[#6c8a1f] tracking-[1.4px]">{t("title")}</h2>
                 <h1 className="text-2xl lg:text-3xl font-bold uppercase text-[#004750] leading-tight">
-                  KONG COLLAPSE TOP ADVENTURE 5D4N
+                  Hanoi&apos;s Ultimate Old-Quarter Food Tour
                 </h1>
                 <p className="text-gray-600 leading-relaxed text-sm lg:text-base">
-                  The 05-day, 04-night journey to conquer Kong collapse will take you on an
-                  adventurous and challenging expedition. This is one of the most exciting...
+                  Explore Hanoi’s Old Quarter backstreets, visiting authentic local eateries and
+                  seeing iconic sights. This immersive food tour includes making your own banh mi,
+                  visiting the largest wet market, and trying over 10 different dishes showcasing
+                  Vietnam&apos;s incredible cuisine and culture.
                 </p>
               </div>
 
@@ -267,7 +274,7 @@ const TopAdventureTour = () => {
                     />
                     <span className="text-gray-700 text-sm">Duration</span>
                   </div>
-                  <span className="text-gray-900 font-semibold text-sm">5 days 4 nights</span>
+                  <span className="text-gray-900 font-semibold text-sm"> 4-6 hours</span>
                 </div>
 
                 {/* Participant */}
@@ -282,7 +289,7 @@ const TopAdventureTour = () => {
                     />
                     <span className="text-gray-700 text-sm">Participant</span>
                   </div>
-                  <span className="text-gray-900 font-semibold text-sm">Up to 10 pax</span>
+                  <span className="text-gray-900 font-semibold text-sm">Up to 12 pax</span>
                 </div>
 
                 {/* Difficulty */}
@@ -295,10 +302,10 @@ const TopAdventureTour = () => {
                       height={18}
                       className="w-[18px] h-[18px] opacity-70"
                     />
-                    <span className="text-gray-700 text-sm">Difficulty</span>
+                    <span className="text-gray-700 text-sm">Service</span>
                   </div>
                   <span className="text-gray-900 font-semibold text-sm">
-                    Level 7 - Extremely Strenuous
+                    Vietnamese food, drink
                   </span>
                 </div>
 
@@ -314,7 +321,7 @@ const TopAdventureTour = () => {
                     />
                     <span className="text-gray-700 text-sm">Departure Day</span>
                   </div>
-                  <span className="text-gray-900 font-semibold text-sm">Tuesday, Friday</span>
+                  <span className="text-gray-900 font-semibold text-sm">Everyday</span>
                 </div>
 
                 {/* Meeting Point */}
@@ -329,7 +336,7 @@ const TopAdventureTour = () => {
                     />
                     <span className="text-gray-700 text-sm">Meeting point</span>
                   </div>
-                  <span className="text-gray-900 font-semibold text-sm">Jungle Boss Office</span>
+                  <span className="text-gray-900 font-semibold text-sm">In tour detail</span>
                 </div>
 
                 {/* Overall Rating */}
@@ -345,7 +352,7 @@ const TopAdventureTour = () => {
                     <span className="text-gray-700 text-sm">Overall rating</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-gray-900 font-semibold text-sm">4.9</span>
+                    <span className=" font-semibold text-sm">4.9</span>
                     <Image
                       src="/images/homePage/star.svg"
                       alt="star"
@@ -369,7 +376,7 @@ const TopAdventureTour = () => {
                     />
                     <span className="text-gray-700 text-sm">Price</span>
                   </div>
-                  <span className="text-gray-900 font-bold text-base">VND 35,000,000/pax</span>
+                  <span className="text-gray-900 font-bold text-base">USD 35/pax</span>
                 </div>
               </div>
 

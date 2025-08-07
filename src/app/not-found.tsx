@@ -22,13 +22,15 @@ const EmptyPage = () => {
               />
             </div>
             <div className="text-center text-gray-200 text-[1rem] md:text-[1rem] lg:text-[1.2rem] font-bold">
-              <span>Oops! Có vẻ như bạn đang đi nhầm hướng. Liên hệ Jungle Boss qua hotline </span>
-              <a href="tel:+84917800805" className="lg:hover:text-primary lg:duration-150">
-                (+84) 917 800 805
+              <span>
+                Oops! Có vẻ như bạn đang đi nhầm hướng. Liên hệ Flygora Travel qua hotline
+              </span>
+              <a href="tel:+84793946789" className="lg:hover:text-primary lg:duration-150">
+                (+84) 793 946 789
               </a>
               <span> hoặc </span>
-              <a href="tel:+84859100222" className="lg:hover:text-primary lg:duration-150">
-                (+84) 859 100 222
+              <a href="tel:+84397897222" className="lg:hover:text-primary lg:duration-150">
+                (+84) 397 897 222
               </a>
               <span> để chúng tôi giúp bạn tìm đường.</span>
             </div>

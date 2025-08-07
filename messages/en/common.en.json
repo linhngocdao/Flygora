@@ -82,10 +82,10 @@
     "exploreButton": "Explore"
   },
   "featuredTour": {
-    "title": "Top adventure tours",
-    "tourName": "Kong Collapse Top Adventure 5D4N",
+    "title": "Top food tours",
+    "tourName": "Hanoi's Ultimate Old-Quarter Food Tour",
     "duration": "Duration",
-    "durationValue": "5 days 4 nights",
+    "durationValue": "4-6 hours",
     "participant": "Participants",
     "participantValue": "Maximum 10 people",
     "difficulty": "Difficulty",
@@ -181,9 +181,9 @@
     "question2": "How to avoid storms and lightning in tours?",
     "answer2": "We are aware of the potential risks associated with storms and lightning and have strict safety procedures. We continuously monitor weather conditions and will postpone or relocate tours if there is a risk.",
     "question3": "Are there toilets in the tours?",
-    "answer3": "Jungle Boss uses compost toilets for all adventure tours. They are environmentally friendly and regularly maintained to ensure hygiene.",
+    "answer3": "Flygora uses compost toilets for all adventure tours. They are environmentally friendly and regularly maintained to ensure hygiene.",
     "question4": "What type of food is provided in the tours?",
-    "answer4": "In our tours, Jungle Boss provides a variety of Vietnamese food including local specialties, fresh fruits and nutritious snacks.",
+    "answer4": "In our tours, Flygora provides a variety of Vietnamese food including local specialties, fresh fruits and nutritious snacks.",
     "question5": "What is your policy on tour cancellations and refunds?",
     "answer5": "Our policy on tour cancellations and refunds is as follows: If you cancel the tour within a specified time frame, you will receive a full or partial refund depending on the cancellation time. However, if you cancel close to the departure date, a cancellation fee will apply. Please refer to the terms and conditions for each tour for more details.",
     "oldFaq": {
