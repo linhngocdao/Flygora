@@ -32,8 +32,6 @@ export const CategorySelect: React.FC<CategorySelectProps> = ({
   emptyLabel = "-- Không chọn --",
 }) => {
   const { activeCategories, loading, error } = useCategory();
-  console.log("activeCategories", activeCategories);
-
   if (error) {
     return (
       <Select disabled>

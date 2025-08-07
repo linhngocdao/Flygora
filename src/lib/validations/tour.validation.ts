@@ -1,5 +1,38 @@
 import z from "zod";
 
+// Tách các schema con để tối ưu performance
+const TourImageSchema = z.object({
+  image_url: z.string(),
+  caption: z.string().optional(),
+  sort_order: z.number().optional(),
+});
+
+const TourItinerarySchema = z.object({
+  session: z.string(),
+  title: z.string(),
+  description: z.string(),
+  sort_order: z.number().optional(),
+});
+
+const TourInclusionSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  sort_order: z.number().optional(),
+});
+
+const VideoSchema = z.object({
+  url: z.string(),
+  title: z.string().optional(),
+  sort_order: z.number().optional(),
+});
+
+const TourHighlightSchema = z.object({
+  icon: z.string(),
+  title: z.string(),
+  sort_order: z.number().optional(),
+});
+
+// Schema chính với lazy validation cho arrays
 export const TourFormSchema = z.object({
   title: z.string().min(1, "Tiêu đề tour là bắt buộc"),
   description: z.string().min(1, "Mô tả là bắt buộc"),
@@ -48,45 +81,10 @@ export const TourFormSchema = z.object({
   meta_robot: z.array(z.string()).optional(),
   meta_title: z.string().optional(),
 
-  // Related data arrays
-  tour_images: z.array(
-    z.object({
-      image_url: z.string(),
-      caption: z.string().optional(),
-      sort_order: z.number().optional(),
-    })
-  ),
-
-  tour_intenerary: z.array(
-    z.object({
-      session: z.string(),
-      title: z.string(),
-      description: z.string(),
-      sort_order: z.number().optional(),
-    })
-  ),
-
-  tour_inclusions: z.array(
-    z.object({
-      title: z.string(),
-      description: z.string(),
-      sort_order: z.number().optional(),
-    })
-  ),
-
-  videos: z.array(
-    z.object({
-      url: z.string(),
-      title: z.string().optional(),
-      sort_order: z.number().optional(),
-    })
-  ),
-
-  tour_highlights: z.array(
-    z.object({
-      icon: z.string(),
-      title: z.string(),
-      sort_order: z.number().optional(),
-    })
-  ),
+  // Related data arrays - quay lại cách cũ để tránh lỗi render
+  tour_images: z.array(TourImageSchema).optional(),
+  tour_intenerary: z.array(TourItinerarySchema).optional(),
+  tour_inclusions: z.array(TourInclusionSchema).optional(),
+  videos: z.array(VideoSchema).optional(),
+  tour_highlights: z.array(TourHighlightSchema).optional(),
 });

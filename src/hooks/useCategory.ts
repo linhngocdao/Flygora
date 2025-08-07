@@ -67,7 +67,6 @@ export const useCategory = () => {
    */
   const getActiveCategories = (): Category[] => {
     return categories.filter((category) => {
-      console.log("category hook", category);
       return category.status === "active";
     });
   };

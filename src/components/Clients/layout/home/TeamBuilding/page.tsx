@@ -46,14 +46,13 @@ const TeamBuilding = () => {
   };
 
   const imageIds = [
-    "83bd39bf-107a-474f-95d2-561a9950b543",
-    "af730d8d-dbd1-4991-a6f6-96a763a99baa",
-    "043ca800-98fc-46da-a7e4-9161dad21989",
-    "fe88327e-7382-49e2-b320-d3f637a6e0fe",
-    "279ed19c-0f05-4d18-909c-d7f0fd10454c",
-    "dace4dff-255e-4197-8b7a-5d0c7260583e",
-    "501c8981-a4cd-43f4-a3d8-962b96433382",
-    "145a9bc5-473f-406c-bb53-37dcdac8f333",
+    "teambuilding1.jpg",
+    "teambuilding2.jpg",
+    "teambuilding3.jpg",
+    "teambuilding4.jpg",
+    "teambuilding5.jpg",
+    "teambuilding6.jpg",
+    "teambuilding7.jpg",
   ];
 
   return (
@@ -90,7 +89,7 @@ const TeamBuilding = () => {
               >
                 <Image
                   className="object-cover w-full h-full"
-                  src={`https://cms.junglebosstours.com/assets/${id}?format=webp&width=800&height=512&quality=100`}
+                  src={`/images/homePage/${id}`}
                   alt={`team building image ${index}`}
                   loading="lazy"
                   width={400}

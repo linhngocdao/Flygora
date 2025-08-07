@@ -62,9 +62,9 @@
     "participantPlaceholder": "--- people"
   },
   "safetyCommitment": {
-    "title": "Safety in adventure tours",
-    "quote": "Your safety is our top priority",
-    "description": "Jungle Boss has established strategic partnerships with prestigious organizations such as the British Cave Research Association, National Speleological Association, and Vietnam Swimming & Rescue. These partnerships aim to enhance the expertise of Jungle Boss staff in cave exploration techniques and rescue operations. Through a comprehensive training program, including tour guides, safety assistants and porter teams, Jungle Boss ensures readiness to deal with potential challenges. Notably, all Jungle Boss team members and guests are equipped with high-quality safety equipment to European standards, prioritizing their safety throughout the adventure. Strict maintenance protocols are consistently applied to all safety equipment stored in caves and at the technical shop. This proactive approach minimizes potential risks, maintaining the highest safety standards. Specially designed for Kong Collapse Top Adventure, Jungle Boss has partnered with global organizations to establish a comprehensive Safety Protocol. This meticulously crafted protocol has received official endorsement from the Quang Binh People's Committee, confirming reliability and unwavering commitment to safety.",
+    "title": "Important Notes for Your Food Tour with Flygora",
+    "quote": "Food Quality and Safety are Our Top Priority",
+    "description": "At Flygora, we follow a rigorous inspection process, from selecting ingredients with transparent origins to ensuring the quality of the final dish. We are committed to making sure every meal you enjoy on our journey adheres to the highest standards of food safety and hygiene. Furthermore, our team of guides is professionally trained and knowledgeable about the ingredients in every dish. Please share any allergies or special dietary requirements with us in advance. This allows Flygora to make the most thoughtful preparations to ensure your culinary experience is both complete and memorable.",
     "buttonText": "Environmental Protection & Survival Rules"
   },
   "teamBuilding": {
@@ -76,9 +76,9 @@
     }
   },
   "guestReview": {
-    "title": "Jungle Boss Travelodge",
-    "subtitle": "A great stopover when visiting Phong Nha - Ke Bang",
-    "description": "Nestled among the vast rice fields of Phong Nha - Ke Bang region, Jungle Boss Travelodge is the ideal place for you to relax throughout your Quang Binh trip. This destination provides cozy accommodation with full amenities, including swimming pool, bar, BBQ area, high-speed Wi-Fi and free bicycles. Come here to experience peaceful, dreamy moments on this heritage land.",
+    "title": "Explore Hanoi - The Thousand-Year-Old City",
+    "subtitle": "Hanoi - Where History Meets Modernity",
+    "description": "Hanoi, the capital of Vietnam, is a city where ancient history meets modern vibrancy. Steeped in over a thousand years of culture, Hanoi offers a rich blend of historical sites, colonial architecture, and modern-day charm. From the bustling streets of the Old Quarter, with its narrow alleys and traditional markets, to the serene beauty of Hoan Kiem Lake and its surrounding temples, Hanoi offers a deep dive into Vietnam's heritage. Visitors can explore historical landmarks like the Ho Chi Minh Mausoleum, the Temple of Literature, and the Imperial Citadel of Thang Long, while also enjoying the lively atmosphere of modern cafes, art galleries, and shopping districts. Whether you're savoring traditional Vietnamese dishes at local eateries or taking a stroll through leafy boulevards, Hanoi provides an unforgettable experience where the past and present coexist harmoniously.",
     "exploreButton": "Explore"
   },
   "featuredTour": {
@@ -99,7 +99,7 @@
     }
   },
   "subscribe": {
-    "title": "Subscribe to receive information from Jungle Boss",
+    "title": "Subscribe to receive information from FLYGORA TRAVEL",
     "description": "Get the latest information about tours and special offers!",
     "form": {
       "emailPlaceholder": "Enter your email",
@@ -175,7 +175,7 @@
     }
   },
   "footerIntro": {
-    "description": "Discover the enchantment of Phong Nha-Ke Bang: Unveil legendary caves, ancient forests and crystal-clear rivers. Start your Jungle Boss adventure to experience this enchanting wonderland, immerse yourself in local culture and join us in preserving natural wonders."
+    "description": "Experience the True Taste of Vietnam: We take you on a culinary journey far beyond the familiar favorites like Pho and Banh Mi, deep into the heart of Vietnam’s authentic food culture. You'll get to savor 'hidden gem' dishes from treasured family recipes that have been perfected over generations. Experience the pure, original flavors of Vietnam, crafted from the best ingredients sourced directly from local communities."
   },
   "faq": {
     "preTitle": "Answers are waiting",

@@ -260,7 +260,7 @@ const HeroSection = () => {
             priority={false}
           />
         </div>
-        <div className="absolute inset-0 w-full h-full bg-gradient-to-t from-black/20 to-black/70"></div>
+        <div className="absolute inset-0 w-full h-full bg-gradient-to-t from-black/10 to-black/50"></div>
         {/* Search Form Container */}
         <div className="container z-[30] absolute bottom-0 -translate-x-1/2 md:translate-y-1/2 translate-y-[110%] left-1/2">
           {/* Mobile Search Form Trigger */}

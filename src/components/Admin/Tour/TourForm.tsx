@@ -1,19 +1,11 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Calendar,
-  DollarSign,
-  ImagePlus,
-  MapPin,
-  Plus,
-  Save,
-  Star,
-  Trash2,
-  Video,
-} from "lucide-react";
+import { Calendar, DollarSign, ImagePlus, MapPin, Plus, Star, Trash2, Video } from "lucide-react";
+import { forwardRef, useCallback, useImperativeHandle, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
+import { toast } from "sonner";
 
 // Components
 import { Button } from "@/components/ui/button";
@@ -42,12 +34,28 @@ import { Textarea } from "@/components/ui/textarea";
 import { VideoUpload } from "@/components/ui/VideoUpload";
 import { CategorySelect } from "@/components/ui/CategorySelect";
 import { TourFormSchema } from "@/lib/validations/tour.validation";
+import { QuillFlygora } from "@/components/ui";
 
 type TourFormValues = z.infer<typeof TourFormSchema>;
 
-const TourForm = () => {
+export interface TourFormRef {
+  submitForm: () => Promise<void>;
+  getCurrentStep: () => string;
+  goToNextStep: () => void;
+  getFormData: () => TourFormValues;
+  isFormValid: () => boolean;
+}
+
+interface TourFormProps {
+  onSubmit?: (data: TourFormValues) => void;
+}
+
+const TourForm = forwardRef<TourFormRef, TourFormProps>(({ onSubmit }, ref) => {
+  const [currentStep, setCurrentStep] = useState("basic");
+
   const form = useForm<TourFormValues>({
     resolver: zodResolver(TourFormSchema),
+    mode: "onSubmit",
     defaultValues: {
       title: "",
       description: "",
@@ -57,6 +65,7 @@ const TourForm = () => {
       product_code: "",
       tour_category_id: "",
       status: "unpublished",
+      // Arrays bây giờ là optional, chỉ khởi tạo khi cần
       tour_images: [{ image_url: "", caption: "", sort_order: 1 }],
       tour_intenerary: [{ session: "", title: "", description: "", sort_order: 1 }],
       tour_inclusions: [{ title: "", description: "", sort_order: 1 }],
@@ -65,63 +74,186 @@ const TourForm = () => {
     },
   });
 
-  const {
-    fields: imageFields,
-    append: appendImage,
-    remove: removeImage,
-  } = useFieldArray({
+  // Memoized field arrays để tránh re-computation
+  const imageFieldArray = useFieldArray({
     control: form.control,
     name: "tour_images",
   });
+  const { fields: imageFields, append: appendImage, remove: removeImage } = imageFieldArray;
 
+  const itineraryFieldArray = useFieldArray({
+    control: form.control,
+    name: "tour_intenerary",
+  });
   const {
     fields: itineraryFields,
     append: appendItinerary,
     remove: removeItinerary,
-  } = useFieldArray({
-    control: form.control,
-    name: "tour_intenerary",
-  });
+  } = itineraryFieldArray;
 
+  const inclusionFieldArray = useFieldArray({
+    control: form.control,
+    name: "tour_inclusions",
+  });
   const {
     fields: inclusionFields,
     append: appendInclusion,
     remove: removeInclusion,
-  } = useFieldArray({
-    control: form.control,
-    name: "tour_inclusions",
-  });
+  } = inclusionFieldArray;
 
-  const {
-    fields: videoFields,
-    append: appendVideo,
-    remove: removeVideo,
-  } = useFieldArray({
+  const videoFieldArray = useFieldArray({
     control: form.control,
     name: "videos",
   });
+  const { fields: videoFields, append: appendVideo, remove: removeVideo } = videoFieldArray;
 
+  const highlightFieldArray = useFieldArray({
+    control: form.control,
+    name: "tour_highlights",
+  });
   const {
     fields: highlightFields,
     append: appendHighlight,
     remove: removeHighlight,
-  } = useFieldArray({
-    control: form.control,
-    name: "tour_highlights",
-  });
+  } = highlightFieldArray;
 
-  const onSubmit = (data: TourFormValues) => {
-    console.log("Submitted Data:", data);
-    console.log("Form Data:", JSON.stringify(data, null, 2));
-  };
+  // Helper function to check if an object has meaningful data - memoized
+  const hasData = useCallback((obj: any, requiredFields: string[]) => {
+    return requiredFields.some((field) => obj[field] && obj[field].toString().trim() !== "");
+  }, []);
 
-  const watchedValues = form.watch();
+  // Function to clean empty array fields - optimized with proper dependencies
+  const cleanFormData = useCallback(
+    (data: TourFormValues) => {
+      const cleanedData = { ...data };
+
+      // Clean tour_images - only include if has image_url or caption
+      if (cleanedData.tour_images) {
+        const validImages = cleanedData.tour_images.filter((img) =>
+          hasData(img, ["image_url", "caption"])
+        );
+        if (validImages.length === 0) {
+          delete (cleanedData as any).tour_images;
+        } else {
+          cleanedData.tour_images = validImages;
+        }
+      }
+
+      // Clean tour_intenerary - only include if has session, title, or description
+      if (cleanedData.tour_intenerary) {
+        const validItinerary = cleanedData.tour_intenerary.filter((item) =>
+          hasData(item, ["session", "title", "description"])
+        );
+        if (validItinerary.length === 0) {
+          delete (cleanedData as any).tour_intenerary;
+        } else {
+          cleanedData.tour_intenerary = validItinerary;
+        }
+      }
+
+      // Clean tour_inclusions - only include if has title or description
+      if (cleanedData.tour_inclusions) {
+        const validInclusions = cleanedData.tour_inclusions.filter((item) =>
+          hasData(item, ["title", "description"])
+        );
+        if (validInclusions.length === 0) {
+          delete (cleanedData as any).tour_inclusions;
+        } else {
+          cleanedData.tour_inclusions = validInclusions;
+        }
+      }
+
+      // Clean videos - only include if has url or title
+      if (cleanedData.videos) {
+        const validVideos = cleanedData.videos.filter((video) => hasData(video, ["url", "title"]));
+        if (validVideos.length === 0) {
+          delete (cleanedData as any).videos;
+        } else {
+          cleanedData.videos = validVideos;
+        }
+      }
+
+      // Clean tour_highlights - only include if has icon or title
+      if (cleanedData.tour_highlights) {
+        const validHighlights = cleanedData.tour_highlights.filter((highlight) =>
+          hasData(highlight, ["icon", "title"])
+        );
+        if (validHighlights.length === 0) {
+          delete (cleanedData as any).tour_highlights;
+        } else {
+          cleanedData.tour_highlights = validHighlights;
+        }
+      }
+
+      return cleanedData;
+    },
+    [hasData]
+  );
+
+  useImperativeHandle(ref, () => {
+    const steps = ["basic", "pricing", "details", "content", "seo", "settings"];
+
+    return {
+      submitForm: async () => {
+        // Validate form trước khi submit
+        const isValid = await form.trigger();
+        if (isValid) {
+          const formData = form.getValues();
+          const cleanedData = cleanFormData(formData);
+          onSubmit?.(cleanedData);
+        } else {
+          // Hiển thị toast thông báo lỗi validation
+          const errors = form.formState.errors;
+          const errorFields = Object.keys(errors);
+
+          if (errorFields.length > 0) {
+            // Lấy field đầu tiên có lỗi để hiển thị thông báo cụ thể
+            const firstErrorField = errorFields[0];
+            const firstError = errors[firstErrorField as keyof typeof errors];
+
+            // Sử dụng thông báo lỗi trực tiếp từ validation schema
+            let errorMessage = "Vui lòng điền đầy đủ thông tin bắt buộc!";
+
+            // Lấy message từ error object nếu có
+            if (firstError && typeof firstError === "object" && "message" in firstError) {
+              errorMessage = firstError.message as string;
+            }
+
+            toast.error(errorMessage, {
+              description: `Còn ${errorFields.length} trường cần điền thông tin`,
+              duration: 4000,
+            });
+
+            // Focus vào field đầu tiên có lỗi
+            const firstErrorElement = document.querySelector(
+              `[name="${firstErrorField}"]`
+            ) as HTMLElement;
+            if (firstErrorElement) {
+              firstErrorElement.focus();
+              firstErrorElement.scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+          }
+
+          console.log("Form validation failed:", JSON.stringify(form.formState.errors, null, 2));
+        }
+      },
+      getCurrentStep: () => currentStep,
+      goToNextStep: () => {
+        const currentIndex = steps.indexOf(currentStep);
+        if (currentIndex < steps.length - 1) {
+          setCurrentStep(steps[currentIndex + 1]);
+        }
+      },
+      getFormData: () => cleanFormData(form.getValues()),
+      isFormValid: () => form.formState.isValid,
+    };
+  }, [currentStep, form, cleanFormData, onSubmit]);
 
   return (
     <div className="max-w-6xl mx-auto p-6">
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <Tabs defaultValue="basic" className="w-full">
+        <form className="space-y-6">
+          <Tabs value={currentStep} onValueChange={setCurrentStep} className="w-full">
             <TabsList className="grid w-full grid-cols-6">
               <TabsTrigger value="basic">Thông tin cơ bản</TabsTrigger>
               <TabsTrigger value="pricing">Giá & Thời gian</TabsTrigger>
@@ -133,141 +265,132 @@ const TourForm = () => {
 
             {/* Tab 1: Thông tin cơ bản */}
             <TabsContent value="basic" className="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Thông tin cơ bản của tour</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
+              <div className="space-y-6">
+                <FormField
+                  control={form.control}
+                  name="title"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Tiêu đề tour *</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="VD: Tour Sapa 3 ngày 2 đêm - Chinh phục Fansipan"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Mô tả chi tiết tour *</FormLabel>
+                      <FormControl>
+                        <QuillFlygora height="200px" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="card_description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Mô tả ngắn cho card</FormLabel>
+                      <FormControl>
+                        <QuillFlygora
+                          height="120px"
+                          placeholder="Mô tả ngắn gọn hiển thị trên card tour"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
-                    name="title"
+                    name="product_code"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Tiêu đề tour *</FormLabel>
+                        <FormLabel>Mã sản phẩm *</FormLabel>
                         <FormControl>
-                          <Input
-                            placeholder="VD: Tour Sapa 3 ngày 2 đêm - Chinh phục Fansipan"
-                            {...field}
+                          <Input placeholder="VD: TOUR001" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="tour_category_id"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Danh mục tour *</FormLabel>
+                        <FormControl>
+                          <CategorySelect
+                            value={field.value}
+                            onValueChange={field.onChange}
+                            placeholder="Mời bạn chọn danh mục"
                           />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
+                </div>
 
-                  <FormField
-                    control={form.control}
-                    name="description"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Mô tả chi tiết tour *</FormLabel>
-                        <FormControl>
-                          <Textarea
-                            placeholder="Mô tả đầy đủ về tour, các hoạt động, địa điểm..."
-                            rows={4}
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                <FormField
+                  control={form.control}
+                  name="cover"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Ảnh đại diện tour</FormLabel>
+                      <FormControl>
+                        <MultipleImageUpload {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-                  <FormField
-                    control={form.control}
-                    name="card_description"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Mô tả ngắn cho card</FormLabel>
-                        <FormControl>
-                          <Textarea
-                            placeholder="Mô tả ngắn gọn hiển thị trên card tour"
-                            rows={2}
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                <FormField
+                  control={form.control}
+                  name="image_header"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Ảnh header trang chi tiết</FormLabel>
+                      <FormControl>
+                        <MultipleImageUpload {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <FormField
-                      control={form.control}
-                      name="product_code"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Mã sản phẩm *</FormLabel>
-                          <FormControl>
-                            <Input placeholder="VD: TOUR001" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="tour_category_id"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Danh mục tour *</FormLabel>
-                          <FormControl>
-                            <CategorySelect
-                              value={field.value}
-                              onValueChange={field.onChange}
-                              placeholder="Mời bạn chọn danh mục"
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  <FormField
-                    control={form.control}
-                    name="cover"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Ảnh đại diện tour</FormLabel>
-                        <FormControl>
-                          <MultipleImageUpload {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="image_header"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Ảnh header trang chi tiết</FormLabel>
-                        <FormControl>
-                          <MultipleImageUpload {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="image_in_menu"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Ảnh hiển thị trong menu</FormLabel>
-                        <FormControl>
-                          <MultipleImageUpload {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </CardContent>
-              </Card>
+                <FormField
+                  control={form.control}
+                  name="image_in_menu"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Ảnh hiển thị trong menu</FormLabel>
+                      <FormControl>
+                        <MultipleImageUpload {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
             </TabsContent>
 
             {/* Tab 2: Giá & Thời gian */}
@@ -404,92 +527,48 @@ const TourForm = () => {
             {/* Tab 3: Chi tiết tour */}
             <TabsContent value="details" className="space-y-6">
               {/* Thông tin địa điểm & Yêu cầu */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <MapPin className="h-5 w-5" />
-                    Thông tin địa điểm & Yêu cầu
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <FormField
-                      control={form.control}
-                      name="location"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Địa điểm tour *</FormLabel>
-                          <FormControl>
-                            <Input placeholder="VD: Sapa, Lào Cai" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="age_requirement"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Yêu cầu độ tuổi</FormLabel>
-                          <FormControl>
-                            <Input placeholder="VD: 18+ hoặc 12-65 tuổi" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <FormField
-                      control={form.control}
-                      name="the_area"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Khu vực hoạt động</FormLabel>
-                          <FormControl>
-                            <Textarea
-                              placeholder="Mô tả khu vực diễn ra tour..."
-                              rows={3}
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="weather_condition"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Điều kiện thời tiết</FormLabel>
-                          <FormControl>
-                            <Textarea
-                              placeholder="Thông tin về thời tiết khu vực..."
-                              rows={3}
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
+              <div className="space-y-6 ">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="location"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Địa điểm tour *</FormLabel>
+                        <FormControl>
+                          <Input placeholder="VD: Sapa, Lào Cai" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
 
                   <FormField
                     control={form.control}
-                    name="meeting_point"
+                    name="age_requirement"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Điểm hẹn & thời gian tập trung</FormLabel>
+                        <FormLabel>Yêu cầu độ tuổi</FormLabel>
                         <FormControl>
-                          <Textarea
-                            placeholder="VD: 8:00 sáng tại văn phòng công ty, 123 Đường ABC, Quận 1, TP.HCM"
-                            rows={3}
+                          <Input placeholder="VD: 18+ hoặc 12-65 tuổi" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <div className="flex flex-col gap-4">
+                  <FormField
+                    control={form.control}
+                    name="the_area"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Khu vực hoạt động</FormLabel>
+                        <FormControl>
+                          <QuillFlygora
+                            height="120px"
+                            placeholder="Mô tả khu vực diễn ra tour..."
                             {...field}
                           />
                         </FormControl>
@@ -497,8 +576,44 @@ const TourForm = () => {
                       </FormItem>
                     )}
                   />
-                </CardContent>
-              </Card>
+
+                  <FormField
+                    control={form.control}
+                    name="weather_condition"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Điều kiện thời tiết</FormLabel>
+                        <FormControl>
+                          <QuillFlygora
+                            height="120px"
+                            placeholder="Thông tin về thời tiết khu vực..."
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                <FormField
+                  control={form.control}
+                  name="meeting_point"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Điểm hẹn & thời gian tập trung</FormLabel>
+                      <FormControl>
+                        <QuillFlygora
+                          height="120px"
+                          placeholder="VD: 8:00 sáng tại văn phòng công ty, 123 Đường ABC, Quận 1, TP.HCM"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
 
               {/* Dịch vụ & Logistics */}
               <Card>
@@ -509,7 +624,7 @@ const TourForm = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="flex flex-col gap-4">
                     <FormField
                       control={form.control}
                       name="languages_code"
@@ -531,9 +646,9 @@ const TourForm = () => {
                         <FormItem>
                           <FormLabel>Điểm đón trả khách</FormLabel>
                           <FormControl>
-                            <Textarea
+                            <QuillFlygora
+                              height="200px"
                               placeholder="Danh sách các điểm đón trả khách..."
-                              rows={2}
                               {...field}
                             />
                           </FormControl>
@@ -543,7 +658,7 @@ const TourForm = () => {
                     />
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="flex flex-col gap-4">
                     <FormField
                       control={form.control}
                       name="food"
@@ -551,9 +666,9 @@ const TourForm = () => {
                         <FormItem>
                           <FormLabel>Ẩm thực</FormLabel>
                           <FormControl>
-                            <Textarea
+                            <QuillFlygora
+                              height="200px"
                               placeholder="Mô tả về ẩm thực trong tour..."
-                              rows={3}
                               {...field}
                             />
                           </FormControl>
@@ -569,9 +684,9 @@ const TourForm = () => {
                         <FormItem>
                           <FormLabel>Logistics & Vận chuyển</FormLabel>
                           <FormControl>
-                            <Textarea
+                            <QuillFlygora
+                              height="200px"
                               placeholder="Thông tin về logistics và vận chuyển..."
-                              rows={3}
                               {...field}
                             />
                           </FormControl>
@@ -581,7 +696,7 @@ const TourForm = () => {
                     />
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="flex flex-col gap-4">
                     <FormField
                       control={form.control}
                       name="optional_extra"
@@ -589,9 +704,9 @@ const TourForm = () => {
                         <FormItem>
                           <FormLabel>Dịch vụ kèm thêm (Optional)</FormLabel>
                           <FormControl>
-                            <Textarea
+                            <QuillFlygora
+                              height="200px"
                               placeholder="Các dịch vụ tùy chọn có thể đặt thêm..."
-                              rows={3}
                               {...field}
                             />
                           </FormControl>
@@ -607,9 +722,9 @@ const TourForm = () => {
                         <FormItem>
                           <FormLabel>Khu cắm trại</FormLabel>
                           <FormControl>
-                            <Textarea
+                            <QuillFlygora
+                              height="200px"
                               placeholder="Mô tả về khu vực cắm trại (nếu có)..."
-                              rows={3}
                               {...field}
                             />
                           </FormControl>
@@ -651,9 +766,9 @@ const TourForm = () => {
                       <FormItem>
                         <FormLabel>Danh sách đồ dùng cần mang</FormLabel>
                         <FormControl>
-                          <Textarea
+                          <QuillFlygora
+                            height="150px"
                             placeholder="Liệt kê các đồ dùng khách cần chuẩn bị..."
-                            rows={4}
                             {...field}
                           />
                         </FormControl>
@@ -673,7 +788,7 @@ const TourForm = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="flex flex-col gap-4">
                     <FormField
                       control={form.control}
                       name="tour_booking_process"
@@ -681,9 +796,9 @@ const TourForm = () => {
                         <FormItem>
                           <FormLabel>Quy trình đặt tour</FormLabel>
                           <FormControl>
-                            <Textarea
+                            <QuillFlygora
+                              height="150px"
                               placeholder="Mô tả các bước đặt tour..."
-                              rows={4}
                               {...field}
                             />
                           </FormControl>
@@ -699,9 +814,9 @@ const TourForm = () => {
                         <FormItem>
                           <FormLabel>Chính sách hủy tour</FormLabel>
                           <FormControl>
-                            <Textarea
+                            <QuillFlygora
+                              height="150px"
                               placeholder="Các điều khoản và điều kiện hủy tour..."
-                              rows={4}
                               {...field}
                             />
                           </FormControl>
@@ -1100,9 +1215,9 @@ const TourForm = () => {
                           <FormItem>
                             <FormLabel>Mô tả chi tiết hành trình</FormLabel>
                             <FormControl>
-                              <Textarea
+                              <QuillFlygora
+                                height="120px"
                                 placeholder="Mô tả chi tiết các hoạt động trong hành trình này..."
-                                rows={3}
                                 {...field}
                               />
                             </FormControl>
@@ -1194,9 +1309,9 @@ const TourForm = () => {
                           <FormItem>
                             <FormLabel>Mô tả chi tiết dịch vụ</FormLabel>
                             <FormControl>
-                              <Textarea
+                              <QuillFlygora
+                                height="120px"
                                 placeholder="Mô tả chi tiết về dịch vụ này..."
-                                rows={3}
                                 {...field}
                               />
                             </FormControl>
@@ -1435,30 +1550,13 @@ const TourForm = () => {
                 </CardContent>
               </Card>
             </TabsContent>
-
-            {/* Buttons */}
-            <div className="flex items-center justify-end gap-4 pt-6">
-              <Button type="button" variant="outline">
-                Hủy
-              </Button>
-              <Button type="submit">
-                <Save className="mr-2 h-4 w-4" />
-                Lưu tour
-              </Button>
-            </div>
           </Tabs>
         </form>
       </Form>
-
-      {/* Debug Panel */}
-      <div className="mt-8 p-4 bg-gray-100 rounded-lg">
-        <h3 className="font-medium mb-2">Form Values (Debug):</h3>
-        <pre className="text-xs overflow-auto max-h-96">
-          {JSON.stringify(watchedValues, null, 2)}
-        </pre>
-      </div>
     </div>
   );
-};
+});
+
+TourForm.displayName = "TourForm";
 
 export default TourForm;

@@ -141,18 +141,20 @@ export default function FaqSection() {
           <div className="flex space-x-2 h-[200px]">
             <div className="w-[45%] h-full rounded-[4px] overflow-hidden flex-shrink-0">
               <Image
-                src="https://cms.junglebosstours.com/assets/8443e8d8-8192-4f88-923f-9519e5517fe9?format=webp&width=900&height=600&quality=100"
+                src="/images/homePage/faqHome1.jpg"
                 width={900}
                 height={600}
+                quality={100}
                 className="object-cover w-full h-full"
                 alt="faq-img-1"
               />
             </div>
             <div className="flex-grow h-full rounded-[4px] overflow-hidden">
               <Image
-                src="https://cms.junglebosstours.com/assets/dca70803-5e9d-4dfd-9e38-4e3e620c1274?format=webp&width=716&height=400&quality=100"
+                src="/images/homePage/faqHome2.jpg"
                 width={716}
                 height={400}
+                quality={100}
                 className="object-cover w-full h-full"
                 alt="faq-img-2"
               />
@@ -162,9 +164,10 @@ export default function FaqSection() {
           <div className="flex md:space-x-2 md:h-[328.5px] max-md:flex-wrap">
             <div className="w-[49.5%] aspect-1 flex-shrink-0 rounded-[4px] overflow-hidden max-md:mr-2 max-md:mb-2">
               <Image
-                src="https://cms.junglebosstours.com/assets/ddc82019-31a0-491d-9343-1d9df8320477?format=webp&width=658&height=658&quality=100"
+                src="/images/homePage/faqHome3.jpg"
                 width={658}
                 height={658}
+                quality={100}
                 className="object-cover w-full h-full"
                 alt="faq-img-3"
               />
@@ -172,18 +175,20 @@ export default function FaqSection() {
             <div className="flex flex-col space-y-2 flex-shrink-0 md:w-[160px] w-[48%] max-md:mb-2">
               <div className="h-1/2 aspect-1 rounded-[4px] overflow-hidden">
                 <Image
-                  src="https://cms.junglebosstours.com/assets/701388c4-561d-4142-8caa-967484222aa8?format=webp&width=320&height=320&quality=100"
+                  src="/images/homePage/faqHome4.jpg"
                   width={320}
                   height={320}
+                  quality={100}
                   className="object-cover w-full h-full"
                   alt="faq-img-4"
                 />
               </div>
               <div className="flex-grow aspect-1 rounded-[4px] overflow-hidden">
                 <Image
-                  src="https://cms.junglebosstours.com/assets/8ec88ecb-67c3-40c2-94b6-4dc3e05c73f8?format=webp&width=320&height=320&quality=100"
+                  src="/images/homePage/faqHome5.jpg"
                   width={320}
                   height={320}
+                  quality={100}
                   className="object-cover w-full h-full"
                   alt="faq-img-5"
                 />
@@ -191,9 +196,10 @@ export default function FaqSection() {
             </div>
             <div className="flex-grow h-full rounded-[4px] overflow-hidden max-md:hidden">
               <Image
-                src="https://cms.junglebosstours.com/assets/6a17d45f-d628-4484-819d-2c14e5b1b98b?format=webp&width=320&height=656&quality=100"
+                src="/images/homePage/faqHome6.jpg"
                 width={320}
                 height={656}
+                quality={100}
                 className="object-cover w-full h-full"
                 alt="faq-img-6"
               />

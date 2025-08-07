@@ -94,7 +94,7 @@ const WhychooseUsSection = () => {
             {/* Welcome, Image */}
             <div className="lg:w-[432px] md:w-1/3 w-1/2 max-lg:mx-auto flex-shrink-0 flex items-center max-md:my-4">
               <Image
-                src="/images/homePage/section-2-welcome.webp"
+                src="/images/homePage/introduce.png"
                 alt="welcome"
                 width={432}
                 height={432}

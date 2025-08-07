@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/api/:path*",
-        destination: "http://52.64.94.227/api/:path*",
+        destination: "http://localhost:5555/api/:path*",
       },
     ];
   },
@@ -30,6 +30,12 @@ const nextConfig: NextConfig = {
         hostname: "junglebosstours.com",
         port: "",
         pathname: "/images/**",
+      },
+      {
+        protocol: "http",
+        hostname: "localhost:5555",
+        port: "",
+        pathname: "/uploads/**",
       },
     ],
   },
