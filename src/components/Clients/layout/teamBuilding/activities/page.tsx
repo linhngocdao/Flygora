@@ -20,14 +20,13 @@ const useScrollPosition = () => {
 };
 
 const imageGallery = [
-  "https://cms.junglebosstours.com/assets/83bd39bf-107a-474f-95d2-561a9950b543?format=webp",
-  "https://cms.junglebosstours.com/assets/af730d8d-dbd1-4991-a6f6-96a763a99baa?format=webp",
-  "https://cms.junglebosstours.com/assets/043ca800-98fc-46da-a7e4-9161dad21989?format=webp",
-  "https://cms.junglebosstours.com/assets/fe88327e-7382-49e2-b320-d3f637a6e0fe?format=webp",
-  "https://cms.junglebosstours.com/assets/279ed19c-0f05-4d18-909c-d7f0fd10454c?format=webp",
-  "https://cms.junglebosstours.com/assets/dace4dff-255e-4197-8b7a-5d0c7260583e?format=webp",
-  "https://cms.junglebosstours.com/assets/501c8981-a4cd-43f4-a3d8-962b96433382?format=webp",
-  "https://cms.junglebosstours.com/assets/145a9bc5-473f-406c-bb53-37dcdac8f333?format=webp",
+  "/images/homePage/teambuilding1.jpg",
+  "/images/homePage/teambuilding2.jpg",
+  "/images/homePage/teambuilding3.jpg",
+  "/images/homePage/teambuilding4.jpg",
+  "/images/homePage/teambuilding5.jpg",
+  "/images/homePage/teambuilding6.jpg",
+  "/images/homePage/teambuilding7.jpg",
 ];
 
 const ActivitiesPage = () => {

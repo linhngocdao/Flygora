@@ -16,37 +16,37 @@ const SuggestTour = () => {
   const tourData = [
     {
       id: 1,
-      title: "Team Building 1D",
-      level: "Level 2 - Easy to Moderate",
-      duration: "1 day",
-      capacity: "10-15 pax/team",
-      location: "Trạ Ang Valley, Trạ Ang Cave",
+      title: "2D1N",
+      level: "Premium package",
+      duration: "2 day",
+      capacity: "30~200pax",
+      location: "Hanoi, NinhBinh",
       description:
-        "This tour is rated as medium level for those who are healthy and familiar with outdoor activities as well as having little experience exploring adventures. 10km hiking on relatively steep terrain, 600m swimming in the cave.",
+        "Experience a journey of contrasts, from Hanoi's cultural landmarks to Ninh Binh's breathtaking beauty—the UNESCO site backdrop for 'Kong: Skull Island'. The tour concludes with immersive visits to traditional craft villages, revealing the timeless soul of Vietnamese artistry",
       image:
         "https://cms.junglebosstours.com/assets/a49ec0ec-5ea8-4507-a035-5d5a086b4c8f?format=webp",
     },
     {
       id: 2,
-      title: "Team Building 2D1N",
-      level: "Level 3 - Moderate",
-      duration: "1 day",
-      capacity: "10-15 pax/team",
-      location: "Trạ Ang Valley, Trạ Ang Cave",
+      title: "3D2N",
+      level: "Premium package",
+      duration: "2 day",
+      capacity: "30~200pax",
+      location: "Hanoi, Ha Long",
       description:
-        "This tour is rated as medium level for those who are healthy and familiar with outdoor activities as well as having little experience exploring adventures. 10km hiking on relatively steep terrain, crossing rivers, 600m swimming in the cave, camping and spend some quality time together overnight at the campsite by Trạ Ang cave.",
+        "Discover the soul of Northern Vietnam on a journey from city to sea. First, explore the cultural landmarks of Hanoi, then board a luxury cruise to experience the serene majesty of Ha Long Bay. Your unforgettable day is completed with a lively gala dinner on the water, creating perfect memories of your adventure.",
       image:
         "https://cms.junglebosstours.com/assets/a49ec0ec-5ea8-4507-a035-5d5a086b4c8f?format=webp",
     },
     {
       id: 3,
-      title: "Team Building 3D2N",
-      level: "Level 3 - Moderate",
-      duration: "4 days",
-      capacity: "10 pax/team",
-      location: "Trạ Ang Valley, Trạ Ang Cave",
+      title: "4D3N",
+      level: "Premium package",
+      duration: "2 days",
+      capacity: "30~200pax",
+      location: "Hanoi, Ninh Binh, Ha Long",
       description:
-        "This tour is rated as medium level for those who are healthy and familiar with outdoor activities as well as having little experience exploring adventures. 10km hiking on relatively steep terrain, 600m swimming in the cave.",
+        "Discover the complete soul of Northern Vietnam on a journey of incredible contrasts. Explore Hanoi's cultural landmarks before witnessing two natural wonders: Ninh Binh's breathtaking beauty—backdrop for 'Kong: Skull Island'—and Ha Long Bay's serene majesty from a luxury cruise. Your adventure culminates with a lively gala dinner on the water and immersive visits to traditional craft villages, blending nature with timeless artistry.",
       image:
         "https://cms.junglebosstours.com/assets/a49ec0ec-5ea8-4507-a035-5d5a086b4c8f?format=webp",
     },

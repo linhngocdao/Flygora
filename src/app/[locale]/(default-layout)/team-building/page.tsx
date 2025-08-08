@@ -81,15 +81,15 @@ const TeamBuildingPage = () => {
                 </h2>
                 <div className="text-gray-700 body-1 prose prose-overview max-w-none">
                   <p>
-                    Immerse your team in an unparalleled adventure amid the awe-inspiring jungles of
-                    Phong Nha – Ke Bang National Park. Jungle Boss Team building is a transformative
-                    journey marked by unique and challenging games, setting us apart from the
-                    conventional team building landscape in Vietnam...
-                  </p>
-                  <p>
-                    Embrace a one-of-a-kind adventure with us – a promise to not only fortify your
-                    team&apos;s bonds but also create lasting memories of an exceptionally
-                    extraordinary experience...
+                    Transform your next teambuilding event from a trip into a lasting investment
+                    with Flygora Travel. We merge five years of proven expertise in the Indian
+                    market with an exceptional package of value and luxury. Our seamless execution
+                    is guaranteed by a dedicated, 24/7 support team that allows your group to focus
+                    purely on connection and growth. By rewarding them with 5-star accommodations
+                    and authentic native cuisine, you reinforce a culture of excellence. We make
+                    this premium experience attainable with pricing at least 15% below competitors
+                    and a transparent no-tipping policy, saving you up to $2,000 and delivering an
+                    unmatched return on your investment in team morale.
                   </p>
                 </div>
               </div>
@@ -156,40 +156,43 @@ const TeamBuildingPage = () => {
             <div className="space-y-4 col-span-full lg:col-span-9 xl:space-y-8 md:space-y-6">
               <div className="grid gap-4 md:grid-cols-2 xl:gap-8 md:gap-5 gap-y-5">
                 <div className="space-y-1 duration-300 ease-in-out md:space-y-2 xl:p-6 md:p-3 lg:hover:bg-[#fcffdf] hover:rounded-2xl">
-                  <h3 className="title-1 text-text-500">Trekking Challenges &amp; Camping</h3>
+                  <h3 className="title-1 text-text-500">The Essence of Hanoi</h3>
                   <hr className="w-full h-px bg-gray-200" />
                   <div className="text-gray-700 body-1">
-                    Organize trekking routes of varying difficulty for teams to race and complete
-                    using teamwork and navigation skills. End with an overnight campout where groups
-                    collaborate to set up camp, cook over a fire, and bond over campfire games.
+                    Explore Hanoi&apos;s key highlights, from the historic Ho Chi Minh Mausoleum and
+                    serene Tran Quoc Pagoda to the vibrant Old Quarter. We&apos;ll then dive into
+                    local life at Dong Xuan Market before capping the day with the unique spectacle
+                    of Train Street.
                   </div>
                 </div>
                 <div className="space-y-1 duration-300 ease-in-out md:space-y-2 xl:p-6 md:p-3 lg:hover:bg-[#fcffdf] hover:rounded-2xl">
-                  <h3 className="title-1 text-text-500">Cave Exploration</h3>
+                  <h3 className="title-1 text-text-500">Trang An Landscape</h3>
                   <hr className="w-full h-px bg-gray-200" />
                   <div className="text-gray-700 body-1">
-                    There are many amazing caves to explore in the park. Split teams up and have
-                    them navigate through a cave system together using flashlights and teamwork.
-                    Offer prizes for teams that make it through fastest or work best together.
+                    Embark on a boat trip in Trang An, a UNESCO site, gliding on a sampan through
+                    caves and past limestone karsts. Discover ancient temples and visit the iconic
+                    &apos;Kong: Skull Island&apos; film set—a unique highlight for unforgettable
+                    photos
                   </div>
                 </div>
                 <div className="space-y-1 duration-300 ease-in-out md:space-y-2 xl:p-6 md:p-3 lg:hover:bg-[#fcffdf] hover:rounded-2xl">
-                  <h3 className="title-1 text-text-500">Outdoor Obstacle Course</h3>
+                  <h3 className="title-1 text-text-500">The Incense Village</h3>
                   <hr className="w-full h-px bg-gray-200" />
                   <div className="text-gray-700 body-1">
-                    Set up a series of challenging outdoor obstacles like rope climbs, balance
-                    beams, tire runs, etc. Split the team into smaller groups and have them race
-                    through the course. This promotes teamwork, communication and friendly
-                    competition.
+                    Discover the traditional art of incense making in an authentic local village. A
+                    photographer&apos;s paradise, it offers stunning visuals of vibrant incense
+                    bundles drying in the sun—a perfect opportunity to capture the colorful spirit
+                    of Vietnamese craftsmanship in lively photos.
                   </div>
                 </div>
                 <div className="space-y-1 duration-300 ease-in-out md:space-y-2 xl:p-6 md:p-3 lg:hover:bg-[#fcffdf] hover:rounded-2xl">
-                  <h3 className="title-1 text-text-500">Amazing Race</h3>
+                  <h3 className="title-1 text-text-500">Ha Long Bay Cruise</h3>
                   <hr className="w-full h-px bg-gray-200" />
                   <div className="text-gray-700 body-1">
-                    Model this after the TV show by creating a series of challenges and races that
-                    teams have to complete across your city. Have checkpoint stops where they get
-                    clues and have to problem solve together to find the next location.
+                    Aboard our 5-star cruise, enjoy a welcome buffet lunch before exploring Ha
+                    Long&apos;s highlights. We&apos;ll visit the magnificent Surprise Cave and
+                    ascend Ti Top Island for panoramic views, concluding the day with a spectacular
+                    sunset tea break on the sundeck.
                   </div>
                 </div>
               </div>
@@ -221,7 +224,7 @@ const TeamBuildingPage = () => {
               <div className="space-y-2 xl:space-y-4 md:space-y-3">
                 <div className="pre-header text-primary tracking-[1.4px]">Connect With Us</div>
                 <h2 className="uppercase headline-1 text-text-500">
-                  Start Your Journey At Jungle Boss Now!
+                  Start Your Journey with Flygora Now !
                 </h2>
                 <div className="text-gray-700 body-1">
                   Pricing for our team-building tours varies based on group size and tour duration.
@@ -231,31 +234,31 @@ const TeamBuildingPage = () => {
               </div>
               <div className="p-4 space-y-2 rounded-lg xl:space-y-4 md:space-y-3 xl:p-8 md:p-6 bg-gray-50">
                 <div className="text-gray-700 body-1">
-                  To inquire further, please contact Jungle Boss Tours via email at
+                  To inquire further, please contact Flygora Travel via email at
                   <span>
                     <a
-                      href="mailto:contact@junglebosstours.com"
+                      href="mailto:advisor@flygora.com"
                       className="duration-300 ease-in-out text-primary lg:hover:text-primary-800"
                     >
-                      contact@junglebosstours.com
+                      advisor@flygora.com
                     </a>
                   </span>
                   or call our hotline:
                 </div>
                 <div>
                   <a
-                    href="tel:(+84) 917 800 805"
+                    href="tel:(+84) 397897222"
                     className="block text-gray-700 duration-300 ease-in-out body-1 lg:hover:text-primary"
                     rel="noopener noreferrer"
                   >
-                    (+84) 917 800 805
+                    (+84) 397 897 222
                   </a>
                   <a
-                    href="tel:(+84) 859 100 222"
+                    href="tel:(+84) 793946789"
                     className="block text-gray-700 duration-300 ease-in-out body-1 lg:hover:text-primary"
                     rel="noopener noreferrer"
                   >
-                    (+84) 859 100 222
+                    (+84) 793 946 789
                   </a>
                 </div>
               </div>
