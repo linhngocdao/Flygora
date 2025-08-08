@@ -78,7 +78,7 @@ const SuggestTour = () => {
                 <Image
                   width={120}
                   height={120}
-                  src="/images/homePage/jb.png"
+                  src="/images/homePage/introduce.png"
                   alt="icon jungle boss"
                   className="xl:max-w-[120px] md:max-w-[84px] max-w-[60px] w-full"
                 />

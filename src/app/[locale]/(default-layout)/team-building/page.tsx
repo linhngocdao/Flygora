@@ -10,6 +10,7 @@ import SubscribeBanner from "@/components/Clients/layout/home/SubscribeBanner/pa
 
 const TeamBuildingPage = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const suggestTourRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -30,6 +31,13 @@ const TeamBuildingPage = () => {
 
     return () => observer.disconnect();
   }, []);
+
+  const scrollToSuggestTour = () => {
+    suggestTourRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
   return (
     <main>
       <section className="relative md:h-[500px] h-[400px] max-h-screen">
@@ -149,7 +157,7 @@ const TeamBuildingPage = () => {
                   Some ideal activities your team can check out
                 </div>
                 <div className="flex items-center justify-center lg:hidden">
-                  <ButtonPrimary name="See More Activities" />
+                  <ButtonPrimary name="See More Activities" onClick={scrollToSuggestTour} />
                 </div>
               </div>
             </div>
@@ -197,14 +205,16 @@ const TeamBuildingPage = () => {
                 </div>
               </div>
               <div className="hidden lg:block">
-                <ButtonPrimary name="See More Activities" />
+                <ButtonPrimary name="See More Activities" onClick={scrollToSuggestTour} />
               </div>
             </div>
           </div>
         </div>
       </section>
       <ActivitiesPage />
-      <SuggestTour />
+      <div ref={suggestTourRef}>
+        <SuggestTour />
+      </div>
       <OurCustomer />
       <section className="xl:py-[68px] md:py-[48px] py-[34px]">
         <div className="container">
