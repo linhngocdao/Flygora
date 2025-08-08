@@ -29,7 +29,7 @@ const AllAdventureTour = () => {
     },
     {
       id: 2,
-      title: "Team building Ha Noi",
+      title: "Multiday tour",
       duration: "2-5 days",
       rating: 4.9,
       reviews: t("seeReviews"),

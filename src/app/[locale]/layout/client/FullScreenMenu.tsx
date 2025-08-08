@@ -49,7 +49,7 @@ const FullScreenMenu: React.FC<FullScreenMenuProps> = ({ isMenuOpen, onCloseMenu
     },
     {
       id: "team-building",
-      label: "Team Building",
+      label: "Multiday tour",
       href: "/team-building",
     },
     {

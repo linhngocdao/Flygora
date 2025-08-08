@@ -106,7 +106,7 @@ const TeamBuildingPage = () => {
               <div className="md:col-span-6">
                 <div className="relative w-full h-full min-h-[400px] overflow-hidden rounded-lg">
                   <Image
-                    src="https://cms.junglebosstours.com/assets/c6fde3fd-4e48-4661-873d-fe4d0e2cfe9a?format=webp"
+                    src="/images/homePage/teambuilding8.jpg"
                     alt="image tour overview"
                     fill
                     priority
@@ -225,7 +225,7 @@ const TeamBuildingPage = () => {
                   width={1000}
                   height={1000}
                   className="w-full h-full"
-                  src="/images/teamBuilding/connect-us.webp"
+                  src="/images/homePage/teamf.jpg"
                   alt="team working"
                 />
               </div>

@@ -85,7 +85,7 @@ const SuggestTour = () => {
                 <div className="space-y-2 md:space-y-3 xl:space-y-4">
                   <div className="pre-header text-primary">Our Tour Demo</div>
                   <h2 className="uppercase headline-1 text-text-500">
-                    Learn Top Team Building Tour at Jungle Boss
+                    Learn Top Team Building Tour at Flygora Travel
                   </h2>
                   <div className="text-gray-700 body-1">Suggestion for your company trip</div>
                 </div>
