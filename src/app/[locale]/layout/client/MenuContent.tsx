@@ -19,37 +19,34 @@ interface MenuContentProps {
 
 const MenuContent: React.FC<MenuContentProps> = ({ activeMenuSection, onCloseMenu }) => {
   const getContentData = (section: string): MenuContentType | null => {
-    switch (section) {
-      case "food-tours":
-        return {
-          title: "ADVENTURE TOURS",
-          description:
-            "Jungle Boss builds teamwork through adventure in Phong Nha – Ke Bang National Park. Challenge your team with games in the jungle.",
-          image: "https://junglebosstours.com/images/banner/banner-tour.webp",
-          alt: "Adventure Tours in Phong Nha Ke Bang",
-          href: "/tour",
-        };
-      case "team-building":
-        return {
-          title: "TEAM BUILDING",
-          description:
-            "Transform your team dynamics with our unique team building experiences in the heart of Vietnam's pristine jungle landscape.",
-          image: "https://junglebosstours.com/images/banner/banner-tour.webp",
-          alt: "Team Building Activities in Vietnam",
-          href: "/team-building",
-        };
-      case "about-us":
-        return {
-          title: "ABOUT US",
-          description:
-            "Discover our story and mission to provide safe, sustainable, and unforgettable adventures in Phong Nha-Ke Bang National Park.",
-          image: "https://junglebosstours.com/images/banner/banner-tour.webp",
-          alt: "Vietnam Adventure Tourism Company",
-          href: "/about-us",
-        };
-      default:
-        return null;
-    }
+    const contentMap: Record<string, MenuContentType> = {
+      "adventure-tours": {
+        title: "ADVENTURE TOURS",
+        description:
+          "Discover breathtaking adventures in pristine natural landscapes. Experience thrilling activities designed to challenge and inspire your team.",
+        image: "https://junglebosstours.com/images/banner/banner-tour.webp",
+        alt: "Adventure Tours in Natural Landscapes",
+        href: "/tour",
+      },
+      "multiday-tours": {
+        title: "MULTIDAY TOURS",
+        description:
+          "Immerse yourself in extended journeys that combine adventure, culture, and unforgettable experiences across multiple destinations.",
+        image: "https://junglebosstours.com/images/banner/banner-tour.webp",
+        alt: "Multiday Adventure Tours",
+        href: "/multiday-tours",
+      },
+      "about-us": {
+        title: "ABOUT US",
+        description:
+          "Learn about our passion for creating sustainable, safe, and transformative travel experiences that connect people with nature.",
+        image: "https://junglebosstours.com/images/banner/banner-tour.webp",
+        alt: "About Our Adventure Tourism Company",
+        href: "/about-us",
+      },
+    };
+
+    return contentMap[section] || null;
   };
 
   const contentData = getContentData(activeMenuSection);
@@ -57,78 +54,77 @@ const MenuContent: React.FC<MenuContentProps> = ({ activeMenuSection, onCloseMen
   if (!contentData) return null;
 
   return (
-    <div className="hidden md:block w-2/3 lg:w-3/5 h-full">
+    <div className="hidden md:block h-full w-full">
       <AnimatePresence mode="wait">
         <motion.div
           key={activeMenuSection}
-          initial={{ opacity: 0, x: 50 }}
+          initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -50 }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
-          className="h-full flex flex-col justify-center px-8 lg:px-12 xl:px-16 py-12 space-y-8"
+          exit={{ opacity: 0, x: -30 }}
+          transition={{ duration: 0.4, ease: [0.4, 0, 0.2, 1] }}
+          className="h-full flex flex-col justify-center px-6 lg:px-8 xl:px-10 py-6 space-y-4"
         >
-          {/* Title and Description Section - Top */}
-          <div className="space-y-6 text-left">
-            <motion.h2
-              initial={{ opacity: 0, y: -30 }}
+          {/* Content Container */}
+          <div className="max-w-4xl mx-auto w-full space-y-5">
+            {/* Title and Description Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-white text-4xl lg:text-5xl xl:text-6xl font-bold tracking-wider leading-tight"
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="space-y-3 text-left"
             >
-              {contentData.title}
-            </motion.h2>
+              <h2 className="text-white text-2xl lg:text-3xl xl:text-4xl font-bold tracking-wide leading-tight">
+                {contentData.title}
+              </h2>
 
-            <motion.p
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-white/90 text-lg lg:text-xl xl:text-2xl leading-relaxed max-w-4xl"
+              <p className="text-white/90 text-sm lg:text-base xl:text-lg leading-relaxed max-w-2xl">
+                {contentData.description}
+              </p>
+            </motion.div>
+
+            {/* Image Section */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="relative w-full mx-auto"
             >
-              {contentData.description}
-            </motion.p>
+              <div className="overflow-hidden rounded-lg aspect-[21/10] shadow-lg">
+                <Image
+                  width={600}
+                  height={275}
+                  src={contentData.image}
+                  alt={contentData.alt}
+                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                  priority
+                />
+              </div>
+            </motion.div>
+
+            {/* Action Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="flex justify-start"
+            >
+              <Link href={contentData.href} onClick={onCloseMenu}>
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="group relative px-6 py-2.5 text-white border-2 border-white/80 rounded-lg bg-transparent overflow-hidden transition-all duration-300 text-sm font-semibold tracking-wide hover:border-[#a4c639] hover:text-[#a4c639]"
+                >
+                  <span className="relative z-10">Explore Now</span>
+                  <motion.div
+                    className="absolute inset-0 bg-white/5"
+                    initial={{ scale: 0, opacity: 0 }}
+                    whileHover={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </motion.button>
+              </Link>
+            </motion.div>
           </div>
-
-          {/* Image Section - Center */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.6 }}
-            className="relative w-full max-w-5xl mx-auto"
-          >
-            <div className="overflow-hidden rounded-2xl aspect-[16/9] shadow-2xl">
-              <Image
-                width={1200}
-                height={675}
-                src={contentData.image}
-                alt={contentData.alt}
-                className="object-cover w-full h-full transition-transform duration-500 hover:scale-105"
-                priority
-              />
-            </div>
-          </motion.div>
-
-          {/* Button Section - Bottom */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="flex justify-start"
-          >
-            <Link href={contentData.href} onClick={onCloseMenu}>
-              <motion.button
-                whileHover={{
-                  scale: 1.05,
-                  backgroundColor: "rgba(255, 255, 255, 0.1)",
-                  borderColor: "#a4c639",
-                }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ duration: 0.2 }}
-                className="px-10 py-4 text-white border-2 border-white rounded-lg bg-transparent transition-all duration-300 text-lg font-medium tracking-wider shadow-lg hover:shadow-xl"
-              >
-                Explore Now
-              </motion.button>
-            </Link>
-          </motion.div>
         </motion.div>
       </AnimatePresence>
     </div>
