@@ -88,8 +88,9 @@ const AllAdventureTour = () => {
           <>
             <button
               onClick={handlePrevClick}
-              className={`absolute top-1/2 -translate-y-1/2 z-20 flex items-center justify-center transition-all duration-300 rounded-full border border-gray-300 bg-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 left-4 xl:left-8 w-12 h-12 ${isBeginning ? "opacity-50 cursor-not-allowed" : "cursor-pointer hover:bg-gray-50"
-                }`}
+              className={`absolute top-1/2 -translate-y-1/2 z-20 flex items-center justify-center transition-all duration-300 rounded-full border border-gray-300 bg-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 left-4 xl:left-8 w-12 h-12 ${
+                isBeginning ? "opacity-50 cursor-not-allowed" : "cursor-pointer hover:bg-gray-50"
+              }`}
               aria-label="Previous slide"
               disabled={isBeginning}
             >
@@ -110,8 +111,9 @@ const AllAdventureTour = () => {
 
             <button
               onClick={handleNextClick}
-              className={`absolute top-1/2 -translate-y-1/2 z-20 flex items-center justify-center transition-all duration-300 rounded-full border border-gray-300 bg-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 right-4 xl:right-8 w-12 h-12 ${isEnd ? "opacity-50 cursor-not-allowed" : "cursor-pointer hover:bg-gray-50"
-                }`}
+              className={`absolute top-1/2 -translate-y-1/2 z-20 flex items-center justify-center transition-all duration-300 rounded-full border border-gray-300 bg-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 right-4 xl:right-8 w-12 h-12 ${
+                isEnd ? "opacity-50 cursor-not-allowed" : "cursor-pointer hover:bg-gray-50"
+              }`}
               aria-label="Next slide"
               disabled={isEnd}
             >
