@@ -96,8 +96,8 @@ const TeamBuildingPage = () => {
                     purely on connection and growth. By rewarding them with 5-star accommodations
                     and authentic native cuisine, you reinforce a culture of excellence. We make
                     this premium experience attainable with pricing at least 15% below competitors
-                    and a transparent no-tipping policy, saving you up to $2,000 and delivering an
-                    unmatched return on your investment in team morale.
+                    and a transparent no-tipping policy, saving you and delivering an unmatched
+                    return on your investment in team morale.
                   </p>
                 </div>
               </div>

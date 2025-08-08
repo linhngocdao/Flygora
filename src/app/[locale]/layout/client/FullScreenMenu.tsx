@@ -45,7 +45,7 @@ const FullScreenMenu: React.FC<FullScreenMenuProps> = ({ isMenuOpen, onCloseMenu
     {
       id: "food-tours",
       label: "Food Tours",
-      href: "/tour",
+      href: "/food-tours",
     },
     {
       id: "team-building",
@@ -257,7 +257,7 @@ const FullScreenMenu: React.FC<FullScreenMenuProps> = ({ isMenuOpen, onCloseMenu
 
           {/* Right Panel - Content Detail (Desktop only) - Responsive width */}
           <div
-            className={`w-3/4 lg:w-4/5 xl:w-5/6 relative z-30 transition-all duration-400 ease-out ${
+            className={`w-full xl:w-5/6 relative z-30 transition-all duration-400 ease-out ${
               isMenuOpen ? "translate-x-0 opacity-100" : "translate-x-12 opacity-0"
             }`}
             style={{

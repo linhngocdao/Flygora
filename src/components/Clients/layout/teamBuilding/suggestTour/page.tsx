@@ -47,17 +47,6 @@ const SuggestTour = () => {
         "Discover the complete soul of Northern Vietnam on a journey of incredible contrasts. Explore Hanoi's cultural landmarks before witnessing two natural wonders: Ninh Binh's breathtaking beauty—backdrop for 'Kong: Skull Island'—and Ha Long Bay's serene majesty from a luxury cruise. Your adventure culminates with a lively gala dinner on the water and immersive visits to traditional craft villages, blending nature with timeless artistry.",
       image: "/images/homePage/teambuilding5.jpg",
     },
-    {
-      id: 4,
-      title: "Team Building 4D3N",
-      level: "Level 4 - Challenging",
-      duration: "4 days",
-      capacity: "8-12 pax/team",
-      location: "Trạ Ang Valley, Trạ Ang Cave",
-      description:
-        "Advanced team building tour for experienced adventurers. Includes challenging terrain, extended cave exploration, and overnight camping in remote locations.",
-      image: "/images/homePage/teambuilding4.jpg",
-    },
   ];
 
   const handlePrevClick = () => {

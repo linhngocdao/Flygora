@@ -12,8 +12,8 @@ export async function generateMetadata({
   const { locale } = await params;
 
   const titles = {
-    vi: "Go Travel - Khám phá thế giới cùng chúng tôi",
-    en: "Go Travel - Explore the world with us",
+    vi: "Flygora Travel - Premium Experience Tour",
+    en: "Flygora Travel - Premium Experience Tour",
   };
 
   const descriptions = {
