@@ -23,8 +23,7 @@ const SuggestTour = () => {
       location: "Hanoi, NinhBinh",
       description:
         "Experience a journey of contrasts, from Hanoi's cultural landmarks to Ninh Binh's breathtaking beauty—the UNESCO site backdrop for 'Kong: Skull Island'. The tour concludes with immersive visits to traditional craft villages, revealing the timeless soul of Vietnamese artistry",
-      image:
-        "https://cms.junglebosstours.com/assets/a49ec0ec-5ea8-4507-a035-5d5a086b4c8f?format=webp",
+      image: "/images/homePage/teambuilding7.jpg",
     },
     {
       id: 2,
@@ -35,8 +34,7 @@ const SuggestTour = () => {
       location: "Hanoi, Ha Long",
       description:
         "Discover the soul of Northern Vietnam on a journey from city to sea. First, explore the cultural landmarks of Hanoi, then board a luxury cruise to experience the serene majesty of Ha Long Bay. Your unforgettable day is completed with a lively gala dinner on the water, creating perfect memories of your adventure.",
-      image:
-        "https://cms.junglebosstours.com/assets/a49ec0ec-5ea8-4507-a035-5d5a086b4c8f?format=webp",
+      image: "/images/homePage/teambuilding6.jpg",
     },
     {
       id: 3,
@@ -47,8 +45,7 @@ const SuggestTour = () => {
       location: "Hanoi, Ninh Binh, Ha Long",
       description:
         "Discover the complete soul of Northern Vietnam on a journey of incredible contrasts. Explore Hanoi's cultural landmarks before witnessing two natural wonders: Ninh Binh's breathtaking beauty—backdrop for 'Kong: Skull Island'—and Ha Long Bay's serene majesty from a luxury cruise. Your adventure culminates with a lively gala dinner on the water and immersive visits to traditional craft villages, blending nature with timeless artistry.",
-      image:
-        "https://cms.junglebosstours.com/assets/a49ec0ec-5ea8-4507-a035-5d5a086b4c8f?format=webp",
+      image: "/images/homePage/teambuilding5.jpg",
     },
     {
       id: 4,
@@ -59,8 +56,7 @@ const SuggestTour = () => {
       location: "Trạ Ang Valley, Trạ Ang Cave",
       description:
         "Advanced team building tour for experienced adventurers. Includes challenging terrain, extended cave exploration, and overnight camping in remote locations.",
-      image:
-        "https://cms.junglebosstours.com/assets/a49ec0ec-5ea8-4507-a035-5d5a086b4c8f?format=webp",
+      image: "/images/homePage/teambuilding4.jpg",
     },
   ];
 
@@ -140,6 +136,7 @@ const SuggestTour = () => {
               <SwiperSlide key={tour.id}>
                 <article className="w-full max-w-[360px]">
                   <div className="relative overflow-hidden rounded-lg mb-4">
+                    {/* Temporarily commented out missing leaf images
                     <div className="absolute z-10 leaf-tr">
                       <Image
                         fill
@@ -156,7 +153,8 @@ const SuggestTour = () => {
                         alt="leaf left"
                       />
                     </div>
-                    <div className="aspect-w-3 aspect-h-2">
+                    */}
+                    <div className="aspect-[3/2] relative">
                       <Image
                         fill
                         className="object-cover w-full h-full"

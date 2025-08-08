@@ -5,10 +5,10 @@ const OurCustomer = () => {
   // Sample customer images - replace with your actual images
   const customerImages = [
     "https://cms.junglebosstours.com/assets/62637abd-9cf8-4c27-99a9-fdd713943881?format=webp",
-    "https://cms.junglebosstours.com/assets/62637abd-9cf8-4c27-99a9-fdd713943881?format=webp",
-    "https://cms.junglebosstours.com/assets/62637abd-9cf8-4c27-99a9-fdd713943881?format=webp",
-    "https://cms.junglebosstours.com/assets/62637abd-9cf8-4c27-99a9-fdd713943881?format=webp",
-    "https://cms.junglebosstours.com/assets/62637abd-9cf8-4c27-99a9-fdd713943881?format=webp",
+    "https://cms.junglebosstours.com/assets/3fa26e48-57f2-400b-b8e0-1b3b5f8715de?format=webp",
+    "https://cms.junglebosstours.com/assets/ceed76d1-ed88-4b4d-8c52-5b71dbae0e15?format=webp",
+    "https://cms.junglebosstours.com/assets/4f08e2dc-1602-4f4d-8b25-d18fbb428f02?format=webp",
+    "https://cms.junglebosstours.com/assets/8ebb31a5-77e7-4f5d-a31b-7b1b95af3977?format=webp",
   ];
 
   return (

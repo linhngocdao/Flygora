@@ -35,7 +35,7 @@ const TeamBuildingPage = () => {
       <section className="relative md:h-[500px] h-[400px] max-h-screen">
         <div className="absolute inset-0">
           <Image
-            src="/images/teamBuilding/banner.webp"
+            src="/images/homePage/teambuilding7.jpg"
             alt="Người leo núi đá gần thác nước"
             fill
             priority
