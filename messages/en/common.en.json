@@ -148,21 +148,21 @@
       "description": "Contact our friendly support experts via email, dedicated hotline or central location",
       "office": {
         "title": "VISIT OUR OFFICE",
-        "description": "Visit Jungle Boss headquarters and meet our team",
-        "address": "Phong Nha Town, Bo Trach District, Quang Binh Province, Vietnam",
+        "description": "Visit Flygora travel headquarters and meet our team",
+        "address": "Tran Duy Hung, Yen Hoa, HaNoi",
         "button": "Get directions"
       },
       "support": {
         "title": "REQUEST SUPPORT",
         "description": "Have questions? Send us an email",
-        "email": "contact@junglebosstours.com",
+        "email": "advisor@flygora.com",
         "button": "Send email"
       },
       "call": {
         "title": "CALL US TODAY",
         "description": "Call us for quick answers",
-        "phone1": "(+84) 917 800 805",
-        "phone2": "(+84) 859 100 222",
+        "phone1": "(+84) 793 946 789",
+        "phone2": "(+84) 397 897 222",
         "button": "Call hotline"
       }
     }

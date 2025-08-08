@@ -148,21 +148,21 @@
       "description": "Liên hệ với các chuyên gia hỗ trợ thân thiện của chúng tôi qua email, đường dây nóng chuyên dụng hoặc địa điểm trung tâm",
       "office": {
         "title": "GHẺ THĂM VĂN PHÒNG CHÚNG TÔI",
-        "description": "Ghé thăm trụ sở Jungle Boss và gặp đội ngũ của chúng tôi",
-        "address": "Thị trấn Phong Nha, Huyện Bố Trạch, Tỉnh Quảng Bình, Việt Nam",
+        "description": "Ghé thăm trụ sở Flygora travel và gặp đội ngũ của chúng tôi",
+        "address": "Tran Duy Hung, Yen Hoa, HaNoi",
         "button": "Lấy hướng dẫn"
       },
       "support": {
         "title": "YÊU CẦU HỖ TRỢ",
         "description": "Có câu hỏi? Gửi email cho chúng tôi",
-        "email": "contact@junglebosstours.com",
+        "email": "advisor@flygora.com",
         "button": "Gửi email"
       },
       "call": {
         "title": "GỌI CHO CHÚNG TÔI NGAY HÔM NAY",
         "description": "Gọi cho chúng tôi để được giải đáp nhanh chóng",
-        "phone1": "(+84) 917 800 805",
-        "phone2": "(+84) 859 100 222",
+        "phone1": "(+84) 793 946 789",
+        "phone2": "(+84) 397 897 222",
         "button": "Gọi đường dây nóng"
       }
     }

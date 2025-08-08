@@ -244,13 +244,13 @@ const FooterGotravel = () => {
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                       {/* Left Column - Company Details */}
                       <div className="space-y-4">
-                        <div>
+                        {/* <div>
                           <p className="text-gray-300 text-sm">
                             <span className="font-semibold">Tax Identification Number:</span>{" "}
                             {companyInfo.taxId} issued by the {companyInfo.taxIssuer} on{" "}
                             {companyInfo.taxDate}
                           </p>
-                        </div>
+                        </div> */}
 
                         <div>
                           <p className="text-gray-300 text-sm">
