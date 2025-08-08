@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 // Import Swiper styles
@@ -13,6 +14,7 @@ import "swiper/css/pagination";
 
 const AllAdventureTour = () => {
   const t = useTranslations("common.adventureTours");
+  const router = useRouter();
 
   const tours = [
     {
@@ -23,6 +25,7 @@ const AllAdventureTour = () => {
       reviews: t("seeReviews"),
       price: "USD 35/person",
       image: "/images/homePage/foodtour1.jpg",
+      url: "/food-tours", // URL cho food tour
     },
     {
       id: 2,
@@ -32,6 +35,7 @@ const AllAdventureTour = () => {
       reviews: t("seeReviews"),
       price: "Negotiation",
       image: "/images/homePage/teambuilding3.jpg",
+      url: "/team-building", // URL cho team building
     },
   ];
 
@@ -60,6 +64,11 @@ const AllAdventureTour = () => {
     if (swiperInstance && !isEnd) {
       swiperInstance.slideNext();
     }
+  };
+
+  // Xử lý click vào tour card
+  const handleTourClick = (url: string) => {
+    router.push(url);
   };
 
   return (
@@ -170,7 +179,10 @@ const AllAdventureTour = () => {
             {tours.map((tour) => (
               <SwiperSlide key={tour.id} className="!w-auto">
                 <div className="w-[320px] mx-auto">
-                  <article className="rounded-xl overflow-hidden shadow-md bg-white hover:shadow-lg group">
+                  <article
+                    className="rounded-xl overflow-hidden shadow-md bg-white hover:shadow-lg group cursor-pointer transition-all duration-300 hover:scale-[1.02]"
+                    onClick={() => handleTourClick(tour.url)}
+                  >
                     <div className="relative aspect-[3/2] w-full overflow-hidden">
                       <Image
                         src="/images/homePage/leaf-bg-left.webp"
@@ -218,12 +230,16 @@ const AllAdventureTour = () => {
                               </svg>
                             </div>
                           </div>
-                          <a
-                            href="#"
-                            className="text-[#6c8a1f] hover:underline text-xs font-medium"
+                          <span
+                            className="text-[#6c8a1f] hover:underline text-xs font-medium cursor-pointer"
+                            onClick={(e) => {
+                              e.stopPropagation(); // Ngăn event bubble lên card
+                              // Có thể thêm logic xử lý reviews ở đây
+                              console.log("View reviews for:", tour.title);
+                            }}
                           >
                             ({tour.reviews})
-                          </a>
+                          </span>
                         </div>
                       </div>
                       <div className="flex justify-between items-center pt-2 border-t border-gray-100">
