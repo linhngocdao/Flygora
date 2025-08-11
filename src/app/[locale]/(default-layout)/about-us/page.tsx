@@ -2,6 +2,7 @@
 import RecommendationBanner from "@/components/Clients/layout/home/RecommendationBanner/page";
 import Image from "next/image";
 import React, { useState } from "react";
+import SliderComponent from "./slider";
 
 const AboutPage = () => {
   const [activeTab, setActiveTab] = useState("introduce");
@@ -45,9 +46,8 @@ const AboutPage = () => {
                 ].map((tab, index) => (
                   <React.Fragment key={tab.id}>
                     <li
-                      className={`flex items-center px-3 space-x-2 cursor-pointer lg:space-x-3 md:px-4 xl:px-6 ${
-                        activeTab === tab.id ? "text-[#a4c639]" : "text-gray-700"
-                      }`}
+                      className={`flex items-center px-3 space-x-2 cursor-pointer lg:space-x-3 md:px-4 xl:px-6 ${activeTab === tab.id ? "text-[#a4c639]" : "text-gray-700"
+                        }`}
                       onClick={() => handleTabClick(tab.id)}
                     >
                       <span className="duration-300 ease-in-out hover:text-[#a4c639] font-medium text-sm md:text-base">
@@ -167,7 +167,7 @@ const AboutPage = () => {
                 <div className="space-y-6">
                   <div>
                     <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
-                      Le Luu Dung
+                      Bui Ngoc Nam
                     </h3>
                     <p className="text-[#a4c639] font-semibold text-lg">Founder</p>
                   </div>
@@ -178,7 +178,7 @@ const AboutPage = () => {
                     years of experience in conservation work while nurturing a deep passion for
                     adventure travel. The establishment of Flygora Tours is a culmination of his
                     dedication and expertise, marking a significant milestone in his career. With
-                    resounding success at Shark Tank Season 5, Mr. Dung continues to assert his
+                    resounding success at Shark Tank Season 5, Mr. Nam continues to assert his
                     pioneering position, leading Flygora Tours in its mission to connect people with
                     nature and contribute to the development of sustainable tourism in Vietnam.
                   </p>
@@ -323,6 +323,8 @@ const AboutPage = () => {
 
       {/* Call to Action Section */}
       <RecommendationBanner />
+
+      <SliderComponent />
     </main>
   );
 };

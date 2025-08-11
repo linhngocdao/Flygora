@@ -133,7 +133,7 @@ const ContactGotravel = () => {
               </div>
               <div className="flex flex-col justify-between p-4 rounded-lg bg-[#4c5d36] xl:p-6 md:p-5">
                 <div>
-                  <div className="mb-2 font-bold text-accent-500 headline-2">
+                  <div className="mb-2 font-bold text-accent-500 headline-2 text-white">
                     {t("moreSupportive.call.title")}
                   </div>
                   <div className="mb-4 text-gray-50 body-1">
@@ -147,7 +147,7 @@ const ContactGotravel = () => {
                       height="20"
                       className="flex-shrink-0 w-5 h-5"
                     />
-                    <div className="flex flex-wrap">
+                    <div className="flex flex-wrap text-white">
                       <div className="mr-1.5 text-accent-500 label-1 last:mr-0">
                         {t("moreSupportive.call.phone1")} /
                       </div>
