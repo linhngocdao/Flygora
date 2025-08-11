@@ -46,8 +46,9 @@ const AboutPage = () => {
                 ].map((tab, index) => (
                   <React.Fragment key={tab.id}>
                     <li
-                      className={`flex items-center px-3 space-x-2 cursor-pointer lg:space-x-3 md:px-4 xl:px-6 ${activeTab === tab.id ? "text-[#a4c639]" : "text-gray-700"
-                        }`}
+                      className={`flex items-center px-3 space-x-2 cursor-pointer lg:space-x-3 md:px-4 xl:px-6 ${
+                        activeTab === tab.id ? "text-[#a4c639]" : "text-gray-700"
+                      }`}
                       onClick={() => handleTabClick(tab.id)}
                     >
                       <span className="duration-300 ease-in-out hover:text-[#a4c639] font-medium text-sm md:text-base">
