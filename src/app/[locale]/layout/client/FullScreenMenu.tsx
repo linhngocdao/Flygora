@@ -43,9 +43,9 @@ const FullScreenMenu: React.FC<FullScreenMenuProps> = ({ isMenuOpen, onCloseMenu
 
   const menuItems: MenuItemType[] = [
     {
-      id: "adventure-tours",
-      label: "Adventure Tours",
-      href: "/tour",
+      id: "food-tours",
+      label: "Food Tours",
+      href: "/food-tours",
     },
     {
       id: "multiday-tours",

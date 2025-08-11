@@ -20,13 +20,13 @@ interface MenuContentProps {
 const MenuContent: React.FC<MenuContentProps> = ({ activeMenuSection, onCloseMenu }) => {
   const getContentData = (section: string): MenuContentType | null => {
     const contentMap: Record<string, MenuContentType> = {
-      "adventure-tours": {
-        title: "ADVENTURE TOURS",
+      "food-tours": {
+        title: "FOOD TOURS",
         description:
-          "Discover breathtaking adventures in pristine natural landscapes. Experience thrilling activities designed to challenge and inspire your team.",
+          "Discover the best food tours in Vietnam. Experience the taste of Vietnam with our food tours.",
         image: "https://junglebosstours.com/images/banner/banner-tour.webp",
-        alt: "Adventure Tours in Natural Landscapes",
-        href: "/tour",
+        alt: "Food Tours in Vietnam",
+        href: "/food-tours",
       },
       "multiday-tours": {
         title: "MULTIDAY TOURS",
@@ -34,14 +34,14 @@ const MenuContent: React.FC<MenuContentProps> = ({ activeMenuSection, onCloseMen
           "Immerse yourself in extended journeys that combine adventure, culture, and unforgettable experiences across multiple destinations.",
         image: "https://junglebosstours.com/images/banner/banner-tour.webp",
         alt: "Multiday Adventure Tours",
-        href: "/multiday-tours",
+        href: "/team-building",
       },
       "about-us": {
         title: "ABOUT US",
         description:
           "Learn about our passion for creating sustainable, safe, and transformative travel experiences that connect people with nature.",
         image: "https://junglebosstours.com/images/banner/banner-tour.webp",
-        alt: "About Our Adventure Tourism Company",
+        alt: "About Our Food Tourism Company",
         href: "/about-us",
       },
     };
