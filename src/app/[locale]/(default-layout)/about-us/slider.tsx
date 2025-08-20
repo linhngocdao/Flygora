@@ -16,11 +16,9 @@ const SliderComponent = () => {
     "https://cms.junglebosstours.com/assets/8dbfed8c-6e0d-4ee2-909d-c8cfc93b99cc?format=webp",
   ];
 
-  // Mảng các chiều rộng khác nhau, nhưng chiều cao cố định
   const imageWidths = [200, 250, 300, 350, 280, 320, 240, 360];
-  const fixedHeight = 250; // Chiều cao cố định cho tất cả ảnh
+  const fixedHeight = 250;
 
-  // Hàm lấy chiều rộng ngẫu nhiên
   const getRandomWidth = (index: number) => {
     return imageWidths[index % imageWidths.length];
   };

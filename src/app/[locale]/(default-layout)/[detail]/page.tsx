@@ -1,604 +1,536 @@
+// app/tours/[slug]/page.tsx
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import Link from "next/link";
+import { useEffect, useMemo, useRef } from "react";
 
-const TourDetail = () => {
-  const [selectedDate, setSelectedDate] = useState("");
-  const [participants, setParticipants] = useState(1);
+function useSmoothScroll() {
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      document.documentElement.style.scrollBehavior = "smooth";
+      return () => {
+        document.documentElement.style.scrollBehavior = "";
+      };
+    }
+  }, []);
+}
 
-  const tourData = {
-    title: "Hanoi Exclusive Food Tour",
-    description:
-      "Ditch the guidebook for a night and discover the backstreets of Hanoi's old-quarter while visiting authentic mom n' pop eateries and passing by some of the city's most iconic sights. Make your own bánh mì, stroll through the city's largest wet market, and try over 10 dishes on this journey through Vietnamese cuisine and culture!",
-    price: "$45 USD",
-    duration: "4-6 hours",
-    participants: "Up to 12 pax",
-    service: "Vietnamese food, drink",
-    departureDay: "Everyday",
-    meetingPoint: "In tour detail",
-    rating: "4.9/5",
-    reviews: "500+ reviews",
-    age: "Ages 4-15 (child pricing), 3 & under free",
-    difficulty:
-      "This walking food tour covers approximately 1.5 miles / 2.5 km. We recommend comfortable walking shoes as we'll explore the authentic backstreets and hidden corners of Hanoi's old quarter.",
-    image: "/images/homePage/foodtour1.jpg",
-  };
+type AccordionItem = {
+  title: string;
+  content: React.ReactNode;
+  id?: string;
+};
 
-  const highlights = [
-    {
-      image: "/images/homePage/foodtour1.jpg",
-      title: "Bánh Cuốn: Steamed Rice Rolls",
-      description:
-        "Meet Mrs. Xuan, the third-generation owner, and watch her steam rice sheets and roll them with minced pork, mushrooms, and secret seasonings.",
-    },
-    {
-      image: "/images/homePage/teambuilding6.jpg",
-      title: "Make Your Own Bánh Mì!",
-      description:
-        "Discover the fascinating story of bánh mì with a hands-on mini cooking class led by Mrs. Huyền, a seasoned local vendor.",
-    },
-    {
-      image: "/images/homePage/teambuilding7.jpg",
-      title: "Cháo Sườn Sụn: Creamy Rice Porridge",
-      description:
-        "Every Hanoian's favorite comfort food. Famous for its silky texture and nostalgic flavors, simmered all day in rich broth.",
-    },
-  ];
+function Accordion({ items }: { items: AccordionItem[] }) {
+  return (
+    <div className="space-y-4">
+      {items.map((it, idx) => (
+        <details key={it.title} className="border-b border-gray-200 pb-3 group">
+          <summary className="flex items-center justify-between py-3 cursor-pointer text-gray-900 hover:text-primary outline-none list-none">
+            <span className="uppercase title-2">{it.title}</span>
+            <svg
+              width="16"
+              height="10"
+              viewBox="0 0 16 10"
+              className="transition-transform group-open:rotate-180"
+            >
+              <path
+                d="M15.1657 0.920372C10.6797 0.623372 6.19372 0.537373 1.70772 0.530373C0.862718 0.500373 0.383718 1.62637 1.01172 2.21137C3.24272 4.53637 5.63372 6.95437 7.93072 9.19837C8.28672 9.56037 8.87172 9.56037 9.22672 9.19837C11.3397 7.04937 13.4127 4.86137 15.4197 2.60637C15.7267 2.27337 15.7987 1.96637 15.7217 1.77437C16.2037 1.51237 16.0837 0.989372 15.1657 0.920372ZM8.62872 7.26737C7.12772 5.66737 5.56872 4.03937 4.01372 2.45137C7.55772 2.37137 11.1007 2.22737 14.6447 1.95537C12.5917 3.67937 10.5967 5.45937 8.62872 7.26737Z"
+                fill="currentColor"
+              />
+            </svg>
+          </summary>
+          <div className="text-gray-700 body-1">{it.content}</div>
+        </details>
+      ))}
+    </div>
+  );
+}
+
+export default function TourDetailPage() {
+  useSmoothScroll();
+
+  const sections = useMemo(
+    () => [
+      { id: "highlight", label: "Highlight" },
+      { id: "tour-detail", label: "Tour Details" },
+      { id: "photos", label: "Photos" },
+      { id: "tour-process", label: "Tour Booking Process" },
+      { id: "book-tour", label: "Book Tour" },
+      { id: "faqs", label: "Frequently Asked Question" },
+    ],
+    []
+  );
+
+  // optional: Intersection to highlight current item later if cần
+  const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <main>
-      {/* Hero Section with Overlay Info */}
-      <section className="relative min-h-screen">
-        <div className="absolute inset-0">
-          <Image src={tourData.image} alt={tourData.title} fill priority className="object-cover" />
-          <div className="absolute inset-0 bg-black/40"></div>
+    <main className="tour-detail">
+      {/* Hero */}
+      <section>
+        <div className="relative h-[300px] md:h-[500px]">
+          <Image
+            src="https://cms.junglebosstours.com/assets/d4cfa964-da02-47f0-9033-77366d447a38?format=webp"
+            alt="Hero"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-black/30 to-transparent" />
         </div>
+      </section>
 
-        {/* Content Overlay */}
-        <div className="relative z-10 container mx-auto px-4 py-8 min-h-screen flex items-center pt-40">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 w-full">
-            {/* Left Side - Tour Info */}
-            <div className="text-white space-y-6">
-              <div className="mb-8">
-                <h1 className="text-4xl lg:text-5xl font-bold mb-4 uppercase">{tourData.title}</h1>
-                <p className="text-lg text-gray-200 leading-relaxed">{tourData.description}</p>
+      <section className="relative bg-gray-100">
+        <div ref={containerRef} className="container mx-auto grid grid-cols-12 md:gap-x-8">
+          {/* Left content */}
+          <div className="col-span-12 xl:col-span-8">
+            {/* Green area */}
+            <div
+              id="green-area"
+              className="bg-green-800 py-8 md:py-11 lg:py-16 space-y-6 lg:space-y-8"
+            >
+              <div className="space-y-2">
+                <h1 className="text-white uppercase text-2xl md:text-3xl font-bold">
+                  Kong Collapse Top Adventure 5D4N
+                </h1>
+                <p className="text-gray-50">
+                  The 05-day, 04-night journey to conquer Kong collapse will take you on an
+                  adventurous and challenging expedition. This is one of the
+                </p>
               </div>
 
-              {/* Tour Details */}
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-yellow-400">⏱</span>
-                    <span>Duration</span>
-                  </div>
-                  <div className="text-white font-semibold">{tourData.duration}</div>
+              <div className="h-px bg-primary/70" />
+
+              <div className="md:flex lg:space-x-16 md:space-x-11 space-y-4 md:space-y-0">
+                <div className="space-y-4 md:w-1/2">
+                  <InfoRow label="Duration" value="5 days 4 nights" />
+                  <InfoRow label="Participant" value="Up to 10 pax" />
+                  <InfoRow label="Departure Day" value="Tuesday, Friday" />
                 </div>
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-yellow-400">👥</span>
-                    <span>Participant</span>
-                  </div>
-                  <div className="text-white font-semibold">{tourData.participants}</div>
-                </div>
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-yellow-400">🍽️</span>
-                    <span>Service</span>
-                  </div>
-                  <div className="text-white font-semibold">{tourData.service}</div>
-                </div>
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-yellow-400">📅</span>
-                    <span>Departure Day</span>
-                  </div>
-                  <div className="text-white font-semibold">{tourData.departureDay}</div>
-                </div>
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-yellow-400">📍</span>
-                    <span>Meeting point</span>
-                  </div>
-                  <div className="text-white font-semibold">{tourData.meetingPoint}</div>
-                </div>
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-yellow-400">⭐</span>
-                    <span>Overall rating</span>
-                  </div>
-                  <div className="text-white font-semibold flex items-center space-x-2">
-                    <span>{tourData.rating}</span>
-                    <span className="text-yellow-400">★</span>
-                    <span className="text-gray-300">({tourData.reviews})</span>
-                  </div>
+                <div className="flex-grow space-y-4">
+                  <InfoRow label="Meeting point" value="Jungle Boss Office" />
+                  <InfoRow
+                    label="Overall rating"
+                    value={
+                      <div className="flex items-center gap-2">
+                        <span className="text-white font-semibold">4.9/5</span>
+                        <span className="text-gray-50">(1015 reviews)</span>
+                      </div>
+                    }
+                  />
+                  <InfoRow label="Age" value="From 16 years old" />
                 </div>
               </div>
 
-              {/* Difficulty */}
-              <div className="bg-green-900/50 p-4 rounded-lg border border-green-700/50">
-                <h3 className="text-yellow-400 font-semibold mb-2">Difficulty</h3>
-                <p className="text-gray-200 text-sm">{tourData.difficulty}</p>
-              </div>
+              <p className="md:w-1/2 text-gray-50">
+                This is a strenuous adventure. You will be required to provide a health statement
+                report and undergo a health check conducted by Jungle Boss Medical Experts before
+                departure.
+              </p>
             </div>
 
-            {/* Right Side - Booking Form */}
-            <div className="flex justify-center lg:justify-end">
-              <div className="bg-white rounded-lg p-6 shadow-xl w-full max-w-md">
-                <div className="text-center mb-6">
-                  <div className="text-3xl font-bold text-green-600 mb-2">{tourData.price}</div>
-                  <div className="text-gray-600">per person</div>
-                </div>
+            {/* Highlight */}
+            <section id="highlight" className="py-8 md:py-11 xl:py-16 space-y-6 lg:space-y-8">
+              <Card className="space-y-4">
+                <Feature
+                  iconUrl="https://cms.junglebosstours.com/assets/ba8628fe-d8fb-4565-b10c-3752e0e1f7ae"
+                  text={
+                    <>
+                      This expedition leads you into the depth of the primary jungle where you will
+                      explore the whole system of Tiger Cave including Kong sinkhole, Pygmy cave,
+                      hang Over cave and Tiger cave.
+                    </>
+                  }
+                />
+                <Feature
+                  iconUrl="https://cms.junglebosstours.com/assets/8609130e-5738-43a2-82b4-0da7d95f7bcb"
+                  text={
+                    <>
+                      Experience camping amidst the cave&#39;s natural surroundings, adjacent to the
+                      plantation inside.
+                    </>
+                  }
+                />
+                <Feature
+                  iconUrl="https://cms.junglebosstours.com/assets/32c23792-c5d3-40e4-b52f-393760ba7a3d"
+                  text={
+                    <>
+                      You will be one of the very first people to step into this untouched
+                      underground secret.
+                    </>
+                  }
+                />
+              </Card>
+            </section>
 
-                <div className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Select Date
-                    </label>
-                    <input
-                      type="date"
-                      value={selectedDate}
-                      onChange={(e) => setSelectedDate(e.target.value)}
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            {/* Tour Details (Accordion) */}
+            <section id="tour-detail" className="py-8 md:py-11 xl:py-16 space-y-6 lg:space-y-8">
+              <Card className="space-y-6">
+                <h2 className="uppercase text-2xl font-bold text-gray-800">Tour Details</h2>
+                <Accordion
+                  items={[
+                    {
+                      title: "Food",
+                      content: (
+                        <div className="prose">
+                          <p>
+                            Meals on the tour are freshly cooked by Jungle Boss Chef & Porter Team.
+                            The food is fresh and healthy. Example menu (seasonal changes apply):
+                          </p>
+                          <ul>
+                            <li>
+                              <strong>Breakfast:</strong> Noodles, pancakes, fruit
+                            </li>
+                            <li>
+                              <strong>Lunch:</strong> Fresh spring rolls… (veg options available)
+                            </li>
+                            <li>
+                              <strong>Dinner:</strong> Steamed rice, beef soup, tuna stew, pork
+                              ribs, eggs, chicken, vegetables…
+                            </li>
+                          </ul>
+                        </div>
+                      ),
+                    },
+                    {
+                      title: "GETTING TO PHONG NHA",
+                      content: (
+                        <div className="space-y-4">
+                          <div>
+                            <div className="title-2 text-gray-900">The Area</div>
+                            <div className="mt-2">
+                              <Image
+                                src="https://cms.junglebosstours.com/assets/5f106623-cac7-47fb-a778-51e3a24ac1cb?width=800&height=533"
+                                alt="Map QB"
+                                width={800}
+                                height={533}
+                                className="rounded-md w-full h-auto"
+                              />
+                            </div>
+                          </div>
+                          <div>
+                            <div className="title-2 text-gray-900">Logistics</div>
+                            <div className="prose">
+                              <h3>Travel options to Phong Nha</h3>
+                              <p>Private cars, sleeping bus, train, or flights.</p>
+                              <h3>Flights</h3>
+                              <p>
+                                Land at Dong Hoi airport (~40km South). Use Jungle Boss private car
+                                or taxi.
+                              </p>
+                              <h3>Train</h3>
+                              <p>
+                                Arrive at Dong Hoi station. Options: private car, taxi, or Dong Hoi
+                                – Phong Nha bus (hourly).
+                              </p>
+                              <h3>Sleeping buses</h3>
+                              <p>Multiple routes (Hue, Da Nang, Ninh Binh, Ha Noi…).</p>
+                            </div>
+                          </div>
+                          <div>
+                            <div className="title-2 text-gray-900">Transfers</div>
+                            <p>
+                              FREE 2-way transportation within Phong Nha and Dong Hoi before and
+                              after the tour.
+                            </p>
+                          </div>
+                        </div>
+                      ),
+                    },
+                  ]}
+                />
+              </Card>
+            </section>
+
+            {/* Photos */}
+            <section id="photos" className="py-8 md:py-11 xl:py-16 space-y-6 lg:space-y-8">
+              <Card>
+                <h2 className="uppercase text-2xl font-bold text-gray-800 mb-4">Photos</h2>
+                <div className="grid grid-cols-6 gap-1 md:gap-4 cursor-pointer">
+                  <div className="relative col-span-6 aspect-[2/1] overflow-hidden rounded-md">
+                    <Image
+                      src="https://cms.junglebosstours.com/assets/79f3cfd7-fe10-4663-99d9-4fb52d03ee10?format=webp&width=1110&quality=100"
+                      alt="Photo hero"
+                      fill
+                      sizes="(min-width: 1024px) 1110px, 100vw"
+                      className="object-cover"
                     />
                   </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Number of Participants
-                    </label>
-                    <select
-                      value={participants}
-                      onChange={(e) => setParticipants(Number(e.target.value))}
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                  {[
+                    "https://cms.junglebosstours.com/assets/caa85d0d-e5c4-49a2-8d58-6e0c41199a70?format=webp&width=360&quality=100",
+                    "https://cms.junglebosstours.com/assets/a0746f1c-3a2b-4b43-8984-908effa6af26?format=webp&width=360&quality=100",
+                    "https://cms.junglebosstours.com/assets/654f2cb7-e017-4478-a7bb-7ae68042e38e?format=webp&width=360&quality=100",
+                  ].map((src, i) => (
+                    <div
+                      key={i}
+                      className="relative col-span-2 aspect-[3/2] overflow-hidden rounded-md"
                     >
-                      {[...Array(10)].map((_, i) => (
-                        <option key={i + 1} value={i + 1}>
-                          {i + 1} {i === 0 ? "person" : "people"}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                      <Image
+                        src={src}
+                        alt={`Photo ${i + 1}`}
+                        fill
+                        className="object-cover"
+                        sizes="33vw"
+                      />
+                    </div>
+                  ))}
 
-                  <div className="border-t pt-4">
-                    <div className="flex justify-between items-center mb-4">
-                      <span className="font-medium">Total</span>
-                      <span className="text-xl font-bold text-green-600">
-                        VND {(800000 * participants).toLocaleString()}
-                      </span>
+                  <div className="relative col-span-3 aspect-[4/3] overflow-hidden rounded-md">
+                    <Image
+                      src="https://cms.junglebosstours.com/assets/1e2c666f-f6ec-4b1c-a4f1-77a12cf97394?format=webp&width=543&quality=100"
+                      alt="Photo 4"
+                      fill
+                      className="object-cover"
+                      sizes="50vw"
+                    />
+                  </div>
+                  <div className="relative col-span-3 aspect-[4/3] overflow-hidden rounded-md">
+                    <Image
+                      src="https://cms.junglebosstours.com/assets/5dd98fe6-3737-4724-86b0-af08f78aed79?format=webp&width=543&quality=100"
+                      alt="Photo 5"
+                      fill
+                      className="object-cover"
+                      sizes="50vw"
+                    />
+                    <div className="absolute inset-0 bg-black/40 grid place-items-center">
+                      <div className="text-white text-3xl md:text-4xl font-bold">+4</div>
                     </div>
                   </div>
-
-                  <button className="w-full bg-green-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-700 transition-colors">
-                    Book Tour
-                  </button>
-
-                  <button className="w-full border border-green-600 text-green-600 py-3 px-6 rounded-lg font-semibold hover:bg-green-50 transition-colors">
-                    Book Private Tour
-                  </button>
                 </div>
+              </Card>
+            </section>
 
-                <div className="mt-6 text-center text-sm text-gray-600">
-                  <p>*Note: The price of private tour is higher than the listed price</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Tour Details Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-gray-800">Tour Details</h2>
-
-            {/* Itinerary */}
-            <div className="mb-12">
-              <h3 className="text-2xl font-semibold mb-6 text-gray-800">What You&apos;ll Do</h3>
-              <div className="space-y-6">
-                <div className="bg-white p-6 rounded-lg shadow-sm">
-                  <h4 className="font-semibold text-lg mb-3 text-green-800">
-                    4:30pm - Bánh Cuốn: Steamed Rice Rolls
-                  </h4>
-                  <p className="text-gray-700 leading-relaxed">
-                    Meet Mrs. Xuan, the third-generation owner of this restaurant, and watch her
-                    steam rice sheets and roll them with minced pork, mushrooms, and a secret blend
-                    seasonings. Then learn why the dipping sauce and garnishes are the staple of
-                    Vietnamese cuisine.
+            {/* Tour Booking Process */}
+            <section id="tour-process" className="py-8 md:py-11 xl:py-16">
+              <Card>
+                <h2 className="uppercase text-2xl font-bold text-gray-800 mb-4">
+                  Tour Booking Process
+                </h2>
+                <div className="prose">
+                  <p>
+                    Kong Collapse Top Adventure requires careful preparation. Please read the
+                    booking steps below carefully:
                   </p>
+                  <ol>
+                    <li>
+                      Review Tour Programs and Assess Your Fitness. Carefully examine tour programs
+                      to ensure suitability for your fitness. Read{" "}
+                      <a
+                        href="https://junglebosstours.com/policy/cancellation-policy"
+                        target="_blank"
+                        rel="noopener"
+                        className="text-primary underline"
+                      >
+                        Online Booking & Cancellation
+                      </a>
+                      .
+                    </li>
+                  </ol>
                 </div>
+              </Card>
+            </section>
 
-                <div className="bg-white p-6 rounded-lg shadow-sm">
-                  <h4 className="font-semibold text-lg mb-3 text-blue-800">
-                    5:15pm - Visit Long Biên Bridge & Hanoi&apos;s Central Market
-                  </h4>
-                  <p className="text-gray-700 leading-relaxed">
-                    Hanoi&apos;s &quot;Horizontal Eiffel Tower&quot; was the first bridge to span
-                    the Red River in Hanoi and was a groundbreaking engineering feat when
-                    constructed by the French over 100 years ago. Stroll across the tracks to grab
-                    some sunset pics, and then visit Hanoi&apos;s largest wet market to try some
-                    street snacks.
-                  </p>
-                </div>
-
-                <div className="bg-white p-6 rounded-lg shadow-sm">
-                  <h4 className="font-semibold text-lg mb-3 text-orange-800">
-                    6:00pm - Make Your Own Bánh Mì!
-                  </h4>
-                  <p className="text-gray-700 leading-relaxed">
-                    Discover the fascinating story of bánh mì with a hands-on mini cooking class led
-                    by Mrs. Huyền, a seasoned local vendor. This is a unique opportunity to
-                    personalize your sandwich with fresh, authentic ingredients while connecting to
-                    the special people behind Hanoi&apos;s vibrant street food culture.
-                  </p>
-                </div>
-
-                <div className="bg-white p-6 rounded-lg shadow-sm">
-                  <h4 className="font-semibold text-lg mb-3 text-purple-800">
-                    6:45pm - Cháo Sườn Sụn: Creamy Rice Porridge
-                  </h4>
-                  <p className="text-gray-700 leading-relaxed">
-                    This is every Hanoian&apos;s favorite comfort food. Famous for its silky texture
-                    and nostalgic flavors, this beloved eatery simmers their porridge all day in a
-                    rich broth, and serves each bowl with a variety of toppings (and a side of
-                    childhood memories).
-                  </p>
-                </div>
-
-                <div className="bg-white p-6 rounded-lg shadow-sm">
-                  <h4 className="font-semibold text-lg mb-3 text-red-800">
-                    7:30pm - Chả Cá: Grilled Turmeric Fish & Chè Dessert
-                  </h4>
-                  <p className="text-gray-700 leading-relaxed">
-                    Prepared directly on your table, marinated fish is cooked in a sizzling pan with
-                    fresh dill and green onions, then enjoyed with rice noodles and a unique dipping
-                    sauce. We&apos;ll finish with Chè, a traditional Vietnamese dessert, and a
-                    premium cocktail at a speakeasy bar.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* What's Included */}
-            <div className="mb-12">
-              <h3 className="text-2xl font-semibold mb-6 text-gray-800">What&apos;s Included</h3>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="bg-white p-6 rounded-lg shadow-sm">
-                  <h4 className="font-semibold text-lg mb-4 text-green-800 flex items-center">
-                    <span className="text-green-600 mr-2">✓</span>
-                    Included
-                  </h4>
-                  <ul className="space-y-2 text-gray-700">
-                    <li>• Far more than a meal&apos;s worth of food (10+ dishes)</li>
-                    <li>• Local beer and soft drinks throughout the tour</li>
-                    <li>• Premium cocktail at a speakeasy bar</li>
-                    <li>• Hands-on bánh mì cooking class</li>
-                    <li>• Local market visit with street snacks</li>
-                    <li>• English-speaking local food guide</li>
-                    <li>• Small group experience (2-12 people)</li>
-                    <li>• Cultural insights and food stories</li>
-                  </ul>
-                </div>
-
-                <div className="bg-white p-6 rounded-lg shadow-sm">
-                  <h4 className="font-semibold text-lg mb-4 text-red-800 flex items-center">
-                    <span className="text-red-600 mr-2">✗</span>
-                    Not included
-                  </h4>
-                  <ul className="space-y-2 text-gray-700">
-                    <li>• Hotel pickup and drop-off</li>
-                    <li>• Gratuities for guide (optional)</li>
-                    <li>• Personal expenses</li>
-                    <li>• Additional drinks beyond what&apos;s included</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            {/* What to Bring */}
-            <div className="mb-12">
-              <h3 className="text-2xl font-semibold mb-6 text-gray-800">What to Bring</h3>
-              <div className="bg-white p-6 rounded-lg shadow-sm">
-                <ul className="grid md:grid-cols-2 gap-2 text-gray-700">
-                  <li>• Comfortable walking shoes (we&apos;ll walk ~1.5 miles)</li>
-                  <li>• Camera for food photos and sunset shots</li>
-                  <li>• Light jacket (evenings can be cool)</li>
-                  <li>• Umbrella (if rain is possible)</li>
-                  <li>• Appetite - come hungry!</li>
-                  <li>• Open mind for new flavors</li>
-                  <li>• Cash for any additional purchases</li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Dietary Accommodations */}
-            <div className="mb-12">
-              <h3 className="text-2xl font-semibold mb-6 text-gray-800">Dietary Accommodations</h3>
-              <div className="bg-white p-6 rounded-lg shadow-sm">
-                <p className="text-gray-700 mb-4">
-                  We can accommodate various dietary requirements when communicated at time of
-                  booking. All requests must be made in advance as same-day requests cannot be
-                  guaranteed.
-                </p>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <h4 className="font-semibold mb-2 text-green-800">We Can Accommodate:</h4>
-                    <ul className="space-y-1 text-gray-700">
-                      <li>• Vegetarian</li>
-                      <li>• Gluten Free</li>
-                      <li>• Dairy Free</li>
-                      <li>• No Spicy</li>
-                      <li>• No Nuts</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-2 text-orange-800">Please Note:</h4>
-                    <ul className="space-y-1 text-gray-700">
-                      <li>• Vietnamese cuisine features fish sauce</li>
-                      <li>• Vegan options are extremely limited</li>
-                      <li>• Cross-contamination may occur</li>
-                      <li>• Not recommended for severe allergies</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Photos Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-gray-800">Photos</h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-              {highlights.map((highlight, index) => (
-                <div key={index} className="relative aspect-square rounded-lg overflow-hidden">
-                  <Image
-                    src={highlight.image}
-                    alt={highlight.title}
-                    fill
-                    className="object-cover hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Reviews Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-gray-800">Reviews</h2>
-
-            <div className="text-center mb-8">
-              <div className="text-5xl font-bold text-green-600 mb-2">{tourData.rating}</div>
-              <div className="flex justify-center items-center space-x-1 mb-2">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-yellow-400 text-xl">
-                    ★
-                  </span>
-                ))}
-              </div>
-              <div className="text-gray-600">Based on {tourData.reviews}</div>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-6">
-              {[
-                {
-                  name: "Sarah Johnson",
-                  rating: 5,
-                  comment:
-                    "Amazing experience! The cave swimming was incredible and the guides were very professional and safety-conscious.",
-                  date: "2 weeks ago",
-                  avatar: "/images/homePage/teambuilding1.jpg",
-                },
-                {
-                  name: "Mike Chen",
-                  rating: 5,
-                  comment:
-                    "Perfect day trip! The BBQ lunch by the stream was delicious and the whole experience was well organized.",
-                  date: "1 month ago",
-                  avatar: "/images/homePage/teambuilding2.jpg",
-                },
-                {
-                  name: "Emma Wilson",
-                  rating: 5,
-                  comment:
-                    "Unforgettable adventure! Swimming through the cave was magical and the guides made us feel completely safe.",
-                  date: "3 weeks ago",
-                  avatar: "/images/homePage/teambuilding3.jpg",
-                },
-              ].map((review, index) => (
-                <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
-                  <div className="flex items-center mb-4">
-                    <div className="relative w-12 h-12 rounded-full overflow-hidden mr-4">
-                      <Image src={review.avatar} alt={review.name} fill className="object-cover" />
-                    </div>
-                    <div>
-                      <div className="font-medium text-gray-900">{review.name}</div>
-                      <div className="flex items-center space-x-1">
-                        {[...Array(review.rating)].map((_, i) => (
-                          <span key={i} className="text-yellow-400 text-sm">
-                            ★
-                          </span>
+            {/* Book Tour */}
+            <section id="book-tour" className="py-8 md:py-11 xl:py-16">
+              <Card className="space-y-4">
+                <h2 className="uppercase text-2xl font-bold text-gray-800">Book Tour lih</h2>
+                <div className="rounded-[8px] bg-gray-50 md:flex md:gap-6 p-3 md:p-6">
+                  {/* Calendar mock (static from input) */}
+                  <div className="md:w-1/2 bg-white p-4 rounded-[8px] relative">
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <div className="text-gray-900 font-semibold">August 10, 2025</div>
+                      </div>
+                      {/* Rút gọn lưới cho demo */}
+                      <div className="grid grid-cols-7 gap-1 text-center text-sm text-gray-700">
+                        {Array.from({ length: 31 }).map((_, i) => (
+                          <div
+                            key={i}
+                            className={[
+                              "aspect-square border border-gray-100 grid place-items-center rounded-sm",
+                              i + 1 === 12 ? "bg-primary/10 border-primary" : "",
+                              [
+                                1, 2, 3, 4, 6, 7, 9, 10, 11, 13, 14, 16, 17, 18, 20, 21, 23, 24, 25,
+                                27, 28, 30, 31,
+                              ].includes(i + 1)
+                                ? "opacity-50 pointer-events-none text-gray-400"
+                                : "",
+                            ].join(" ")}
+                          >
+                            {i + 1}
+                          </div>
                         ))}
+                      </div>
+                      <div className="flex gap-2 items-center">
+                        <span className="text-gray-700 text-sm">Availability</span>
                       </div>
                     </div>
                   </div>
-                  <p className="text-gray-700 mb-2">&quot;{review.comment}&quot;</p>
-                  <div className="text-sm text-gray-500">{review.date}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Cancellation Policy */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-gray-800">Tour Cancellation Policy</h2>
+                  {/* Booking summary */}
+                  <div className="flex-1 flex flex-col justify-between gap-4 mt-4 md:mt-0">
+                    <div className="space-y-4">
+                      <div className="text-gray-900 text-sm">Tue, August 12, 2025</div>
+                      <label className="inline-flex items-center gap-2 px-4 py-1 rounded border border-primary w-fit">
+                        <input type="radio" name="slot" defaultChecked />
+                        <span className="text-sm">All day</span>
+                        <span className="w-1 h-1 bg-gray-900 rounded-full" />
+                        <span className="text-sm text-gray-900">10 Available</span>
+                      </label>
 
-            <div className="space-y-6">
-              <div className="bg-white p-6 rounded-lg shadow-sm">
-                <h3 className="font-semibold text-lg mb-4">Cancellation Policy</h3>
-                <ul className="space-y-2 text-gray-700">
-                  <li>
-                    • <strong>Full Refund:</strong> Reservations cancelled 24 hours or more before
-                    your tour start time are fully refundable (100% refund).
-                  </li>
-                  <li>
-                    • <strong>No Refund:</strong> Bookings canceled within 24 hours notice are not
-                    refundable.
-                  </li>
-                  <li>
-                    • <strong>Rescheduling:</strong> If you would like to reschedule your tour with
-                    less than 24 hours notice, we will charge 50% of your total since we are unable
-                    to fill your spots at short notice.
-                  </li>
-                </ul>
-              </div>
+                      <div className="text-gray-900 font-semibold">
+                        Select Number of Participants *
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <div className="text-sm">Participant</div>
+                        <div className="text-sm">1</div>
+                        <div className="text-sm">VND 35,000,000/pax</div>
+                      </div>
 
-              <div className="bg-white p-6 rounded-lg shadow-sm">
-                <h3 className="font-semibold text-lg mb-4">Important Information</h3>
-                <ul className="space-y-2 text-gray-700 text-sm">
-                  <li>
-                    • <strong>Group Size:</strong> Minimum 2 people, maximum 12 people per tour for
-                    an intimate experience.
-                  </li>
-                  <li>
-                    • <strong>Weather Policy:</strong> Tours run rain or shine. In extreme weather
-                    conditions, we will provide full refund.
-                  </li>
-                  <li>
-                    • <strong>Dietary Requirements:</strong> Must be communicated at time of
-                    booking. Same-day requests cannot be guaranteed.
-                  </li>
-                  <li>
-                    • <strong>Meeting Point:</strong> Exact location details will be sent
-                    immediately after booking confirmation.
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+                      <div className="h-px bg-gray-100" />
+                      <div className="flex items-center justify-between">
+                        <div className="text-gray-900 font-semibold">Total</div>
+                        <div className="text-primary font-medium">VND 35,000,000</div>
+                      </div>
+                    </div>
 
-      {/* FAQ Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-gray-800">Frequently Asked Question</h2>
-
-            <div className="space-y-4">
-              {[
-                {
-                  question: "How much food and drink will I get?",
-                  answer:
-                    "This is not a tasting tour - you should come hungry! You will get more than a full meal of food with 10+ dishes. We also provide local beer, soft drinks, and bottled water throughout the tour, plus a specialty cocktail at a speakeasy bar. If you need more food, just let your guide know.",
-                },
-                {
-                  question: "Will I need to walk very far?",
-                  answer:
-                    "This is a walking tour covering about 1.5 miles / 2.5 km by foot, so we recommend comfortable walking shoes. The distance is split between 5+ stops, so it's roughly a 5-10 minute walk between each stop - a great chance to digest before the next stop!",
-                },
-                {
-                  question: "Where does the tour start and end?",
-                  answer:
-                    "The tour starts at 4:30pm at our first restaurant located on the north boundary of Hanoi's old-quarter. You'll get the exact address immediately after booking. Our last stop is on the south boundary of the old-quarter with plenty of options to continue exploring.",
-                },
-                {
-                  question: "What if it's raining or there is inclement weather?",
-                  answer:
-                    "All of our tours are rain-or-shine, so dress for the weather. If rain is possible, bring an umbrella and shoes that can get wet. In rare cases of extreme weather, your guide will cancel the tour and provide a full refund.",
-                },
-                {
-                  question: "Can I book a private tour?",
-                  answer:
-                    "Yes! This food tour can be booked privately for yourself or for groups/special occasions. We've hosted birthdays, corporate events, and more. Private tours with 8+ people typically won't incur an extra fee. Contact us directly to arrange!",
-                },
-                {
-                  question: "What ages qualify for child pricing?",
-                  answer:
-                    "Child pricing is valid for ages 4-15. Children ages 3 and under are free. Our tours are family-friendly and we can adjust the experience for younger guests.",
-                },
-              ].map((faq, index) => (
-                <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
-                  <h3 className="font-semibold text-lg mb-2 text-gray-800">
-                    {String(index + 1).padStart(2, "0")}
-                  </h3>
-                  <h4 className="font-medium mb-3 text-gray-800">{faq.question}</h4>
-                  <p className="text-gray-700">{faq.answer}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Related Tours */}
-      <section className="py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold mb-8 text-gray-800">
-              Start Your Next Adventure Tour
-            </h2>
-
-            <div className="grid md:grid-cols-4 gap-6">
-              {[
-                {
-                  title: "Do Quyen Waterfall Zipline Experience",
-                  duration: "1 day",
-                  price: "VND 1,200,000",
-                  image: "/images/homePage/teambuilding1.jpg",
-                },
-                {
-                  title: "Phong Huong Adventure 1D",
-                  duration: "1 day",
-                  price: "VND 900,000",
-                  image: "/images/homePage/teambuilding2.jpg",
-                },
-                {
-                  title: "Elephant Cave & Ma Da Valley Jungle Trek 1D",
-                  duration: "1 day",
-                  price: "VND 800,000",
-                  image: "/images/homePage/teambuilding3.jpg",
-                },
-                {
-                  title: "Phong Huong Excursion 2D1N",
-                  duration: "2 days",
-                  price: "VND 1,800,000",
-                  image: "/images/homePage/teambuilding4.jpg",
-                },
-              ].map((tour, index) => (
-                <div
-                  key={index}
-                  className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
-                >
-                  <div className="relative h-48">
-                    <Image src={tour.image} alt={tour.title} fill className="object-cover" />
-                  </div>
-                  <div className="p-4">
-                    <h3 className="font-semibold text-sm mb-2 text-gray-800 line-clamp-2">
-                      {tour.title}
-                    </h3>
-                    <div className="text-xs text-gray-600 mb-2">{tour.duration}</div>
-                    <div className="font-bold text-green-600">{tour.price}</div>
+                    <button className="btn btn-solid mt-4 md:mt-0 w-full rounded-md bg-primary text-white py-3 font-medium">
+                      Book Now
+                    </button>
                   </div>
                 </div>
-              ))}
-            </div>
+
+                <p className="text-primary text-sm">
+                  *Please note: This product is on request. We will confirm availability within the
+                  shortest possible time after we receive your order.
+                </p>
+              </Card>
+            </section>
+
+            {/* FAQs */}
+            <section id="faqs" className="py-8 md:py-11 xl:py-16">
+              <Card className="space-y-4">
+                <h2 className="uppercase text-2xl font-bold text-gray-800">
+                  Frequently Asked Question
+                </h2>
+
+                <div className="space-y-4">
+                  <details className="group">
+                    <summary className="flex items-center justify-between cursor-pointer">
+                      <div className="flex items-center gap-2">
+                        <span className="text-gray-500 font-semibold">01</span>
+                        <span className="text-gray-900 font-semibold group-hover:text-primary transition-colors">
+                          What should I notice during the tours?
+                        </span>
+                      </div>
+                      <Chevron />
+                    </summary>
+                    <div className="mt-2 text-gray-700">
+                      Be responsible for the environment… read the rules and survival guide.
+                    </div>
+                  </details>
+
+                  <div className="h-px bg-gray-100" />
+
+                  <details className="group">
+                    <summary className="flex items-center justify-between cursor-pointer">
+                      <div className="flex items-center gap-2">
+                        <span className="text-gray-500 font-semibold">06</span>
+                        <span className="text-gray-900 font-semibold group-hover:text-primary transition-colors">
+                          How to avoid thunderstorms & lightning during the tours?
+                        </span>
+                      </div>
+                      <Chevron />
+                    </summary>
+                    <div className="mt-2 text-gray-700">
+                      Prepare carefully; if entering a thunderstorm area, follow safety tips (see
+                      Jungle Boss blog).
+                    </div>
+                  </details>
+                </div>
+              </Card>
+            </section>
           </div>
+
+          {/* Right sidebar */}
+          <aside className="col-span-12 xl:col-span-4 xl:pt-16 xl:pl-8 sticky top-[84px] h-fit space-y-4 pb-8">
+            <Card className="flex items-center justify-between md:flex-row gap-4">
+              <div>
+                <div className="text-gray-700 text-sm">Price</div>
+                <div className="title-2 text-primary text-xl font-semibold">VND 35,000,000/pax</div>
+              </div>
+
+              <Link
+                href="#book-tour"
+                className="inline-flex items-center justify-center rounded-md bg-primary text-white px-5 py-3 font-medium"
+              >
+                Book Tour
+              </Link>
+            </Card>
+
+            <nav
+              id="sidebar-menu"
+              className="p-4 rounded-[8px] space-y-2 bg-green-600/90 max-h-[calc(100vh-255px-80px-32px)] overflow-y-auto"
+            >
+              {sections.map((s) => (
+                <div key={s.id}>
+                  <Link
+                    href={`#${s.id}`}
+                    className="block px-3 py-[6px] text-gray-100 label-1 hover:text-white"
+                  >
+                    {s.label}
+                  </Link>
+                  <div className="h-px bg-green-700" />
+                </div>
+              ))}
+            </nav>
+          </aside>
         </div>
       </section>
     </main>
   );
-};
+}
 
-export default TourDetail;
+// ------ Tiny UI atoms ------
+function Card({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  return <div className={`rounded-[8px] bg-white p-3 md:p-4 lg:p-6 ${className}`}>{children}</div>;
+}
+
+function InfoRow({ label, value }: { label: string; value: React.ReactNode | string }) {
+  return (
+    <div className="flex items-center gap-3">
+      <div className="text-gray-100 w-[120px] shrink-0">{label}</div>
+      <div className="text-white font-semibold">{value}</div>
+    </div>
+  );
+}
+
+function Feature({ iconUrl, text }: { iconUrl: string; text: React.ReactNode }) {
+  return (
+    <div className="flex items-center gap-4 text-gray-700">
+      <div className="relative w-12 h-12">
+        <Image src={iconUrl} alt="" fill className="object-contain" />
+      </div>
+      <div className="flex-1 font-semibold">{text}</div>
+    </div>
+  );
+}
+
+function Chevron() {
+  return (
+    <svg
+      width="16"
+      height="10"
+      viewBox="0 0 16 10"
+      className="transition-transform group-open:rotate-180"
+    >
+      <path
+        d="M15.1657 0.920372C10.6797 0.623372 6.19372 0.537373 1.70772 0.530373C0.862718 0.500373 0.383718 1.62637 1.01172 2.21137C3.24272 4.53637 5.63372 6.95437 7.93072 9.19837C8.28672 9.56037 8.87172 9.56037 9.22672 9.19837C11.3397 7.04937 13.4127 4.86137 15.4197 2.60637C15.7267 2.27337 15.7987 1.96637 15.7217 1.77437C16.2037 1.51237 16.0837 0.989372 15.1657 0.920372ZM8.62872 7.26737C7.12772 5.66737 5.56872 4.03937 4.01372 2.45137C7.55772 2.37137 11.1007 2.22737 14.6447 1.95537C12.5917 3.67937 10.5967 5.45937 8.62872 7.26737Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
