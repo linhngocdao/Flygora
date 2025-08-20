@@ -1,65 +1,58 @@
 import React from "react";
 import Image from "next/image";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
 
-// Certificate years constant
 const CERTIFICATE_YEARS = [2020, 2019, 2018, 2017, 2024, 2023, 2022, 2021] as const;
 
-const Certificates = () => {
+const Certificates = ({ id }: { id: string }) => {
   return (
-    <section className="py-16 md:py-20 lg:py-24" id="our-certificates">
+    <section className="py-16 md:py-20 lg:py-24" id={id}>
       <div className="container">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-16">
-            <div className="text-[#a4c639] font-script text-2xl md:text-3xl mb-4">
-              Our Certificates
+          <div>
+            <div className="space-y-2 xl:space-y-4 md:space-y-3">
+              <div className="pre-header text-primary tracking-[1.4px]">Our Certificates</div>
+              <h2 className="uppercase headline-1 text-text-500">Honored for Our Dedication</h2>
             </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-              HONORED FOR OUR DEDICATION
-            </h2>
-            <p className="text-lg text-gray-600 mt-4 max-w-3xl mx-auto">
-              Jungle Boss has earned the 2017, 2018 & 2019 this certificate based on consistently great reviews!
-            </p>
+            <div className="mt-2 text-gray-700 body-1">
+              Flygora travel has earned the 2017, 2018 &amp; 2019 this certificate based on
+              consistently great reviews!
+            </div>
           </div>
 
-          {/* Certificates Slider */}
-          <div className="relative certificates-slider overflow-hidden">
+          <div className="relative certificates-slider overflow-hidden mt-10">
             <div className="max-w-7xl mx-auto px-4 relative">
-              {/* Custom Navigation Arrows */}
               <button
-                className="certificates-button-prev absolute left-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white rounded-full shadow-lg border border-gray-300 flex items-center justify-center hover:shadow-xl transition-all duration-300"
+                className="certificates-button-prev hidden lg:flex absolute left-4 top-1/2 -translate-y-1/2 z-30 w-14 h-14 bg-white rounded-full shadow-xl border-2 border-gray-200 items-center justify-center hover:bg-[#a4c639] hover:border-[#a4c639] hover:shadow-2xl transition-all duration-300 group"
                 aria-label="Previous certificates"
               >
                 <svg
-                  width="18"
-                  height="18"
+                  width="20"
+                  height="20"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth="2"
-                  className="text-gray-600 -ml-0.5"
+                  strokeWidth="2.5"
+                  className="text-gray-700 group-hover:text-white transition-colors duration-300 -ml-0.5"
                 >
                   <path d="M15 18l-6-6 6-6" />
                 </svg>
               </button>
 
               <button
-                className="certificates-button-next absolute right-4 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white rounded-full shadow-lg border border-gray-300 flex items-center justify-center hover:shadow-xl transition-all duration-300"
+                className="certificates-button-next hidden lg:flex absolute right-4 top-1/2 -translate-y-1/2 z-30 w-14 h-14 bg-white rounded-full shadow-xl border-2 border-gray-200 items-center justify-center hover:bg-[#a4c639] hover:border-[#a4c639] hover:shadow-2xl transition-all duration-300 group"
                 aria-label="Next certificates"
               >
                 <svg
-                  width="18"
-                  height="18"
+                  width="20"
+                  height="20"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  strokeWidth="2"
-                  className="text-gray-600 ml-0.5"
+                  strokeWidth="2.5"
+                  className="text-gray-700 group-hover:text-white transition-colors duration-300 ml-0.5"
                 >
                   <path d="M9 18l6-6-6-6" />
                 </svg>
@@ -67,17 +60,13 @@ const Certificates = () => {
 
               <div className="px-16">
                 <Swiper
-                  modules={[Navigation, Pagination, Autoplay]}
+                  modules={[Navigation]}
                   spaceBetween={24}
                   slidesPerView={3}
                   centeredSlides={false}
                   navigation={{
-                    nextEl: '.certificates-button-next',
-                    prevEl: '.certificates-button-prev',
-                  }}
-                  autoplay={{
-                    delay: 4000,
-                    disableOnInteraction: false,
+                    nextEl: ".certificates-button-next",
+                    prevEl: ".certificates-button-prev",
                   }}
                   breakpoints={{
                     320: {
@@ -97,10 +86,10 @@ const Certificates = () => {
                 >
                   {CERTIFICATE_YEARS.map((year) => (
                     <SwiperSlide key={year}>
-                      <div className="group text-center hover:text-[#a4c639] rounded-2xl border-2 border-gray-300 hover:border-gray-400 transition-all duration-300 select-none">
-                        <div >
+                      <div className="group text-center hover:text-[#a4c639] rounded-2xl border-2 border-gray-300 hover:border-gray-400 transition-all duration-300 select-none p-[50px]">
+                        <div>
                           <div className="flex justify-center items-center">
-                            <div className="w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64">
+                            <div className="">
                               <Image
                                 width={256}
                                 height={256}
@@ -112,22 +101,14 @@ const Certificates = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="space-y-1">
-                          <h3 className="text-base lg:text-lg font-bold text-gray-800 group-hover:text-[#a4c639] transition-colors duration-300">
-                            Trip Advisor Certificates of
-                          </h3>
-                          <p className="text-base lg:text-lg font-bold text-gray-800 group-hover:text-[#a4c639] transition-colors duration-300">
-                            Excellence {year}
-                          </p>
-                        </div>
+                        <p className="mt-4 text-base lg:text-lg font-bold text-gray-800 group-hover:text-[#a4c639] transition-colors duration-300">
+                          Trip Advisor Certificates of Excellence {year}
+                        </p>
                       </div>
                     </SwiperSlide>
                   ))}
                 </Swiper>
               </div>
-
-              {/* Custom Pagination */}
-              <div className="certificates-pagination flex justify-center mt-8"></div>
             </div>
           </div>
         </div>

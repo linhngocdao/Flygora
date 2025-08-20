@@ -26,13 +26,13 @@ const FloatButtonMenu = () => {
       id: "phone",
       label: "Call us",
       action: () => {
-        window.open("tel:+84917800805", "_self");
+        window.open("tel:+84793946789", "_self");
         closeMenu();
       },
       icon: (
         <Image
           src="/images/homePage/phone.png"
-          alt="Zalo Icon"
+          alt="Phone Icon"
           width={20}
           height={20}
           className="w-5 h-5"
@@ -43,13 +43,13 @@ const FloatButtonMenu = () => {
       id: "whatsapp",
       label: "WhatsApp",
       action: () => {
-        window.open("https://wa.me/84917800805", "_blank");
+        window.open("https://wa.me/84793946789", "_blank");
         closeMenu();
       },
       icon: (
         <Image
           src="/images/homePage/whatsapp.svg"
-          alt="Zalo Icon"
+          alt="WhatsApp Icon"
           width={20}
           height={20}
           className="w-5 h-5"
@@ -60,7 +60,7 @@ const FloatButtonMenu = () => {
       id: "zalo",
       label: "Zalo",
       action: () => {
-        window.open("https://zalo.me/84917800805", "_blank");
+        window.open("https://zalo.me/84793946789", "_blank");
         closeMenu();
       },
       icon: (
@@ -77,7 +77,7 @@ const FloatButtonMenu = () => {
       id: "email",
       label: "Email",
       action: () => {
-        window.open("mailto:contact@junglebosstours.com", "_self");
+        window.open("mailto:advisor@flygora.com", "_self");
         closeMenu();
       },
       icon: (

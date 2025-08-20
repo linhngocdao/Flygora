@@ -59,7 +59,7 @@ const RecommendationBanner = () => {
             <h2 className="text-center text-white uppercase text-[1.375rem] font-semibold">
               {t("title")}
             </h2>
-            <h2 className="text-center uppercase text-[0.5rem] headline-[125%] font-[600] lg:text-[1.9rem] text-[#ede52a]">
+            <h2 className="text-center uppercase text-[1rem] headline-[125%] font-[600] lg:text-[1.9rem] text-[#ede52a]">
               {t("subtitle")}
             </h2>
           </div>

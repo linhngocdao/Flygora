@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 interface HeroSectionProps {
@@ -10,7 +11,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ coverImage, title }) =
     <section className="relative h-screen">
       {/* Hero Image - Full screen */}
       <div className="relative h-full overflow-hidden">
-        <img
+        <Image
+          width={1440}
+          height={800}
           src={coverImage}
           alt={title}
           className="w-full h-full object-cover"

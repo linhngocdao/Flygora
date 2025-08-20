@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { X } from "lucide-react";
 import { TourImage } from "@/types/tour";
+import Image from "next/image";
 
 interface PhotoGalleryProps {
   images: TourImage[];
@@ -32,7 +33,9 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ images }) => {
             className="rounded-lg overflow-hidden relative col-span-6 aspect-[2/1]"
             onClick={() => openLightbox(images[0].image_url)}
           >
-            <img
+            <Image
+              width={800}
+              height={400}
               className="object-cover w-full h-full hover:scale-105 transition-transform duration-300"
               src={images[0].image_url}
               alt={images[0].caption}
@@ -50,7 +53,9 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ images }) => {
             className="rounded-lg overflow-hidden relative col-span-2 aspect-[3/2]"
             onClick={() => openLightbox(image.image_url)}
           >
-            <img
+            <Image
+              width={400}
+              height={300}
               className="object-cover w-full h-full hover:scale-105 transition-transform duration-300"
               src={image.image_url}
               alt={image.caption}
@@ -79,7 +84,9 @@ export const PhotoGallery: React.FC<PhotoGalleryProps> = ({ images }) => {
             >
               <X className="w-6 h-6 text-white" />
             </button>
-            <img
+            <Image
+              width={800}
+              height={600}
               src={selectedImage}
               alt="Gallery image"
               className="max-w-full max-h-full object-contain"

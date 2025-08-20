@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import ButtonPrimary from "@/components/Clients/ui/buttonPrimary";
 
-const SubscribeBanner = () => {
+const SubscribeBanner = ({ className }: { className?: string }) => {
   // Sử dụng hook đa ngôn ngữ
   const t = useTranslations("common.subscribe");
 
@@ -59,7 +59,7 @@ const SubscribeBanner = () => {
   };
 
   return (
-    <section className="email-signup mb-8 lg:mb-16 md:mb-12">
+    <section className={`email-signup mb-8 lg:mb-16 md:mb-12 ${className}`}>
       <div className="container">
         <div
           className="lg:p-8 p-6 bg-cover rounded-lg"
