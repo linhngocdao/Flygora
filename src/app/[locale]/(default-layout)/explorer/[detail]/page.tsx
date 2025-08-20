@@ -46,7 +46,7 @@ interface TOCItem {
   level: number;
 }
 
-const BlogDetailPage = ({ params }: BlogDetailPageProps) => {
+const BlogDetailPage = ({ params }: any) => {
   console.log(params);
 
   const [copiedLink, setCopiedLink] = useState(false);
@@ -368,11 +368,10 @@ const BlogDetailPage = ({ params }: BlogDetailPageProps) => {
                     </button>
                     <button
                       onClick={handleCopyLink}
-                      className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
-                        copiedLink
+                      className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${copiedLink
                           ? "bg-green-600 text-white"
                           : "bg-gray-600 text-white hover:bg-gray-700"
-                      }`}
+                        }`}
                     >
                       <svg
                         className="w-5 h-5"
@@ -429,17 +428,15 @@ const BlogDetailPage = ({ params }: BlogDetailPageProps) => {
                       <button
                         key={index}
                         onClick={() => scrollToSection(item.id)}
-                        className={`w-full text-left p-2 rounded-lg transition-all duration-300 hover:bg-yellow-50 hover:text-yellow-700 group ${
-                          item.level === 1
+                        className={`w-full text-left p-2 rounded-lg transition-all duration-300 hover:bg-yellow-50 hover:text-yellow-700 group ${item.level === 1
                             ? "font-medium text-gray-800"
                             : "ml-4 text-gray-600 text-sm"
-                        }`}
+                          }`}
                       >
                         <div className="flex items-start space-x-2">
                           <span
-                            className={`inline-block w-2 h-2 rounded-full mt-2 transition-colors ${
-                              item.level === 1 ? "bg-yellow-500" : "bg-gray-400"
-                            } group-hover:bg-yellow-600`}
+                            className={`inline-block w-2 h-2 rounded-full mt-2 transition-colors ${item.level === 1 ? "bg-yellow-500" : "bg-gray-400"
+                              } group-hover:bg-yellow-600`}
                           ></span>
                           <span className="leading-relaxed">{item.title}</span>
                         </div>
