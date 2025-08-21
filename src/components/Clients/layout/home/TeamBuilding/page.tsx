@@ -102,7 +102,7 @@ const TeamBuilding = () => {
 
         {/* Button căn giữa */}
         <div className="flex justify-center mt-8">
-          <ButtonPrimary name="Explore Now" />
+          <ButtonPrimary name="Explore Now" fullWidth />
         </div>
       </section>
     </div>

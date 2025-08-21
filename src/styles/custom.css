@@ -3,6 +3,12 @@
     linear-gradient(180deg, rgba(52, 67, 15, 0) 50%, #34430f),
     linear-gradient(180deg, transparent, transparent 43.17%);
 }
+.btn-outline-light {
+  color: rgb(255 255 255 / 1);
+  letter-spacing: 0.32px;
+  max-width: 185px;
+  width: 100%;
+}
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }

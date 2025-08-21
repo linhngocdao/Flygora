@@ -468,7 +468,7 @@ const TopAdventureTour = () => {
               }}
             >
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                <ButtonPrimary name="Book Tour" href="/food-tours" />
+                <ButtonPrimary name="Book Tour" href="/food-tours" maxWidth="w-full" />
               </motion.div>
             </motion.div>
           </motion.div>

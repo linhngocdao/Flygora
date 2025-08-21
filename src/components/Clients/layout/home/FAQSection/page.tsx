@@ -236,7 +236,7 @@ export default function FaqSection() {
               transition: { duration: 0.1, ease: "easeOut" },
             }}
           >
-            <ButtonPrimary name={t("contactButton")} href="/contact-us" />
+            <ButtonPrimary name={t("contactButton")} href="/contact-us" fullWidth />
           </motion.div>
         </motion.div>
 

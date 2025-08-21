@@ -157,7 +157,11 @@ const TeamBuildingPage = () => {
                   Some ideal activities your team can check out
                 </div>
                 <div className="flex items-center justify-center lg:hidden">
-                  <ButtonPrimary name="See More Activities" onClick={scrollToSuggestTour} />
+                  <ButtonPrimary
+                    name="See More Activities"
+                    onClick={scrollToSuggestTour}
+                    fullWidth
+                  />
                 </div>
               </div>
             </div>
@@ -205,7 +209,7 @@ const TeamBuildingPage = () => {
                 </div>
               </div>
               <div className="hidden lg:block">
-                <ButtonPrimary name="See More Activities" onClick={scrollToSuggestTour} />
+                <ButtonPrimary name="See More Activities" onClick={scrollToSuggestTour} fullWidth />
               </div>
             </div>
           </div>
@@ -273,8 +277,8 @@ const TeamBuildingPage = () => {
                 </div>
               </div>
               <div className="flex items-center w-full space-x-1 max-sm:justify-center md:space-x-6 xl:space-x-8">
-                <ButtonPrimary name="Contact Us" />
-                <ButtonPrimary name="Get a Quote" />
+                <ButtonPrimary name="Contact Us" fullWidth />
+                <ButtonPrimary name="Get a Quote" fullWidth />
               </div>
             </div>
           </div>

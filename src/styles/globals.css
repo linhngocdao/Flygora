@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./custom.css";
+@import "./modal-gallery.css";
 
 :root {
   --font-geomanist: "Geomanist", sans-serif;
@@ -308,6 +309,17 @@ body {
   width: 100%;
   transition: background-color 0.3s ease;
 }
+.btn-primary {
+  align-items: center;
+  background-color: #34430f;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  letter-spacing: 0.32px;
+  max-width: 140px;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
 
 .btn-solid:hover {
   background-color: #6c8a1f;
@@ -526,5 +538,27 @@ body {
   }
   100% {
     transform: translateX(-50%);
+  }
+}
+
+/* Custom scrollbar utilities for mobile optimization */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+/* Mobile modal optimizations */
+@media (max-width: 768px) {
+  .modal-content-mobile {
+    max-height: calc(100vh - 2rem);
+    overflow: hidden;
+  }
+
+  .modal-image-mobile {
+    max-height: calc(60vh);
   }
 }

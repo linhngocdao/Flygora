@@ -90,7 +90,10 @@ const SubscribeBanner = ({ className }: { className?: string }) => {
                 )}
               </div>
               <div className="max-md:flex max-md:justify-center">
-                <ButtonPrimary name={isSubmitting ? t("form.submitting") : t("form.submit")} />
+                <ButtonPrimary
+                  name={isSubmitting ? t("form.submitting") : t("form.submit")}
+                  className="!w-[279px]"
+                />
               </div>
             </div>
 

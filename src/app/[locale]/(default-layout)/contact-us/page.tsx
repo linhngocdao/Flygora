@@ -52,10 +52,21 @@ const ContactGotravel = () => {
       <ContactForm />
       {/* More Supportive */}
       <section className="relative overflow-hidden mb-20">
-        <div
-          ref={sectionRef}
-          className="xl:py-[68px] md:py-14 py-8 bg-[url('/images/homepage/section-2-bg.webp')] bg-[length:100%_100%] relative overflow-hidden"
-        >
+        <div ref={sectionRef} className="xl:py-[68px] md:py-14 py-8 relative overflow-hidden">
+          <div className="absolute inset-0">
+            <Image
+              src="/images/homepage/section-2-bg.webp"
+              alt="background our team"
+              className="object-cover w-full h-full"
+              fill
+              quality={100}
+              sizes="100vw"
+              priority
+              style={{
+                imageRendering: "crisp-edges",
+              }}
+            />
+          </div>
           <Image
             src="/images/homePage/leaf-bg-right.webp"
             alt="leaf"
@@ -106,7 +117,13 @@ const ContactGotravel = () => {
                     <div className="text-primary label-1">{t("moreSupportive.office.address")}</div>
                   </div>
                 </div>
-                <ButtonPrimary name={t("moreSupportive.office.button")} />
+                <ButtonPrimary
+                  name={t("moreSupportive.office.button")}
+                  onClick={() => {
+                    window.open("https://maps.app.goo.gl/hxivrcrqv36Dvfrv8", "_blank");
+                  }}
+                  fullWidth
+                />
               </div>
               <div className="flex flex-col justify-between p-4 rounded-lg bg-[#e6ee95] xl:p-6 md:p-5">
                 <div>
@@ -129,7 +146,13 @@ const ContactGotravel = () => {
                     </div>
                   </div>
                 </div>
-                <ButtonPrimary name={t("moreSupportive.support.button")} />
+                <ButtonPrimary
+                  name={t("moreSupportive.support.button")}
+                  onClick={() => {
+                    window.open("mailto:advisor@flygora.com", "_blank");
+                  }}
+                  fullWidth
+                />
               </div>
               <div className="flex flex-col justify-between p-4 rounded-lg bg-[#4c5d36] xl:p-6 md:p-5">
                 <div>
@@ -157,7 +180,14 @@ const ContactGotravel = () => {
                     </div>
                   </div>
                 </div>
-                <ButtonPrimary name={t("moreSupportive.call.button")} />
+                {/* Tạo sự kiện gọi chọn 1 trong 2 số */}
+                <ButtonPrimary
+                  name={t("moreSupportive.call.button")}
+                  onClick={() => {
+                    window.open("tel:+84793946789", "_blank");
+                  }}
+                  fullWidth
+                />
               </div>
             </div>
           </div>

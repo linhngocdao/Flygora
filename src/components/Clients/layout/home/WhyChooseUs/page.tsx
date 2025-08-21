@@ -87,7 +87,7 @@ const WhychooseUsSection = () => {
                   <p>{t("description")} </p>
                 </div>
 
-                <ButtonPrimary name={t("aboutUsButton")} href="/about-us" />
+                <ButtonPrimary name={t("aboutUsButton")} href="/about-us" fullWidth />
               </div>
             </div>
 
