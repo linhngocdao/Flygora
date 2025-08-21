@@ -4,15 +4,17 @@ import ButtonTour from "@/components/Clients/ui/buttonPrimary";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeftIcon } from "lucide-react";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 // import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import * as z from "zod";
 
 interface BookingPageProps {
-  total_participants?: string;
-  booking_date?: string;
+  searchParams: {
+    total_participants?: string;
+    booking_date?: string;
+  };
 }
 
 // Zod schema for participant validation
@@ -124,20 +126,19 @@ interface BookingFormData {
   voucherCode?: string;
 }
 
-const BookingPage: React.FC<BookingPageProps> = ({ total_participants, booking_date }) => {
-  const searchParams = useSearchParams();
-  //   const router = useRouter();
+const BookingPage: React.FC<BookingPageProps> = () => {
+  const searchParamsHook = useSearchParams();
+  const router = useRouter();
 
-  // Lấy dữ liệu từ URL params
-  const urlParticipants = searchParams.get("total_participants");
-  const urlBookingDate = searchParams.get("booking_date");
+  // Lấy dữ liệu từ searchParams (Next.js cung cấp) hoặc fallback về useSearchParams hook
+  const urlParticipants = searchParamsHook.get("total_participants");
+  const urlBookingDate = searchParamsHook.get("booking_date");
 
-  console.log("URL Params:", {
-    total_participants: urlParticipants,
-    booking_date: urlBookingDate,
-  });
+  // Sử dụng dữ liệu từ searchParams
+  const finalParticipants = urlParticipants;
+  const finalBookingDate = urlBookingDate;
 
-  console.log("Props:", { total_participants, booking_date });
+  console.log("Final values:", { finalParticipants, finalBookingDate });
 
   const [showPaxInput, setShowPaxInput] = useState<boolean>(false);
   const [participantForms, setParticipantForms] = useState<{ [key: number]: boolean }>({
@@ -148,7 +149,7 @@ const BookingPage: React.FC<BookingPageProps> = ({ total_participants, booking_d
 
   const pricePerPerson = 180000;
 
-  // Function để format ngày tháng từ URL params
+  // Function để format ngày tháng từ props hoặc URL params
   const formatBookingDate = (dateStr: string | null) => {
     if (!dateStr) return "Chưa chọn ngày";
 
@@ -165,11 +166,11 @@ const BookingPage: React.FC<BookingPageProps> = ({ total_participants, booking_d
     }
   };
 
-  // Lấy ngày đã format từ URL params
-  const formattedBookingDate = formatBookingDate(urlBookingDate);
+  // Lấy ngày đã format từ final value
+  const formattedBookingDate = formatBookingDate(finalBookingDate);
 
-  // Tính toán số người tham gia từ URL params
-  const initialParticipants = urlParticipants ? parseInt(urlParticipants) : 1;
+  // Tính toán số người tham gia từ final value
+  const initialParticipants = finalParticipants ? parseInt(finalParticipants) : 1;
   const participantCount = Math.max(1, initialParticipants);
 
   // Tạo mảng participants dựa trên số lượng từ URL
@@ -300,7 +301,7 @@ const BookingPage: React.FC<BookingPageProps> = ({ total_participants, booking_d
     return error?.message || null;
   };
   const handleBackToDetails = () => {
-    // router.back();
+    router.back();
   };
 
   return (
