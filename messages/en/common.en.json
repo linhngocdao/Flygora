@@ -139,6 +139,8 @@
       "allCountries": "All countries",
       "sendRequest": "Send request",
       "sending": "Sending...",
+      "captcha": "Security verification",
+      "recaptchaRequired": "Please complete security verification",
       "submitSuccess": "Thank you for sending your message! We will contact you as soon as possible.",
       "submitError": "Sorry, an error occurred while sending the form. Please try again."
     },

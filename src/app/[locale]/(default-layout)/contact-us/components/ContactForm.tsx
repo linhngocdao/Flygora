@@ -1,11 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import * as z from "zod";
+import ReCAPTCHA from "react-google-recaptcha";
 import ButtonPrimary from "@/components/Clients/ui/buttonPrimary";
+import { useMutation } from "@tanstack/react-query";
+import { SendContact } from "@/config/contact/contact.api";
+import { toast } from "sonner";
 
 // Định nghĩa schema validation cho form liên hệ
 const contactFormSchema = z.object({
@@ -15,6 +19,7 @@ const contactFormSchema = z.object({
   phonePrefix: z.string().min(1, { message: "contact.form.phonePrefixRequired" }),
   phoneNumber: z.string().min(6, { message: "contact.form.phoneNumberRequired" }),
   message: z.string().optional(),
+  recaptcha: z.string().min(1, { message: "contact.form.recaptchaRequired" }),
 });
 
 // Kiểu dữ liệu của form
@@ -30,8 +35,10 @@ const POPULAR_COUNTRY_CODES = [
 
 // Component chính
 const ContactForm = () => {
-  // Hook đa ngôn ngữ
   const t = useTranslations("common.contact");
+
+  // Ref cho reCAPTCHA
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   // State cho dropdown mã quốc gia
   const [isPhoneDropdownOpen, setIsPhoneDropdownOpen] = useState(false);
@@ -53,6 +60,21 @@ const ContactForm = () => {
       phonePrefix: "",
       phoneNumber: "",
       message: "",
+      recaptcha: "",
+    },
+  });
+
+  const createMutation = useMutation({
+    mutationFn: SendContact,
+    onSuccess: () => {
+      toast.success(t("form.submitSuccess"));
+      // Reset reCAPTCHA sau khi gửi thành công
+      recaptchaRef.current?.reset();
+    },
+    onError: (error: any) => {
+      toast.error(error?.message || t("form.submitError"));
+      // Reset reCAPTCHA khi có lỗi
+      recaptchaRef.current?.reset();
     },
   });
 
@@ -63,21 +85,23 @@ const ContactForm = () => {
     setIsPhoneDropdownOpen(false);
   };
 
+  // Xử lý thay đổi reCAPTCHA
+  const handleRecaptchaChange = (token: string | null) => {
+    setValue("recaptcha", token || "");
+  };
+
   // Xử lý gửi form
-  const onSubmit = async (data: ContactFormValues) => {
-    try {
-      // TODO: Gửi dữ liệu form đến API backend
-      console.log("Form data:", data);
-
-      // Reset form sau khi gửi thành công
-      reset();
-
-      // Hiển thị thông báo thành công
-      alert(t("form.submitSuccess"));
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      alert(t("form.submitError"));
+  const onSubmit = async (data: any) => {
+    // Kiểm tra reCAPTCHA trước khi gửi
+    if (!data.recaptcha) {
+      toast.error(t("form.recaptchaRequired"));
+      return;
     }
+
+    createMutation.mutate(data);
+    reset();
+    // Reset reCAPTCHA sau khi reset form
+    recaptchaRef.current?.reset();
   };
 
   return (
@@ -381,6 +405,28 @@ const ContactForm = () => {
                       </div>
                     </label>
                   </fieldset>
+                </div>
+
+                {/* reCAPTCHA */}
+                <div>
+                  <div className="mb-2">
+                    <span className="label">
+                      {t("form.captcha")}
+                      <span className="required">*</span>
+                    </span>
+                  </div>
+                  <ReCAPTCHA
+                    ref={recaptchaRef}
+                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+                    onChange={handleRecaptchaChange}
+                    onExpired={() => setValue("recaptcha", "")}
+                    onError={() => setValue("recaptcha", "")}
+                    theme="light"
+                    size="normal"
+                  />
+                  {errors.recaptcha && (
+                    <p className="text-red-500 text-xs mt-1">{t(errors.recaptcha.message || "")}</p>
+                  )}
                 </div>
 
                 {/* Nút gửi */}
