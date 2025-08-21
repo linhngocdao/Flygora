@@ -4,14 +4,15 @@ import ButtonTour from "@/components/Clients/ui/buttonPrimary";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ArrowLeftIcon } from "lucide-react";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
+// import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
-import { toast } from "sonner";
 import * as z from "zod";
 
 interface BookingPageProps {
-  participant1?: string;
-  date?: string;
+  total_participants?: string;
+  booking_date?: string;
 }
 
 // Zod schema for participant validation
@@ -123,8 +124,20 @@ interface BookingFormData {
   voucherCode?: string;
 }
 
-const BookingPage: React.FC<BookingPageProps> = ({ participant1, date }) => {
-  console.log(participant1, date);
+const BookingPage: React.FC<BookingPageProps> = ({ total_participants, booking_date }) => {
+  const searchParams = useSearchParams();
+  //   const router = useRouter();
+
+  // Lấy dữ liệu từ URL params
+  const urlParticipants = searchParams.get("total_participants");
+  const urlBookingDate = searchParams.get("booking_date");
+
+  console.log("URL Params:", {
+    total_participants: urlParticipants,
+    booking_date: urlBookingDate,
+  });
+
+  console.log("Props:", { total_participants, booking_date });
 
   const [showPaxInput, setShowPaxInput] = useState<boolean>(false);
   const [participantForms, setParticipantForms] = useState<{ [key: number]: boolean }>({
@@ -135,25 +148,52 @@ const BookingPage: React.FC<BookingPageProps> = ({ participant1, date }) => {
 
   const pricePerPerson = 180000;
 
+  // Function để format ngày tháng từ URL params
+  const formatBookingDate = (dateStr: string | null) => {
+    if (!dateStr) return "Chưa chọn ngày";
+
+    try {
+      const date = new Date(dateStr);
+      return date.toLocaleDateString("en-US", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+    } catch {
+      return "Ngày không hợp lệ";
+    }
+  };
+
+  // Lấy ngày đã format từ URL params
+  const formattedBookingDate = formatBookingDate(urlBookingDate);
+
+  // Tính toán số người tham gia từ URL params
+  const initialParticipants = urlParticipants ? parseInt(urlParticipants) : 1;
+  const participantCount = Math.max(1, initialParticipants);
+
+  // Tạo mảng participants dựa trên số lượng từ URL
+  const createInitialParticipants = (count: number) => {
+    return Array.from({ length: count }, () => ({
+      firstName: "",
+      lastName: "",
+      email: "",
+      birthDate: "",
+      gender: "",
+      country: "",
+      passportId: "",
+      phonePrefix: "",
+      phone: "",
+      hearAbout: "",
+      specialRequirements: "",
+    }));
+  };
+
   // Form setup with react-hook-form and zod
   const form = useForm<BookingFormData>({
     resolver: zodResolver(bookingSchema),
     defaultValues: {
-      participants: [
-        {
-          firstName: "",
-          lastName: "",
-          email: "",
-          birthDate: "",
-          gender: "",
-          country: "",
-          passportId: "",
-          phonePrefix: "",
-          phone: "",
-          hearAbout: "",
-          specialRequirements: "",
-        },
-      ],
+      participants: createInitialParticipants(participantCount),
       billing: {
         firstName: "",
         lastName: "",
@@ -260,8 +300,7 @@ const BookingPage: React.FC<BookingPageProps> = ({ participant1, date }) => {
     return error?.message || null;
   };
   const handleBackToDetails = () => {
-    // viết cho tôi logic để quay lại bước chi tiết
-    toast.info("Đang phát triển");
+    // router.back();
   };
 
   return (
@@ -324,7 +363,9 @@ const BookingPage: React.FC<BookingPageProps> = ({ participant1, date }) => {
                   <div className="flex items-center justify-center mb-2 space-x-4 xl:mb-4 md:mb-3 xl:space-x-8 md:space-x-6">
                     <div className="flex flex-col items-center space-y-1">
                       <div className="text-sm tracking-[0.28px] text-gray-900">Start date</div>
-                      <div className="font-medium text-gray-900 text-base">October 25, 2025</div>
+                      <div className="font-medium text-gray-900 text-base">
+                        {formattedBookingDate}
+                      </div>
                     </div>
 
                     <div>
@@ -364,7 +405,9 @@ const BookingPage: React.FC<BookingPageProps> = ({ participant1, date }) => {
 
                     <div className="flex flex-col items-center space-y-1">
                       <div className="text-sm tracking-[0.28px] text-gray-900">End date</div>
-                      <div className="font-medium text-gray-900 text-base">October 25, 2025</div>
+                      <div className="font-medium text-gray-900 text-base">
+                        {formattedBookingDate}
+                      </div>
                     </div>
                   </div>
 
@@ -891,7 +934,9 @@ const BookingPage: React.FC<BookingPageProps> = ({ participant1, date }) => {
                     <div className="xl:py-4 md:py-3 py-2 flex items-center justify-center xl:space-x-8 md:space-x-[22px] space-x-4 border-b border-dashed border-gray-100">
                       <div className="flex flex-col items-center space-y-1">
                         <div className="text-sm tracking-[0.28px] text-gray-900">Start date</div>
-                        <div className="font-medium text-gray-900 text-base">October 25, 2025</div>
+                        <div className="font-medium text-gray-900 text-base">
+                          {formattedBookingDate}
+                        </div>
                       </div>
 
                       <div>
@@ -931,7 +976,9 @@ const BookingPage: React.FC<BookingPageProps> = ({ participant1, date }) => {
 
                       <div className="flex flex-col items-center space-y-1">
                         <div className="text-sm tracking-[0.28px] text-gray-900">End date</div>
-                        <div className="font-medium text-gray-900 text-base">October 25, 2025</div>
+                        <div className="font-medium text-gray-900 text-base">
+                          {formattedBookingDate}
+                        </div>
                       </div>
                     </div>
 

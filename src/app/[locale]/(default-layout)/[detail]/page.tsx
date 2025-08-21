@@ -6,6 +6,7 @@ import ImageGalleryModal from "@/components/Clients/ui/ImageGalleryModal";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
+import BookingTour from "./components/BookingTour";
 
 function useSmoothScroll() {
   useEffect(() => {
@@ -265,7 +266,7 @@ export default function TourDetailPage() {
                     </div>
                   </div>
                 </div>
-                <ButtonPrimary name="Book Tour" fullWidth />
+                <ButtonPrimary name="Book Tour" fullWidth href="#book-tour" />
                 {/* <div className="space-y-4 w-fit">
                   <div className="flex space-x-2">
                     <ButtonPrimary name="Give as a Gift" maxWidth="w-full" />
@@ -521,78 +522,7 @@ export default function TourDetailPage() {
               </section>
 
               {/* Book Tour */}
-              <section id="book-tour" className="py-4">
-                <Card className="space-y-4">
-                  <h2 className="uppercase text-2xl font-bold text-gray-800">Book Tour lih</h2>
-                  <div className="rounded-[8px] bg-gray-50 md:flex md:gap-6 p-3 md:p-6">
-                    {/* Calendar mock (static from input) */}
-                    <div className="md:w-1/2 bg-white p-4 rounded-[8px] relative">
-                      <div className="space-y-4">
-                        <div className="flex items-center justify-between">
-                          <div className="text-gray-900 font-semibold">August 10, 2025</div>
-                        </div>
-                        {/* Rút gọn lưới cho demo */}
-                        <div className="grid grid-cols-7 gap-1 text-center text-sm text-gray-700">
-                          {Array.from({ length: 31 }).map((_, i) => (
-                            <div
-                              key={i}
-                              className={[
-                                "aspect-square border border-gray-100 grid place-items-center rounded-sm",
-                                i + 1 === 12 ? "bg-primary/10 border-primary" : "",
-                                [
-                                  1, 2, 3, 4, 6, 7, 9, 10, 11, 13, 14, 16, 17, 18, 20, 21, 23, 24,
-                                  25, 27, 28, 30, 31,
-                                ].includes(i + 1)
-                                  ? "opacity-50 pointer-events-none text-gray-400"
-                                  : "",
-                              ].join(" ")}
-                            >
-                              {i + 1}
-                            </div>
-                          ))}
-                        </div>
-                        <div className="flex gap-2 items-center">
-                          <span className="text-gray-700 text-sm">Availability</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Booking summary */}
-                    <div className="flex-1 flex flex-col justify-between gap-4 mt-4 md:mt-0">
-                      <div className="space-y-4">
-                        <div className="text-gray-900 text-sm">Tue, August 12, 2025</div>
-                        <label className="inline-flex items-center gap-2 px-4 py-1 rounded border border-primary w-fit">
-                          <input type="radio" name="slot" defaultChecked />
-                          <span className="text-sm">All day</span>
-                          <span className="w-1 h-1 bg-gray-900 rounded-full" />
-                          <span className="text-sm text-gray-900">10 Available</span>
-                        </label>
-
-                        <div className="text-gray-900 font-semibold">
-                          Select Number of Participants *
-                        </div>
-                        <div className="flex items-center gap-4">
-                          <div className="text-sm">Participant</div>
-                          <div className="text-sm">1</div>
-                          <div className="text-sm">VND 35,000,000/pax</div>
-                        </div>
-
-                        <div className="h-px bg-gray-100" />
-                        <div className="flex items-center justify-between">
-                          <div className="text-gray-900 font-semibold">Total</div>
-                          <div className="text-primary font-medium">VND 35,000,000</div>
-                        </div>
-                      </div>
-                      <ButtonPhu name="Book Tour" href="#book-tour" />
-                    </div>
-                  </div>
-
-                  <p className="text-primary text-sm">
-                    *Please note: This product is on request. We will confirm availability within
-                    the shortest possible time after we receive your order.
-                  </p>
-                </Card>
-              </section>
+              <BookingTour />
 
               {/* FAQs */}
               <section id="faqs" className="py-4">
@@ -657,7 +587,7 @@ export default function TourDetailPage() {
                   </div>
                 </div>
               </div>
-              <ButtonPrimary name="Book Tour" fullWidth />
+              <ButtonPrimary name="Book Tour" fullWidth href="#book-tour" />
             </div>
 
             {/* TOC - fade in khi scroll qua hero */}
