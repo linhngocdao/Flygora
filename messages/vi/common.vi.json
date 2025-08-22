@@ -139,7 +139,6 @@
       "allCountries": "Tất cả quốc gia",
       "sendRequest": "Gửi yêu cầu",
       "sending": "Đang gửi...",
-      "captcha": "Xác thực bảo mật",
       "recaptchaRequired": "Vui lòng xác thực bảo mật",
       "submitSuccess": "Cảm ơn bạn đã gửi tin nhắn! Chúng tôi sẽ liên hệ lại với bạn trong thời gian sớm nhất.",
       "submitError": "Xin lỗi, đã xảy ra lỗi khi gửi biểu mẫu. Vui lòng thử lại."
