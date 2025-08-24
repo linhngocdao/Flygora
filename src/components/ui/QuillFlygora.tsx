@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { useEffect, useRef } from "react";
-import Quill from "quill";
 import "quill/dist/quill.snow.css";
 import "@/styles/quill-flygora.css";
 import { cn } from "@/lib/utils";
@@ -32,10 +31,7 @@ const defaultModules = {
     [{ color: [] }, { background: [] }],
     ["clean"],
   ],
-  clipboard: {
-    // Tắt smart copy/paste để tránh lỗi với MS Word
-    matchVisual: false,
-  },
+  clipboard: { matchVisual: false },
 };
 
 const defaultFormats = [
@@ -73,75 +69,75 @@ const QuillFlygora = React.forwardRef<HTMLDivElement, QuillFlygoraProps>(
     ref
   ) => {
     const containerRef = useRef<HTMLDivElement>(null);
-    const quillRef = useRef<Quill | null>(null);
+    const quillRef = useRef<any>(null);
     const isInitialized = useRef(false);
 
-    // Stable callbacks
     const onChangeRef = useRef(onChange);
     const onBlurRef = useRef(onBlur);
-
-    // Update refs on every render
     onChangeRef.current = onChange;
     onBlurRef.current = onBlur;
 
-    // Initialize Quill only in the client-side
+    // Init Quill on client only (fix SSR: document/window not defined)
     useEffect(() => {
-      if (typeof document === "undefined") return;
       if (!containerRef.current || isInitialized.current) return;
 
-      const quill = new Quill(containerRef.current, {
-        theme,
-        modules,
-        formats,
-        placeholder,
-        readOnly: readOnly || disabled,
-      });
+      let isUnmounted = false;
 
-      quillRef.current = quill;
-      isInitialized.current = true;
+      (async () => {
+        // ⬇️ import động, chỉ chạy ở client
+        const { default: Quill } = await import("quill");
 
-      // Set initial value
-      if (value) {
-        quill.root.innerHTML = value;
-      }
+        if (isUnmounted) return;
 
-      // Handle text changes
-      quill.on("text-change", () => {
-        const html = quill.root.innerHTML;
-        const text = quill.getText().trim();
-        const finalValue = text.length === 0 ? "" : html;
-        onChangeRef.current?.(finalValue);
-      });
+        const quill = new Quill(containerRef.current!, {
+          theme,
+          modules,
+          formats,
+          placeholder,
+          readOnly: readOnly || disabled,
+        });
 
-      // Handle blur
-      quill.on("selection-change", (range) => {
-        if (!range) {
-          onBlurRef.current?.();
+        quillRef.current = quill;
+        isInitialized.current = true;
+
+        // Set initial value (giữ history đúng)
+        if (value) {
+          quill.clipboard.dangerouslyPasteHTML(value);
         }
-      });
+
+        quill.on("text-change", () => {
+          const html = quill.root.innerHTML;
+          const text = quill.getText().trim();
+          onChangeRef.current?.(text.length === 0 ? "" : html);
+        });
+
+        quill.on("selection-change", (range: any) => {
+          if (!range) onBlurRef.current?.();
+        });
+      })();
 
       return () => {
-        if (quillRef.current) {
-          quillRef.current = null;
-        }
+        isUnmounted = true;
+        quillRef.current = null;
       };
-    }, [theme, modules, formats, placeholder, disabled, readOnly, value]);
+      // Không đưa `value` vào đây để tránh re-init vô ích
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [theme, modules, formats, placeholder, disabled, readOnly]);
 
-    // Update content when value changes externally (only for controlled components)
+    // Sync value từ ngoài vào (controlled)
     useEffect(() => {
-      if (quillRef.current && value !== undefined) {
-        const currentHtml = quillRef.current.root.innerHTML;
-        if (value !== currentHtml) {
-          const selection = quillRef.current.getSelection();
-          quillRef.current.root.innerHTML = value;
-          if (selection) {
-            quillRef.current.setSelection(selection);
-          }
-        }
+      const quill = quillRef.current;
+      if (!quill || value === undefined) return;
+
+      const currentHtml = quill.root.innerHTML;
+      if (value !== currentHtml) {
+        const sel = quill.getSelection();
+        quill.clipboard.dangerouslyPasteHTML(value);
+        if (sel) quill.setSelection(sel);
       }
     }, [value]);
 
-    // Update readOnly state
+    // Toggle readOnly/disabled runtime
     useEffect(() => {
       if (quillRef.current) {
         quillRef.current.enable(!disabled && !readOnly);

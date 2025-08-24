@@ -32,6 +32,35 @@ export const CategorySelect: React.FC<CategorySelectProps> = ({
   emptyLabel = "-- Không chọn --",
 }) => {
   const { activeCategories, loading, error } = useCategory();
+
+  // Use ref to avoid infinite re-renders
+  const onValueChangeRef = React.useRef(onValueChange);
+  onValueChangeRef.current = onValueChange;
+
+  // Memoize callback để tránh re-render không cần thiết
+  const handleValueChange = React.useCallback(
+    (newValue: string) => {
+      if (newValue === "__empty__") {
+        onValueChangeRef.current?.("");
+      } else if (newValue === "__create_new__") {
+        // Không thay đổi value khi click "Tạo mới"
+        return;
+      } else {
+        onValueChangeRef.current?.(newValue);
+      }
+    },
+    [] // Không có dependency để tránh re-render
+  );
+
+  // Xử lý value để tương thích với Radix UI Select - đảm bảo không gây re-render
+  const selectValue = React.useMemo(() => {
+    // Đảm bảo luôn trả về string để tránh undefined gây lỗi với Radix
+    if (!value || value === "") {
+      return allowEmpty ? "__empty__" : "";
+    }
+    return value;
+  }, [value, allowEmpty]);
+
   if (error) {
     return (
       <Select disabled>
@@ -46,21 +75,6 @@ export const CategorySelect: React.FC<CategorySelectProps> = ({
       </Select>
     );
   }
-
-  // Xử lý value để tương thích với Radix UI Select
-  const selectValue = value === "" ? "__empty__" : value;
-
-  // Xử lý onValueChange để convert lại thành empty string khi cần
-  const handleValueChange = (newValue: string) => {
-    if (newValue === "__empty__") {
-      onValueChange?.("");
-    } else if (newValue === "__create_new__") {
-      // Không thay đổi value khi click "Tạo mới"
-      return;
-    } else {
-      onValueChange?.(newValue);
-    }
-  };
 
   return (
     <Select value={selectValue} onValueChange={handleValueChange} disabled={disabled || loading}>

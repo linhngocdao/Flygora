@@ -2,7 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Calendar, DollarSign, ImagePlus, MapPin, Plus, Star, Trash2, Video } from "lucide-react";
-import { forwardRef, useCallback, useImperativeHandle, useState } from "react";
+import React, { forwardRef, useCallback, useImperativeHandle, useState, useEffect } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
 import { toast } from "sonner";
@@ -35,7 +35,6 @@ import { VideoUpload } from "@/components/ui/VideoUpload";
 import { CategorySelect } from "@/components/ui/CategorySelect";
 import { TourFormSchema } from "@/lib/validations/tour.validation";
 import { QuillFlygora } from "@/components/ui";
-
 type TourFormValues = z.infer<typeof TourFormSchema>;
 
 export interface TourFormRef {
@@ -48,9 +47,10 @@ export interface TourFormRef {
 
 interface TourFormProps {
   onSubmit?: (data: TourFormValues) => void;
+  onChange?: (data: TourFormValues) => void;
 }
 
-const TourForm = forwardRef<TourFormRef, TourFormProps>(({ onSubmit }, ref) => {
+const TourForm = forwardRef<TourFormRef, TourFormProps>(({ onSubmit, onChange }, ref) => {
   const [currentStep, setCurrentStep] = useState("basic");
 
   const form = useForm<TourFormValues>({
@@ -193,6 +193,54 @@ const TourForm = forwardRef<TourFormRef, TourFormProps>(({ onSubmit }, ref) => {
     [hasData]
   );
 
+  // Watch form values and trigger onChange
+  const watchedValues = form.watch();
+
+  // Use ref to avoid infinite re-renders
+  const onChangeRef = React.useRef(onChange);
+  onChangeRef.current = onChange;
+
+  useEffect(() => {
+    // Simple real-time onChange with throttling
+    const timeoutId = setTimeout(() => {
+      if (onChangeRef.current) {
+        // Inline cleanFormData to avoid dependency issues
+        const cleanedData = { ...watchedValues };
+
+        // Helper function to check if object has meaningful data
+        const hasData = (obj: any, fields: string[]) =>
+          fields.some((field) => obj[field] && obj[field].toString().trim() !== ""); // Clean tour_images
+        if (cleanedData.tour_images) {
+          const validImages = cleanedData.tour_images.filter((img: any) =>
+            hasData(img, ["image_url", "caption"])
+          );
+          if (validImages.length === 0) {
+            delete (cleanedData as any).tour_images;
+          } else {
+            cleanedData.tour_images = validImages;
+          }
+        }
+
+        // Clean tour_intenerary
+        if (cleanedData.tour_intenerary) {
+          const validItinerary = cleanedData.tour_intenerary.filter((item: any) =>
+            hasData(item, ["session", "title", "description"])
+          );
+          if (validItinerary.length === 0) {
+            delete (cleanedData as any).tour_intenerary;
+          } else {
+            cleanedData.tour_intenerary = validItinerary;
+          }
+        }
+
+        // Clean other arrays...
+        onChangeRef.current(cleanedData);
+      }
+    }, 300); // 300ms delay to prevent excessive calls
+
+    return () => clearTimeout(timeoutId);
+  }, [watchedValues]); // Only depend on watchedValues
+
   useImperativeHandle(ref, () => {
     const steps = ["basic", "pricing", "details", "content", "seo", "settings"];
 
@@ -285,7 +333,7 @@ const TourForm = forwardRef<TourFormRef, TourFormProps>(({ onSubmit }, ref) => {
                   )}
                 />
 
-                {/* <FormField
+                <FormField
                   control={form.control}
                   name="slug"
                   render={({ field }) => (
@@ -300,7 +348,7 @@ const TourForm = forwardRef<TourFormRef, TourFormProps>(({ onSubmit }, ref) => {
                       <FormMessage />
                     </FormItem>
                   )}
-                /> */}
+                />
 
                 <FormField
                   control={form.control}

@@ -6,7 +6,7 @@ import React, { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import TourForm, { TourFormRef } from "@/components/Admin/Tour/TourForm";
+import TourLiveEditor, { TourLiveEditorRef } from "@/components/Admin/Tour/TourLiveEditor";
 import { useTourStore } from "@/store/tour.store";
 import Link from "next/link";
 import { toast } from "sonner";
@@ -16,7 +16,7 @@ import { createTour } from "@/config/tour/tour.api";
 const CreateTourPage = () => {
   const locale = useLocale();
   const router = useRouter();
-  const tourFormRef = useRef<TourFormRef>(null);
+  const tourFormRef = useRef<TourLiveEditorRef>(null);
   const [currentStep, setCurrentStep] = useState("basic");
   const queryClient = useQueryClient();
 
@@ -113,7 +113,7 @@ const CreateTourPage = () => {
       {/* Form Card */}
       <Card>
         <CardContent>
-          <TourForm ref={tourFormRef} onSubmit={handleTourSubmit} />
+          <TourLiveEditor ref={tourFormRef} onSubmit={handleTourSubmit} />
         </CardContent>
       </Card>
     </div>
