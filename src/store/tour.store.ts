@@ -35,6 +35,8 @@ interface TourState {
 
   // Filter actions
   setFilters: (filters: Partial<QueryGetTours>) => void;
+  removeFilter: (filterKey: keyof QueryGetTours) => void;
+  removeFilters: (filterKeys: (keyof QueryGetTours)[]) => void;
   setPagination: (pagination: Partial<TourState["pagination"]>) => void;
   setSearchQuery: (query: string) => void;
   setSelectedCategory: (category: string) => void;
@@ -100,9 +102,38 @@ export const useTourStore = create<TourState>((set, get) => ({
 
   // Filter actions
   setFilters: (newFilters) =>
-    set((state) => ({
-      filters: { ...state.filters, ...newFilters },
-    })),
+    set((state) => {
+      // Tạo filters mới và loại bỏ các thuộc tính undefined
+      const updatedFilters = { ...state.filters, ...newFilters };
+
+      // Xóa các thuộc tính có giá trị undefined
+      Object.keys(updatedFilters).forEach((key) => {
+        if (updatedFilters[key as keyof QueryGetTours] === undefined) {
+          delete updatedFilters[key as keyof QueryGetTours];
+        }
+      });
+      return {
+        filters: updatedFilters,
+      };
+    }),
+
+  removeFilter: (filterKey) =>
+    set((state) => {
+      const newFilters = { ...state.filters };
+      delete newFilters[filterKey];
+      return {
+        filters: { ...newFilters, page: 1 },
+      };
+    }),
+
+  removeFilters: (filterKeys) =>
+    set((state) => {
+      const newFilters = { ...state.filters };
+      filterKeys.forEach((key) => delete newFilters[key]);
+      return {
+        filters: { ...newFilters, page: 1 },
+      };
+    }),
 
   setPagination: (newPagination) =>
     set((state) => ({

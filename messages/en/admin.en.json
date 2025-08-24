@@ -20,12 +20,12 @@
     "bookings": "Bookings Management",
     "customers": "Customers Management",
     "users": "Users Management",
-    "reviews": "Reviews Management",
     "categories": "Categories of Tours",
+    "reviews": "Reviews Management",
+    "contact": "Contacts Management",
     "vouchers": "Vouchers Management",
     "analytics": "Analytics",
-    "settings": "Settings",
-    "contact": "Contacts"
+    "settings": "Settings"
   },
   "header": {
     "notifications": "Notifications",

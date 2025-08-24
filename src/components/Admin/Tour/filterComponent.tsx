@@ -36,7 +36,7 @@ import { formatCurrency } from "@/utilities/currency";
 import { Category } from "@/types/categories.type";
 
 const FilterComponent = () => {
-  const { filters, setFilters, resetFilters } = useTourStore();
+  const { filters, setFilters, resetFilters, removeFilter, removeFilters } = useTourStore();
   const [isAdvancedOpen, setIsAdvancedOpen] = useState(false);
 
   // Fetch categories
@@ -91,20 +91,13 @@ const FilterComponent = () => {
     setFilters({ is_top: !filters.is_top, page: 1 });
   };
 
-  // Clear individual filters
+  // Clear individual filters - Sử dụng store method
   const clearFilter = (filterKey: keyof typeof filters) => {
-    console.log("Clearing filter:", filterKey);
-
-    const newFilters = { ...filters };
-    delete newFilters[filterKey];
-    setFilters({ ...newFilters, page: 1 });
+    removeFilter(filterKey);
   };
 
-  // Clear multiple filters at once
   const clearFilters = (filterKeys: (keyof typeof filters)[]) => {
-    const newFilters = { ...filters };
-    filterKeys.forEach((key) => delete newFilters[key]);
-    setFilters({ ...newFilters, page: 1 });
+    removeFilters(filterKeys);
   };
 
   // Get active filters count
@@ -306,80 +299,104 @@ const FilterComponent = () => {
             <div className="flex flex-wrap gap-1.5 pt-1.5 border-t border-border/50">
               {filters.query && (
                 <Badge
-                  onClick={() => clearFilter("query")}
+                  onClick={() => {
+                    console.log("Clicked query badge to remove filter");
+                    clearFilter("query");
+                  }}
                   variant="outline"
-                  className="h-6 text-xs px-2 gap-1 cursor-pointer hover:bg-destructive/10"
+                  className="h-6 text-xs px-2 gap-1 cursor-pointer hover:bg-destructive/10 transition-all duration-200"
                 >
                   <Search className="h-3 w-3 text-gray-600" />
                   &ldquo;{filters.query}&rdquo;
-                  <X className="h-3 w-3 cursor-pointer hover:text-destructive" />
+                  <X className="h-3 w-3 hover:text-destructive transition-colors" />
                 </Badge>
               )}
 
               {(filters.price_min || filters.price_max) && (
                 <Badge
-                  onClick={() => clearFilters(["price_min", "price_max"])}
+                  onClick={() => {
+                    console.log("Clicked price badge to remove filter");
+                    clearFilters(["price_min", "price_max"]);
+                  }}
                   variant="outline"
-                  className="h-6 text-xs px-2 gap-1 cursor-pointer hover:bg-destructive/10"
+                  className="h-6 text-xs px-2 gap-1 cursor-pointer hover:bg-destructive/10 transition-all duration-200"
                 >
                   <DollarSign className="h-3 w-3 text-green-600" />
                   {formatCurrency(filters.price_min || 0)} -{" "}
                   {formatCurrency(filters.price_max || 10000000)}
-                  <X className="h-3 w-3 cursor-pointer hover:text-destructive" />
+                  <X className="h-3 w-3 hover:text-destructive transition-colors" />
                 </Badge>
               )}
 
               {(filters.duration_min || filters.duration_max) && (
                 <Badge
                   variant="outline"
-                  className="h-6 text-xs px-2 gap-1 cursor-pointer hover:bg-destructive/10"
-                  onClick={() => clearFilters(["duration_min", "duration_max"])}
+                  className="h-6 text-xs px-2 gap-1 cursor-pointer hover:bg-destructive/10 transition-all duration-200"
+                  onClick={() => {
+                    console.log("Clicked duration badge to remove filter");
+                    clearFilters(["duration_min", "duration_max"]);
+                  }}
                 >
                   <Calendar className="h-3 w-3 text-blue-600" />
                   {filters.duration_min || 1} - {filters.duration_max || 30} ngày
-                  <X className="h-3 w-3 cursor-pointer hover:text-destructive" />
+                  <X className="h-3 w-3 hover:text-destructive transition-colors" />
                 </Badge>
               )}
 
               {filters.category_id && (
                 <Badge
                   variant="outline"
-                  className="h-6 text-xs px-2 gap-1 cursor-pointer hover:bg-destructive/10"
-                  onClick={() => clearFilter("category_id")}
+                  className="h-6 text-xs px-2 gap-1 cursor-pointer hover:bg-destructive/10 transition-all duration-200"
+                  onClick={() => {
+                    console.log("Clicked category badge to remove filter");
+                    clearFilter("category_id");
+                  }}
                 >
                   <Tag className="h-3 w-3 text-purple-600" />
                   {categories.find((c: Category) => c.id === filters.category_id)?.name || "N/A"}
-                  <X className="h-3 w-3 cursor-pointer hover:text-destructive" />
+                  <X className="h-3 w-3 hover:text-destructive transition-colors" />
                 </Badge>
               )}
 
               {filters.status && (
-                <Badge variant="outline" className="h-6 text-xs px-2 gap-1">
+                <Badge
+                  variant="outline"
+                  className="h-6 text-xs px-2 gap-1 cursor-pointer hover:bg-destructive/10 transition-all duration-200"
+                  onClick={() => {
+                    console.log("Clicked status badge to remove filter");
+                    clearFilter("status");
+                  }}
+                >
                   {filters.status === "published" ? "Đã xuất bản" : "Nháp"}
-                  <X
-                    className="h-3 w-3 cursor-pointer hover:text-destructive"
-                    onClick={() => clearFilter("status")}
-                  />
+                  <X className="h-3 w-3 hover:text-destructive transition-colors" />
                 </Badge>
               )}
 
               {filters.is_featured && (
-                <Badge variant="outline" className="h-6 text-xs px-2 gap-1">
+                <Badge
+                  variant="outline"
+                  className="h-6 text-xs px-2 gap-1 cursor-pointer hover:bg-destructive/10 transition-all duration-200"
+                  onClick={() => {
+                    console.log("Clicked featured badge to remove filter");
+                    clearFilter("is_featured");
+                  }}
+                >
                   Nổi bật
-                  <X
-                    className="h-3 w-3 cursor-pointer hover:text-destructive"
-                    onClick={() => clearFilter("is_featured")}
-                  />
+                  <X className="h-3 w-3 hover:text-destructive transition-colors" />
                 </Badge>
               )}
 
               {filters.is_top && (
-                <Badge variant="outline" className="h-6 text-xs px-2 gap-1">
+                <Badge
+                  variant="outline"
+                  className="h-6 text-xs px-2 gap-1 cursor-pointer hover:bg-destructive/10 transition-all duration-200"
+                  onClick={() => {
+                    console.log("Clicked top badge to remove filter");
+                    clearFilter("is_top");
+                  }}
+                >
                   TOP
-                  <X
-                    className="h-3 w-3 cursor-pointer hover:text-destructive"
-                    onClick={() => clearFilter("is_top")}
-                  />
+                  <X className="h-3 w-3 hover:text-destructive transition-colors" />
                 </Badge>
               )}
             </div>

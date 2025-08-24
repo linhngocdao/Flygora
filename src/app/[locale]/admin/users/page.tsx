@@ -4,9 +4,7 @@ import AddUserModal from "@/components/Admin/Users/AddUserModal";
 import ChangePasswordModal from "@/components/Admin/Users/ChangePasswordModal";
 import DeleteUserModal from "@/components/Admin/Users/DeleteUserModal";
 import EditUserModal from "@/components/Admin/Users/EditUserModal";
-import { MultipleImageUpload } from "@/components/ui/MultipleImageUpload";
-import { SingleImageUpload } from "@/components/ui/SingleImageUpload";
-import TableFlygora from "@/components/ui/TableFlygora"; // Import TableFlygora component
+import TableFlygora from "@/components/ui/TableFlygora";
 import { Avatar } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -17,14 +15,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import {
   Select,
@@ -43,7 +33,6 @@ import {
 } from "@/config/user/user.api";
 import { useDebounce } from "@/hooks/useDebounce";
 import { GetAllUserResponse } from "@/types/user.type";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   Edit,
@@ -61,9 +50,7 @@ import {
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import z from "zod";
 
 const UserManager = () => {
   const t = useTranslations("admin.users");
@@ -80,7 +67,6 @@ const UserManager = () => {
   const [searchDisplay, setSearchDisplay] = useState("");
   const debouncedSearch = useDebounce(searchDisplay, 500);
 
-  // Add CSS for highlighting search terms
   const searchHighlightStyle = `
     mark {
       background-color: #fef08a;
@@ -445,69 +431,9 @@ const UserManager = () => {
     totalPages: totalPages,
   };
 
-  const FormSchema = z.object({
-    imageUrl: z.string().min(2, {
-      message: "Image URL must be at least 2 characters.",
-    }),
-    name: z.string().min(2, {
-      message: "Image URL must be at least 2 characters.",
-    }),
-  });
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-    defaultValues: {
-      imageUrl: "",
-      name: "",
-    },
-  });
-  const onSubmit = (data: z.infer<typeof FormSchema>) => {
-    console.log("Form submitted with data:", data);
-    // Handle form submission logic here
-    toast.success("Form submitted successfully!");
-  };
-
   return (
     <div className="space-y-6">
       <style dangerouslySetInnerHTML={{ __html: searchHighlightStyle }} />
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
-          <FormField
-            control={form.control}
-            name="imageUrl"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Username</FormLabel>
-                <FormControl>
-                  <MultipleImageUpload {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Name</FormLabel>
-                <FormControl>
-                  <MultipleImageUpload {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button type="submit">Submit</Button>
-        </form>
-      </Form>
-
-      <SingleImageUpload
-        label="Ảnh đại diện"
-        value=""
-        onChange={() => {
-          console.log("Image changed");
-        }}
-      />
 
       {/* Header Section */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">

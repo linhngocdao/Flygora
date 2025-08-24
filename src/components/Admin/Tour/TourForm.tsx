@@ -65,12 +65,13 @@ const TourForm = forwardRef<TourFormRef, TourFormProps>(({ onSubmit }, ref) => {
       product_code: "",
       tour_category_id: "",
       status: "unpublished",
+      meta_robot: [],
       // Arrays bây giờ là optional, chỉ khởi tạo khi cần
       tour_images: [{ image_url: "", caption: "", sort_order: 1 }],
       tour_intenerary: [{ session: "", title: "", description: "", sort_order: 1 }],
       tour_inclusions: [{ title: "", description: "", sort_order: 1 }],
-      videos: [{ url: "", title: "", sort_order: 1 }],
-      tour_highlights: [{ icon: "", title: "", sort_order: 1 }],
+      videos: [{ url: "", title: "", description: "", sort_order: 1 }],
+      tour_highlights: [{ icon: "", title: "", description: "", sort_order: 1 }],
     },
   });
 
@@ -163,9 +164,11 @@ const TourForm = forwardRef<TourFormRef, TourFormProps>(({ onSubmit }, ref) => {
         }
       }
 
-      // Clean videos - only include if has url or title
+      // Clean videos - only include if has url or title or description
       if (cleanedData.videos) {
-        const validVideos = cleanedData.videos.filter((video) => hasData(video, ["url", "title"]));
+        const validVideos = cleanedData.videos.filter((video) =>
+          hasData(video, ["url", "title", "description"])
+        );
         if (validVideos.length === 0) {
           delete (cleanedData as any).videos;
         } else {
@@ -173,10 +176,10 @@ const TourForm = forwardRef<TourFormRef, TourFormProps>(({ onSubmit }, ref) => {
         }
       }
 
-      // Clean tour_highlights - only include if has icon or title
+      // Clean tour_highlights - only include if has icon or title or description
       if (cleanedData.tour_highlights) {
         const validHighlights = cleanedData.tour_highlights.filter((highlight) =>
-          hasData(highlight, ["icon", "title"])
+          hasData(highlight, ["icon", "title", "description"])
         );
         if (validHighlights.length === 0) {
           delete (cleanedData as any).tour_highlights;
@@ -262,7 +265,6 @@ const TourForm = forwardRef<TourFormRef, TourFormProps>(({ onSubmit }, ref) => {
               <TabsTrigger value="seo">SEO & Meta</TabsTrigger>
               <TabsTrigger value="settings">Cài đặt hiển thị</TabsTrigger>
             </TabsList>
-
             {/* Tab 1: Thông tin cơ bản */}
             <TabsContent value="basic" className="space-y-6">
               <div className="space-y-6">
@@ -282,6 +284,23 @@ const TourForm = forwardRef<TourFormRef, TourFormProps>(({ onSubmit }, ref) => {
                     </FormItem>
                   )}
                 />
+
+                {/* <FormField
+                  control={form.control}
+                  name="slug"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Slug URL (tùy chọn)</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="VD: tour-sapa-3-ngay-2-dem (sẽ tự động tạo từ tiêu đề nếu để trống)"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                /> */}
 
                 <FormField
                   control={form.control}
@@ -1027,13 +1046,36 @@ const TourForm = forwardRef<TourFormRef, TourFormProps>(({ onSubmit }, ref) => {
                           )}
                         />
                       </div>
+
+                      <FormField
+                        control={form.control}
+                        name={`videos.${index}.description`}
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Mô tả video</FormLabel>
+                            <FormControl>
+                              <Textarea
+                                placeholder="Mô tả ngắn gọn về nội dung video"
+                                rows={2}
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
                     </div>
                   ))}
                   <Button
                     type="button"
                     variant="outline"
                     onClick={() =>
-                      appendVideo({ url: "", title: "", sort_order: videoFields.length + 1 })
+                      appendVideo({
+                        url: "",
+                        title: "",
+                        description: "",
+                        sort_order: videoFields.length + 1,
+                      })
                     }
                   >
                     <Plus className="h-4 w-4 mr-2" />
@@ -1118,6 +1160,24 @@ const TourForm = forwardRef<TourFormRef, TourFormProps>(({ onSubmit }, ref) => {
                           )}
                         />
                       </div>
+
+                      <FormField
+                        control={form.control}
+                        name={`tour_highlights.${index}.description`}
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Mô tả điểm nổi bật</FormLabel>
+                            <FormControl>
+                              <Textarea
+                                placeholder="Mô tả chi tiết về điểm nổi bật này"
+                                rows={2}
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
                     </div>
                   ))}
                   <Button
@@ -1127,6 +1187,7 @@ const TourForm = forwardRef<TourFormRef, TourFormProps>(({ onSubmit }, ref) => {
                       appendHighlight({
                         icon: "",
                         title: "",
+                        description: "",
                         sort_order: highlightFields.length + 1,
                       })
                     }
@@ -1406,6 +1467,105 @@ const TourForm = forwardRef<TourFormRef, TourFormProps>(({ onSubmit }, ref) => {
                         <FormLabel>Ảnh SEO (Meta Image)</FormLabel>
                         <FormControl>
                           <MultipleImageUpload {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="meta_robot"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Chỉ dẫn SEO (Meta Robot)</FormLabel>
+                        <FormControl>
+                          <div className="space-y-2">
+                            <div className="flex items-center space-x-2">
+                              <input
+                                type="checkbox"
+                                id="index"
+                                checked={field.value?.includes("index") || false}
+                                onChange={(e) => {
+                                  const current = field.value || [];
+                                  if (e.target.checked) {
+                                    field.onChange([
+                                      ...current.filter((v) => v !== "index"),
+                                      "index",
+                                    ]);
+                                  } else {
+                                    field.onChange(current.filter((v) => v !== "index"));
+                                  }
+                                }}
+                              />
+                              <label htmlFor="index" className="text-sm">
+                                Index (Cho phép index)
+                              </label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <input
+                                type="checkbox"
+                                id="follow"
+                                checked={field.value?.includes("follow") || false}
+                                onChange={(e) => {
+                                  const current = field.value || [];
+                                  if (e.target.checked) {
+                                    field.onChange([
+                                      ...current.filter((v) => v !== "follow"),
+                                      "follow",
+                                    ]);
+                                  } else {
+                                    field.onChange(current.filter((v) => v !== "follow"));
+                                  }
+                                }}
+                              />
+                              <label htmlFor="follow" className="text-sm">
+                                Follow (Theo dõi links)
+                              </label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <input
+                                type="checkbox"
+                                id="noindex"
+                                checked={field.value?.includes("noindex") || false}
+                                onChange={(e) => {
+                                  const current = field.value || [];
+                                  if (e.target.checked) {
+                                    field.onChange([
+                                      ...current.filter((v) => v !== "noindex"),
+                                      "noindex",
+                                    ]);
+                                  } else {
+                                    field.onChange(current.filter((v) => v !== "noindex"));
+                                  }
+                                }}
+                              />
+                              <label htmlFor="noindex" className="text-sm">
+                                No Index (Không index)
+                              </label>
+                            </div>
+                            <div className="flex items-center space-x-2">
+                              <input
+                                type="checkbox"
+                                id="nofollow"
+                                checked={field.value?.includes("nofollow") || false}
+                                onChange={(e) => {
+                                  const current = field.value || [];
+                                  if (e.target.checked) {
+                                    field.onChange([
+                                      ...current.filter((v) => v !== "nofollow"),
+                                      "nofollow",
+                                    ]);
+                                  } else {
+                                    field.onChange(current.filter((v) => v !== "nofollow"));
+                                  }
+                                }}
+                              />
+                              <label htmlFor="nofollow" className="text-sm">
+                                No Follow (Không follow links)
+                              </label>
+                            </div>
+                          </div>
                         </FormControl>
                         <FormMessage />
                       </FormItem>

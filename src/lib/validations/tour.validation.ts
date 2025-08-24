@@ -23,18 +23,21 @@ const TourInclusionSchema = z.object({
 const VideoSchema = z.object({
   url: z.string(),
   title: z.string().optional(),
+  description: z.string().optional(),
   sort_order: z.number().optional(),
 });
 
 const TourHighlightSchema = z.object({
   icon: z.string(),
   title: z.string(),
+  description: z.string().optional(),
   sort_order: z.number().optional(),
 });
 
 // Schema chính với lazy validation cho arrays
 export const TourFormSchema = z.object({
   title: z.string().min(1, "Tiêu đề tour là bắt buộc"),
+  slug: z.string().optional(),
   description: z.string().min(1, "Mô tả là bắt buộc"),
   card_description: z.string().optional(),
   location: z.string().optional(),

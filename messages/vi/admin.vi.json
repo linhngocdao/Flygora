@@ -19,12 +19,12 @@
     "bookings": "Danh sách đặt tour",
     "customers": "Khách hàng",
     "users": "Người dùng",
-    "reviews": "Đánh giá",
     "categories": "Danh mục tour",
+    "reviews": "Đánh giá",
+    "contact": "Quản lý liên hệ",
     "vouchers": "Quản lý vouchers",
     "analytics": "Phân tích",
-    "settings": "Cài đặt",
-    "contact": "Quản lý liên hệ"
+    "settings": "Cài đặt"
   },
   "header": {
     "notifications": "Thông báo",
