@@ -16,15 +16,16 @@
   },
   "sidebar": {
     "dashboard": "Dashboard",
-    "tours": "Tours",
-    "bookings": "Bookings",
-    "customers": "Customers",
-    "users": "Users",
-    "reviews": "Reviews",
-    "categories": "Categories",
-    "vouchers": "Vouchers",
+    "tours": "Tours Management",
+    "bookings": "Bookings Management",
+    "customers": "Customers Management",
+    "users": "Users Management",
+    "reviews": "Reviews Management",
+    "categories": "Categories of Tours",
+    "vouchers": "Vouchers Management",
     "analytics": "Analytics",
-    "settings": "Settings"
+    "settings": "Settings",
+    "contact": "Contacts"
   },
   "header": {
     "notifications": "Notifications",

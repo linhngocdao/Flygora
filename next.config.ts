@@ -2,12 +2,13 @@ import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 const withNextIntl = createNextIntlPlugin();
 
+//http://52.64.94.227
 const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
         source: "/api/:path*",
-        destination: "http://52.64.94.227/api/:path*",
+        destination: "http://localhost:5555/api/:path*",
       },
     ];
   },

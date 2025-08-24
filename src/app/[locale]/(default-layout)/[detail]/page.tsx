@@ -58,9 +58,27 @@ function Card({ children, className = "" }: { children: React.ReactNode; classNa
   return <div className={`rounded-[8px] bg-white p-3 md:p-4 lg:p-6 ${className}`}>{children}</div>;
 }
 
-function InfoRow({ label, value }: { label: string; value: React.ReactNode | string }) {
+function InfoRow({
+  label,
+  value,
+  icon,
+}: {
+  label: string;
+  value: React.ReactNode | string;
+  icon?: string;
+}) {
   return (
     <div className="flex items-center gap-3">
+      {icon && (
+        <Image
+          style={{ objectFit: "contain", color: "white" }}
+          src={icon}
+          alt={icon}
+          className="brightness-0 invert"
+          width={20}
+          height={20}
+        />
+      )}
       <div className="text-gray-100 w-[120px] shrink-0">{label}</div>
       <div className="text-white font-semibold">{value}</div>
     </div>
@@ -114,17 +132,17 @@ export default function TourDetailPage() {
 
   // Tour images for gallery
   const tourImages = [
-    "https://cms.junglebosstours.com/assets/d4cfa964-da02-47f0-9033-77366d447a38?format=webp",
-    "https://cms.junglebosstours.com/assets/79f3cfd7-fe10-4663-99d9-4fb52d03ee10?format=webp&width=1110&quality=100",
-    "https://cms.junglebosstours.com/assets/caa85d0d-e5c4-49a2-8d58-6e0c41199a70?format=webp&width=360&quality=100",
-    "https://cms.junglebosstours.com/assets/a0746f1c-3a2b-4b43-8984-908effa6af26?format=webp&width=360&quality=100",
-    "https://cms.junglebosstours.com/assets/654f2cb7-e017-4478-a7bb-7ae68042e38e?format=webp&width=360&quality=100",
-    "https://cms.junglebosstours.com/assets/1e2c666f-f6ec-4b1c-a4f1-77a12cf97394?format=webp&width=543&quality=100",
-    "https://cms.junglebosstours.com/assets/5dd98fe6-3737-4724-86b0-af08f78aed79?format=webp&width=543&quality=100",
-    "https://cms.junglebosstours.com/assets/5dd98fe6-3737-4724-86b0-af08f78aed79?format=webp&width=543&quality=100",
-    "https://cms.junglebosstours.com/assets/5dd98fe6-3737-4724-86b0-af08f78aed79?format=webp&width=543&quality=100",
-    "https://cms.junglebosstours.com/assets/5dd98fe6-3737-4724-86b0-af08f78aed79?format=webp&width=543&quality=100",
-    "https://cms.junglebosstours.com/assets/5dd98fe6-3737-4724-86b0-af08f78aed79?format=webp&width=543&quality=100",
+    "/images/others/tour1/Hanoi-Old-Quarter-Evening-Food-Tour-Banh-Cuon-Vendor.jpg",
+    "/images/others/tour1/Hanoi-Old-Quarter-Evening-Food-Dessert-Bowls.jpg",
+    "/images/others/tour1/Hanoi-Old-Quarter-Evening-Food-Tour-Banh-Mi-Guests.jpg",
+    "/images/others/tour1/Hanoi-Old-Quarter-Evening-Food-Tour-Banh-Mi-Ingredients.jpg",
+    "/images/others/tour1/Hanoi-Old-Quarter-Evening-Food-Tour-Banh-Mi-Sandwiches.jpg",
+    "/images/others/tour1/Hanoi-Old-Quarter-Evening-Food-Tour-Dishes.jpg",
+    "/images/others/tour1/Hanoi-Old-Quarter-Evening-Food-Tour-Grilled-Fish-Hotpot.jpg",
+    "/images/others/tour1/Hanoi-Old-Quarter-Evening-Food-Tour-Grilled-Fish-Pan.jpg",
+    "/images/others/tour1/Hanoi-Old-Quarter-Evening-Food-Tour-Holding-Bahn-Mi.jpg",
+    "/images/others/tour1/Hanoi-Old-Quarter-Evening-Food-Tour-Porridge-Tray.jpg",
+    "/images/others/tour1/Hanoi-Old-Quarter-Evening-Food-Tour-Rice-Roll-Vendor.jpg",
   ];
 
   // optional: Intersection to highlight current item later if cần
@@ -186,8 +204,8 @@ export default function TourDetailPage() {
       <section>
         <div className="tour-detail-banner md:h-[500px] h-[300px] relative w-full overflow-hidden">
           <Image
-            src="https://cms.junglebosstours.com/assets/d4cfa964-da02-47f0-9033-77366d447a38?format=webp"
-            alt="d4cfa964 da02 47f0 9033 77366d447a38formatwebp"
+            src="/images/others/tour1/Hanoi-Old-Quarter-Evening-Food-Tour-Banh-Cuon-Vendor.jpg"
+            alt="Hanoi Old Quarter Evening Food Tour Banh Cuon Vendor"
             loading="eager"
             fill
             className="object-cover"
@@ -204,11 +222,14 @@ export default function TourDetailPage() {
             <div id="green-area" className="space-y-6 lg:space-y-8">
               <div className="space-y-2">
                 <h1 className="text-white uppercase text-2xl md:text-3xl font-bold">
-                  Kong Collapse Top Adventure 5D4N
+                  Hanoi Exclusive Food Tour
                 </h1>
                 <p className="text-gray-50">
-                  The 05-day, 04-night journey to conquer Kong collapse will take you on an
-                  adventurous and challenging expedition. This is one of the
+                  Ditch the guidebook for a night and discover the backstreets of Hanoi’s
+                  old-quarter while visiting authentic mom n’ pop eateries and passing by some of
+                  the city’s most iconic sights. Make your own bahn mi, stroll through the city’s
+                  largest wet market, and try over 10 dishes on this journey through Vietnamese
+                  cuisine and culture!
                 </p>
               </div>
 
@@ -216,29 +237,43 @@ export default function TourDetailPage() {
 
               <div className="md:flex lg:space-x-16 md:space-x-11 space-y-4 md:space-y-0">
                 <div className="space-y-4 md:w-1/2">
-                  <InfoRow label="Duration" value="5 days 4 nights" />
-                  <InfoRow label="Participant" value="Up to 10 pax" />
-                  <InfoRow label="Departure Day" value="Tuesday, Friday" />
+                  <InfoRow label="Duration" value="4-6 hours" icon="/images/others/duration.svg" />
+                  <InfoRow
+                    label="Participant"
+                    value="Up to 12 pax"
+                    icon="/images/others/participant.svg"
+                  />
+                  <InfoRow
+                    label="Departure Day"
+                    value="Everyday"
+                    icon="/images/others/departureDay.svg"
+                  />
                 </div>
                 <div className="flex-grow space-y-4">
-                  <InfoRow label="Meeting point" value="Jungle Boss Office" />
+                  <InfoRow
+                    label="Meeting point"
+                    value="Flygora Travel Office"
+                    icon="/images/others/meetingPoint.svg"
+                  />
                   <InfoRow
                     label="Overall rating"
                     value={
                       <div className="flex items-center gap-2">
                         <span className="text-white font-semibold">4.9/5</span>
-                        <span className="text-gray-50">(1015 reviews)</span>
+                        <span className="text-gray-50">(215 reviews)</span>
                       </div>
                     }
+                    icon="/images/others/overating.svg"
                   />
-                  <InfoRow label="Age" value="From 16 years old" />
+                  <InfoRow label="Age" value="From 16 years old" icon="/images/others/age.svg" />
                 </div>
               </div>
 
               <p className="md:w-1/2 text-gray-50">
-                This is a strenuous adventure. You will be required to provide a health statement
-                report and undergo a health check conducted by Jungle Boss Medical Experts before
-                departure.
+                Explore Hanoi&apos;s Old Quarter backstreets, visiting authentic local eateries and
+                seeing iconic sights. This immersive food tour includes making your own banh mi,
+                visiting the largest wet market, and trying over 10 different dishes showcasing
+                Vietnam&apos;s incredible cuisine and culture.
               </p>
             </div>
           </div>
@@ -262,7 +297,7 @@ export default function TourDetailPage() {
                   </div>
                   <div>
                     <div className="flex items-center space-x-2">
-                      <div className="title-2 text-primary"> VND 35,000,000/pax</div>
+                      <div className="title-2 text-primary">USD 35$/pax</div>
                     </div>
                   </div>
                 </div>
@@ -291,9 +326,10 @@ export default function TourDetailPage() {
                     iconUrl="https://cms.junglebosstours.com/assets/ba8628fe-d8fb-4565-b10c-3752e0e1f7ae"
                     text={
                       <>
-                        This expedition leads you into the depth of the primary jungle where you
-                        will explore the whole system of Tiger Cave including Kong sinkhole, Pygmy
-                        cave, hang Over cave and Tiger cave.
+                        Discover Hanoi’s Old Quarter through{" "}
+                        <strong>5 hand-picked local eateries</strong> and a bustling market,
+                        indulging in over <strong>10 different dishes</strong> that showcase
+                        northern Vietnamese cuisine.
                       </>
                     }
                   />
@@ -301,8 +337,8 @@ export default function TourDetailPage() {
                     iconUrl="https://cms.junglebosstours.com/assets/8609130e-5738-43a2-82b4-0da7d95f7bcb"
                     text={
                       <>
-                        Experience camping amidst the cave&#39;s natural surroundings, adjacent to
-                        the plantation inside.
+                        Get hands-on with food – <strong>make your own Bánh Mì</strong> sandwich
+                        with guidance from a local vendor.
                       </>
                     }
                   />
@@ -310,8 +346,26 @@ export default function TourDetailPage() {
                     iconUrl="https://cms.junglebosstours.com/assets/32c23792-c5d3-40e4-b52f-393760ba7a3d"
                     text={
                       <>
-                        You will be one of the very first people to step into this untouched
-                        underground secret.
+                        Walk across <strong>Long Biên Bridge</strong> at sunset, visit the city’s
+                        largest wet market, and enjoy a true local’s perspective of Hanoi at night.
+                      </>
+                    }
+                  />
+                  <Feature
+                    iconUrl="https://cms.junglebosstours.com/assets/32c23792-c5d3-40e4-b52f-393760ba7a3d"
+                    text={
+                      <>
+                        Unlimited local beer or soft drinks along the way, plus a{" "}
+                        <strong>signature cocktail</strong> at a hidden speakeasy bar.
+                      </>
+                    }
+                  />
+                  <Feature
+                    iconUrl="https://cms.junglebosstours.com/assets/32c23792-c5d3-40e4-b52f-393760ba7a3d"
+                    text={
+                      <>
+                        Small group (<strong>max 12 guests</strong>) led by a passionate{" "}
+                        <strong>English-speaking local foodie guide</strong>.
                       </>
                     }
                   />
@@ -325,72 +379,53 @@ export default function TourDetailPage() {
                   <Accordion
                     items={[
                       {
-                        title: "Food",
+                        title: "Duration & Schedule",
                         content: (
                           <div className="prose">
                             <p>
-                              Meals on the tour are freshly cooked by Jungle Boss Chef & Porter
-                              Team. The food is fresh and healthy. Example menu (seasonal changes
-                              apply):
+                              The tour lasts around <strong>3.5 hours</strong>, starting daily at{" "}
+                              <strong>4:30 PM</strong>. A gentle walking pace, covering about 2.5
+                              km.
                             </p>
-                            <ul>
-                              <li>
-                                <strong>Breakfast:</strong> Noodles, pancakes, fruit
-                              </li>
-                              <li>
-                                <strong>Lunch:</strong> Fresh spring rolls… (veg options available)
-                              </li>
-                              <li>
-                                <strong>Dinner:</strong> Steamed rice, beef soup, tuna stew, pork
-                                ribs, eggs, chicken, vegetables…
-                              </li>
-                            </ul>
                           </div>
                         ),
                       },
                       {
-                        title: "GETTING TO PHONG NHA",
+                        title: "Group Size",
                         content: (
-                          <div className="space-y-4">
-                            <div>
-                              <div className="title-2 text-gray-900">The Area</div>
-                              <div className="mt-2">
-                                <Image
-                                  src="https://cms.junglebosstours.com/assets/5f106623-cac7-47fb-a778-51e3a24ac1cb?width=800&height=533"
-                                  alt="Map QB"
-                                  width={800}
-                                  height={533}
-                                  className="rounded-md w-full h-auto"
-                                />
-                              </div>
-                            </div>
-                            <div>
-                              <div className="title-2 text-gray-900">Logistics</div>
-                              <div className="prose">
-                                <h3>Travel options to Phong Nha</h3>
-                                <p>Private cars, sleeping bus, train, or flights.</p>
-                                <h3>Flights</h3>
-                                <p>
-                                  Land at Dong Hoi airport (~40km South). Use Jungle Boss private
-                                  car or taxi.
-                                </p>
-                                <h3>Train</h3>
-                                <p>
-                                  Arrive at Dong Hoi station. Options: private car, taxi, or Dong
-                                  Hoi – Phong Nha bus (hourly).
-                                </p>
-                                <h3>Sleeping buses</h3>
-                                <p>Multiple routes (Hue, Da Nang, Ninh Binh, Ha Noi…).</p>
-                              </div>
-                            </div>
-                            <div>
-                              <div className="title-2 text-gray-900">Transfers</div>
-                              <p>
-                                FREE 2-way transportation within Phong Nha and Dong Hoi before and
-                                after the tour.
-                              </p>
-                            </div>
-                          </div>
+                          <p>
+                            <strong>2–12 guests</strong> per tour. Solo travelers are welcome and
+                            will join a small group.
+                          </p>
+                        ),
+                      },
+                      {
+                        title: "Meeting Point",
+                        content: (
+                          <p>
+                            Starts at a local restaurant on the{" "}
+                            <strong>north end of Hanoi’s Old Quarter</strong>. Exact address
+                            provided after booking. Ends around the <strong>south end</strong>.
+                          </p>
+                        ),
+                      },
+                      {
+                        title: "Dietary Requirements",
+                        content: (
+                          <p>
+                            We can accommodate{" "}
+                            <strong>vegetarian, vegan, gluten-free, nut-free</strong>, or other
+                            diets with advance notice.
+                          </p>
+                        ),
+                      },
+                      {
+                        title: "Cancellation",
+                        content: (
+                          <p>
+                            <strong>Free cancellation</strong> up to 24 hours before tour start for
+                            a full refund. Tours run rain or shine.
+                          </p>
                         ),
                       },
                     ]}
@@ -409,12 +444,11 @@ export default function TourDetailPage() {
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        console.log("Clicked hero image"); // Debug log
                         setIsImageModalOpen(true);
                       }}
                     >
                       <Image
-                        src="https://cms.junglebosstours.com/assets/79f3cfd7-fe10-4663-99d9-4fb52d03ee10?format=webp&width=1110&quality=100"
+                        src="/images/others/tour1/Hanoi-Old-Quarter-Evening-Food-Tour-Banh-Cuon-Vendor.jpg"
                         alt="Photo hero"
                         fill
                         sizes="(min-width: 1024px) 1110px, 100vw"
@@ -423,9 +457,9 @@ export default function TourDetailPage() {
                     </button>
 
                     {[
-                      "https://cms.junglebosstours.com/assets/caa85d0d-e5c4-49a2-8d58-6e0c41199a70?format=webp&width=360&quality=100",
-                      "https://cms.junglebosstours.com/assets/a0746f1c-3a2b-4b43-8984-908effa6af26?format=webp&width=360&quality=100",
-                      "https://cms.junglebosstours.com/assets/654f2cb7-e017-4478-a7bb-7ae68042e38e?format=webp&width=360&quality=100",
+                      "/images/others/tour1/Hanoi-Old-Quarter-Evening-Food-Dessert-Bowls.jpg",
+                      "/images/others/tour1/Hanoi-Old-Quarter-Evening-Food-Tour-Banh-Mi-Guests.jpg",
+                      "/images/others/tour1/Hanoi-Old-Quarter-Evening-Food-Tour-Banh-Mi-Ingredients.jpg",
                     ].map((src, i) => (
                       <button
                         key={i}
@@ -434,7 +468,6 @@ export default function TourDetailPage() {
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
-                          console.log(`Clicked image ${i + 1}`); // Debug log
                           setIsImageModalOpen(true);
                         }}
                       >
@@ -459,7 +492,7 @@ export default function TourDetailPage() {
                       }}
                     >
                       <Image
-                        src="https://cms.junglebosstours.com/assets/1e2c666f-f6ec-4b1c-a4f1-77a12cf97394?format=webp&width=543&quality=100"
+                        src="/images/others/tour1/Hanoi-Old-Quarter-Evening-Food-Tour-Banh-Mi-Sandwiches.jpg"
                         alt="Photo 4"
                         fill
                         className="object-cover pointer-events-none"
@@ -477,7 +510,7 @@ export default function TourDetailPage() {
                       }}
                     >
                       <Image
-                        src="https://cms.junglebosstours.com/assets/5dd98fe6-3737-4724-86b0-af08f78aed79?format=webp&width=543&quality=100"
+                        src="/images/others/tour1/Hanoi-Old-Quarter-Evening-Food-Tour-Dishes.jpg"
                         alt="Photo 5"
                         fill
                         className="object-cover pointer-events-none"

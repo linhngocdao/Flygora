@@ -1,10 +1,5 @@
-import { contactPayload, RecaptchaResponse } from "@/types/contact.type";
+import { contactPayload, RecaptchaResponse, QueryGetContacts } from "@/types/contact.type";
 import axiosInstance from "../axios";
-
-interface contactParam {
-  page?: number;
-  limit?: number;
-}
 
 // Xác thực reCAPTCHA trước khi gửi form
 export async function verifyRecaptcha(token: string): Promise<RecaptchaResponse> {
@@ -35,8 +30,8 @@ export async function SendContact(payload: contactPayload) {
   return data;
 }
 
-export async function GetContact(param: contactParam) {
-  const { data } = await axiosInstance.get("/contact", { params: param });
+export async function GetContact(params: QueryGetContacts) {
+  const { data } = await axiosInstance.get("/contact", { params });
   return data;
 }
 

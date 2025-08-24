@@ -15,15 +15,16 @@
   },
   "sidebar": {
     "dashboard": "Tổng quan",
-    "tours": "Tours",
-    "bookings": "Đặt tour",
+    "tours": "Quản lý Tours",
+    "bookings": "Danh sách đặt tour",
     "customers": "Khách hàng",
     "users": "Người dùng",
     "reviews": "Đánh giá",
-    "categories": "Danh mục",
-    "vouchers": "Vouchers",
+    "categories": "Danh mục tour",
+    "vouchers": "Quản lý vouchers",
     "analytics": "Phân tích",
-    "settings": "Cài đặt"
+    "settings": "Cài đặt",
+    "contact": "Quản lý liên hệ"
   },
   "header": {
     "notifications": "Thông báo",

@@ -11,6 +11,20 @@ import { useMutation } from "@tanstack/react-query";
 import { SendContact } from "@/config/contact/contact.api";
 import { toast } from "sonner";
 
+// Định nghĩa schema validation cho form liên hệ
+const contactFormSchema = z.object({
+  firstName: z.string().min(1, { message: "contact.form.firstNameRequired" }),
+  lastName: z.string().min(1, { message: "contact.form.lastNameRequired" }),
+  email: z.string().email({ message: "contact.form.emailInvalid" }),
+  phonePrefix: z.string().min(1, { message: "contact.form.phonePrefixRequired" }),
+  phoneNumber: z.string().min(6, { message: "contact.form.phoneNumberRequired" }),
+  message: z.string().optional(),
+  recaptcha: z.string().min(1, { message: "contact.form.recaptchaRequired" }),
+});
+
+// Kiểu dữ liệu của form
+type ContactFormValues = z.infer<typeof contactFormSchema>;
+
 // Danh sách mã quốc gia phổ biến
 const POPULAR_COUNTRY_CODES = [
   { code: "VN", prefix: "+84", name: "Việt Nam" },
@@ -22,16 +36,6 @@ const POPULAR_COUNTRY_CODES = [
 // Component chính
 const ContactForm = () => {
   const t = useTranslations("common.contact");
-  const contactFormSchema = z.object({
-    firstName: z.string().min(1, { message: "form.firstNameRequired" }),
-    lastName: z.string().min(1, { message: "form.lastNameRequired" }),
-    email: z.string().email({ message: "form.emailInvalid" }),
-    phonePrefix: z.string().min(1, { message: "form.phonePrefixRequired" }),
-    phoneNumber: z.string().min(6, { message: "form.phoneNumberRequired" }),
-    message: z.string().optional(),
-    recaptcha: z.string().min(1, { message: "form.recaptchaRequired" }),
-  });
-  type ContactFormValues = z.infer<typeof contactFormSchema>;
 
   // Ref cho reCAPTCHA
   const recaptchaRef = useRef<ReCAPTCHA>(null);
@@ -405,12 +409,6 @@ const ContactForm = () => {
 
                 {/* reCAPTCHA */}
                 <div>
-                  <div className="mb-2">
-                    <span className="label">
-                      {t("form.captcha")}
-                      <span className="required">*</span>
-                    </span>
-                  </div>
                   <ReCAPTCHA
                     ref={recaptchaRef}
                     sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}

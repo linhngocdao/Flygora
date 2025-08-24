@@ -16,6 +16,7 @@ import {
   Package,
   UserCog,
   BadgeDollarSign,
+  Phone,
 } from "lucide-react";
 
 const sidebarItems = [
@@ -55,7 +56,11 @@ const sidebarItems = [
     label: "categories",
     href: "/admin/categories",
   },
-
+  {
+    icon: Phone,
+    label: "contact",
+    href: "/admin/contact",
+  },
   {
     icon: Star,
     label: "reviews",

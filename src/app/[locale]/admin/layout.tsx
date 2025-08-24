@@ -14,11 +14,10 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   const pathname = usePathname();
   const router = useRouter();
   const [sidebarCollapsed, setSidebarCollapsed] = useState(true);
-
-  // Kiểm tra xem có phải trang login không
   const isLoginPage = pathname.includes("/admin/login");
-
+  console.log(isLoginPage);
   const { error } = useVerifyToken(!isLoginPage);
+  console.log(error);
 
   useEffect(() => {
     if (error) {
@@ -27,12 +26,10 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     }
   }, [error, pathname, router]);
 
-  // Nếu là trang login, chỉ render children không có header/sidebar
   if (isLoginPage) {
     return <>{children}</>;
   }
 
-  // Nếu không phải trang login, render layout đầy đủ
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Admin Header */}
