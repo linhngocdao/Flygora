@@ -8,11 +8,7 @@ const ScrollToTop = () => {
 
   useEffect(() => {
     const toggleVisibility = () => {
-      if (window.scrollY > 1200) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
+      setIsVisible(window.scrollY > 1200);
     };
 
     let timeoutId: NodeJS.Timeout;
@@ -36,16 +32,15 @@ const ScrollToTop = () => {
     });
   }, []);
 
-  if (!isVisible) {
-    return null;
-  }
+  if (!isVisible) return null;
 
   return (
     <button
       onClick={scrollToTop}
       className={`
+        hidden md:flex  /* 👈 ẩn trên mobile, chỉ hiện từ md trở lên */
         fixed bottom-5 right-6 md:right-12 md:bottom-4
-        z-[998] flex justify-center items-center
+        z-[998] justify-center items-center
         w-12 h-12 md:w-14 md:h-14
         rounded-full cursor-pointer bg-img text-white
         transition-all duration-300 ease-in-out

@@ -95,7 +95,7 @@
   },
   "policy": {
     "banner": {
-      "title": "Special launch offer – New version of Do Quyen"
+      "title": "Special launch offer – New version of Flygora Travel"
     }
   },
   "subscribe": {
@@ -139,7 +139,6 @@
       "allCountries": "All countries",
       "sendRequest": "Send request",
       "sending": "Sending...",
-      "recaptchaRequired": "Please complete security verification",
       "submitSuccess": "Thank you for sending your message! We will contact you as soon as possible.",
       "submitError": "Sorry, an error occurred while sending the form. Please try again."
     },
@@ -187,118 +186,6 @@
     "answer4": "In our tours, Flygora provides a variety of Vietnamese food including local specialties, fresh fruits and nutritious snacks.",
     "question5": "What is your policy on tour cancellations and refunds?",
     "answer5": "Our policy on tour cancellations and refunds is as follows: If you cancel the tour within a specified time frame, you will receive a full or partial refund depending on the cancellation time. However, if you cancel close to the departure date, a cancellation fee will apply. Please refer to the terms and conditions for each tour for more details.",
-    "oldFaq": {
-      "categories": {
-        "security-management": {
-          "title": "Security & Management",
-          "items": {
-            "thunderstorms-lightning": {
-              "question": "How to avoid storms and lightning in tours?",
-              "answer": "We continuously monitor weather conditions and have established safety procedures. Tours may be postponed or rescheduled if dangerous weather conditions are forecast. Our guides are trained to recognize weather patterns and will move the group to a safe area if necessary."
-            },
-            "departure-cancellation": {
-              "question": "If I can change the departure date or cancel the tour, what are the policies?",
-              "answer": "Tour cancellation policies vary depending on tour type and timing. Generally, cancellations made 48+ hours in advance receive full refunds, 24-48 hours receive 50% refunds, and less than 24 hours receive no refunds. Weather-related cancellations always receive full refunds or rescheduling options."
-            },
-            "join-cannot-swim": {
-              "question": "Am I allowed to join the tour if I can't swim?",
-              "answer": "Yes, you can join most tours even if you can't swim. We provide life jackets for all water activities and have trained guides to assist. However, some advanced water tours may require basic swimming skills, which will be clearly indicated in the tour description."
-            },
-            "skills-needed": {
-              "question": "What skills do I need?",
-              "answer": "Most tours are designed for beginners and do not require special skills. Basic fitness level and willingness to follow safety instructions are usually sufficient. Advanced tours will specify required skills in their descriptions."
-            },
-            "adventure-levels": {
-              "question": "What are the different levels of adventure tours?",
-              "answer": "We offer tours from Level 1 (Beginner - family-friendly) to Level 5 (Expert - requiring advanced skills). Each tour is clearly marked with difficulty level, duration and physical requirements."
-            }
-          }
-        },
-        "general-faq": {
-          "title": "General FAQ",
-          "items": {
-            "chemical-shampoo": {
-              "question": "Am I allowed to use chemical shampoo?",
-              "answer": "We encourage the use of environmentally friendly, biodegradable shampoos to protect the natural environment. Chemical shampoos can harm local ecosystems, especially near water sources. We can suggest suitable alternatives."
-            },
-            "shower-place": {
-              "question": "Are there shower facilities during the tour?",
-              "answer": "Shower facilities vary depending on tour type. Day tours typically do not include shower facilities, while overnight tours usually include basic washing areas or access to natural swimming spots. Check your specific tour details."
-            },
-            "toilet-facilities": {
-              "question": "Are there toilets during the tour?",
-              "answer": "Basic toilet facilities or designated areas are available on most tours. For wilderness tours, we practice Leave No Trace principles and provide guidance on proper waste disposal."
-            },
-            "food-provided": {
-              "question": "What type of food is provided in the tour?",
-              "answer": "We provide nutritious local cuisine including Vietnamese specialties, fresh fruits and energy-rich snacks. Vegetarian options are available with advance notice. All food is prepared to hygiene standards."
-            },
-            "bring-camping-gear": {
-              "question": "Do I need to bring my own cave gear and camping equipment?",
-              "answer": "All necessary safety equipment including helmets, headlamps, ropes and camping gear are provided. You only need to bring personal items like clothing, toiletries and any specific personal preferences."
-            }
-          }
-        },
-        "tour-information": {
-          "title": "Tour information",
-          "items": {
-            "what-to-notice": {
-              "question": "What should I pay attention to in the tour?",
-              "answer": "Always follow guide instructions, stay with the group, wear provided safety equipment, respect local customs and environment, stay hydrated, and immediately notify guides of any health issues."
-            },
-            "leeches-jungle": {
-              "question": "Are there leeches in the jungle?",
-              "answer": "Leeches may be present in some forest areas, especially during rainy season. We provide guidance on prevention and removal. They are harmless but can be prevented with appropriate clothing and insect repellent."
-            },
-            "medical-condition": {
-              "question": "If I have a medical condition? Can I still join the tour?",
-              "answer": "Please inform us of any medical conditions when booking. Our guides are trained in first aid, and we can accommodate many conditions with proper preparation. Some serious conditions may prevent participation for safety reasons."
-            },
-            "what-to-pack": {
-              "question": "What should I pack for the tour?",
-              "answer": "Pack lightweight, quick-dry clothing, sturdy hiking shoes, rain gear, sunscreen, insect repellent, personal toiletries, any medications, and waterproof bags for electronics. We will provide a detailed packing list when booking."
-            }
-          }
-        },
-        "policy": {
-          "title": "Policy",
-          "items": {
-            "bad-weather-cancellation": {
-              "question": "What happens if bad weather causes tour cancellation?",
-              "answer": "If weather conditions are deemed unsafe, tours will be cancelled or postponed. You will receive a full refund or rescheduling option. Safety is our top priority, and we monitor weather conditions continuously."
-            },
-            "payment-booking": {
-              "question": "When do I need to pay in full to confirm a one-day tour booking?",
-              "answer": "Full payment is required at least 24 hours before the tour date for day tours. For multi-day tours, a 50% deposit secures your booking with full payment due 48 hours before departure."
-            },
-            "change-departure-date": {
-              "question": "If I can change the departure date or cancel the tour, what are the policies?",
-              "answer": "Departure date changes are subject to availability and may incur fees. Cancellation policy: 48+ hours = full refund, 24-48 hours = 50% refund, less than 24 hours = no refund. Weather cancellations always receive full refunds."
-            }
-          }
-        }
-      },
-      "preTitle": "Answers are waiting",
-      "title": "Frequently Asked Questions",
-      "subtitle": "Important information for your trip",
-      "contactButton": "Contact us",
-      "question1": "What happens if bad weather causes tour cancellation?",
-      "answer1": "If we have to cancel a tour due to weather, we will notify you as soon as possible and provide alternative options at no additional cost, such as alternative tours, new dates or full refunds.",
-      "question2": "How to avoid storms and lightning in tours?",
-      "answer2": "We are aware of the potential risks associated with storms and lightning and have strict safety procedures. We continuously monitor weather conditions and will postpone or relocate tours if there is a risk.",
-      "question3": "Are there toilets in the tours?",
-      "answer3": "Jungle Boss uses compost toilets for all adventure tours. They are environmentally friendly and regularly maintained to ensure hygiene.",
-      "question4": "What type of food is provided in the tours?",
-      "answer4": "In our tours, Jungle Boss provides a variety of Vietnamese food including local specialties, fresh fruits and nutritious snacks.",
-      "question5": "Do I need to bring my own cave exploration and camping gear?",
-      "answer5": "You don't need to bring your own cave exploration or camping gear as Jungle Boss provides all necessary safety equipment including helmets, flashlights and ropes.",
-      "question6": "Am I allowed to join the tour if I can't swim?",
-      "answer6": "Absolutely, you will be provided with life jackets to ensure safety during the adventure. Our guides are trained to assist non-swimmers.",
-      "question7": "What skills do I need?",
-      "answer7": "While prior experience in cave exploration, hiking and camping may be beneficial, it is not required. Our tours are designed for all skill levels.",
-      "question8": "What are the different levels of adventure tours?",
-      "answer8": "Our tours range from relaxing to extremely adventurous, from Level 1 (Family-friendly) to Level 5 (Expert - requiring advanced skills)."
-    },
     "footerIntro": {
       "description": "Discover the enchantment of Phong Nha-Ke Bang: Unveil legendary caves, ancient forests and crystal-clear rivers. Start your Jungle Boss adventure to experience this enchanting wonderland, immerse yourself in local culture and join us in preserving natural wonders."
     },

@@ -19,7 +19,7 @@ const BookingTour = () => {
   const [currentMonth, setCurrentMonth] = useState<number>(today.getMonth());
   const [currentYear, setCurrentYear] = useState<number>(today.getFullYear());
 
-  const pricePerPerson = 35000000; // VND 35,000,000
+  const pricePerPerson = 35; // USD $35
 
   // Tạo calendar cho tháng hiện tại
   const getDaysInMonth = (month: number, year: number) => {
@@ -249,17 +249,13 @@ const BookingTour = () => {
                       +
                     </button>
                   </div>
-                  <div className="text-sm">
-                    VND {new Intl.NumberFormat("vi-VN").format(pricePerPerson)}/pax
-                  </div>
+                  <div className="text-sm">${pricePerPerson}/pax</div>
                 </div>
 
                 <div className="h-px bg-gray-100" />
                 <div className="flex items-center justify-between">
                   <div className="text-gray-900 font-semibold">Total</div>
-                  <div className="text-primary font-medium">
-                    VND {new Intl.NumberFormat("vi-VN").format(pricePerPerson * participants)}
-                  </div>
+                  <div className="text-primary font-medium">${pricePerPerson * participants}</div>
                 </div>
               </div>
 

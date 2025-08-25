@@ -23,272 +23,144 @@ const Policy = () => {
 
   const policyItems: PolicyItem[] = [
     {
-      id: "special-launch-offer",
-      title: "Special launch offer – New version of Do Quyen",
-      content: (
-        <div className="prose-policy">
-          <p className="font-bold text-lg mb-4">
-            10% OFF – UPGRADED ADVENTURE WITH 4 BRAND NEW EXTREME EXPERIENCES
-          </p>
-
-          <h2 className="text-xl font-bold mb-3">I. PROMOTION NAME</h2>
-          <p className="mb-4">
-            Launch promotion for the 2025 upgraded version of &#34;DO QUYEN WATERFALL TOP ADVENTURE
-            CONQUERING 2D1N&quot;
-          </p>
-
-          <h2 className="text-xl font-bold mb-3">II. PROGRAM DETAILS</h2>
-          <p className="mb-4">
-            Jungle Boss officially introduces the <strong>upgraded version</strong> of the iconic Do
-            Quyen Waterfall Top Adventure Conquering – a new journey packed with{" "}
-            <strong>4 times more challenges</strong>, optimized in{" "}
-            <strong>duration and cost</strong>, while staying true to Jungle Boss&apos;s signature
-            of <strong>safe and authentic adventure travel</strong>.
-          </p>
-          <p className="mb-2">
-            <strong>Original price:</strong> 11,250,000 VND/person
-          </p>
-          <p className="mb-2">
-            <strong>10% OFF for all customers</strong> booking during the promotion → Discounted
-            price: 10,125,000 VND/person
-          </p>
-          <p className="mb-2">
-            <strong>
-              10% OFF from discounted price for returning Jungle Boss Explorers → Only 9,112,000
-              VND/person
-            </strong>
-          </p>
-          <p className="mb-4">
-            <strong>
-              5% OFF from discounted price for friends of Jungle Boss Explorers → Only 9,618,000
-              VND/person
-            </strong>
-          </p>
-          <p className="mb-4">
-            <strong className="text-primary-600">
-              <Link
-                href="/tour/do-quyen-waterfall-top-adventure-conquering-3d2n"
-                className="text-primary-600 hover:underline"
-              >
-                [Click here for full itinerary and tour details]
-              </Link>
-            </strong>
-          </p>
-
-          <h2 className="text-xl font-bold mb-3">III. PROMOTION PERIOD</h2>
-          <p className="mb-4">
-            This promotion is valid for bookings from <strong>June 9, 2025</strong> to{" "}
-            <strong>June 22, 2025</strong>.
-          </p>
-
-          <h2 className="text-xl font-bold mb-3">IV. TERMS & CONDITIONS</h2>
-          <ul className="list-disc list-inside space-y-2">
-            <li>Offer is valid for all adventurers (Vietnamese and international)</li>
-            <li>Discount applies to all members in a booking – no group size limit</li>
-            <li>
-              Valid for <strong>new bookings only</strong>, made within the promotional period
-            </li>
-            <li>
-              Offer is <strong>exclusive to direct bookings</strong> via Jungle Boss website,
-              fanpage, or hotline
-            </li>
-            <li>Full payment (100%) must be completed within the promotion period</li>
-            <li>
-              Valid bookings can choose any departure date <strong>within 2 years</strong> from
-              registration
-            </li>
-            <li>
-              Fully paid bookings may be <strong>transferred</strong> to another person in case of
-              cancellation, or processed according to{" "}
-              <Link href="/policy/cancellation-policy" className="text-primary-600 hover:underline">
-                Jungle Boss&apos;s current Cancellation policy
-              </Link>
-            </li>
-            <li>
-              <strong>Cannot be combined</strong> with other promotions or discount vouchers.
-            </li>
-          </ul>
-          <p className="mt-4">
-            Jungle Boss wishes all Explorers an unforgettable journey with the new 2025 version of
-            Do Quyen – <strong>shorter, bolder, and more intense than ever before!</strong>
-          </p>
-        </div>
-      ),
-    },
-    {
-      id: "jungle-boss-race-jungle",
-      title: "Jungle Boss x Race Jungle: Exclusive Privileges!",
-      content: (
-        <div className="prose-policy">
-          <h2 className="text-xl font-bold mb-3">
-            Jungle Boss x Race Jungle: Exclusive Privileges!
-          </h2>
-          <p className="mb-4">
-            Join the ultimate adventure collaboration between Jungle Boss and Race Jungle for
-            exclusive privileges and experiences.
-          </p>
-          <h3 className="text-lg font-semibold mb-2">Special Benefits:</h3>
-          <ul className="list-disc list-inside space-y-2">
-            <li>Priority booking access</li>
-            <li>Exclusive race tracks</li>
-            <li>Professional equipment included</li>
-            <li>Expert guidance throughout</li>
-          </ul>
-        </div>
-      ),
-    },
-    {
-      id: "show-off-moments",
-      title: "Show Off Your Moments - Win An Awesome Tour Minigame Policy",
-      content: (
-        <div className="prose-policy">
-          <h2 className="text-xl font-bold mb-3">Show Off Your Moments - Win An Awesome Tour</h2>
-          <p className="mb-4">
-            Share your adventure moments and win amazing tour packages through our exciting
-            minigame.
-          </p>
-          <h3 className="text-lg font-semibold mb-2">How to Participate:</h3>
-          <ul className="list-disc list-inside space-y-2">
-            <li>Share photos from your Jungle Boss adventure</li>
-            <li>Use official hashtags</li>
-            <li>Tag friends to increase your chances</li>
-            <li>Winners announced monthly</li>
-          </ul>
-        </div>
-      ),
-    },
-    {
-      id: "speed-puzzle",
-      title: "Speed Puzzle - Win A Super Hot Tour Minigame Policy",
-      content: (
-        <div className="prose-policy">
-          <h2 className="text-xl font-bold mb-3">Speed Puzzle Challenge</h2>
-          <p className="mb-4">
-            Test your skills in our speed puzzle challenge and win exciting tour packages.
-          </p>
-          <h3 className="text-lg font-semibold mb-2">Game Rules:</h3>
-          <ul className="list-disc list-inside space-y-2">
-            <li>Complete puzzles within time limit</li>
-            <li>Multiple difficulty levels available</li>
-            <li>Daily challenges with rewards</li>
-            <li>Leaderboard competitions</li>
-          </ul>
-        </div>
-      ),
-    },
-    {
-      id: "celebrating-9-years",
-      title: "Jungle Boss: Celebrating 9 Years Of Adventure - Up To 19% Off!",
-      content: (
-        <div className="prose-policy">
-          <h2 className="text-xl font-bold mb-3">9 Years Anniversary Celebration</h2>
-          <p className="mb-4">
-            Join us in celebrating 9 amazing years of adventure with exclusive discounts up to 19%
-            off!
-          </p>
-          <h3 className="text-lg font-semibold mb-2">Anniversary Offers:</h3>
-          <ul className="list-disc list-inside space-y-2">
-            <li>Up to 19% discount on selected tours</li>
-            <li>Limited time anniversary packages</li>
-            <li>Special commemorative gifts</li>
-            <li>Loyalty rewards for returning customers</li>
-          </ul>
-        </div>
-      ),
-    },
-    {
-      id: "vietnam-national-day",
-      title: "Happy Vietnam National Day - 29 Slot With 20% Off Promotion Policy",
-      content: (
-        <div className="prose-policy">
-          <h2 className="text-xl font-bold mb-3">Vietnam National Day Special</h2>
-          <p className="mb-4">
-            Celebrate Vietnam National Day with our special promotion - 29 slots available with 20%
-            discount!
-          </p>
-          <h3 className="text-lg font-semibold mb-2">Promotion Details:</h3>
-          <ul className="list-disc list-inside space-y-2">
-            <li>Limited to 29 slots only</li>
-            <li>20% discount on all tour packages</li>
-            <li>Valid for Vietnamese citizens</li>
-            <li>Booking period: September 1-15</li>
-          </ul>
-        </div>
-      ),
-    },
-    {
-      id: "expert-talk-show",
-      title: "Expert Talk Show Giveaway Policy",
-      content: (
-        <div className="prose-policy">
-          <h2 className="text-xl font-bold mb-3">Expert Talk Show Giveaway</h2>
-          <p className="mb-4">
-            Join our expert talk shows and participate in exciting giveaways with valuable prizes.
-          </p>
-          <h3 className="text-lg font-semibold mb-2">Giveaway Terms:</h3>
-          <ul className="list-disc list-inside space-y-2">
-            <li>Attend live talk shows</li>
-            <li>Interactive Q&A sessions</li>
-            <li>Random prize drawings</li>
-            <li>Expert adventure tips included</li>
-          </ul>
-        </div>
-      ),
-    },
-    {
       id: "flash-sale",
       title: "Flash Sale Policy",
       content: (
         <div className="prose-policy">
           <h2 className="text-xl font-bold mb-3">I. EVENT NAME</h2>
-          <p className="mb-4">MONTHLY FLASH SALES</p>
-
-          <h2 className="text-xl font-bold mb-3">II. PRODUCT STRUCTURE</h2>
           <p className="mb-4">
-            We offer a limited number of discounts on our adventure tours each month. The discounts
-            vary, so please be sure to check our{" "}
-            <Link href="/jungle-boss-tours-fanpage" className="text-primary-600 hover:underline">
-              Jungle Boss Tours fanpage
-            </Link>{" "}
-            for updates.
+            <strong>FLYGORA MONTHLY FLASH SALE</strong>
+          </p>
+
+          <h2 className="text-xl font-bold mb-3">II. PRODUCT SCOPE</h2>
+          <p className="mb-4">
+            Applies to <strong>Flygora tours labeled “Flash Sale”</strong> on our website during the
+            promotional period. The number of discounted slots is
+            <strong> limited</strong> and may vary each month.
           </p>
 
           <h2 className="text-xl font-bold mb-3">III. ELIGIBLE PARTICIPANTS</h2>
-          <p className="mb-4">Eligible participants must meet the following conditions:</p>
-          <p className="mb-2">2.1. Must be a Vietnamese citizen or foreigner, aged 16 or over.</p>
+          <ul className="list-disc list-inside space-y-2 mb-4">
+            <li>
+              Open to both Vietnamese and international customers aged <strong>16+</strong>.
+            </li>
+            <li>Not applicable to Flygora employees, sales agents, or travel agents.</li>
+            <li>
+              Valid for <strong>new bookings only</strong> made during the Flash Sale period.
+            </li>
+          </ul>
+
+          <h2 className="text-xl font-bold mb-3">IV. TIME FRAME</h2>
           <p className="mb-4">
-            2.2. Participants must NOT be employees or sales agents/travel agents of Jungle Boss
-            Tours.
+            Conducted in promotional “<strong>golden hours 20:00–21:00</strong>” on specific dates
+            announced on Flygora’s official channels (website / fanpage). Please follow the latest
+            updates directly on our tour pages or fanpage.
           </p>
 
-          <h2 className="text-xl font-bold mb-3">III. TIME FRAME</h2>
-          <p className="mb-4">
-            The program takes place during the golden hours from 8:00 PM to 9:00 PM on days with
-            matching day and month numbers (e.g., 1/1, 2/2...).
-          </p>
+          <h2 className="text-xl font-bold mb-3">V. HOW TO PARTICIPATE</h2>
+          <ul className="list-disc list-inside space-y-2">
+            <li>
+              Open the tour page labeled <strong>Flash Sale</strong> during the promotional period.
+            </li>
+            <li>
+              Select an available departure date, fill in traveler information, and confirm booking.
+            </li>
+            <li>
+              Complete <strong>100% payment within the Flash Sale timeframe</strong> to secure the
+              discount.
+            </li>
+            <li>Receive booking confirmation from Flygora once payment is successful.</li>
+          </ul>
 
-          <h2 className="text-xl font-bold mb-3">IV. HOW TO PARTICIPATE</h2>
-          <p className="mb-4">You can participate with a few simple steps:</p>
+          <h2 className="text-xl font-bold mt-6 mb-3">VI. PAYMENT & CONFIRMATION</h2>
+          <ul className="list-disc list-inside space-y-2">
+            <li>Applies to payment methods supported on Flygora’s website.</li>
+            <li>
+              Bookings without completed payment during the Flash Sale timeframe will{" "}
+              <strong>not</strong> retain the promotional price.
+            </li>
+            <li>
+              Discount slots are allocated on a <strong>“first paid, first served”</strong> basis.
+            </li>
+          </ul>
+
+          <h2 className="text-xl font-bold mt-6 mb-3">VII. RESCHEDULE & CANCELLATION</h2>
+          <p className="mb-2">
+            Flash Sale bookings follow Flygora’s official <strong>Cancellation Policy</strong>.
+            Please see the “Cancellation Policy” section for details.
+          </p>
+          <ul className="list-disc list-inside space-y-2">
+            <li>Rescheduling is subject to seat availability and possible fare differences.</li>
+            <li>
+              Cannot be combined with <strong>other promotions or vouchers</strong>.
+            </li>
+          </ul>
+
+          <h2 className="text-xl font-bold mt-6 mb-3">VIII. NOTES</h2>
+          <ul className="list-disc list-inside space-y-2">
+            <li>
+              The discount rate, slot quantity, and applicable tours will be announced for each
+              Flash Sale round.
+            </li>
+            <li>
+              Flygora reserves the right to adjust the program based on actual conditions while
+              ensuring customer benefits.
+            </li>
+          </ul>
         </div>
       ),
     },
+
     {
       id: "cancellation-policy",
       title: "Cancellation Policy",
       content: (
         <div className="prose-policy">
           <h2 className="text-xl font-bold mb-3">Cancellation Policy</h2>
-          <p className="mb-4">
-            Understanding our cancellation terms ensures a smooth booking experience for all
-            customers.
-          </p>
-          <h3 className="text-lg font-semibold mb-2">Cancellation Terms:</h3>
+
+          <p className="mb-4">All Flygora food tours require payment in advance.</p>
+
+          <h3 className="text-lg font-semibold mb-2">I. ONE-DAY TOURS</h3>
           <ul className="list-disc list-inside space-y-2">
-            <li>48+ hours before tour: Full refund</li>
-            <li>24-48 hours before: 50% refund</li>
-            <li>Less than 24 hours: No refund</li>
-            <li>Weather cancellations: Full refund or reschedule</li>
+            <li>
+              <strong>100% Refund:</strong> If the customer cancels the service
+              <strong> 3 days</strong> before the tour departure date.
+            </li>
+            <li>
+              <strong>50% Refund:</strong> If the customer cancels the service
+              <strong> 24 hours</strong> before the tour departure date.
+            </li>
+            <li>
+              <strong>No Refund:</strong> If the customer cancels the service within{" "}
+              <strong>24 hours</strong> of the tour departure date.
+            </li>
           </ul>
+          <p className="mt-3">
+            <strong>Change of service:</strong> Customers can change their service selection if the
+            change request is submitted <strong>3 days</strong> before the departure date, subject
+            to tour availability.
+          </p>
+
+          <h3 className="text-lg font-semibold mt-6 mb-2">II. TOURS OF TWO DAYS OR MORE</h3>
+          <ul className="list-disc list-inside space-y-2">
+            <li>
+              <strong>100% Refund:</strong> If the customer cancels the service
+              <strong> 7 days</strong> before the tour departure date.
+            </li>
+            <li>
+              <strong>50% Refund:</strong> If the customer cancels the service
+              <strong> 3 days</strong> before the tour departure date.
+            </li>
+            <li>
+              <strong>No Refund:</strong> If the customer cancels the service within{" "}
+              <strong>3 days</strong> of the tour departure date.
+            </li>
+          </ul>
+          <p className="mt-3">
+            <strong>Change of service:</strong> Customers can change their service selection if the
+            change request is submitted <strong>7 days</strong> before the departure date, subject
+            to tour availability.
+          </p>
         </div>
       ),
     },
@@ -297,21 +169,48 @@ const Policy = () => {
       title: "Alcohol & Drugs Policy",
       content: (
         <div className="prose-policy">
-          <h2 className="text-xl font-bold mb-3">Alcohol & Drugs Policy</h2>
+          <h2 className="text-xl font-bold mb-3">Alcohol &amp; Drugs Policy</h2>
           <p className="mb-4">
-            For the safety of all participants, we maintain strict policies regarding alcohol and
-            substance use.
+            Our policy is simple: Flygora has a <strong>zero-tolerance</strong> stance on illegal
+            drugs and excessive alcohol consumption to ensure a safe and enjoyable experience for
+            everyone. Responsible drinking is permitted, but disruptive behavior will result in
+            removal from the tour without a refund.
           </p>
-          <h3 className="text-lg font-semibold mb-2">Safety Guidelines:</h3>
+
+          <h3 className="text-lg font-semibold mb-2">Alcohol 🍺</h3>
+          <p className="mb-2">
+            While some of our tours include curated alcoholic beverage pairings like local beer or
+            rice wine, your safety and the enjoyment of all guests are our top priorities.
+          </p>
           <ul className="list-disc list-inside space-y-2">
-            <li>No alcohol consumption during activities</li>
-            <li>Zero tolerance for illegal substances</li>
-            <li>Safety briefings mandatory</li>
-            <li>Right to refuse service if violated</li>
+            <li>
+              <strong>Responsible Consumption:</strong> Enjoy the included tastings, but please
+              drink responsibly. Excessive intoxication is not permitted.
+            </li>
+            <li>
+              <strong>Behavior:</strong> Guests whose behavior becomes disruptive, disrespectful, or
+              unsafe due to alcohol consumption will be asked to leave the tour immediately at their
+              own expense, with no refund provided.
+            </li>
+            <li>
+              <strong>Age Limit:</strong> You must be of legal drinking age in Vietnam (
+              <strong>18+</strong>) to consume alcoholic beverages on the tour.
+            </li>
+            <li>
+              <strong>Outside Alcohol:</strong> Please do not bring your own alcoholic beverages.
+            </li>
           </ul>
+
+          <h3 className="text-lg font-semibold mt-6 mb-2">Drugs &amp; Illegal Substances 💊</h3>
+          <p>
+            Our policy regarding drugs and illegal substances is strict and straightforward.
+            Possession, use, or distribution of illegal substances is prohibited. Any violation may
+            result in immediate removal from the tour without refund.
+          </p>
         </div>
       ),
     },
+
     {
       id: "privacy-cookie",
       title: "Privacy & Cookie",

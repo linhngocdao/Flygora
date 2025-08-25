@@ -142,7 +142,7 @@ const BookingPage = () => {
   const [showVoucherForm, setShowVoucherForm] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-  const pricePerPerson = 180000;
+  const pricePerPerson = 35; // USD $35
 
   // Function để format ngày tháng từ props hoặc URL params
   const formatBookingDate = (dateStr: string | null) => {
@@ -278,7 +278,7 @@ const BookingPage = () => {
   };
 
   const formatPrice = (price: number) => {
-    return new Intl.NumberFormat("vi-VN").format(price);
+    return `$${price}`;
   };
 
   const getFieldError = (fieldPath: string) => {
@@ -423,7 +423,7 @@ const BookingPage = () => {
                   >
                     <div className="border-b border-gray-200 pb-3.5 flex justify-between items-center">
                       <div className="text-sm font-medium tracking-[0.32px] text-gray-900">
-                        VND {formatPrice(pricePerPerson)}/pax
+                        ${pricePerPerson}/pax
                       </div>
                       <div className="w-16">
                         <select
@@ -922,7 +922,7 @@ const BookingPage = () => {
                         Do Quyen Waterfall Zipline Experience
                       </div>
                       <div className="font-medium text-gray-900 text-base max-md:hidden">
-                        VND {formatPrice(pricePerPerson)}/pax
+                        ${pricePerPerson}/pax
                       </div>
                     </div>
 
@@ -980,14 +980,12 @@ const BookingPage = () => {
 
                     {/* Price Breakdown */}
                     <div className="flex justify-between xl:pb-[19px] md:pb-3.5 pb-2.5 border-b border-gray-100 xl:pt-4 md:pt-3 pt-2">
-                      <div className="text-gray-900 text-sm w-[145px]">
-                        VND {formatPrice(pricePerPerson)}/pax
-                      </div>
+                      <div className="text-gray-900 text-sm w-[145px]">${pricePerPerson}/pax</div>
                       <div className="flex-shrink-0 w-8 text-gray-900 text-sm font-medium">
                         x {participants.length.toString().padStart(2, "0")}
                       </div>
                       <div className="text-gray-900 text-sm font-medium w-[124px] flex-shrink-0 text-right">
-                        VND {formatPrice(totalPrice)}
+                        {formatPrice(totalPrice)}
                       </div>
                     </div>
 
@@ -1035,16 +1033,16 @@ const BookingPage = () => {
                         </div>
                       </div>
                       <div className="font-medium text-white text-base">
-                        VND {formatPrice(totalPrice)}
+                        {formatPrice(totalPrice)}
                       </div>
                     </div>
 
                     <div className="xl:pt-[19px] md:pt-3.5 pt-2.5 flex justify-between">
                       <div className="flex-shrink-0 font-medium text-white text-base">
-                        Total (VND)
+                        Total (USD)
                       </div>
                       <div className="font-medium text-base text-yellow-400">
-                        VND {formatPrice(totalPrice)}
+                        {formatPrice(totalPrice)}
                       </div>
                     </div>
                   </div>

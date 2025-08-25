@@ -616,7 +616,7 @@ export default function TourDetailPage() {
                 </div>
                 <div>
                   <div className="flex items-center space-x-2">
-                    <div className="title-2 text-primary"> VND 35,000,000/pax</div>
+                    <div className="title-2 text-primary"> USD 35$/pax</div>
                   </div>
                 </div>
               </div>
@@ -659,7 +659,7 @@ export default function TourDetailPage() {
           <div className="flex items-center justify-between gap-4">
             <div>
               <div className="text-gray-700 text-sm">Price</div>
-              <div className="title-2 text-primary text-xl font-semibold">VND 35,000,000/pax</div>
+              <div className="title-2 text-primary text-xl font-semibold">USD 35$/pax</div>
             </div>
             <ButtonPhu name="Book Tour" href="#book-tour" />
           </div>

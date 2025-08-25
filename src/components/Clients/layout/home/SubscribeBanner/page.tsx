@@ -1,11 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import ButtonPrimary from "@/components/Clients/ui/buttonPrimary";
+import { useMutation } from "@tanstack/react-query";
+import { SendContact } from "@/config/contact/contact.api";
+import { toast } from "sonner";
 
 const SubscribeBanner = ({ className }: { className?: string }) => {
   // Sử dụng hook đa ngôn ngữ
@@ -17,45 +20,47 @@ const SubscribeBanner = ({ className }: { className?: string }) => {
       .string()
       .min(1, { message: t("form.validation.emailRequired") })
       .email({ message: t("form.validation.emailInvalid") }),
+    type: z.enum(["contact", "marketing"]),
   });
 
   // Trích xuất kiểu dữ liệu từ schema zod
   type SubscribeFormData = z.infer<typeof subscribeSchema>;
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   // Khởi tạo React Hook Form với validation schema
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     reset,
   } = useForm<SubscribeFormData>({
     resolver: zodResolver(subscribeSchema),
+    defaultValues: {
+      email: "",
+      type: "marketing",
+    },
     // Xác định schema sau khi đã có biến t
     context: { t },
   });
 
+  const createMutation = useMutation({
+    mutationFn: SendContact,
+    onSuccess: () => {
+      toast.success(t("form.successMessage"));
+      reset(); // Reset form sau khi submit thành công
+    },
+    onError: (error: any) => {
+      toast.error(error?.message || t("form.errorMessage"));
+    },
+  });
+
   // Xử lý khi form được submit
   const onSubmit = async (data: SubscribeFormData) => {
-    try {
-      setIsSubmitting(true);
-      // TODO: Gửi dữ liệu đăng ký đến API
-      console.log("Form submitted with email:", data.email);
+    const subscribeData = {
+      email: data.email,
+      type: "marketing" as const,
+    };
 
-      // Giả lập API call thành công
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      setSubmitSuccess(true);
-      reset(); // Reset form sau khi submit thành công
-
-      // Ẩn thông báo thành công sau 3 giây
-      setTimeout(() => setSubmitSuccess(false), 3000);
-    } catch (error) {
-      console.error("Lỗi khi đăng ký:", error);
-    } finally {
-      setIsSubmitting(false);
-    }
+    createMutation.mutate(subscribeData);
   };
 
   return (
@@ -89,20 +94,19 @@ const SubscribeBanner = ({ className }: { className?: string }) => {
                   <p className="mt-1 text-sm text-red-500">{errors.email.message as string}</p>
                 )}
               </div>
+
+              {/* Hidden field cho type */}
+              <input type="hidden" {...register("type")} value="marketing" />
+
               <div className="max-md:flex max-md:justify-center">
                 <ButtonPrimary
                   name={isSubmitting ? t("form.submitting") : t("form.submit")}
+                  type="submit"
+                  disabled={isSubmitting}
                   className="!w-[279px]"
                 />
               </div>
             </div>
-
-            {/* Thông báo đăng ký thành công */}
-            {submitSuccess && (
-              <div className="mt-2 text-center text-green-600 font-medium">
-                {t("form.successMessage")}
-              </div>
-            )}
           </form>
         </div>
       </div>
