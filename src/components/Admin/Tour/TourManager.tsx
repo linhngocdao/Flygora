@@ -54,15 +54,7 @@ const TourManager = () => {
   const queryClient = useQueryClient();
 
   // Store state
-  const {
-    filters,
-    pagination,
-    setCurrentTour,
-    openEditModal,
-    openViewModal,
-    setPagination,
-    setTours,
-  } = useTourStore();
+  const { filters, pagination, setPagination, setTours } = useTourStore();
 
   // Local state
   const [deleteDialogOpen, setDeleteDialogOpen] = React.useState(false);
@@ -115,15 +107,6 @@ const TourManager = () => {
   });
 
   // Handle actions
-  const handleView = (tour: Tour) => {
-    setCurrentTour(tour);
-    openViewModal();
-  };
-
-  const handleEdit = (tour: Tour) => {
-    setCurrentTour(tour);
-    openEditModal();
-  };
 
   const handleDelete = (tour: Tour) => {
     setTourToDelete(tour);
@@ -293,22 +276,18 @@ const TourManager = () => {
           <DropdownMenuContent align="end" className="w-48">
             <DropdownMenuLabel>Thao tác</DropdownMenuLabel>
             <DropdownMenuSeparator />
-
-            <DropdownMenuItem onClick={() => handleView(record)}>
-              <Eye className="mr-2 h-4 w-4" />
-              Xem chi tiết
-            </DropdownMenuItem>
-
             <DropdownMenuItem asChild>
               <Link href={`/${locale}/admin/tours/${record.id}`}>
                 <Eye className="mr-2 h-4 w-4" />
-                Trang chi tiết
+                Xem chi tiết
               </Link>
             </DropdownMenuItem>
 
-            <DropdownMenuItem onClick={() => handleEdit(record)}>
-              <Edit className="mr-2 h-4 w-4" />
-              Chỉnh sửa
+            <DropdownMenuItem asChild>
+              <Link href={`/${locale}/admin/tours/${record.id}/edit`}>
+                <Edit className="mr-2 h-4 w-4" />
+                Chỉnh sửa
+              </Link>
             </DropdownMenuItem>
 
             <DropdownMenuSeparator />

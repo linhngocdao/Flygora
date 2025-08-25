@@ -10,7 +10,6 @@ type TourFormValues = z.infer<typeof TourFormSchema>;
 
 interface TourPreviewProps {
   data: Partial<TourFormValues>;
-  deviceMode: "desktop" | "tablet" | "mobile";
 }
 
 function InfoRow({
@@ -23,19 +22,21 @@ function InfoRow({
   icon?: string;
 }) {
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-2 sm:gap-3">
       {icon && (
         <Image
           style={{ objectFit: "contain", color: "white" }}
           src={icon}
           alt={icon}
-          className="brightness-0 invert"
+          className="brightness-0 invert w-4 h-4 sm:w-5 sm:h-5"
           width={20}
           height={20}
         />
       )}
-      <div className="text-gray-100 w-[120px] shrink-0">{label}</div>
-      <div className="text-white font-semibold">{value || "Chưa điền"}</div>
+      <div className="text-gray-100 w-[100px] sm:w-[120px] shrink-0 text-xs sm:text-sm">
+        {label}
+      </div>
+      <div className="text-white font-semibold text-xs sm:text-sm">{value || "Chưa điền"}</div>
     </div>
   );
 }
@@ -98,7 +99,7 @@ function Accordion({ items }: { items: AccordionItem[] }) {
   );
 }
 
-export default function TourPreview({ data, deviceMode }: TourPreviewProps) {
+export default function TourPreview({ data }: TourPreviewProps) {
   // Format giá tiền
   const formatPrice = (price?: number) => {
     if (!price) return "Chưa có giá";
@@ -123,13 +124,9 @@ export default function TourPreview({ data, deviceMode }: TourPreviewProps) {
 
   return (
     <main className="tour-detail-preview bg-white min-h-full pb-20 xl:pb-0">
-      {/* Hero Banner */}
+      {/* Hero Banner - responsive height */}
       <section>
-        <div
-          className={`tour-detail-banner relative w-full overflow-hidden ${
-            deviceMode === "mobile" ? "h-[250px]" : "md:h-[500px] h-[300px]"
-          }`}
-        >
+        <div className="tour-detail-banner relative w-full overflow-hidden h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px]">
           <Image
             src={coverImage}
             alt={tourTitle}
@@ -142,16 +139,18 @@ export default function TourPreview({ data, deviceMode }: TourPreviewProps) {
         </div>
       </section>
 
-      {/* Green Info Section */}
-      <section className="bg-[#34430f] py-8 md:py-11 lg:py-16">
-        <div className="container mx-auto grid grid-cols-12 md:gap-x-8">
-          {/* Left content */}
-          <div className="col-span-12 xl:col-span-8">
-            <div className="space-y-6 lg:space-y-8">
+      {/* Green Info Section - responsive padding */}
+      <section className="bg-[#34430f] py-4 sm:py-6 md:py-8 lg:py-11 xl:py-16">
+        <div className="container mx-auto px-2 sm:px-4 md:px-6 grid grid-cols-12 md:gap-x-8">
+          {/* Left content - responsive */}
+          <div className="col-span-12 xl:col-span-8 px-2 sm:px-4 md:px-0">
+            <div className="space-y-4 sm:space-y-6 lg:space-y-8">
               <div className="space-y-2">
-                <h1 className="text-white uppercase text-2xl md:text-3xl font-bold">{tourTitle}</h1>
+                <h1 className="text-white uppercase text-xl sm:text-2xl md:text-3xl font-bold">
+                  {tourTitle}
+                </h1>
                 <div
-                  className="text-gray-50"
+                  className="text-gray-50 text-sm sm:text-base"
                   dangerouslySetInnerHTML={{
                     __html:
                       tourDescription.length > 300
@@ -164,7 +163,7 @@ export default function TourPreview({ data, deviceMode }: TourPreviewProps) {
               <div className="h-px bg-primary/70" />
 
               <div className="md:flex lg:space-x-16 md:space-x-11 space-y-4 md:space-y-0">
-                <div className="space-y-4 md:w-1/2">
+                <div className="space-y-3 md:space-y-4 md:w-1/2">
                   <InfoRow
                     label="Duration"
                     value={`${tourDays} ngày ${tourNights} đêm`}
@@ -181,7 +180,7 @@ export default function TourPreview({ data, deviceMode }: TourPreviewProps) {
                     icon="/images/others/departureDay.svg"
                   />
                 </div>
-                <div className="flex-grow space-y-4">
+                <div className="flex-grow space-y-3 md:space-y-4">
                   <InfoRow
                     label="Meeting point"
                     value={location}
@@ -201,7 +200,7 @@ export default function TourPreview({ data, deviceMode }: TourPreviewProps) {
                 </div>
               </div>
 
-              <p className="md:w-1/2 text-gray-50">
+              <p className="md:w-1/2 text-gray-50 text-sm sm:text-base">
                 {tourDescription.length > 200
                   ? tourDescription.substring(0, 200) + "..."
                   : tourDescription}
@@ -209,16 +208,16 @@ export default function TourPreview({ data, deviceMode }: TourPreviewProps) {
             </div>
           </div>
 
-          {/* Right sidebar - desktop only */}
-          <aside className="hidden xl:block col-span-4 xl:pt-0 xl:pl-8">
-            <div className="sticky top-[84px] space-y-4">
+          {/* Right sidebar - responsive design */}
+          <aside className="hidden lg:block col-span-4 xl:pt-0 xl:pl-8">
+            <div className="sticky top-[84px] space-y-4 px-2">
               <Button
                 variant="outline"
-                className="w-full bg-transparent border border-white text-white hover:bg-white hover:text-[#34430f]"
+                className="w-full bg-transparent border border-white text-white hover:bg-white hover:text-[#34430f] text-sm"
               >
                 View Image
               </Button>
-              <div className="p-6 rounded-[8px] bg-white xl:space-y-4 max-md:space-y-4 xl:block md:flex md:justify-between">
+              <div className="p-4 lg:p-6 rounded-[8px] bg-white xl:space-y-4 max-md:space-y-4 xl:block md:flex md:justify-between">
                 <div className="space-y-2">
                   <div className="flex items-center space-x-2">
                     <div className="text-gray-700 text-sm">Price</div>
@@ -230,7 +229,7 @@ export default function TourPreview({ data, deviceMode }: TourPreviewProps) {
                           {formatPrice(originalPrice)}
                         </div>
                       )}
-                      <div className="text-2xl font-bold text-primary">
+                      <div className="text-xl lg:text-2xl font-bold text-primary">
                         {formatPrice(salePrice || originalPrice)}
                       </div>
                     </div>
@@ -243,15 +242,17 @@ export default function TourPreview({ data, deviceMode }: TourPreviewProps) {
         </div>
       </section>
 
-      {/* Content Section */}
+      {/* Content Section - responsive */}
       <section className="relative bg-gray-100">
-        <div className="container mx-auto grid grid-cols-12 md:gap-x-8">
+        <div className="container mx-auto px-2 sm:px-4 md:px-6 grid grid-cols-12 md:gap-x-8">
           <div className="col-span-12 xl:col-span-8">
-            <div className="">
+            <div className="px-2 sm:px-0">
               {/* Tour Highlights */}
-              <section id="highlight" className="py-4">
-                <Card className="space-y-4">
-                  <h2 className="uppercase text-2xl font-bold text-gray-800 mb-4">Highlight</h2>
+              <section id="highlight" className="py-3 sm:py-4">
+                <Card className="space-y-3 sm:space-y-4">
+                  <h2 className="uppercase text-xl sm:text-2xl font-bold text-gray-800 mb-3 sm:mb-4">
+                    Highlight
+                  </h2>
                   {data.tour_highlights && data.tour_highlights.length > 0 ? (
                     data.tour_highlights.map((highlight, index) => (
                       <Feature
@@ -527,17 +528,19 @@ export default function TourPreview({ data, deviceMode }: TourPreviewProps) {
         </div>
       </section>
 
-      {/* Mobile fixed pricing */}
-      <div className="xl:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50">
-        <div className="container mx-auto p-4">
-          <div className="flex items-center justify-between gap-4">
+      {/* Mobile fixed pricing - improved responsive */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50">
+        <div className="container mx-auto p-3 sm:p-4">
+          <div className="flex items-center justify-between gap-3 sm:gap-4">
             <div>
-              <div className="text-gray-700 text-sm">Price</div>
-              <div className="text-xl font-semibold text-primary">
+              <div className="text-gray-700 text-xs sm:text-sm">Price</div>
+              <div className="text-lg sm:text-xl font-semibold text-primary">
                 {formatPrice(salePrice || originalPrice)}
               </div>
             </div>
-            <Button className="bg-primary hover:bg-primary/90">Book Tour</Button>
+            <Button className="bg-primary hover:bg-primary/90 px-4 sm:px-6 text-sm sm:text-base">
+              Book Tour
+            </Button>
           </div>
         </div>
       </div>
