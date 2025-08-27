@@ -73,7 +73,10 @@ export default async function RootLayout({
           </>
         )}
       </head>
-      <body className={`${geomanist.variable} ${svnKingston.variable} antialiased`}>
+      <body
+        className={`${geomanist.variable} ${svnKingston.variable} antialiased`}
+        suppressHydrationWarning
+      >
         {children}
         <Toaster position="top-center" />
       </body>
