@@ -140,18 +140,134 @@ export default function BookingsManagement() {
     [selectedBookingId, refetch]
   );
 
+  const rowTable = [
+    {
+      key: "bookingCode",
+      title: "Mã booking",
+      render: (value: string) => (
+        <div className="font-medium text-blue-600 dark:text-blue-400 transition-colors">
+          {value}
+        </div>
+      ),
+    },
+    {
+      key: "booker",
+      title: "Khách hàng",
+      render: (value: { name: string; email: string; phone: string }) => (
+        <div>
+          <p className="font-medium text-gray-900 dark:text-white">{value.name}</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">{value.email}</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">{value.phone}</p>
+        </div>
+      ),
+    },
+    {
+      key: "tour",
+      title: "Tour",
+      render: (value: { title: string; productCode: string }, record: { tourDate: string }) => (
+        <div>
+          <p className="font-medium text-gray-900 dark:text-white">{value.title}</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">{value.productCode}</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Ngày tour: {record.tourDate}</p>
+        </div>
+      ),
+    },
+    {
+      key: "numberOfParticipants",
+      title: "Số người",
+      render: (value: number) => (
+        <div className="text-center font-medium text-gray-900 dark:text-white">{value}</div>
+      ),
+    },
+    {
+      key: "finalPrice",
+      title: "Tổng tiền",
+      render: (value: any) => (
+        <div className="font-medium text-gray-900 dark:text-white">
+          {formatCurrency(parseFloat(value))}
+        </div>
+      ),
+    },
+    {
+      key: "status",
+      title: "Trạng thái",
+      render: (value: string) => getStatusBadge(value),
+    },
+    {
+      key: "payment",
+      title: "Thanh toán",
+      render: (value: { status: string }) => getPaymentStatusBadge(value.status),
+    },
+    {
+      key: "actions",
+      title: "Thao tác",
+      render: (_: any, record: any) => (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-8 w-8 dark:hover:bg-gray-700 dark:text-gray-300"
+            >
+              <MoreHorizontal className="h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            align="end"
+            className="w-[200px] dark:bg-gray-800 dark:border-gray-700"
+          >
+            <DropdownMenuItem
+              onClick={() => handleViewBooking(record.id)}
+              className="dark:text-gray-300 dark:hover:bg-gray-700"
+            >
+              <Eye className="mr-2 h-4 w-4" />
+              Xem chi tiết
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => handleOpenUpdateStatus(record.id)}
+              className="dark:text-gray-300 dark:hover:bg-gray-700"
+            >
+              <RefreshCcw className="mr-2 h-4 w-4" />
+              Cập nhật trạng thái
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      ),
+    },
+  ];
+
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "confirmed":
-        return <Badge className="bg-green-100 text-green-800">{t("confirmed")}</Badge>;
+        return (
+          <Badge className="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 dark:border-green-700/50">
+            {t("confirmed")}
+          </Badge>
+        );
       case "pending":
-        return <Badge className="bg-yellow-100 text-yellow-800">{t("pending")}</Badge>;
+        return (
+          <Badge className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400 dark:border-yellow-700/50">
+            {t("pending")}
+          </Badge>
+        );
       case "cancelled":
-        return <Badge className="bg-red-100 text-red-800">{t("cancelled")}</Badge>;
+        return (
+          <Badge className="bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400 dark:border-red-700/50">
+            {t("cancelled")}
+          </Badge>
+        );
       case "completed":
-        return <Badge className="bg-blue-100 text-blue-800">{t("completed")}</Badge>;
+        return (
+          <Badge className="bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-700/50">
+            {t("completed")}
+          </Badge>
+        );
       default:
-        return <Badge>{status}</Badge>;
+        return (
+          <Badge className="bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600">
+            {status}
+          </Badge>
+        );
     }
   };
 
@@ -159,13 +275,29 @@ export default function BookingsManagement() {
     switch (status) {
       case "paid":
       case "succeeded":
-        return <Badge className="bg-green-100 text-green-800">{t("paid")}</Badge>;
+        return (
+          <Badge className="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 dark:border-green-700/50">
+            {t("paid")}
+          </Badge>
+        );
       case "pending":
-        return <Badge className="bg-yellow-100 text-yellow-800">{t("unpaid")}</Badge>;
+        return (
+          <Badge className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400 dark:border-yellow-700/50">
+            {t("unpaid")}
+          </Badge>
+        );
       case "refunded":
-        return <Badge className="bg-gray-100 text-gray-800">{t("refunded")}</Badge>;
+        return (
+          <Badge className="bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600">
+            {t("refunded")}
+          </Badge>
+        );
       default:
-        return <Badge>{status}</Badge>;
+        return (
+          <Badge className="bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600">
+            {status}
+          </Badge>
+        );
     }
   };
 
@@ -205,457 +337,522 @@ export default function BookingsManagement() {
   ];
 
   return (
-    <div className="space-y-6">
-      {/* Page Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t("title")}</h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">{t("subtitle")}</p>
-        </div>
-        <div className="flex items-center space-x-2">
-          <Button variant="outline">
-            <Download className="mr-2 h-4 w-4" />
-            {t("exportExcel")}
-          </Button>
-          <Button>
-            <Calendar className="mr-2 h-4 w-4" />
-            {t("calendar")}
-          </Button>
-        </div>
-      </div>
-
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {stats.map((stat, index) => (
-          <Card key={index}>
-            <CardContent className="p-6">
-              <div className="text-center">
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">{stat.title}</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white mt-2">
-                  {stat.value}
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-
-      {/* Search and Filters */}
-      <Card className="p-6">
-        <div className="space-y-4">
-          {/* Tìm kiếm */}
-          <div className="flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between">
-            <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-              <Input
-                placeholder="Tìm kiếm theo tên khách hàng, tour hoặc mã booking..."
-                value={searchDisplay}
-                onChange={(e) => setSearchDisplay(e.target.value)}
-                className="pl-10"
-                disabled={isLoading}
-              />
-            </div>
-
-            <div className="flex gap-3">
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={handleReset}
-                disabled={isLoading}
-                title="Xóa bộ lọc"
-              >
-                <RefreshCcw className="h-4 w-4" />
-              </Button>
-
-              <Button
-                variant={Object.keys(filters).length > 2 ? "default" : "outline"}
-                className="flex items-center"
-                onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
-              >
-                <Filter className="mr-2 h-4 w-4" />
-                Bộ lọc {Object.keys(filters).length > 2 && `(${Object.keys(filters).length - 2})`}
-              </Button>
-            </div>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+      <div className="space-y-6 p-6">
+        {/* Page Header */}
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white transition-colors">
+              {t("title")}
+            </h1>
+            <p className="text-gray-600 dark:text-gray-400 mt-1 transition-colors">
+              {t("subtitle")}
+            </p>
           </div>
+          <div className="flex items-center space-x-2">
+            <Button variant="outline" className="dark:border-gray-700 dark:hover:bg-gray-800">
+              <Download className="mr-2 h-4 w-4" />
+              {t("exportExcel")}
+            </Button>
+            <Button className="bg-primary hover:bg-primary/90 dark:bg-blue-600 dark:hover:bg-blue-700">
+              <Calendar className="mr-2 h-4 w-4" />
+              {t("calendar")}
+            </Button>
+          </div>
+        </div>
 
-          {/* Bộ lọc nâng cao */}
-          {showAdvancedFilters && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t">
-              {/* Trạng thái booking */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Trạng thái đặt tour</label>
-                <Select
-                  value={filters.status || "all"}
-                  onValueChange={(value) => {
-                    setFilters((prev) => ({
-                      ...prev,
-                      status:
-                        value === "all"
-                          ? undefined
-                          : (value as "pending" | "confirmed" | "cancelled" | "completed"),
-                      page: 1,
-                    }));
-                  }}
-                  disabled={isLoading}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Tất cả trạng thái" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Tất cả trạng thái</SelectItem>
-                    <SelectItem value="pending">Chờ xác nhận</SelectItem>
-                    <SelectItem value="confirmed">Đã xác nhận</SelectItem>
-                    <SelectItem value="cancelled">Đã hủy</SelectItem>
-                    <SelectItem value="completed">Hoàn thành</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {/* Trạng thái thanh toán */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Trạng thái thanh toán</label>
-                <Select
-                  value={filters.payment_status || "all"}
-                  onValueChange={(value) => {
-                    setFilters((prev) => ({
-                      ...prev,
-                      payment_status:
-                        value === "all"
-                          ? undefined
-                          : (value as "pending" | "succeeded" | "failed" | "refunded"),
-                      page: 1,
-                    }));
-                  }}
-                  disabled={isLoading}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Tất cả trạng thái" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">Tất cả trạng thái</SelectItem>
-                    <SelectItem value="pending">Chưa thanh toán</SelectItem>
-                    <SelectItem value="succeeded">Đã thanh toán</SelectItem>
-                    <SelectItem value="failed">Thanh toán thất bại</SelectItem>
-                    <SelectItem value="refunded">Đã hoàn tiền</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {/* Ngày từ */}
-              <div className="space-y-2">
-                <label htmlFor="date-from" className="text-sm font-medium">
-                  Từ ngày
-                </label>
-                <div className="relative">
-                  <Input
-                    id="date-from"
-                    type="date"
-                    value={filters.date_from || ""}
-                    onChange={(e) => {
-                      setFilters((prev) => ({
-                        ...prev,
-                        date_from: e.target.value || undefined,
-                        page: 1,
-                      }));
-                    }}
-                    disabled={isLoading}
-                  />
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {stats.map((stat, index) => (
+            <Card
+              key={index}
+              className="dark:bg-gray-800 dark:border-gray-700 transition-colors hover:shadow-lg dark:hover:shadow-gray-900/20"
+            >
+              <CardContent className="p-6">
+                <div className="text-center">
+                  <p className="text-sm font-medium text-gray-600 dark:text-gray-400 transition-colors">
+                    {stat.title}
+                  </p>
+                  <p className="text-2xl font-bold text-gray-900 dark:text-white mt-2 transition-colors">
+                    {stat.value}
+                  </p>
                 </div>
-              </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
 
-              {/* Ngày đến */}
-              <div className="space-y-2">
-                <label htmlFor="date-to" className="text-sm font-medium">
-                  Đến ngày
-                </label>
-                <div className="relative">
-                  <Input
-                    id="date-to"
-                    type="date"
-                    value={filters.date_to || ""}
-                    onChange={(e) => {
-                      setFilters((prev) => ({
-                        ...prev,
-                        date_to: e.target.value || undefined,
-                        page: 1,
-                      }));
-                    }}
-                    disabled={isLoading}
-                  />
-                </div>
-              </div>
-
-              {/* Sắp xếp */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Sắp xếp theo</label>
-                <Select
-                  value={filters.sort_by || "createdAt"}
-                  onValueChange={(value) => {
-                    setFilters((prev) => ({
-                      ...prev,
-                      sort_by: value,
-                      page: 1,
-                    }));
-                  }}
+        {/* Search and Filters */}
+        <Card className="dark:bg-gray-800 dark:border-gray-700 transition-colors">
+          <div className="p-6 space-y-4">
+            {/* Tìm kiếm */}
+            <div className="flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between">
+              <div className="relative flex-1 max-w-md">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 h-4 w-4" />
+                <Input
+                  placeholder="Tìm kiếm theo tên khách hàng, tour hoặc mã booking..."
+                  value={searchDisplay}
+                  onChange={(e) => setSearchDisplay(e.target.value)}
+                  className="pl-10 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 focus:dark:border-blue-500"
                   disabled={isLoading}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Chọn trường sắp xếp" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="createdAt">Ngày đặt</SelectItem>
-                    <SelectItem value="tourDate">Ngày tour</SelectItem>
-                    <SelectItem value="finalPrice">Giá trị đơn hàng</SelectItem>
-                    <SelectItem value="numberOfParticipants">Số người tham gia</SelectItem>
-                  </SelectContent>
-                </Select>
+                />
               </div>
 
-              {/* Thứ tự sắp xếp */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Thứ tự sắp xếp</label>
-                <Select
-                  value={filters.sort_order || "desc"}
-                  onValueChange={(value) => {
-                    setFilters((prev) => ({
-                      ...prev,
-                      sort_order: value as "asc" | "desc",
-                      page: 1,
-                    }));
-                  }}
+              <div className="flex gap-3">
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={handleReset}
                   disabled={isLoading}
+                  title="Xóa bộ lọc"
+                  className="dark:border-gray-600 dark:hover:bg-gray-700 dark:text-gray-300"
                 >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Chọn thứ tự sắp xếp" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="asc">Tăng dần</SelectItem>
-                    <SelectItem value="desc">Giảm dần</SelectItem>
-                  </SelectContent>
-                </Select>
+                  <RefreshCcw className="h-4 w-4" />
+                </Button>
+
+                <Button
+                  variant={Object.keys(filters).length > 2 ? "default" : "outline"}
+                  className={`flex items-center ${
+                    Object.keys(filters).length > 2
+                      ? "dark:bg-blue-600 dark:hover:bg-blue-700"
+                      : "dark:border-gray-600 dark:hover:bg-gray-700 dark:text-gray-300"
+                  }`}
+                  onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
+                >
+                  <Filter className="mr-2 h-4 w-4" />
+                  Bộ lọc {Object.keys(filters).length > 2 && `(${Object.keys(filters).length - 2})`}
+                </Button>
               </div>
             </div>
-          )}
-        </div>
-      </Card>
 
-      {/* Error state */}
-      {error && (
-        <Card className="p-6">
-          <div className="text-center text-red-600">
-            <p>Có lỗi xảy ra khi tải dữ liệu. Vui lòng thử lại.</p>
+            {/* Bộ lọc nâng cao */}
+            {showAdvancedFilters && (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                {/* Trạng thái booking */}
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Trạng thái đặt tour
+                  </label>
+                  <Select
+                    value={filters.status || "all"}
+                    onValueChange={(value) => {
+                      setFilters((prev) => ({
+                        ...prev,
+                        status:
+                          value === "all"
+                            ? undefined
+                            : (value as "pending" | "confirmed" | "cancelled" | "completed"),
+                        page: 1,
+                      }));
+                    }}
+                    disabled={isLoading}
+                  >
+                    <SelectTrigger className="dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                      <SelectValue placeholder="Tất cả trạng thái" />
+                    </SelectTrigger>
+                    <SelectContent className="dark:bg-gray-800 dark:border-gray-700">
+                      <SelectItem value="all" className="dark:text-gray-300 dark:hover:bg-gray-700">
+                        Tất cả trạng thái
+                      </SelectItem>
+                      <SelectItem
+                        value="pending"
+                        className="dark:text-gray-300 dark:hover:bg-gray-700"
+                      >
+                        Chờ xác nhận
+                      </SelectItem>
+                      <SelectItem
+                        value="confirmed"
+                        className="dark:text-gray-300 dark:hover:bg-gray-700"
+                      >
+                        Đã xác nhận
+                      </SelectItem>
+                      <SelectItem
+                        value="cancelled"
+                        className="dark:text-gray-300 dark:hover:bg-gray-700"
+                      >
+                        Đã hủy
+                      </SelectItem>
+                      <SelectItem
+                        value="completed"
+                        className="dark:text-gray-300 dark:hover:bg-gray-700"
+                      >
+                        Hoàn thành
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Trạng thái thanh toán */}
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Trạng thái thanh toán
+                  </label>
+                  <Select
+                    value={filters.payment_status || "all"}
+                    onValueChange={(value) => {
+                      setFilters((prev) => ({
+                        ...prev,
+                        payment_status:
+                          value === "all"
+                            ? undefined
+                            : (value as "pending" | "succeeded" | "failed" | "refunded"),
+                        page: 1,
+                      }));
+                    }}
+                    disabled={isLoading}
+                  >
+                    <SelectTrigger className="dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                      <SelectValue placeholder="Tất cả trạng thái" />
+                    </SelectTrigger>
+                    <SelectContent className="dark:bg-gray-800 dark:border-gray-700">
+                      <SelectItem value="all" className="dark:text-gray-300 dark:hover:bg-gray-700">
+                        Tất cả trạng thái
+                      </SelectItem>
+                      <SelectItem
+                        value="pending"
+                        className="dark:text-gray-300 dark:hover:bg-gray-700"
+                      >
+                        Chưa thanh toán
+                      </SelectItem>
+                      <SelectItem
+                        value="succeeded"
+                        className="dark:text-gray-300 dark:hover:bg-gray-700"
+                      >
+                        Đã thanh toán
+                      </SelectItem>
+                      <SelectItem
+                        value="failed"
+                        className="dark:text-gray-300 dark:hover:bg-gray-700"
+                      >
+                        Thanh toán thất bại
+                      </SelectItem>
+                      <SelectItem
+                        value="refunded"
+                        className="dark:text-gray-300 dark:hover:bg-gray-700"
+                      >
+                        Đã hoàn tiền
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Ngày từ */}
+                <div className="space-y-2">
+                  <label
+                    htmlFor="date-from"
+                    className="text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >
+                    Từ ngày
+                  </label>
+                  <div className="relative">
+                    <Input
+                      id="date-from"
+                      type="date"
+                      value={filters.date_from || ""}
+                      onChange={(e) => {
+                        setFilters((prev) => ({
+                          ...prev,
+                          date_from: e.target.value || undefined,
+                          page: 1,
+                        }));
+                      }}
+                      disabled={isLoading}
+                      className="dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 focus:dark:border-blue-500"
+                    />
+                  </div>
+                </div>
+
+                {/* Ngày đến */}
+                <div className="space-y-2">
+                  <label
+                    htmlFor="date-to"
+                    className="text-sm font-medium text-gray-700 dark:text-gray-300"
+                  >
+                    Đến ngày
+                  </label>
+                  <div className="relative">
+                    <Input
+                      id="date-to"
+                      type="date"
+                      value={filters.date_to || ""}
+                      onChange={(e) => {
+                        setFilters((prev) => ({
+                          ...prev,
+                          date_to: e.target.value || undefined,
+                          page: 1,
+                        }));
+                      }}
+                      disabled={isLoading}
+                      className="dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 focus:dark:border-blue-500"
+                    />
+                  </div>
+                </div>
+
+                {/* Sắp xếp */}
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Sắp xếp theo
+                  </label>
+                  <Select
+                    value={filters.sort_by || "createdAt"}
+                    onValueChange={(value) => {
+                      setFilters((prev) => ({
+                        ...prev,
+                        sort_by: value,
+                        page: 1,
+                      }));
+                    }}
+                    disabled={isLoading}
+                  >
+                    <SelectTrigger className="dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                      <SelectValue placeholder="Chọn trường sắp xếp" />
+                    </SelectTrigger>
+                    <SelectContent className="dark:bg-gray-800 dark:border-gray-700">
+                      <SelectItem
+                        value="createdAt"
+                        className="dark:text-gray-300 dark:hover:bg-gray-700"
+                      >
+                        Ngày đặt
+                      </SelectItem>
+                      <SelectItem
+                        value="tourDate"
+                        className="dark:text-gray-300 dark:hover:bg-gray-700"
+                      >
+                        Ngày tour
+                      </SelectItem>
+                      <SelectItem
+                        value="finalPrice"
+                        className="dark:text-gray-300 dark:hover:bg-gray-700"
+                      >
+                        Giá trị đơn hàng
+                      </SelectItem>
+                      <SelectItem
+                        value="numberOfParticipants"
+                        className="dark:text-gray-300 dark:hover:bg-gray-700"
+                      >
+                        Số người tham gia
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Thứ tự sắp xếp */}
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Thứ tự sắp xếp
+                  </label>
+                  <Select
+                    value={filters.sort_order || "desc"}
+                    onValueChange={(value) => {
+                      setFilters((prev) => ({
+                        ...prev,
+                        sort_order: value as "asc" | "desc",
+                        page: 1,
+                      }));
+                    }}
+                    disabled={isLoading}
+                  >
+                    <SelectTrigger className="dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                      <SelectValue placeholder="Chọn thứ tự sắp xếp" />
+                    </SelectTrigger>
+                    <SelectContent className="dark:bg-gray-800 dark:border-gray-700">
+                      <SelectItem value="asc" className="dark:text-gray-300 dark:hover:bg-gray-700">
+                        Tăng dần
+                      </SelectItem>
+                      <SelectItem
+                        value="desc"
+                        className="dark:text-gray-300 dark:hover:bg-gray-700"
+                      >
+                        Giảm dần
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+            )}
           </div>
         </Card>
-      )}
 
-      {/* Bookings Table */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Danh sách Bookings ({bookingsData.length})</CardTitle>
-          <CardDescription>Tổng quan tất cả các booking trong hệ thống</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <TableFlygora
-            columns={[
-              {
-                key: "bookingCode",
-                title: "Mã booking",
-                render: (value) => <div className="font-medium text-blue-600">{value}</div>,
-              },
-              {
-                key: "booker",
-                title: "Khách hàng",
-                render: (value) => (
-                  <div>
-                    <p className="font-medium">{value.name}</p>
-                    <p className="text-sm text-gray-500">{value.email}</p>
-                    <p className="text-sm text-gray-500">{value.phone}</p>
-                  </div>
-                ),
-              },
-              {
-                key: "tour",
-                title: "Tour",
-                render: (value, record) => (
-                  <div>
-                    <p className="font-medium">{value.title}</p>
-                    <p className="text-sm text-gray-500">{value.productCode}</p>
-                    <p className="text-sm text-gray-500">Ngày tour: {record.tourDate}</p>
-                  </div>
-                ),
-              },
-              {
-                key: "numberOfParticipants",
-                title: "Số người",
-                render: (value) => <div className="text-center font-medium">{value}</div>,
-              },
-              {
-                key: "finalPrice",
-                title: "Tổng tiền",
-                render: (value) => (
-                  <div className="font-medium">{formatCurrency(parseFloat(value))}</div>
-                ),
-              },
-              {
-                key: "status",
-                title: "Trạng thái",
-                render: (value) => getStatusBadge(value),
-              },
-              {
-                key: "payment",
-                title: "Thanh toán",
-                render: (value) => getPaymentStatusBadge(value.status),
-              },
-              {
-                key: "actions",
-                title: "Thao tác",
-                render: (_, record) => (
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="icon" className="h-8 w-8">
-                        <MoreHorizontal className="h-4 w-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end" className="w-[200px]">
-                      <DropdownMenuItem onClick={() => handleViewBooking(record.id)}>
-                        <Eye className="mr-2 h-4 w-4" />
-                        Xem chi tiết
-                      </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => handleOpenUpdateStatus(record.id)}>
-                        <RefreshCcw className="mr-2 h-4 w-4" />
-                        Cập nhật trạng thái
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                ),
-              },
-            ]}
-            data={bookingsData}
-            loading={isLoading}
-            pagination={{
-              current: filters.page || 1,
-              pageSize: filters.limit || 10,
-              total: data?.meta?.pagination?.totalItems || 0,
-              totalPages: data?.meta?.pagination?.totalPages || 0,
-            }}
-            onPageChange={handlePageChange}
-            emptyText="Không có booking nào được tìm thấy"
-            emptyIcon={<Search className="h-12 w-12 text-gray-400" />}
-            rowKey="id"
-          />
-        </CardContent>
-      </Card>
-
-      {/* Modal Cập Nhật Trạng Thái */}
-      <Dialog open={isStatusUpdateModalOpen} onOpenChange={setIsStatusUpdateModalOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Cập nhật trạng thái đặt tour</DialogTitle>
-            <DialogDescription>Chọn trạng thái mới cho đơn đặt tour này</DialogDescription>
-          </DialogHeader>
-
-          {bookingsData.find((booking) => booking.id === selectedBookingId) && (
-            <div className="py-4">
-              <div className="mb-4 p-3 border rounded-md bg-gray-50">
-                <p className="text-sm font-medium mb-1">Thông tin đơn hàng hiện tại:</p>
-                <div className="grid grid-cols-2 gap-2 text-sm">
-                  <div>
-                    <span className="text-gray-500">Mã booking:</span>
-                    <span className="font-medium ml-1">
-                      {
-                        bookingsData.find((booking) => booking.id === selectedBookingId)
-                          ?.bookingCode
-                      }
-                    </span>
-                  </div>
-                  <div>
-                    <span className="text-gray-500">Khách hàng:</span>
-                    <span className="font-medium ml-1">
-                      {
-                        bookingsData.find((booking) => booking.id === selectedBookingId)?.booker
-                          .name
-                      }
-                    </span>
-                  </div>
-                  <div>
-                    <span className="text-gray-500">Trạng thái hiện tại:</span>
-                    <span className="ml-1">
-                      {getStatusBadge(
-                        bookingsData.find((booking) => booking.id === selectedBookingId)?.status ||
-                          ""
-                      )}
-                    </span>
-                  </div>
-                  <div>
-                    <span className="text-gray-500">Tour:</span>
-                    <span className="font-medium ml-1">
-                      {bookingsData.find((booking) => booking.id === selectedBookingId)?.tour.title}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Trạng thái mới:</label>
-                  <div className="grid grid-cols-2 gap-2">
-                    <Button
-                      variant={selectedStatus === "pending" ? "default" : "outline"}
-                      className="justify-start"
-                      onClick={() => {
-                        setSelectedStatus("pending");
-                        handleUpdateStatus("pending");
-                      }}
-                    >
-                      <div className="w-2 h-2 rounded-full bg-yellow-500 mr-2"></div>
-                      Chờ xác nhận
-                    </Button>
-                    <Button
-                      variant={selectedStatus === "confirmed" ? "default" : "outline"}
-                      className="justify-start"
-                      onClick={() => {
-                        setSelectedStatus("confirmed");
-                        handleUpdateStatus("confirmed");
-                      }}
-                    >
-                      <div className="w-2 h-2 rounded-full bg-green-500 mr-2"></div>
-                      Đã xác nhận
-                    </Button>
-                    <Button
-                      variant={selectedStatus === "cancelled" ? "default" : "outline"}
-                      className="justify-start"
-                      onClick={() => {
-                        setSelectedStatus("cancelled");
-                        handleUpdateStatus("cancelled");
-                      }}
-                    >
-                      <div className="w-2 h-2 rounded-full bg-red-500 mr-2"></div>
-                      Đã hủy
-                    </Button>
-                    <Button
-                      variant={selectedStatus === "completed" ? "default" : "outline"}
-                      className="justify-start"
-                      onClick={() => {
-                        setSelectedStatus("completed");
-                        handleUpdateStatus("completed");
-                      }}
-                    >
-                      <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
-                      Hoàn thành
-                    </Button>
-                  </div>
-                </div>
-              </div>
+        {/* Error state */}
+        {error && (
+          <Card className="dark:bg-gray-800 dark:border-gray-700">
+            <div className="p-6 text-center text-red-600 dark:text-red-400">
+              <p>Có lỗi xảy ra khi tải dữ liệu. Vui lòng thử lại.</p>
             </div>
-          )}
+          </Card>
+        )}
 
-          <DialogFooter>
-            <Button variant="outline" onClick={handleCloseUpdateStatusModal}>
-              Đóng
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+        {/* Bookings Table */}
+        <Card className="dark:bg-gray-800 dark:border-gray-700 transition-colors">
+          <CardHeader>
+            <CardTitle className="text-gray-900 dark:text-white">
+              Danh sách Bookings ({bookingsData.length})
+            </CardTitle>
+            <CardDescription className="text-gray-600 dark:text-gray-400">
+              Tổng quan tất cả các booking trong hệ thống
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <TableFlygora
+              columns={rowTable}
+              data={bookingsData}
+              loading={isLoading}
+              pagination={{
+                current: filters.page || 1,
+                pageSize: filters.limit || 10,
+                total: data?.meta?.pagination?.totalItems || 0,
+                totalPages: data?.meta?.pagination?.totalPages || 0,
+              }}
+              onPageChange={handlePageChange}
+              emptyText="Không có booking nào được tìm thấy"
+              emptyIcon={<Search className="h-12 w-12 text-gray-400 dark:text-gray-500" />}
+              rowKey="id"
+            />
+          </CardContent>
+        </Card>
+
+        {/* Modal Cập Nhật Trạng Thái */}
+        <Dialog open={isStatusUpdateModalOpen} onOpenChange={setIsStatusUpdateModalOpen}>
+          <DialogContent className="dark:bg-gray-800 dark:border-gray-700">
+            <DialogHeader>
+              <DialogTitle className="text-gray-900 dark:text-white">
+                Cập nhật trạng thái đặt tour
+              </DialogTitle>
+              <DialogDescription className="text-gray-600 dark:text-gray-400">
+                Chọn trạng thái mới cho đơn đặt tour này
+              </DialogDescription>
+            </DialogHeader>
+
+            {bookingsData.find((booking) => booking.id === selectedBookingId) && (
+              <div className="py-4">
+                <div className="mb-4 p-3 border border-gray-200 dark:border-gray-600 rounded-md bg-gray-50 dark:bg-gray-700/50">
+                  <p className="text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
+                    Thông tin đơn hàng hiện tại:
+                  </p>
+                  <div className="grid grid-cols-2 gap-2 text-sm">
+                    <div>
+                      <span className="text-gray-500 dark:text-gray-400">Mã booking:</span>
+                      <span className="font-medium ml-1 text-gray-900 dark:text-white">
+                        {
+                          bookingsData.find((booking) => booking.id === selectedBookingId)
+                            ?.bookingCode
+                        }
+                      </span>
+                    </div>
+                    <div>
+                      <span className="text-gray-500 dark:text-gray-400">Khách hàng:</span>
+                      <span className="font-medium ml-1 text-gray-900 dark:text-white">
+                        {
+                          bookingsData.find((booking) => booking.id === selectedBookingId)?.booker
+                            .name
+                        }
+                      </span>
+                    </div>
+                    <div>
+                      <span className="text-gray-500 dark:text-gray-400">Trạng thái hiện tại:</span>
+                      <span className="ml-1">
+                        {getStatusBadge(
+                          bookingsData.find((booking) => booking.id === selectedBookingId)
+                            ?.status || ""
+                        )}
+                      </span>
+                    </div>
+                    <div>
+                      <span className="text-gray-500 dark:text-gray-400">Tour:</span>
+                      <span className="font-medium ml-1 text-gray-900 dark:text-white">
+                        {
+                          bookingsData.find((booking) => booking.id === selectedBookingId)?.tour
+                            .title
+                        }
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                      Trạng thái mới:
+                    </label>
+                    <div className="grid grid-cols-2 gap-2">
+                      <Button
+                        variant={selectedStatus === "pending" ? "default" : "outline"}
+                        className={`justify-start ${
+                          selectedStatus === "pending"
+                            ? "dark:bg-blue-600 dark:hover:bg-blue-700"
+                            : "dark:border-gray-600 dark:hover:bg-gray-700 dark:text-gray-300"
+                        }`}
+                        onClick={() => {
+                          setSelectedStatus("pending");
+                          handleUpdateStatus("pending");
+                        }}
+                      >
+                        <div className="w-2 h-2 rounded-full bg-yellow-500 mr-2"></div>
+                        Chờ xác nhận
+                      </Button>
+                      <Button
+                        variant={selectedStatus === "confirmed" ? "default" : "outline"}
+                        className={`justify-start ${
+                          selectedStatus === "confirmed"
+                            ? "dark:bg-blue-600 dark:hover:bg-blue-700"
+                            : "dark:border-gray-600 dark:hover:bg-gray-700 dark:text-gray-300"
+                        }`}
+                        onClick={() => {
+                          setSelectedStatus("confirmed");
+                          handleUpdateStatus("confirmed");
+                        }}
+                      >
+                        <div className="w-2 h-2 rounded-full bg-green-500 mr-2"></div>
+                        Đã xác nhận
+                      </Button>
+                      <Button
+                        variant={selectedStatus === "cancelled" ? "default" : "outline"}
+                        className={`justify-start ${
+                          selectedStatus === "cancelled"
+                            ? "dark:bg-blue-600 dark:hover:bg-blue-700"
+                            : "dark:border-gray-600 dark:hover:bg-gray-700 dark:text-gray-300"
+                        }`}
+                        onClick={() => {
+                          setSelectedStatus("cancelled");
+                          handleUpdateStatus("cancelled");
+                        }}
+                      >
+                        <div className="w-2 h-2 rounded-full bg-red-500 mr-2"></div>
+                        Đã hủy
+                      </Button>
+                      <Button
+                        variant={selectedStatus === "completed" ? "default" : "outline"}
+                        className={`justify-start ${
+                          selectedStatus === "completed"
+                            ? "dark:bg-blue-600 dark:hover:bg-blue-700"
+                            : "dark:border-gray-600 dark:hover:bg-gray-700 dark:text-gray-300"
+                        }`}
+                        onClick={() => {
+                          setSelectedStatus("completed");
+                          handleUpdateStatus("completed");
+                        }}
+                      >
+                        <div className="w-2 h-2 rounded-full bg-blue-500 mr-2"></div>
+                        Hoàn thành
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <DialogFooter>
+              <Button
+                variant="outline"
+                onClick={handleCloseUpdateStatusModal}
+                className="dark:border-gray-600 dark:hover:bg-gray-700 dark:text-gray-300"
+              >
+                Đóng
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      </div>
     </div>
   );
 }

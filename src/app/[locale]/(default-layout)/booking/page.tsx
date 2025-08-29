@@ -275,14 +275,25 @@ const BookingPage = () => {
 
       console.log("Booking payload:", payload);
 
-      // Call the booking API
-      const response = await createBooking(payload);
-      console.log("Booking API response:", response);
+      // Call booking API - tạo booking và trả về checkoutUrl để redirect
+      const bookingResponse = await createBooking(payload);
+      console.log("Booking API response:", bookingResponse);
 
-      alert("Booking submitted successfully!");
+      if (bookingResponse.status && bookingResponse.data) {
+        // Redirect đến Stripe Checkout page
+        const { checkoutUrl, bookingId } = bookingResponse.data;
+
+        console.log("🚀 Redirecting to Stripe Checkout:", checkoutUrl);
+        console.log("📝 Booking ID:", bookingId);
+
+        // Redirect đến trang thanh toán Stripe
+        window.location.href = checkoutUrl;
+      } else {
+        throw new Error(bookingResponse.message || "Failed to create booking");
+      }
     } catch (error) {
-      console.error("Error submitting booking:", error);
-      alert("Error submitting booking. Please try again.");
+      console.error("Error creating booking:", error);
+      alert("Error creating booking. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -794,7 +805,7 @@ const BookingPage = () => {
                   {/* Desktop Booking Button */}
                   <div className="relative z-0 max-lg:hidden">
                     <ButtonTour
-                      name={`${isSubmitting ? "Booking..." : "Booking now"}`}
+                      name={`${isSubmitting ? "Processing..." : "Continue to Payment"}`}
                       className="bg-white"
                       type="submit"
                       fullWidth
@@ -924,7 +935,7 @@ const BookingPage = () => {
                   {/* Mobile Booking Button */}
                   <div className="flex justify-center p-4 bg-white lg:hidden md:p-5">
                     <ButtonTour
-                      name={`${isSubmitting ? "Booking..." : "Booking now"}`}
+                      name={`${isSubmitting ? "Processing..." : "Continue to Payment"}`}
                       className="bg-white"
                       type="submit"
                       fullWidth

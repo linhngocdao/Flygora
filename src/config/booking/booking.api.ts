@@ -1,7 +1,7 @@
 import { ApiResponse } from "@/types/main";
 import axiosInstance from "../axios";
 
-interface BookingPayload {
+export interface BookingPayload {
   tour_id: string;
   tour_date: string;
   booker: {
@@ -19,6 +19,12 @@ interface BookingPayload {
     special_requirements?: string;
   }>;
   voucher_code?: string;
+}
+
+// Response từ createBooking API (đã tích hợp Stripe Checkout)
+interface CreateBookingResponse {
+  bookingId: string;
+  checkoutUrl: string; // URL để redirect đến Stripe Checkout
 }
 
 export interface BookingParam {
@@ -139,8 +145,13 @@ export interface BookingDetailResponse {
   meta: any;
 }
 
-export async function createBooking(payload: BookingPayload) {
-  const { data } = await axiosInstance.post<ApiResponse<any>>("/bookings", payload);
+export async function createBooking(
+  payload: BookingPayload
+): Promise<ApiResponse<CreateBookingResponse>> {
+  const { data } = await axiosInstance.post<ApiResponse<CreateBookingResponse>>(
+    "/bookings",
+    payload
+  );
   return data;
 }
 

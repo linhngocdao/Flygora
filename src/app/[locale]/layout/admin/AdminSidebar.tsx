@@ -128,9 +128,9 @@ export default function AdminSidebar({ onCollapseChange }: AdminSidebarProps) {
                   : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400"
               )}
             >
-              <Icon className="h-5 w-5 flex-shrink-0" />
+              <Icon className="h-5 w-5 flex-shrink-0 dark:text-white" />
               {!isCollapsed && (
-                <span className="font-medium capitalize transition-all duration-200">
+                <span className="font-medium capitalize transition-all duration-200 dark:text-white">
                   {t(item.label)}
                 </span>
               )}

@@ -2,7 +2,7 @@ import axios, { AxiosInstance, AxiosError } from "axios";
 import Cookies from "js-cookie";
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: "/api/v1", // Sử dụng proxy thay vì direct call
+  baseURL: "http://localhost:5555/api/v1",
   timeout: 5 * 60 * 1000,
   withCredentials: true,
 });
