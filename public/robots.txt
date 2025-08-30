@@ -10,7 +10,7 @@ Allow: /
 Disallow: /admin
 
 # Host
-Host: https://www.flygora.com/
+Host: https://www.flygora.com
 
 # Sitemaps
 Sitemap: https://www.flygora.com/sitemap.xml
