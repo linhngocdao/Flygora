@@ -4,14 +4,6 @@ const withNextIntl = createNextIntlPlugin();
 
 //http://52.64.94.227
 const nextConfig: NextConfig = {
-  async rewrites() {
-    return [
-      {
-        source: "/api/:path*",
-        destination: "http://localhost:5555/api/:path*",
-      },
-    ];
-  },
   images: {
     remotePatterns: [
       {
