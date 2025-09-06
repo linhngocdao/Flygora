@@ -2,7 +2,7 @@ import axios, { AxiosInstance, AxiosError } from "axios";
 import Cookies from "js-cookie";
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: `${process.env.API_URL}/api/v1`,
+  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:5555/api/v1",
   timeout: 5 * 60 * 1000,
   withCredentials: true,
 });
@@ -69,7 +69,7 @@ axiosInstance.interceptors.response.use(
       try {
         // Gọi refresh token endpoint
         const response = await axios.post(
-          `${process.env.API_URL}/api/v1/user/refresh-token`,
+          `${process.env.NEXT_PUBLIC_API_URL}/api/v1/user/refresh-token`,
           {},
           { withCredentials: true }
         );
