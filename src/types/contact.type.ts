@@ -28,6 +28,7 @@ export interface QueryGetContacts {
   page?: number;
   limit?: number;
   query?: string;
+  type?: "contact" | "marketing";
 }
 
 // Response từ API contact

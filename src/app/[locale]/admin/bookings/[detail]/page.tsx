@@ -4,23 +4,8 @@ import React from "react";
 import { useTranslations } from "next-intl";
 import { useParams, useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import {
-  ArrowLeft,
-  Calendar,
-  User,
-  Phone,
-  Mail,
-  MapPin,
-  CreditCard,
-  Clock,
-  Users,
-  FileText,
-  Download,
-  RefreshCcw,
-  Loader2,
-} from "lucide-react";
+import { ArrowLeft, RefreshCcw, Loader2 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { DetailBookingByAdmin } from "@/config/booking/booking.api";
 import { formatCurrency } from "@/utilities/currency";
@@ -136,7 +121,9 @@ export default function BookingDetailPage() {
       <div className="min-h-screen flex items-center justify-center bg-background dark:bg-gray-950">
         <div className="text-center">
           <div className="text-red-500 dark:text-red-400 mb-4">
-            <FileText className="h-16 w-16 mx-auto mb-2" />
+            <div className="w-16 h-16 mx-auto mb-2 bg-red-100 dark:bg-red-900 rounded-full flex items-center justify-center">
+              <span className="text-2xl">❌</span>
+            </div>
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               Không thể tải thông tin booking
             </h3>
@@ -164,7 +151,9 @@ export default function BookingDetailPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background dark:bg-gray-950">
         <div className="text-center">
-          <FileText className="h-16 w-16 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
+          <div className="w-16 h-16 mx-auto mb-4 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center">
+            <span className="text-2xl">📄</span>
+          </div>
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
             Không tìm thấy booking
           </h3>
@@ -186,87 +175,98 @@ export default function BookingDetailPage() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 p-6">
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Header */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <Button variant="outline" size="icon" onClick={handleBack}>
-              <ArrowLeft className="h-4 w-4" />
-            </Button>
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-                Chi tiết đặt tour #{booking.booking_code}
-              </h1>
-              <p className="text-gray-600 dark:text-gray-400 mt-1">
-                Thông tin chi tiết về đơn đặt tour
-              </p>
+        <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-8 mb-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-6">
+              <Button
+                variant="outline"
+                onClick={handleBack}
+                className="px-6 py-2 font-medium hover:bg-gray-50 dark:hover:bg-gray-800"
+              >
+                ← Quay lại
+              </Button>
+              <div>
+                <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+                  Đặt tour #{booking.booking_code}
+                </h1>
+                <p className="text-lg text-gray-600 dark:text-gray-400">
+                  Thông tin chi tiết về đơn đặt tour
+                </p>
+              </div>
             </div>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Button variant="outline" onClick={handleRefresh}>
-              <RefreshCcw className="mr-2 h-4 w-4" />
-              Làm mới
-            </Button>
-            <Button variant="outline" onClick={handleExportPDF}>
-              <Download className="mr-2 h-4 w-4" />
-              Xuất PDF
-            </Button>
+            <div className="flex items-center space-x-3">
+              <Button
+                variant="outline"
+                onClick={handleRefresh}
+                className="px-6 py-2 font-medium hover:bg-gray-50 dark:hover:bg-gray-800"
+              >
+                Làm mới
+              </Button>
+              <Button
+                variant="outline"
+                onClick={handleExportPDF}
+                className="px-6 py-2 font-medium hover:bg-gray-50 dark:hover:bg-gray-800"
+              >
+                Xuất PDF
+              </Button>
+            </div>
           </div>
         </div>
 
         {/* Status Overview */}
-        <Card className="dark:bg-gray-900 dark:border-gray-700">
-          <CardContent className="p-6">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-              <div className="text-center">
-                <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
-                  Trạng thái đơn hàng
-                </div>
-                {getStatusBadge(booking.status)}
+        <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-8">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Tổng quan</h2>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div className="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
+              <div className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3">
+                Trạng thái đơn hàng
               </div>
-              <div className="text-center">
-                <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
-                  Trạng thái thanh toán
-                </div>
-                {getPaymentStatusBadge(booking.payment.status)}
+              {getStatusBadge(booking.status)}
+            </div>
+            <div className="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
+              <div className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3">
+                Trạng thái thanh toán
               </div>
-              <div className="text-center">
-                <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">
-                  Số người tham gia
-                </div>
-                <div className="font-semibold text-lg text-gray-900 dark:text-white">
-                  {booking.number_of_participants} người
-                </div>
+              {getPaymentStatusBadge(booking.stripe_session_id ? "succeeded" : "pending")}
+            </div>
+            <div className="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
+              <div className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3">
+                Số người tham gia
               </div>
-              <div className="text-center">
-                <div className="text-sm text-gray-500 dark:text-gray-400 mb-1">Tổng giá trị</div>
-                <div className="font-semibold text-lg text-green-600 dark:text-green-400">
-                  {formatCurrency(parseFloat(booking.final_price))}
-                </div>
+              <div className="font-bold text-2xl text-gray-900 dark:text-white">
+                {booking.number_of_participants}
+              </div>
+              <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">người</div>
+            </div>
+            <div className="text-center p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
+              <div className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-3">
+                Tổng giá trị
+              </div>
+              <div className="font-bold text-2xl text-green-600 dark:text-green-400">
+                {formatCurrency(booking.final_price)}
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
         {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Thông tin đơn hàng */}
-          <Card className="dark:bg-gray-900 dark:border-gray-700">
-            <CardHeader className="dark:border-gray-700">
-              <CardTitle className="flex items-center text-gray-900 dark:text-white">
-                <FileText className="mr-2 h-5 w-5" />
-                Thông tin đơn hàng
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
+          <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-8">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
+              Thông tin đơn hàng
+            </h3>
+            <div className="space-y-6">
+              <div className="grid grid-cols-2 gap-6">
+                <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
                     Mã booking
                   </label>
-                  <p className="font-medium text-blue-600 dark:text-blue-400">
+                  <p className="font-semibold text-lg text-blue-600 dark:text-blue-400">
                     {booking.booking_code}
                   </p>
                 </div>
-                <div>
+                <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
                     Ngày đặt
                   </label>
@@ -280,12 +280,11 @@ export default function BookingDetailPage() {
                     })}
                   </p>
                 </div>
-                <div>
+                <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
                     Ngày khởi hành
                   </label>
-                  <p className="font-medium flex items-center text-gray-900 dark:text-white">
-                    <Calendar className="mr-1 h-4 w-4" />
+                  <p className="font-medium text-gray-900 dark:text-white">
                     {new Date(booking.tour_date).toLocaleDateString("vi-VN", {
                       year: "numeric",
                       month: "long",
@@ -293,138 +292,130 @@ export default function BookingDetailPage() {
                     })}
                   </p>
                 </div>
-                <div>
+                <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
                     Số người tham gia
                   </label>
-                  <p className="font-medium flex items-center text-gray-900 dark:text-white">
-                    <Users className="mr-1 h-4 w-4" />
+                  <p className="font-medium text-gray-900 dark:text-white">
                     {booking.number_of_participants} người
                   </p>
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
-                <h4 className="font-semibold mb-2 text-gray-900 dark:text-white">Chi tiết giá</h4>
-                <div className="space-y-2">
+              <div className="pt-6 border-t border-gray-200 dark:border-gray-700">
+                <h4 className="font-semibold text-lg mb-4 text-gray-900 dark:text-white">
+                  Chi tiết giá
+                </h4>
+                <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 space-y-3">
                   <div className="flex justify-between">
                     <span className="text-gray-600 dark:text-gray-400">Tổng tiền gốc:</span>
-                    <span className="text-gray-900 dark:text-white">
-                      {formatCurrency(parseFloat(booking.total_price))}
+                    <span className="font-medium text-gray-900 dark:text-white">
+                      {formatCurrency(booking.total_price)}
                     </span>
                   </div>
-                  {booking.discount_amount !== "0.00" && (
+                  {booking.discount_amount && booking.discount_amount !== "0.00" && (
                     <div className="flex justify-between text-red-600 dark:text-red-400">
                       <span>Giảm giá:</span>
-                      <span>-{formatCurrency(parseFloat(booking.discount_amount))}</span>
+                      <span className="font-medium">
+                        -{formatCurrency(booking.discount_amount)}
+                      </span>
                     </div>
                   )}
-                  <div className="flex justify-between font-semibold text-green-600 dark:text-green-400">
+                  <div className="flex justify-between font-bold text-lg text-green-600 dark:text-green-400 pt-2 border-t border-gray-200 dark:border-gray-600">
                     <span>Giá cuối cùng:</span>
-                    <span>{formatCurrency(parseFloat(booking.final_price))}</span>
+                    <span>{formatCurrency(booking.final_price)}</span>
                   </div>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
           {/* Thông tin khách hàng */}
-          <Card className="dark:bg-gray-900 dark:border-gray-700">
-            <CardHeader className="dark:border-gray-700">
-              <CardTitle className="flex items-center text-gray-900 dark:text-white">
-                <User className="mr-2 h-5 w-5" />
-                Thông tin khách hàng
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
+          <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-8">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
+              Thông tin khách hàng
+            </h3>
+            <div className="space-y-6">
+              <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
                   Họ và tên
                 </label>
-                <p className="font-medium text-lg text-gray-900 dark:text-white">
-                  {booking.tour_booker.first_name} {booking.tour_booker.last_name}
+                <p className="font-semibold text-xl text-gray-900 dark:text-white">
+                  {booking.booker.first_name} {booking.booker.last_name}
                 </p>
               </div>
-              <div>
+              <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
                   Email
                 </label>
-                <p className="font-medium flex items-center">
-                  <Mail className="mr-2 h-4 w-4" />
+                <p className="font-medium">
                   <a
-                    href={`mailto:${booking.tour_booker.email}`}
-                    className="text-blue-600 dark:text-blue-400 hover:underline"
+                    href={`mailto:${booking.booker.email}`}
+                    className="text-blue-600 dark:text-blue-400 hover:underline transition-colors"
                   >
-                    {booking.tour_booker.email}
+                    {booking.booker.email}
                   </a>
                 </p>
               </div>
-              <div>
+              <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
                   Số điện thoại
                 </label>
-                <p className="font-medium flex items-center">
-                  <Phone className="mr-2 h-4 w-4" />
+                <p className="font-medium">
                   <a
-                    href={`tel:${booking.tour_booker.phone_number}`}
-                    className="text-blue-600 dark:text-blue-400 hover:underline"
+                    href={`tel:${booking.booker.phone_number}`}
+                    className="text-blue-600 dark:text-blue-400 hover:underline transition-colors"
                   >
-                    {booking.tour_booker.phone_number}
+                    {booking.booker.phone_number}
                   </a>
                 </p>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
           {/* Thông tin tour */}
-          <Card className="dark:bg-gray-900 dark:border-gray-700">
-            <CardHeader className="dark:border-gray-700">
-              <CardTitle className="flex items-center text-gray-900 dark:text-white">
-                <MapPin className="mr-2 h-5 w-5" />
-                Thông tin tour
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
+          <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-8">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">Thông tin tour</h3>
+            <div className="space-y-6">
+              <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
                   Tên tour
                 </label>
-                <p className="font-medium text-lg text-gray-900 dark:text-white">
+                <p className="font-semibold text-xl text-gray-900 dark:text-white leading-relaxed">
                   {booking.tour.title}
                 </p>
               </div>
-              <div>
+              <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
                   Mã tour
                 </label>
-                <p className="font-medium text-gray-900 dark:text-white">
+                <p className="font-medium text-blue-600 dark:text-blue-400">
                   {booking.tour.product_code}
                 </p>
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
+              <div className="grid grid-cols-2 gap-6">
+                <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
                     Giá gốc
                   </label>
                   <p className="font-medium text-gray-500 dark:text-gray-400 line-through">
-                    {formatCurrency(parseFloat(booking.tour.original_price))}
+                    {formatCurrency(booking.tour.original_price)}
                   </p>
                 </div>
-                <div>
+                <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
                     Giá khuyến mại
                   </label>
-                  <p className="font-medium text-green-600 dark:text-green-400">
-                    {formatCurrency(parseFloat(booking.tour.sale_price))}
+                  <p className="font-semibold text-green-600 dark:text-green-400">
+                    {formatCurrency(booking.tour.sale_price)}
                   </p>
                 </div>
               </div>
-              <div>
+              <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
                   Ngày khởi hành
                 </label>
-                <p className="font-medium flex items-center text-gray-900 dark:text-white">
-                  <Calendar className="mr-2 h-4 w-4" />
+                <p className="font-medium text-gray-900 dark:text-white">
                   {new Date(booking.tour_date).toLocaleDateString("vi-VN", {
                     weekday: "long",
                     year: "numeric",
@@ -433,112 +424,82 @@ export default function BookingDetailPage() {
                   })}
                 </p>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
 
           {/* Thông tin thanh toán */}
-          <Card className="dark:bg-gray-900 dark:border-gray-700">
-            <CardHeader className="dark:border-gray-700">
-              <CardTitle className="flex items-center text-gray-900 dark:text-white">
-                <CreditCard className="mr-2 h-5 w-5" />
-                Thông tin thanh toán
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
+          <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-8">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
+              Thông tin thanh toán
+            </h3>
+            <div className="space-y-6">
+              <div className="grid grid-cols-2 gap-6">
+                <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
                     Trạng thái
                   </label>
-                  <div className="mt-1">{getPaymentStatusBadge(booking.payment.status)}</div>
+                  <div>
+                    {getPaymentStatusBadge(booking.stripe_session_id ? "succeeded" : "pending")}
+                  </div>
                 </div>
-                <div>
+                <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
                     Số tiền
                   </label>
-                  <p className="font-medium text-lg text-green-600 dark:text-green-400">
-                    {formatCurrency(parseFloat(booking.payment.amount))} {booking.payment.currency}
+                  <p className="font-bold text-2xl text-green-600 dark:text-green-400">
+                    {formatCurrency(booking.final_price)}
                   </p>
                 </div>
               </div>
 
-              {booking.payment.paid_at && (
-                <div>
-                  <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                    Ngày thanh toán
-                  </label>
-                  <p className="font-medium flex items-center text-gray-900 dark:text-white">
-                    <Clock className="mr-2 h-4 w-4" />
-                    {new Date(booking.payment.paid_at).toLocaleDateString("vi-VN", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                  </p>
-                </div>
-              )}
-
-              <div>
+              <div className="space-y-2">
                 <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                  ID thanh toán
+                  Phương thức thanh toán
                 </label>
-                <p className="font-mono text-sm bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-300 p-2 rounded">
-                  {booking.payment.id}
+                <p className="font-medium text-gray-900 dark:text-white">
+                  {booking.stripe_session_id ? "Stripe (Thẻ tín dụng/Debit)" : "Chưa thanh toán"}
                 </p>
               </div>
 
-              {booking.payment.stripe_payment_intent_id && (
-                <div>
+              {booking.stripe_session_id && (
+                <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                    Stripe Payment Intent
+                    Stripe Session ID
                   </label>
-                  <p className="font-mono text-sm bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-300 p-2 rounded">
-                    {booking.payment.stripe_payment_intent_id}
+                  <p className="font-mono text-sm bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300 p-3 rounded-lg border">
+                    {booking.stripe_session_id}
                   </p>
                 </div>
               )}
-
-              {booking.payment.transaction_id && (
-                <div>
-                  <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                    Transaction ID
-                  </label>
-                  <p className="font-mono text-sm bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-300 p-2 rounded">
-                    {booking.payment.transaction_id}
-                  </p>
-                </div>
-              )}
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
 
         {/* Thông tin người tham gia */}
-        <Card className="dark:bg-gray-900 dark:border-gray-700">
-          <CardHeader className="dark:border-gray-700">
-            <CardTitle className="flex items-center text-gray-900 dark:text-white">
-              <Users className="mr-2 h-5 w-5" />
-              Danh sách người tham gia ({booking.participants.length} người)
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {booking.participants.map((participant) => (
+        <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-8">
+          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
+            Danh sách người tham gia ({booking.participants.length} người)
+          </h3>
+          <div>
+            <div className="space-y-6">
+              {booking.participants.map((participant, index) => (
                 <div
                   key={participant.id}
-                  className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 bg-white dark:bg-gray-800"
+                  className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700"
                 >
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div>
+                  <h4 className="font-semibold text-lg text-gray-900 dark:text-white mb-4">
+                    Người tham gia #{index + 1}
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="space-y-2">
                       <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
                         Họ và tên
                       </label>
-                      <p className="font-medium text-gray-900 dark:text-white">
+                      <p className="font-semibold text-gray-900 dark:text-white">
                         {participant.first_name} {participant.last_name}
                       </p>
                     </div>
-                    <div>
+                    <div className="space-y-2">
                       <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
                         Ngày sinh
                       </label>
@@ -548,7 +509,7 @@ export default function BookingDetailPage() {
                           : "Chưa cung cấp"}
                       </p>
                     </div>
-                    <div>
+                    <div className="space-y-2">
                       <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
                         Quốc tịch
                       </label>
@@ -556,7 +517,7 @@ export default function BookingDetailPage() {
                         {participant.nationality || "Chưa cung cấp"}
                       </p>
                     </div>
-                    <div>
+                    <div className="space-y-2">
                       <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
                         Số hộ chiếu
                       </label>
@@ -565,11 +526,11 @@ export default function BookingDetailPage() {
                       </p>
                     </div>
                     {participant.special_requirements && (
-                      <div className="md:col-span-2">
+                      <div className="md:col-span-2 space-y-2">
                         <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
                           Yêu cầu đặc biệt
                         </label>
-                        <p className="font-medium text-gray-900 dark:text-white">
+                        <p className="font-medium text-gray-900 dark:text-white bg-white dark:bg-gray-700 p-3 rounded border">
                           {participant.special_requirements}
                         </p>
                       </div>
@@ -578,57 +539,60 @@ export default function BookingDetailPage() {
                 </div>
               ))}
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
         {/* Voucher thông tin (nếu có) */}
-        {booking.voucher && (
-          <Card className="dark:bg-gray-900 dark:border-gray-700">
-            <CardHeader className="dark:border-gray-700">
-              <CardTitle className="flex items-center text-gray-900 dark:text-white">
-                <FileText className="mr-2 h-5 w-5" />
-                Thông tin voucher
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                    Mã voucher
-                  </label>
-                  <p className="font-medium text-gray-900 dark:text-white">
-                    {booking.voucher.code}
-                  </p>
-                </div>
-                <div>
-                  <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                    Giá trị giảm
-                  </label>
-                  <p className="font-medium text-red-600 dark:text-red-400">
-                    -{formatCurrency(parseFloat(booking.discount_amount))}
-                  </p>
-                </div>
+        {booking.voucher_id && booking.discount_amount && (
+          <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-8">
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">
+              Thông tin voucher
+            </h3>
+            <div className="grid grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                  Voucher ID
+                </label>
+                <p className="font-semibold text-gray-900 dark:text-white">{booking.voucher_id}</p>
               </div>
-            </CardContent>
-          </Card>
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                  Giá trị giảm
+                </label>
+                <p className="font-bold text-xl text-red-600 dark:text-red-400">
+                  -{formatCurrency(booking.discount_amount)}
+                </p>
+              </div>
+            </div>
+          </div>
         )}
 
         {/* Timeline / History */}
-        <Card className="dark:bg-gray-900 dark:border-gray-700">
-          <CardHeader className="dark:border-gray-700">
-            <CardTitle className="flex items-center text-gray-900 dark:text-white">
-              <Clock className="mr-2 h-5 w-5" />
-              Lịch sử thay đổi
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="flex items-start space-x-3">
-                <div className="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+        <div className="bg-white dark:bg-gray-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-8">
+          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6">Lịch sử thay đổi</h3>
+          <div className="space-y-6">
+            <div className="flex items-start space-x-4">
+              <div className="w-3 h-3 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+              <div>
+                <p className="font-semibold text-gray-900 dark:text-white">Booking được tạo</p>
+                <p className="text-gray-500 dark:text-gray-400 mt-1">
+                  {new Date(booking.created_at).toLocaleDateString("vi-VN", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </p>
+              </div>
+            </div>
+            {booking.updated_at !== booking.created_at && (
+              <div className="flex items-start space-x-4">
+                <div className="w-3 h-3 bg-orange-500 rounded-full mt-2 flex-shrink-0"></div>
                 <div>
-                  <p className="font-medium text-gray-900 dark:text-white">Booking được tạo</p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
-                    {new Date(booking.created_at).toLocaleDateString("vi-VN", {
+                  <p className="font-semibold text-gray-900 dark:text-white">Cập nhật lần cuối</p>
+                  <p className="text-gray-500 dark:text-gray-400 mt-1">
+                    {new Date(booking.updated_at).toLocaleDateString("vi-VN", {
                       year: "numeric",
                       month: "long",
                       day: "numeric",
@@ -638,45 +602,22 @@ export default function BookingDetailPage() {
                   </p>
                 </div>
               </div>
-              {booking.updated_at !== booking.created_at && (
-                <div className="flex items-start space-x-3">
-                  <div className="w-2 h-2 bg-orange-500 rounded-full mt-2"></div>
-                  <div>
-                    <p className="font-medium text-gray-900 dark:text-white">Cập nhật lần cuối</p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      {new Date(booking.updated_at).toLocaleDateString("vi-VN", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
-                    </p>
-                  </div>
+            )}
+            {booking.stripe_session_id && (
+              <div className="flex items-start space-x-4">
+                <div className="w-3 h-3 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                <div>
+                  <p className="font-semibold text-gray-900 dark:text-white">
+                    Thanh toán đã được xử lý
+                  </p>
+                  <p className="text-gray-500 dark:text-gray-400 mt-1">
+                    Phương thức: Stripe Payment
+                  </p>
                 </div>
-              )}
-              {booking.payment.paid_at && (
-                <div className="flex items-start space-x-3">
-                  <div className="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
-                  <div>
-                    <p className="font-medium text-gray-900 dark:text-white">
-                      Thanh toán thành công
-                    </p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      {new Date(booking.payment.paid_at).toLocaleDateString("vi-VN", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
-                    </p>
-                  </div>
-                </div>
-              )}
-            </div>
-          </CardContent>
-        </Card>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

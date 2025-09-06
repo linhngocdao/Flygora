@@ -1,13 +1,18 @@
 /**
  * Format số tiền theo định dạng Việt Nam
- * @param amount - Số tiền cần format
+ * @param amount - Số tiền cần format (number hoặc string)
  * @returns Chuỗi đã format (VD: 1.000.000 ₫)
  */
-export function formatCurrency(amount: number): string {
+export function formatCurrency(amount: number | string): string {
+  // Nếu là string, chuyển đổi cẩn thận để không mất độ chính xác
+  const numericAmount = typeof amount === "string" ? parseFloat(amount) : amount;
+
   return new Intl.NumberFormat("vi-VN", {
     style: "currency",
     currency: "VND",
-  }).format(amount);
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(numericAmount);
 }
 
 /**

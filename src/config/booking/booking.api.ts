@@ -42,41 +42,93 @@ export interface BookingParam {
 
 export interface Booking {
   id: string;
-  bookingCode: string;
+  booking_code: string;
   status: "pending" | "confirmed" | "cancelled" | "completed";
-  tourDate: string;
-  numberOfParticipants: number;
-  totalPrice: string;
-  finalPrice: string;
-  createdAt: string;
+  tour_date: string;
+  number_of_participants: number;
+  total_price: string;
+  final_price: string;
+  discount_amount: string | null;
+  tour_id: string;
+  tour_booker_id: string;
+  voucher_id: string | null;
+  stripe_session_id: string | null;
+  created_at: string;
+  updated_at: string;
+  booker: {
+    id: string;
+    first_name: string;
+    last_name: string;
+    email: string;
+    phone_number: string;
+    created_at: string;
+    updated_at: string;
+  };
   tour: {
     id: string;
     title: string;
-    productCode: string;
-  };
-  booker: {
-    id: string;
-    name: string;
-    email: string;
-    phone: string;
-  };
-  payment: {
-    id: string;
+    slug: string;
+    description: string;
+    card_description: string;
+    location: string;
+    meeting_point: string;
+    tour_booking_process: string | null;
+    tour_cancellation_policy: string | null;
+    age_requirement: string;
+    cover: string;
+    image_in_menu: string | null;
+    tour_days: string;
+    tour_nights: string;
+    original_price: string;
+    sale_price: string;
+    participant_min: number;
+    participant_max: number;
+    product_code: string;
+    image_header: string | null;
+    tour_category_id: string;
+    campsites: string | null;
+    food: string | null;
+    kitlist: string | null;
+    languages_code: string | null;
+    logistics: string | null;
+    map_title: string | null;
+    optional_extra: string | null;
+    the_area: string | null;
+    title_kitlist: string | null;
+    transfers: string | null;
+    weather_condition: string | null;
+    sort: number;
+    show_in_footer: boolean | null;
+    is_top: boolean | null;
+    label_hot: string | null;
+    is_featured: boolean | null;
+    label_discount: string | null;
     status: string;
-    amount: string;
-    paidAt: string | null;
+    meta_description: string | null;
+    meta_image: string | null;
+    meta_keyword: string | null;
+    meta_robot: string[] | null;
+    meta_title: string | null;
+    user_created: string;
+    user_updated: string | null;
+    created_at: string;
+    updated_at: string;
   };
 }
 
 export interface BookingResponse {
+  status: boolean;
+  code: number;
+  message: string;
   data: Booking[];
+  errors: any;
   meta: {
-    pagination: {
-      totalItems: number;
-      totalPages: number;
-      currentPage: number;
-      itemsPerPage: number;
-    };
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+    hasNextPage: boolean;
+    hasPrevPage: boolean;
   };
 }
 
@@ -89,25 +141,21 @@ export interface BookingDetail {
   number_of_participants: number;
   total_price: string;
   final_price: string;
-  discount_amount: string;
+  discount_amount: string | null;
   tour_id: string;
   tour_booker_id: string;
   voucher_id: string | null;
+  stripe_session_id: string | null;
   created_at: string;
   updated_at: string;
-  tour: {
-    id: string;
-    title: string;
-    product_code: string;
-    original_price: string;
-    sale_price: string;
-  };
-  tour_booker: {
+  booker: {
     id: string;
     first_name: string;
     last_name: string;
     email: string;
     phone_number: string;
+    created_at: string;
+    updated_at: string;
   };
   participants: Array<{
     id: string;
@@ -117,32 +165,65 @@ export interface BookingDetail {
     nationality?: string;
     passport_number?: string;
     special_requirements?: string;
+    booking_id: string;
+    created_at: string;
+    updated_at: string;
   }>;
-  voucher: {
+  tour: {
     id: string;
-    code: string;
-    discount_value: string;
-    discount_type: string;
-  } | null;
-  payment: {
-    id: string;
-    stripe_payment_intent_id?: string;
-    transaction_id?: string;
-    amount: string;
-    currency: string;
-    status: "pending" | "succeeded" | "failed" | "refunded";
-    payment_method?: string;
-    paid_at?: string;
+    title: string;
+    slug: string;
+    description: string;
+    card_description: string;
+    location: string;
+    meeting_point: string;
+    tour_booking_process: string | null;
+    tour_cancellation_policy: string | null;
+    age_requirement: string;
+    cover: string;
+    image_in_menu: string | null;
+    tour_days: string;
+    tour_nights: string;
+    original_price: string;
+    sale_price: string;
+    participant_min: number;
+    participant_max: number;
+    product_code: string;
+    image_header: string | null;
+    tour_category_id: string;
+    campsites: string | null;
+    food: string | null;
+    kitlist: string | null;
+    languages_code: string | null;
+    logistics: string | null;
+    map_title: string | null;
+    optional_extra: string | null;
+    the_area: string | null;
+    title_kitlist: string | null;
+    transfers: string | null;
+    weather_condition: string | null;
+    sort: number;
+    show_in_footer: boolean | null;
+    is_top: boolean | null;
+    label_hot: string | null;
+    is_featured: boolean | null;
+    label_discount: string | null;
+    status: string;
+    meta_description: string | null;
+    meta_image: string | null;
+    meta_keyword: string | null;
+    meta_robot: string[] | null;
+    meta_title: string | null;
+    user_created: string;
+    user_updated: string | null;
+    created_at: string;
+    updated_at: string;
   };
 }
 
 export interface BookingDetailResponse {
-  status: boolean;
-  code: number;
-  message: string;
+  status: string;
   data: BookingDetail;
-  errors: any;
-  meta: any;
 }
 
 export async function createBooking(
@@ -156,7 +237,7 @@ export async function createBooking(
 }
 
 export async function ListBooking(params: BookingParam) {
-  const { data } = await axiosInstance.get<BookingResponse>("/bookings/admin", { params });
+  const { data } = await axiosInstance.get<BookingResponse>("/bookings", { params });
   return data;
 }
 
@@ -165,13 +246,13 @@ export async function UpdateStatus(
   payload: { status: "pending" | "confirmed" | "cancelled" | "completed" }
 ) {
   const { data } = await axiosInstance.put<ApiResponse<any>>(
-    `/bookings/admin/${bookingID}/status`,
+    `/bookings/${bookingID}/status`,
     payload
   );
   return data;
 }
 
 export async function DetailBookingByAdmin(bookingID: string) {
-  const { data } = await axiosInstance.get<BookingDetailResponse>(`/bookings/admin/${bookingID}`);
+  const { data } = await axiosInstance.get<BookingDetailResponse>(`/bookings/${bookingID}`);
   return data;
 }

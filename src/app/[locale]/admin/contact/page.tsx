@@ -23,6 +23,14 @@ import {
 import TableFlygora from "@/components/ui/TableFlygora";
 import { GetContact, DeleteContact } from "@/config/contact/contact.api";
 import { Contact, QueryGetContacts } from "@/types/contact.type";
+
+type ContactType = "contact" | "marketing";
+
+interface TabItem {
+  key: ContactType;
+  label: string;
+  count?: number;
+}
 import {
   Trash2,
   MoreHorizontal,
@@ -39,10 +47,12 @@ const ContactManager = () => {
   const queryClient = useQueryClient();
 
   // States
+  const [activeTab, setActiveTab] = useState<ContactType>("contact");
   const [filters, setFilters] = useState<QueryGetContacts>({
     page: 1,
     limit: 10,
     query: undefined,
+    type: "contact", // Add type filter
   });
   const [searchDisplay, setSearchDisplay] = useState("");
   const [viewingContact, setViewingContact] = useState<Contact | null>(null);
@@ -71,11 +81,28 @@ const ContactManager = () => {
     refetchOnWindowFocus: false,
   });
 
+  // Query for contact counts
+  const { data: contactCounts } = useQuery<any>({
+    queryKey: ["contact-counts"],
+    queryFn: async () => {
+      const [contactResponse, marketingResponse] = await Promise.all([
+        GetContact({ page: 1, limit: 1, type: "contact" }),
+        GetContact({ page: 1, limit: 1, type: "marketing" }),
+      ]);
+      return {
+        contact: contactResponse?.meta?.total || 0,
+        marketing: marketingResponse?.meta?.total || 0,
+      };
+    },
+    refetchOnWindowFocus: false,
+  });
+
   // Mutations
   const deleteMutation = useMutation({
     mutationFn: DeleteContact,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["contacts"] });
+      queryClient.invalidateQueries({ queryKey: ["contact-counts"] });
       toast.success("Xóa liên hệ thành công");
     },
     onError: (error: any) => {
@@ -112,6 +139,18 @@ const ContactManager = () => {
       page: 1,
       limit: 10,
       query: undefined,
+      type: activeTab,
+    });
+  }, [activeTab]);
+
+  const handleTabChange = useCallback((tab: ContactType) => {
+    setActiveTab(tab);
+    setSearchDisplay("");
+    setFilters({
+      page: 1,
+      limit: 10,
+      query: undefined,
+      type: tab,
     });
   }, []);
 
@@ -124,107 +163,191 @@ const ContactManager = () => {
     }));
   }, [debouncedSearchTerm]);
 
-  // Table columns
-  const columns = [
-    {
-      key: "name",
-      title: "Họ và tên",
-      render: (value: any, record: Contact) => (
-        <div className="flex items-center gap-3">
-          <div className="h-8 w-8 rounded-full bg-gradient-to-r from-green-500 to-blue-600 flex items-center justify-center text-white text-sm font-semibold">
-            {record.firstName.charAt(0).toUpperCase()}
-          </div>
-          <div>
-            <span className="font-medium text-gray-900 dark:text-white">
-              {record.firstName} {record.lastName}
-            </span>
-            <div className="text-sm text-gray-500 dark:text-gray-400">{record.email}</div>
-          </div>
-        </div>
-      ),
-    },
-    {
-      key: "phone",
-      title: "Số điện thoại",
-      render: (value: any, record: Contact) => (
-        <div className="flex items-center gap-2 text-sm">
-          <Phone className="h-4 w-4 text-gray-400" />
-          <span className="text-gray-700 dark:text-gray-300">
-            {record.phonePrefix} {record.phoneNumber}
-          </span>
-        </div>
-      ),
-    },
-    {
-      key: "message",
-      title: "Tin nhắn",
-      render: (value: string) => (
-        <div className="max-w-xs">
-          <span className="text-sm text-gray-700 dark:text-gray-300 line-clamp-2">
-            {value
-              ? value.substring(0, 100) + (value.length > 100 ? "..." : "")
-              : "Không có tin nhắn"}
-          </span>
-        </div>
-      ),
-    },
-    {
-      key: "status",
-      title: "Trạng thái",
-      render: () => (
-        <Badge
-          variant="secondary"
-          className="bg-blue-100 text-blue-800 hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-300"
-        >
-          Mới
-        </Badge>
-      ),
-    },
-    {
-      key: "created_at",
-      title: "Ngày gửi",
-      render: (value: any, record: Contact) => (
-        <span className="text-sm text-gray-500 dark:text-gray-400">
-          {record.createdAt
-            ? new Date(record.createdAt).toLocaleDateString("vi-VN", {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-                hour: "2-digit",
-                minute: "2-digit",
-              })
-            : "-"}
-        </span>
-      ),
-    },
-    {
-      key: "actions",
-      title: "Hành động",
-      align: "right" as const,
-      render: (_: any, record: Contact) => (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" className="h-8 w-8">
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-[160px]">
-            <DropdownMenuItem onClick={() => handleView(record)}>
-              <Eye className="mr-2 h-4 w-4" />
-              Xem chi tiết
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              className="text-red-600 focus:text-red-600 focus:bg-red-50 dark:focus:bg-red-950"
-              onClick={() => handleDelete(record)}
+  // Table columns - different for each contact type
+  const getColumns = () => {
+    if (activeTab === "marketing") {
+      // Marketing tab - chỉ hiển thị email
+      return [
+        {
+          key: "email",
+          title: "Email Marketing",
+          render: (value: any, record: Contact) => (
+            <div className="flex items-center gap-3">
+              <div className="h-8 w-8 rounded-full bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center text-white text-sm font-semibold">
+                {record.email?.charAt(0).toUpperCase()}
+              </div>
+              <div>
+                <span className="font-medium text-gray-900 dark:text-white">{record.email}</span>
+                <div className="text-sm text-gray-500 dark:text-gray-400">
+                  {record.firstName && record.lastName
+                    ? `${record.firstName} ${record.lastName}`
+                    : "Marketing Subscriber"}
+                </div>
+              </div>
+            </div>
+          ),
+        },
+        {
+          key: "status",
+          title: "Trạng thái",
+          render: () => (
+            <Badge
+              variant="secondary"
+              className="bg-purple-100 text-purple-800 hover:bg-purple-200 dark:bg-purple-900 dark:text-purple-300"
             >
-              <Trash2 className="mr-2 h-4 w-4" />
-              Xóa
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      ),
-    },
-  ];
+              Đăng ký
+            </Badge>
+          ),
+        },
+        {
+          key: "created_at",
+          title: "Ngày đăng ký",
+          render: (value: any, record: Contact) => (
+            <span className="text-sm text-gray-500 dark:text-gray-400">
+              {record.createdAt
+                ? new Date(record.createdAt).toLocaleDateString("vi-VN", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })
+                : "-"}
+            </span>
+          ),
+        },
+        {
+          key: "actions",
+          title: "Hành động",
+          align: "right" as const,
+          render: (_: any, record: Contact) => (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="h-8 w-8">
+                  <MoreHorizontal className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-[160px]">
+                <DropdownMenuItem onClick={() => handleView(record)}>
+                  <Eye className="mr-2 h-4 w-4" />
+                  Xem chi tiết
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  className="text-red-600 focus:text-red-600 focus:bg-red-50 dark:focus:bg-red-950"
+                  onClick={() => handleDelete(record)}
+                >
+                  <Trash2 className="mr-2 h-4 w-4" />
+                  Xóa
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ),
+        },
+      ];
+    }
+
+    // Contact tab - hiển thị đầy đủ thông tin
+    return [
+      {
+        key: "name",
+        title: "Họ và tên",
+        render: (value: any, record: Contact) => (
+          <div className="flex items-center gap-3">
+            <div className="h-8 w-8 rounded-full bg-gradient-to-r from-green-500 to-blue-600 flex items-center justify-center text-white text-sm font-semibold">
+              {record.firstName?.charAt(0).toUpperCase()}
+            </div>
+            <div>
+              <span className="font-medium text-gray-900 dark:text-white">
+                {record.firstName} {record.lastName}
+              </span>
+              <div className="text-sm text-gray-500 dark:text-gray-400">{record.email}</div>
+            </div>
+          </div>
+        ),
+      },
+      {
+        key: "phone",
+        title: "Số điện thoại",
+        render: (value: any, record: Contact) => (
+          <div className="flex items-center gap-2 text-sm">
+            <Phone className="h-4 w-4 text-gray-400" />
+            <span className="text-gray-700 dark:text-gray-300">
+              {record.phonePrefix} {record.phoneNumber}
+            </span>
+          </div>
+        ),
+      },
+      {
+        key: "message",
+        title: "Tin nhắn",
+        render: (value: string) => (
+          <div className="max-w-xs">
+            <span className="text-sm text-gray-700 dark:text-gray-300 line-clamp-2">
+              {value
+                ? value.substring(0, 100) + (value.length > 100 ? "..." : "")
+                : "Không có tin nhắn"}
+            </span>
+          </div>
+        ),
+      },
+      {
+        key: "status",
+        title: "Trạng thái",
+        render: () => (
+          <Badge
+            variant="secondary"
+            className="bg-blue-100 text-blue-800 hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-300"
+          >
+            Mới
+          </Badge>
+        ),
+      },
+      {
+        key: "created_at",
+        title: "Ngày gửi",
+        render: (value: any, record: Contact) => (
+          <span className="text-sm text-gray-500 dark:text-gray-400">
+            {record.createdAt
+              ? new Date(record.createdAt).toLocaleDateString("vi-VN", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })
+              : "-"}
+          </span>
+        ),
+      },
+      {
+        key: "actions",
+        title: "Hành động",
+        align: "right" as const,
+        render: (_: any, record: Contact) => (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="icon" className="h-8 w-8">
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-[160px]">
+              <DropdownMenuItem onClick={() => handleView(record)}>
+                <Eye className="mr-2 h-4 w-4" />
+                Xem chi tiết
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                className="text-red-600 focus:text-red-600 focus:bg-red-50 dark:focus:bg-red-950"
+                onClick={() => handleDelete(record)}
+              >
+                <Trash2 className="mr-2 h-4 w-4" />
+                Xóa
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        ),
+      },
+    ];
+  };
 
   // Pagination info
   const pagination = data?.data
@@ -235,6 +358,20 @@ const ContactManager = () => {
         totalPages: Math.ceil((data.meta.total || 0) / (filters.limit || 10)),
       }
     : undefined;
+
+  // Tab data
+  const tabs: TabItem[] = [
+    {
+      key: "contact",
+      label: "Liên hệ",
+      count: contactCounts?.contact,
+    },
+    {
+      key: "marketing",
+      label: "Marketing",
+      count: contactCounts?.marketing,
+    },
+  ];
 
   // Loading state
   const isAnyMutationLoading = deleteMutation.isPending;
@@ -251,13 +388,53 @@ const ContactManager = () => {
         </div>
       </div>
 
+      {/* Tabs */}
+      <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700">
+        <div className="flex border-b border-gray-200 dark:border-gray-700">
+          {tabs.map((tab) => (
+            <button
+              key={tab.key}
+              onClick={() => handleTabChange(tab.key)}
+              className={`
+                flex items-center gap-2 px-6 py-4 text-sm font-medium transition-colors
+                ${
+                  activeTab === tab.key
+                    ? "text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400 bg-blue-50 dark:bg-blue-900/20"
+                    : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
+                }
+              `}
+            >
+              {tab.label}
+              {tab.count !== undefined && (
+                <span
+                  className={`
+                  px-2 py-1 text-xs rounded-full
+                  ${
+                    activeTab === tab.key
+                      ? "bg-blue-100 dark:bg-blue-800 text-blue-600 dark:text-blue-300"
+                      : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400"
+                  }
+                `}
+                >
+                  {tab.count}
+                </span>
+              )}
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* Filters */}
       <Card className="p-6">
         <div className="flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between">
           <div className="relative flex-1 max-w-md">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
             <Input
-              placeholder="Tìm kiếm theo tên, email, số điện thoại..."
+              placeholder={
+                activeTab === "marketing"
+                  ? "Tìm kiếm theo tên, email marketing..."
+                  : "Tìm kiếm theo tên, email, số điện thoại..."
+              }
               value={searchDisplay}
               onChange={(e) => setSearchDisplay(e.target.value)}
               className="pl-10"
@@ -290,12 +467,12 @@ const ContactManager = () => {
 
       {/* Table */}
       <TableFlygora
-        columns={columns}
+        columns={getColumns()}
         data={data?.data || []}
         loading={isLoading}
         pagination={pagination}
         onPageChange={handlePageChange}
-        emptyText="Không có liên hệ nào được tìm thấy"
+        emptyText={`Không có ${activeTab === "marketing" ? "đăng ký marketing" : "liên hệ"} nào được tìm thấy`}
         emptyIcon={<Search className="h-12 w-12 text-gray-400" />}
         rowKey="id"
       />
@@ -306,9 +483,13 @@ const ContactManager = () => {
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <MessageSquare className="h-5 w-5" />
-              Chi tiết liên hệ
+              {activeTab === "marketing" ? "Chi tiết đăng ký Marketing" : "Chi tiết liên hệ"}
             </DialogTitle>
-            <DialogDescription>Thông tin chi tiết về liên hệ từ khách hàng</DialogDescription>
+            <DialogDescription>
+              {activeTab === "marketing"
+                ? "Thông tin chi tiết về đăng ký marketing từ khách hàng"
+                : "Thông tin chi tiết về liên hệ từ khách hàng"}
+            </DialogDescription>
           </DialogHeader>
 
           {viewingContact && (
@@ -340,36 +521,69 @@ const ContactManager = () => {
                   </div>
                 </div>
 
-                <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-900 dark:text-white">
-                    Số điện thoại
-                  </label>
-                  <div className="flex items-center gap-2 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                    <Phone className="h-4 w-4 text-gray-400" />
-                    <span className="text-gray-700 dark:text-gray-300">
-                      {viewingContact.phonePrefix} {viewingContact.phoneNumber}
-                    </span>
+                {/* Chỉ hiển thị số điện thoại cho contact tab */}
+                {activeTab === "contact" && (
+                  <div className="space-y-2">
+                    <label className="text-sm font-medium text-gray-900 dark:text-white">
+                      Số điện thoại
+                    </label>
+                    <div className="flex items-center gap-2 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                      <Phone className="h-4 w-4 text-gray-400" />
+                      <span className="text-gray-700 dark:text-gray-300">
+                        {viewingContact.phonePrefix} {viewingContact.phoneNumber}
+                      </span>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
 
-              {/* Message */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-900 dark:text-white">
-                  Tin nhắn
-                </label>
-                <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg min-h-[120px]">
-                  <p className="text-gray-700 dark:text-gray-300 whitespace-pre-wrap">
-                    {viewingContact.message || "Không có tin nhắn"}
-                  </p>
+              {/* Message - only show for contact type */}
+              {activeTab === "contact" && (
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-900 dark:text-white">
+                    Tin nhắn
+                  </label>
+                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg min-h-[120px]">
+                    <p className="text-gray-700 dark:text-gray-300 whitespace-pre-wrap">
+                      {viewingContact.message || "Không có tin nhắn"}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              )}
+
+              {/* Marketing interests - only show for marketing type */}
+              {activeTab === "marketing" && (
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-gray-900 dark:text-white">
+                    Quan tâm Marketing
+                  </label>
+                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                    <div className="flex flex-wrap gap-2">
+                      <Badge
+                        variant="outline"
+                        className="bg-purple-50 text-purple-700 border-purple-200"
+                      >
+                        Newsletter
+                      </Badge>
+                      <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200">
+                        Tour Updates
+                      </Badge>
+                      <Badge
+                        variant="outline"
+                        className="bg-green-50 text-green-700 border-green-200"
+                      >
+                        Promotions
+                      </Badge>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               {/* Timestamps */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                 <div className="space-y-1">
                   <label className="text-sm font-medium text-gray-900 dark:text-white">
-                    Ngày gửi
+                    {activeTab === "marketing" ? "Ngày đăng ký" : "Ngày gửi"}
                   </label>
                   <p className="text-sm text-gray-600 dark:text-gray-400">
                     {new Date(viewingContact.createdAt).toLocaleString("vi-VN")}

@@ -60,6 +60,7 @@ export default function BookingsManagement() {
     queryFn: () => ListBooking(filters),
     refetchOnWindowFocus: false,
   });
+  console.log("data", data);
 
   // Tính toán thống kê từ dữ liệu API
   const bookingsData = useMemo(() => data?.data || [], [data?.data]);
@@ -142,7 +143,7 @@ export default function BookingsManagement() {
 
   const rowTable = [
     {
-      key: "bookingCode",
+      key: "booking_code",
       title: "Mã booking",
       render: (value: string) => (
         <div className="font-medium text-blue-600 dark:text-blue-400 transition-colors">
@@ -153,39 +154,46 @@ export default function BookingsManagement() {
     {
       key: "booker",
       title: "Khách hàng",
-      render: (value: { name: string; email: string; phone: string }) => (
+      render: (value: {
+        first_name: string;
+        last_name: string;
+        email: string;
+        phone_number: string;
+      }) => (
         <div>
-          <p className="font-medium text-gray-900 dark:text-white">{value.name}</p>
+          <p className="font-medium text-gray-900 dark:text-white">
+            {value.first_name} {value.last_name}
+          </p>
           <p className="text-sm text-gray-500 dark:text-gray-400">{value.email}</p>
-          <p className="text-sm text-gray-500 dark:text-gray-400">{value.phone}</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">{value.phone_number}</p>
         </div>
       ),
     },
     {
       key: "tour",
       title: "Tour",
-      render: (value: { title: string; productCode: string }, record: { tourDate: string }) => (
+      render: (value: { title: string; product_code: string }, record: { tour_date: string }) => (
         <div>
           <p className="font-medium text-gray-900 dark:text-white">{value.title}</p>
-          <p className="text-sm text-gray-500 dark:text-gray-400">{value.productCode}</p>
-          <p className="text-sm text-gray-500 dark:text-gray-400">Ngày tour: {record.tourDate}</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">{value.product_code}</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            Ngày tour: {new Date(record.tour_date).toLocaleDateString("vi-VN")}
+          </p>
         </div>
       ),
     },
     {
-      key: "numberOfParticipants",
+      key: "number_of_participants",
       title: "Số người",
       render: (value: number) => (
         <div className="text-center font-medium text-gray-900 dark:text-white">{value}</div>
       ),
     },
     {
-      key: "finalPrice",
+      key: "final_price",
       title: "Tổng tiền",
-      render: (value: any) => (
-        <div className="font-medium text-gray-900 dark:text-white">
-          {formatCurrency(parseFloat(value))}
-        </div>
+      render: (value: string) => (
+        <div className="font-medium text-gray-900 dark:text-white">{formatCurrency(value)}</div>
       ),
     },
     {
@@ -194,9 +202,22 @@ export default function BookingsManagement() {
       render: (value: string) => getStatusBadge(value),
     },
     {
-      key: "payment",
+      key: "stripe_session_id",
       title: "Thanh toán",
-      render: (value: { status: string }) => getPaymentStatusBadge(value.status),
+      render: (value: string | null) => {
+        // Since payment info is not in the API response, we'll determine status based on stripe_session_id
+        const paymentStatus = value ? "succeeded" : "pending";
+        return getPaymentStatusBadge(paymentStatus);
+      },
+    },
+    {
+      key: "created_at",
+      title: "Ngày đặt",
+      render: (value: string) => (
+        <div className="text-sm text-gray-900 dark:text-white">
+          {new Date(value).toLocaleDateString("vi-VN")}
+        </div>
+      ),
     },
     {
       key: "actions",
@@ -301,16 +322,16 @@ export default function BookingsManagement() {
     }
   };
 
-  const totalBookings = data?.meta?.pagination?.totalItems || 0;
+  const totalBookings = data?.meta?.total || 0;
 
   // Đếm số lượng booking theo trạng thái
   const confirmedBookings = bookingsData.filter((booking) => booking.status === "confirmed").length;
   const pendingBookings = bookingsData.filter((booking) => booking.status === "pending").length;
 
-  // Tính tổng doanh thu từ các booking có payment.status = "succeeded"
+  // Tính tổng doanh thu từ các booking có stripe_session_id (đã thanh toán)
   const totalRevenue = bookingsData
-    .filter((booking) => booking.payment.status === "succeeded")
-    .reduce((sum, booking) => sum + parseFloat(booking.payment.amount || "0"), 0);
+    .filter((booking) => booking.stripe_session_id && booking.status !== "cancelled")
+    .reduce((sum, booking) => sum + parseFloat(booking.final_price || "0"), 0);
 
   // Stats cards
   const stats = [
@@ -700,8 +721,8 @@ export default function BookingsManagement() {
               pagination={{
                 current: filters.page || 1,
                 pageSize: filters.limit || 10,
-                total: data?.meta?.pagination?.totalItems || 0,
-                totalPages: data?.meta?.pagination?.totalPages || 0,
+                total: data?.meta?.total || 0,
+                totalPages: data?.meta?.totalPages || 0,
               }}
               onPageChange={handlePageChange}
               emptyText="Không có booking nào được tìm thấy"
@@ -735,17 +756,21 @@ export default function BookingsManagement() {
                       <span className="font-medium ml-1 text-gray-900 dark:text-white">
                         {
                           bookingsData.find((booking) => booking.id === selectedBookingId)
-                            ?.bookingCode
+                            ?.booking_code
                         }
                       </span>
                     </div>
                     <div>
                       <span className="text-gray-500 dark:text-gray-400">Khách hàng:</span>
                       <span className="font-medium ml-1 text-gray-900 dark:text-white">
-                        {
-                          bookingsData.find((booking) => booking.id === selectedBookingId)?.booker
-                            .name
-                        }
+                        {(() => {
+                          const booking = bookingsData.find(
+                            (booking) => booking.id === selectedBookingId
+                          );
+                          return booking
+                            ? `${booking.booker.first_name} ${booking.booker.last_name}`
+                            : "";
+                        })()}
                       </span>
                     </div>
                     <div>
