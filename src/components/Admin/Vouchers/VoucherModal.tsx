@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Dialog,
   DialogContent,
@@ -21,13 +22,16 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
+import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { voucherPayloadCreate, voucherResponse } from "@/types/voucher.type";
+import { getPrivateTours } from "@/config/tour/tour.api";
+import { useQuery } from "@tanstack/react-query";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { vi } from "date-fns/locale";
-import { Calendar as CalendarIcon } from "lucide-react";
-import React, { forwardRef, useImperativeHandle } from "react";
+import { Calendar as CalendarIcon, Search, X } from "lucide-react";
+import React, { forwardRef, useImperativeHandle, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -66,6 +70,22 @@ const VoucherModal = forwardRef<VoucherModalRef, VoucherModalProps>(
     const [isActiveState, setIsActiveState] = React.useState(true);
     const [validFromDate, setValidFromDate] = React.useState<Date>();
     const [validToDate, setValidToDate] = React.useState<Date>();
+    const [selectedTourIds, setSelectedTourIds] = React.useState<string[]>([]);
+    const [tourSearchQuery, setTourSearchQuery] = useState("");
+
+    // Fetch tours data
+    const { data: toursData, isLoading: toursLoading } = useQuery({
+      queryKey: ["tours-for-voucher", tourSearchQuery],
+      queryFn: () =>
+        getPrivateTours({
+          query: tourSearchQuery || undefined,
+          limit: 50,
+          status: "published",
+        }),
+      staleTime: 5 * 60 * 1000, // 5 minutes
+    });
+
+    const tours = React.useMemo(() => toursData?.data?.tours || [], [toursData?.data?.tours]);
 
     // Khởi tạo form với react-hook-form và zod
     const {
@@ -101,6 +121,7 @@ const VoucherModal = forwardRef<VoucherModalRef, VoucherModalProps>(
         setIsActiveState(voucher.is_active);
         setValidFromDate(voucher.valid_from ? new Date(voucher.valid_from) : undefined);
         setValidToDate(voucher.valid_to ? new Date(voucher.valid_to) : undefined);
+        setSelectedTourIds(voucher.applicable_tour_ids || []);
         reset({
           code: voucher.code,
           description: voucher.description || "",
@@ -122,6 +143,7 @@ const VoucherModal = forwardRef<VoucherModalRef, VoucherModalProps>(
         setIsActiveState(true);
         setValidFromDate(undefined);
         setValidToDate(undefined);
+        setSelectedTourIds([]);
         reset({
           code: "",
           description: "",
@@ -146,6 +168,7 @@ const VoucherModal = forwardRef<VoucherModalRef, VoucherModalProps>(
       setIsActiveState(voucher.is_active);
       setValidFromDate(voucher.valid_from ? new Date(voucher.valid_from) : undefined);
       setValidToDate(voucher.valid_to ? new Date(voucher.valid_to) : undefined);
+      setSelectedTourIds(voucher.applicable_tour_ids || []);
       reset({
         code: voucher.code + "-copy",
         description: voucher.description || "",
@@ -175,6 +198,7 @@ const VoucherModal = forwardRef<VoucherModalRef, VoucherModalProps>(
           is_active: isActiveState,
           valid_from: validFromDate ? format(validFromDate, "yyyy-MM-dd") : "",
           valid_to: validToDate ? format(validToDate, "yyyy-MM-dd") : "",
+          applicable_tour_ids: selectedTourIds,
         };
 
         if (isDuplicate && editingVoucher) {
@@ -205,8 +229,30 @@ const VoucherModal = forwardRef<VoucherModalRef, VoucherModalProps>(
       setIsActiveState(true);
       setValidFromDate(undefined);
       setValidToDate(undefined);
+      setSelectedTourIds([]);
+      setTourSearchQuery("");
       reset();
     };
+
+    // Handle tour selection
+    const handleTourToggle = React.useCallback((tourId: string) => {
+      setSelectedTourIds((prev) =>
+        prev.includes(tourId) ? prev.filter((id) => id !== tourId) : [...prev, tourId]
+      );
+    }, []);
+
+    const handleSelectAllTours = React.useCallback(() => {
+      const allTourIds = tours.map((tour) => tour.id);
+      setSelectedTourIds(allTourIds);
+    }, [tours]);
+
+    const handleDeselectAllTours = React.useCallback(() => {
+      setSelectedTourIds([]);
+    }, []);
+
+    const removeTourFromSelection = React.useCallback((tourId: string) => {
+      setSelectedTourIds((prev) => prev.filter((id) => id !== tourId));
+    }, []);
 
     return (
       <Dialog open={open} onOpenChange={handleClose}>
@@ -464,6 +510,144 @@ const VoucherModal = forwardRef<VoucherModalRef, VoucherModalProps>(
                       <p className="text-sm text-red-500">{errors.max_uses.message}</p>
                     )}
                   </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Tour Selection */}
+            <Card>
+              <CardContent className="p-4">
+                <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                  Áp dụng cho Tours
+                </h3>
+
+                {/* Selected Tours Display */}
+                {selectedTourIds.length > 0 && (
+                  <div className="mb-4">
+                    <Label className="text-sm font-medium mb-2 block">
+                      Tours đã chọn ({selectedTourIds.length})
+                    </Label>
+                    <div className="flex flex-wrap gap-2 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg max-h-32 overflow-y-auto">
+                      {selectedTourIds.map((tourId) => {
+                        const tour = tours.find((t) => t.id === tourId);
+                        return (
+                          <Badge
+                            key={tourId}
+                            variant="secondary"
+                            className="flex items-center gap-1"
+                          >
+                            <span className="max-w-[200px] truncate">
+                              {tour?.title || `Tour ID: ${tourId}`}
+                            </span>
+                            <X
+                              className="h-3 w-3 cursor-pointer hover:text-red-500"
+                              onClick={() => removeTourFromSelection(tourId)}
+                            />
+                          </Badge>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+
+                {/* Search Tours */}
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2">
+                    <div className="relative flex-1">
+                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                      <Input
+                        placeholder="Tìm kiếm tours..."
+                        value={tourSearchQuery}
+                        onChange={(e) => setTourSearchQuery(e.target.value)}
+                        className="pl-10"
+                      />
+                    </div>
+                    <div className="flex gap-2">
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={handleSelectAllTours}
+                        disabled={tours.length === 0}
+                      >
+                        Chọn tất cả
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={handleDeselectAllTours}
+                        disabled={selectedTourIds.length === 0}
+                      >
+                        Bỏ chọn
+                      </Button>
+                    </div>
+                  </div>
+
+                  {/* Tours List */}
+                  <div className="border rounded-lg">
+                    <div className="h-64 overflow-y-auto">
+                      {toursLoading ? (
+                        <div className="flex items-center justify-center h-32">
+                          <div className="flex items-center gap-2 text-gray-500">
+                            <div className="h-4 w-4 animate-spin rounded-full border-2 border-gray-300 border-t-gray-600" />
+                            Đang tải tours...
+                          </div>
+                        </div>
+                      ) : tours.length === 0 ? (
+                        <div className="flex items-center justify-center h-32 text-gray-500">
+                          {tourSearchQuery ? "Không tìm thấy tour nào" : "Không có tour nào"}
+                        </div>
+                      ) : (
+                        <div className="p-2">
+                          {tours.map((tour) => (
+                            <div
+                              key={tour.id}
+                              className="flex items-start gap-3 p-3 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg"
+                            >
+                              <Checkbox
+                                checked={selectedTourIds.includes(tour.id)}
+                                onCheckedChange={() => handleTourToggle(tour.id)}
+                                className="mt-1"
+                              />
+                              <div
+                                className="flex-1 min-w-0 cursor-pointer"
+                                onClick={() => handleTourToggle(tour.id)}
+                              >
+                                <div className="flex items-center gap-2 mb-1">
+                                  <h4 className="font-medium text-sm truncate">{tour.title}</h4>
+                                  <Badge variant="outline" className="text-xs">
+                                    {tour.product_code}
+                                  </Badge>
+                                </div>
+                                <p className="text-xs text-gray-500 line-clamp-2">
+                                  {tour.card_description || tour.description}
+                                </p>
+                                <div className="flex items-center gap-4 mt-2 text-xs text-gray-400">
+                                  <span>{tour.location}</span>
+                                  <span>
+                                    {tour.tour_days}D{tour.tour_nights}N
+                                  </span>
+                                  <span className="font-medium text-green-600">
+                                    {new Intl.NumberFormat("vi-VN", {
+                                      style: "currency",
+                                      currency: "VND",
+                                    }).format(tour.sale_price)}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Help Text */}
+                  <p className="text-xs text-gray-500">
+                    Để trống nếu voucher áp dụng cho tất cả tours. Chọn tours cụ thể nếu muốn giới
+                    hạn phạm vi sử dụng.
+                  </p>
                 </div>
               </CardContent>
             </Card>

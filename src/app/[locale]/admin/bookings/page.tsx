@@ -146,9 +146,7 @@ export default function BookingsManagement() {
       key: "booking_code",
       title: "Mã booking",
       render: (value: string) => (
-        <div className="font-medium text-blue-600 dark:text-blue-400 transition-colors">
-          {value}
-        </div>
+        <div className="font-medium text-blue-600 transition-colors">{value}</div>
       ),
     },
     {
@@ -161,11 +159,11 @@ export default function BookingsManagement() {
         phone_number: string;
       }) => (
         <div>
-          <p className="font-medium text-gray-900 dark:text-white">
+          <p className="font-medium text-gray-900">
             {value.first_name} {value.last_name}
           </p>
-          <p className="text-sm text-gray-500 dark:text-gray-400">{value.email}</p>
-          <p className="text-sm text-gray-500 dark:text-gray-400">{value.phone_number}</p>
+          <p className="text-sm text-gray-500">{value.email}</p>
+          <p className="text-sm text-gray-500">{value.phone_number}</p>
         </div>
       ),
     },
@@ -174,9 +172,9 @@ export default function BookingsManagement() {
       title: "Tour",
       render: (value: { title: string; product_code: string }, record: { tour_date: string }) => (
         <div>
-          <p className="font-medium text-gray-900 dark:text-white">{value.title}</p>
-          <p className="text-sm text-gray-500 dark:text-gray-400">{value.product_code}</p>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+          <p className="font-medium text-gray-900">{value.title}</p>
+          <p className="text-sm text-gray-500">{value.product_code}</p>
+          <p className="text-sm text-gray-500">
             Ngày tour: {new Date(record.tour_date).toLocaleDateString("vi-VN")}
           </p>
         </div>
@@ -186,14 +184,14 @@ export default function BookingsManagement() {
       key: "number_of_participants",
       title: "Số người",
       render: (value: number) => (
-        <div className="text-center font-medium text-gray-900 dark:text-white">{value}</div>
+        <div className="text-center font-medium text-gray-900">{value}</div>
       ),
     },
     {
       key: "final_price",
       title: "Tổng tiền",
       render: (value: string) => (
-        <div className="font-medium text-gray-900 dark:text-white">{formatCurrency(value)}</div>
+        <div className="font-medium text-gray-900">{formatCurrency(value)}</div>
       ),
     },
     {
@@ -214,9 +212,7 @@ export default function BookingsManagement() {
       key: "created_at",
       title: "Ngày đặt",
       render: (value: string) => (
-        <div className="text-sm text-gray-900 dark:text-white">
-          {new Date(value).toLocaleDateString("vi-VN")}
-        </div>
+        <div className="text-sm text-gray-900">{new Date(value).toLocaleDateString("vi-VN")}</div>
       ),
     },
     {
@@ -225,29 +221,16 @@ export default function BookingsManagement() {
       render: (_: any, record: any) => (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="h-8 w-8 dark:hover:bg-gray-700 dark:text-gray-300"
-            >
+            <Button variant="ghost" size="icon" className="h-8 w-8">
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent
-            align="end"
-            className="w-[200px] dark:bg-gray-800 dark:border-gray-700"
-          >
-            <DropdownMenuItem
-              onClick={() => handleViewBooking(record.id)}
-              className="dark:text-gray-300 dark:hover:bg-gray-700"
-            >
+          <DropdownMenuContent align="end" className="w-[200px]">
+            <DropdownMenuItem onClick={() => handleViewBooking(record.id)}>
               <Eye className="mr-2 h-4 w-4" />
               Xem chi tiết
             </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => handleOpenUpdateStatus(record.id)}
-              className="dark:text-gray-300 dark:hover:bg-gray-700"
-            >
+            <DropdownMenuItem onClick={() => handleOpenUpdateStatus(record.id)}>
               <RefreshCcw className="mr-2 h-4 w-4" />
               Cập nhật trạng thái
             </DropdownMenuItem>
@@ -260,35 +243,15 @@ export default function BookingsManagement() {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "confirmed":
-        return (
-          <Badge className="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 dark:border-green-700/50">
-            {t("confirmed")}
-          </Badge>
-        );
+        return <Badge className="bg-green-100 text-green-800">{t("confirmed")}</Badge>;
       case "pending":
-        return (
-          <Badge className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400 dark:border-yellow-700/50">
-            {t("pending")}
-          </Badge>
-        );
+        return <Badge className="bg-yellow-100 text-yellow-800">{t("pending")}</Badge>;
       case "cancelled":
-        return (
-          <Badge className="bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400 dark:border-red-700/50">
-            {t("cancelled")}
-          </Badge>
-        );
+        return <Badge className="bg-red-100 text-red-800">{t("cancelled")}</Badge>;
       case "completed":
-        return (
-          <Badge className="bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-700/50">
-            {t("completed")}
-          </Badge>
-        );
+        return <Badge className="bg-blue-100 text-blue-800">{t("completed")}</Badge>;
       default:
-        return (
-          <Badge className="bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600">
-            {status}
-          </Badge>
-        );
+        return <Badge className="bg-gray-100 text-gray-800">{status}</Badge>;
     }
   };
 
@@ -296,29 +259,13 @@ export default function BookingsManagement() {
     switch (status) {
       case "paid":
       case "succeeded":
-        return (
-          <Badge className="bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400 dark:border-green-700/50">
-            {t("paid")}
-          </Badge>
-        );
+        return <Badge className="bg-green-100 text-green-800">{t("paid")}</Badge>;
       case "pending":
-        return (
-          <Badge className="bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400 dark:border-yellow-700/50">
-            {t("unpaid")}
-          </Badge>
-        );
+        return <Badge className="bg-yellow-100 text-yellow-800">{t("unpaid")}</Badge>;
       case "refunded":
-        return (
-          <Badge className="bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600">
-            {t("refunded")}
-          </Badge>
-        );
+        return <Badge className="bg-gray-100 text-gray-800">{t("refunded")}</Badge>;
       default:
-        return (
-          <Badge className="bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600">
-            {status}
-          </Badge>
-        );
+        return <Badge className="bg-gray-100 text-gray-800">{status}</Badge>;
     }
   };
 
@@ -358,24 +305,20 @@ export default function BookingsManagement() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+    <div className="min-h-screen bg-gray-50 transition-colors duration-200">
       <div className="space-y-6 p-6">
         {/* Page Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white transition-colors">
-              {t("title")}
-            </h1>
-            <p className="text-gray-600 dark:text-gray-400 mt-1 transition-colors">
-              {t("subtitle")}
-            </p>
+            <h1 className="text-3xl font-bold text-gray-900 transition-colors">{t("title")}</h1>
+            <p className="text-gray-600 mt-1 transition-colors">{t("subtitle")}</p>
           </div>
           <div className="flex items-center space-x-2">
-            <Button variant="outline" className="dark:border-gray-700 dark:hover:bg-gray-800">
+            <Button variant="outline" className="">
               <Download className="mr-2 h-4 w-4" />
               {t("exportExcel")}
             </Button>
-            <Button className="bg-primary hover:bg-primary/90 dark:bg-blue-600 dark:hover:bg-blue-700">
+            <Button className="bg-primary hover:bg-primary/90">
               <Calendar className="mr-2 h-4 w-4" />
               {t("calendar")}
             </Button>
@@ -385,16 +328,13 @@ export default function BookingsManagement() {
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {stats.map((stat, index) => (
-            <Card
-              key={index}
-              className="dark:bg-gray-800 dark:border-gray-700 transition-colors hover:shadow-lg dark:hover:shadow-gray-900/20"
-            >
+            <Card key={index} className="transition-colors hover:shadow-lg">
               <CardContent className="p-6">
                 <div className="text-center">
-                  <p className="text-sm font-medium text-gray-600 dark:text-gray-400 transition-colors">
+                  <p className="text-sm font-medium text-gray-600 transition-colors">
                     {stat.title}
                   </p>
-                  <p className="text-2xl font-bold text-gray-900 dark:text-white mt-2 transition-colors">
+                  <p className="text-2xl font-bold text-gray-900 mt-2 transition-colors">
                     {stat.value}
                   </p>
                 </div>
@@ -404,7 +344,7 @@ export default function BookingsManagement() {
         </div>
 
         {/* Search and Filters */}
-        <Card className="dark:bg-gray-800 dark:border-gray-700 transition-colors">
+        <Card className="transition-colors">
           <div className="p-6 space-y-4">
             {/* Tìm kiếm */}
             <div className="flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between">
@@ -414,7 +354,7 @@ export default function BookingsManagement() {
                   placeholder="Tìm kiếm theo tên khách hàng, tour hoặc mã booking..."
                   value={searchDisplay}
                   onChange={(e) => setSearchDisplay(e.target.value)}
-                  className="pl-10 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 focus:dark:border-blue-500"
+                  className="pl-10"
                   disabled={isLoading}
                 />
               </div>
@@ -426,7 +366,6 @@ export default function BookingsManagement() {
                   onClick={handleReset}
                   disabled={isLoading}
                   title="Xóa bộ lọc"
-                  className="dark:border-gray-600 dark:hover:bg-gray-700 dark:text-gray-300"
                 >
                   <RefreshCcw className="h-4 w-4" />
                 </Button>
@@ -435,8 +374,8 @@ export default function BookingsManagement() {
                   variant={Object.keys(filters).length > 2 ? "default" : "outline"}
                   className={`flex items-center ${
                     Object.keys(filters).length > 2
-                      ? "dark:bg-blue-600 dark:hover:bg-blue-700"
-                      : "dark:border-gray-600 dark:hover:bg-gray-700 dark:text-gray-300"
+                      ? "bg-blue-600 hover:bg-blue-700"
+                      : "border-gray-600 hover:bg-gray-700 text-gray-300"
                   }`}
                   onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
                 >
@@ -448,12 +387,10 @@ export default function BookingsManagement() {
 
             {/* Bộ lọc nâng cao */}
             {showAdvancedFilters && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-gray-200">
                 {/* Trạng thái booking */}
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Trạng thái đặt tour
-                  </label>
+                  <label className="text-sm font-medium text-gray-700">Trạng thái đặt tour</label>
                   <Select
                     value={filters.status || "all"}
                     onValueChange={(value) => {
@@ -468,35 +405,23 @@ export default function BookingsManagement() {
                     }}
                     disabled={isLoading}
                   >
-                    <SelectTrigger className="dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <SelectTrigger className="">
                       <SelectValue placeholder="Tất cả trạng thái" />
                     </SelectTrigger>
-                    <SelectContent className="dark:bg-gray-800 dark:border-gray-700">
+                    <SelectContent className="">
                       <SelectItem value="all" className="dark:text-gray-300 dark:hover:bg-gray-700">
                         Tất cả trạng thái
                       </SelectItem>
-                      <SelectItem
-                        value="pending"
-                        className="dark:text-gray-300 dark:hover:bg-gray-700"
-                      >
+                      <SelectItem value="pending" className="">
                         Chờ xác nhận
                       </SelectItem>
-                      <SelectItem
-                        value="confirmed"
-                        className="dark:text-gray-300 dark:hover:bg-gray-700"
-                      >
+                      <SelectItem value="confirmed" className="">
                         Đã xác nhận
                       </SelectItem>
-                      <SelectItem
-                        value="cancelled"
-                        className="dark:text-gray-300 dark:hover:bg-gray-700"
-                      >
+                      <SelectItem value="cancelled" className="">
                         Đã hủy
                       </SelectItem>
-                      <SelectItem
-                        value="completed"
-                        className="dark:text-gray-300 dark:hover:bg-gray-700"
-                      >
+                      <SelectItem value="completed" className="">
                         Hoàn thành
                       </SelectItem>
                     </SelectContent>
@@ -505,9 +430,7 @@ export default function BookingsManagement() {
 
                 {/* Trạng thái thanh toán */}
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Trạng thái thanh toán
-                  </label>
+                  <label className="text-sm font-medium text-gray-700">Trạng thái thanh toán</label>
                   <Select
                     value={filters.payment_status || "all"}
                     onValueChange={(value) => {
@@ -522,35 +445,23 @@ export default function BookingsManagement() {
                     }}
                     disabled={isLoading}
                   >
-                    <SelectTrigger className="dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <SelectTrigger className="">
                       <SelectValue placeholder="Tất cả trạng thái" />
                     </SelectTrigger>
-                    <SelectContent className="dark:bg-gray-800 dark:border-gray-700">
+                    <SelectContent className="">
                       <SelectItem value="all" className="dark:text-gray-300 dark:hover:bg-gray-700">
                         Tất cả trạng thái
                       </SelectItem>
-                      <SelectItem
-                        value="pending"
-                        className="dark:text-gray-300 dark:hover:bg-gray-700"
-                      >
+                      <SelectItem value="pending" className="">
                         Chưa thanh toán
                       </SelectItem>
-                      <SelectItem
-                        value="succeeded"
-                        className="dark:text-gray-300 dark:hover:bg-gray-700"
-                      >
+                      <SelectItem value="succeeded" className="">
                         Đã thanh toán
                       </SelectItem>
-                      <SelectItem
-                        value="failed"
-                        className="dark:text-gray-300 dark:hover:bg-gray-700"
-                      >
+                      <SelectItem value="failed" className="">
                         Thanh toán thất bại
                       </SelectItem>
-                      <SelectItem
-                        value="refunded"
-                        className="dark:text-gray-300 dark:hover:bg-gray-700"
-                      >
+                      <SelectItem value="refunded" className="">
                         Đã hoàn tiền
                       </SelectItem>
                     </SelectContent>
@@ -559,10 +470,7 @@ export default function BookingsManagement() {
 
                 {/* Ngày từ */}
                 <div className="space-y-2">
-                  <label
-                    htmlFor="date-from"
-                    className="text-sm font-medium text-gray-700 dark:text-gray-300"
-                  >
+                  <label htmlFor="date-from" className="text-sm font-medium text-gray-700">
                     Từ ngày
                   </label>
                   <div className="relative">
@@ -578,17 +486,14 @@ export default function BookingsManagement() {
                         }));
                       }}
                       disabled={isLoading}
-                      className="dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 focus:dark:border-blue-500"
+                      className=""
                     />
                   </div>
                 </div>
 
                 {/* Ngày đến */}
                 <div className="space-y-2">
-                  <label
-                    htmlFor="date-to"
-                    className="text-sm font-medium text-gray-700 dark:text-gray-300"
-                  >
+                  <label htmlFor="date-to" className="text-sm font-medium text-gray-700">
                     Đến ngày
                   </label>
                   <div className="relative">
@@ -604,16 +509,14 @@ export default function BookingsManagement() {
                         }));
                       }}
                       disabled={isLoading}
-                      className="dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 focus:dark:border-blue-500"
+                      className=""
                     />
                   </div>
                 </div>
 
                 {/* Sắp xếp */}
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Sắp xếp theo
-                  </label>
+                  <label className="text-sm font-medium text-gray-700">Sắp xếp theo</label>
                   <Select
                     value={filters.sort_by || "createdAt"}
                     onValueChange={(value) => {
@@ -625,32 +528,20 @@ export default function BookingsManagement() {
                     }}
                     disabled={isLoading}
                   >
-                    <SelectTrigger className="dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <SelectTrigger className="">
                       <SelectValue placeholder="Chọn trường sắp xếp" />
                     </SelectTrigger>
-                    <SelectContent className="dark:bg-gray-800 dark:border-gray-700">
-                      <SelectItem
-                        value="createdAt"
-                        className="dark:text-gray-300 dark:hover:bg-gray-700"
-                      >
+                    <SelectContent className="">
+                      <SelectItem value="createdAt" className="">
                         Ngày đặt
                       </SelectItem>
-                      <SelectItem
-                        value="tourDate"
-                        className="dark:text-gray-300 dark:hover:bg-gray-700"
-                      >
+                      <SelectItem value="tourDate" className="">
                         Ngày tour
                       </SelectItem>
-                      <SelectItem
-                        value="finalPrice"
-                        className="dark:text-gray-300 dark:hover:bg-gray-700"
-                      >
+                      <SelectItem value="finalPrice" className="">
                         Giá trị đơn hàng
                       </SelectItem>
-                      <SelectItem
-                        value="numberOfParticipants"
-                        className="dark:text-gray-300 dark:hover:bg-gray-700"
-                      >
+                      <SelectItem value="numberOfParticipants" className="">
                         Số người tham gia
                       </SelectItem>
                     </SelectContent>
@@ -659,9 +550,7 @@ export default function BookingsManagement() {
 
                 {/* Thứ tự sắp xếp */}
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Thứ tự sắp xếp
-                  </label>
+                  <label className="text-sm font-medium text-gray-700">Thứ tự sắp xếp</label>
                   <Select
                     value={filters.sort_order || "desc"}
                     onValueChange={(value) => {
@@ -673,17 +562,14 @@ export default function BookingsManagement() {
                     }}
                     disabled={isLoading}
                   >
-                    <SelectTrigger className="dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <SelectTrigger className="">
                       <SelectValue placeholder="Chọn thứ tự sắp xếp" />
                     </SelectTrigger>
-                    <SelectContent className="dark:bg-gray-800 dark:border-gray-700">
+                    <SelectContent className="">
                       <SelectItem value="asc" className="dark:text-gray-300 dark:hover:bg-gray-700">
                         Tăng dần
                       </SelectItem>
-                      <SelectItem
-                        value="desc"
-                        className="dark:text-gray-300 dark:hover:bg-gray-700"
-                      >
+                      <SelectItem value="desc" className="">
                         Giảm dần
                       </SelectItem>
                     </SelectContent>
@@ -696,7 +582,7 @@ export default function BookingsManagement() {
 
         {/* Error state */}
         {error && (
-          <Card className="dark:bg-gray-800 dark:border-gray-700">
+          <Card className="">
             <div className="p-6 text-center text-red-600 dark:text-red-400">
               <p>Có lỗi xảy ra khi tải dữ liệu. Vui lòng thử lại.</p>
             </div>
@@ -704,12 +590,12 @@ export default function BookingsManagement() {
         )}
 
         {/* Bookings Table */}
-        <Card className="dark:bg-gray-800 dark:border-gray-700 transition-colors">
+        <Card className="transition-colors">
           <CardHeader>
-            <CardTitle className="text-gray-900 dark:text-white">
+            <CardTitle className="text-gray-900">
               Danh sách Bookings ({bookingsData.length})
             </CardTitle>
-            <CardDescription className="text-gray-600 dark:text-gray-400">
+            <CardDescription className="text-gray-600">
               Tổng quan tất cả các booking trong hệ thống
             </CardDescription>
           </CardHeader>
@@ -726,7 +612,7 @@ export default function BookingsManagement() {
               }}
               onPageChange={handlePageChange}
               emptyText="Không có booking nào được tìm thấy"
-              emptyIcon={<Search className="h-12 w-12 text-gray-400 dark:text-gray-500" />}
+              emptyIcon={<Search className="h-12 w-12 text-gray-400" />}
               rowKey="id"
             />
           </CardContent>

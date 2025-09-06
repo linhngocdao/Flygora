@@ -48,6 +48,7 @@ import { toast } from "sonner";
 
 // Utils
 import { formatCurrency } from "@/utilities/currency";
+import { getErrorMessage } from "@/lib/utils";
 
 const TourManager = () => {
   const locale = useLocale();
@@ -89,7 +90,8 @@ const TourManager = () => {
       setTourToDelete(null);
     },
     onError: (error: any) => {
-      toast.error(error?.response?.data?.message || "Có lỗi xảy ra khi xóa tour");
+      const errorMessage = getErrorMessage(error, "Có lỗi xảy ra khi xóa tour");
+      toast.error(errorMessage);
     },
   });
 
@@ -102,7 +104,8 @@ const TourManager = () => {
       toast.success("Cập nhật trạng thái thành công!");
     },
     onError: (error: any) => {
-      toast.error(error?.response?.data?.message || "Có lỗi xảy ra khi cập nhật trạng thái");
+      const errorMessage = getErrorMessage(error, "Có lỗi xảy ra khi cập nhật trạng thái");
+      toast.error(errorMessage);
     },
   });
 
@@ -152,8 +155,8 @@ const TourManager = () => {
       title: "Thông tin tour",
       render: (value: string, record: Tour) => (
         <div className="space-y-1">
-          <div className="font-semibold text-gray-900 dark:text-white leading-tight">{value}</div>
-          <div className="text-sm text-gray-600 dark:text-gray-400 flex items-center gap-2">
+          <div className="font-semibold text-gray-900 leading-tight">{value}</div>
+          <div className="text-sm text-gray-600 flex items-center gap-2">
             <MapPin className="h-3 w-3" />
             {record.location || "Chưa cập nhật"}
           </div>
@@ -191,9 +194,7 @@ const TourManager = () => {
               {formatCurrency(record.original_price)}
             </div>
           )}
-          <div className="font-semibold text-green-600 dark:text-green-400">
-            {formatCurrency(record.sale_price)}
-          </div>
+          <div className="font-semibold text-green-600">{formatCurrency(record.sale_price)}</div>
           {record.sale_price !== record.original_price && (
             <BadgeComponent variant="destructive" className="text-xs">
               -
@@ -299,10 +300,7 @@ const TourManager = () => {
 
             <DropdownMenuSeparator />
 
-            <DropdownMenuItem
-              onClick={() => handleDelete(record)}
-              className="text-red-600 dark:text-red-400"
-            >
+            <DropdownMenuItem onClick={() => handleDelete(record)} className="text-red-600">
               <Trash2 className="mr-2 h-4 w-4" />
               Xóa tour
             </DropdownMenuItem>
@@ -329,12 +327,12 @@ const TourManager = () => {
         onPageChange={handlePageChange}
         emptyText="Chưa có tour nào được tạo"
         emptyIcon={
-          <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-full">
+          <div className="p-4 bg-gray-50 rounded-full">
             <MapPin className="h-8 w-8 text-gray-400" />
           </div>
         }
         onRow={() => ({
-          className: "cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800",
+          className: "cursor-pointer hover:bg-gray-50",
         })}
       />
 

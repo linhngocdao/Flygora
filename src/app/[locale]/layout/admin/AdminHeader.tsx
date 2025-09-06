@@ -18,6 +18,7 @@ import { Bell, Settings, LogOut, User, Loader2 } from "lucide-react";
 import { useAuthStore } from "@/store/auth.store";
 import { useLogout } from "@/hooks/useLogout";
 import { toast } from "sonner";
+import { getErrorMessage } from "@/lib/utils";
 
 export default function AdminHeader() {
   const t = useTranslations("admin.header");
@@ -39,8 +40,8 @@ export default function AdminHeader() {
           router.replace(`/${locale}/admin/login`);
         },
         onError: (error: any) => {
-          console.error("Lỗi đăng xuất:", error);
-          toast.error("Có lỗi xảy ra khi đăng xuất");
+          const errorMessage = getErrorMessage(error, "Có lỗi xảy ra khi đăng xuất");
+          toast.error(errorMessage);
           const locale = pathname.split("/")[1] || "vi";
           router.replace(`/${locale}/admin/login`);
         },
@@ -49,11 +50,11 @@ export default function AdminHeader() {
   };
 
   return (
-    <header className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 h-16 fixed top-0 left-0 right-0 z-50">
+    <header className="bg-white border-b border-gray-200 h-16 fixed top-0 left-0 right-0 z-50">
       <div className="flex items-center justify-between px-6 h-full">
         {/* Logo */}
         <div className="flex items-center">
-          <h1 className="text-xl font-bold text-gray-900 dark:text-white">GoTravel Admin</h1>
+          <h1 className="text-xl font-bold text-gray-900">GoTravel Admin</h1>
         </div>
 
         {/* Right Side */}

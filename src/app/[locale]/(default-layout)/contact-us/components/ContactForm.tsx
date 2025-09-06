@@ -9,6 +9,7 @@ import ButtonPrimary from "@/components/Clients/ui/buttonPrimary";
 import { useMutation } from "@tanstack/react-query";
 import { SendContact } from "@/config/contact/contact.api";
 import { toast } from "sonner";
+import { getErrorMessage } from "@/lib/utils";
 
 // Định nghĩa schema validation cho form liên hệ
 const contactFormSchema = z.object({
@@ -66,7 +67,8 @@ const ContactForm = () => {
       toast.success(t("form.submitSuccess"));
     },
     onError: (error: any) => {
-      toast.error(error?.message || t("form.submitError"));
+      const errorMessage = getErrorMessage(error, "Gửi phản hồi thất bại");
+      toast.error(errorMessage);
     },
   });
 

@@ -101,12 +101,12 @@ const TablePagination: React.FC<{
   const endItem = Math.min(current * pageSize, total);
 
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-4 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
+    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-6 py-4 border-t border-gray-200 bg-white">
       {/* Results info */}
-      <div className="text-sm text-gray-700 dark:text-gray-300 order-2 sm:order-1">
-        Hiển thị <span className="font-medium text-gray-900 dark:text-white">{startItem}</span> đến{" "}
-        <span className="font-medium text-gray-900 dark:text-white">{endItem}</span> trong tổng số{" "}
-        <span className="font-medium text-gray-900 dark:text-white">{total}</span> kết quả
+      <div className="text-sm text-gray-700 order-2 sm:order-1">
+        Hiển thị <span className="font-medium text-gray-900">{startItem}</span> đến{" "}
+        <span className="font-medium text-gray-900">{endItem}</span> trong tổng số{" "}
+        <span className="font-medium text-gray-900">{total}</span> kết quả
       </div>
 
       {/* Pagination controls */}
@@ -117,7 +117,7 @@ const TablePagination: React.FC<{
           size="sm"
           onClick={() => onPageChange(1)}
           disabled={current === 1}
-          className="flex items-center gap-1 px-2 dark:border-gray-600 dark:hover:bg-gray-700 dark:text-gray-300"
+          className="flex items-center gap-1 px-2"
           title="Trang đầu"
         >
           <ChevronsLeft className="h-4 w-4" />
@@ -129,7 +129,7 @@ const TablePagination: React.FC<{
           size="sm"
           onClick={() => onPageChange(current - 1)}
           disabled={current === 1}
-          className="flex items-center gap-1 px-3 dark:border-gray-600 dark:hover:bg-gray-700 dark:text-gray-300"
+          className="flex items-center gap-1 px-3"
         >
           <ChevronLeft className="h-4 w-4" />
           <span className="hidden sm:inline">Trước</span>
@@ -140,10 +140,7 @@ const TablePagination: React.FC<{
           {pageNumbers.map((pageNumber, index) => {
             if (pageNumber === "...") {
               return (
-                <span
-                  key={`ellipsis-${index}`}
-                  className="px-3 py-2 text-gray-500 dark:text-gray-400"
-                >
+                <span key={`ellipsis-${index}`} className="px-3 py-2 text-gray-500">
                   ...
                 </span>
               );
@@ -161,8 +158,8 @@ const TablePagination: React.FC<{
                   min-w-[32px] h-8 px-2
                   ${
                     isCurrentPage
-                      ? "bg-blue-600 hover:bg-blue-700 text-white dark:bg-blue-600 dark:hover:bg-blue-700"
-                      : "hover:bg-gray-50 hover:text-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 dark:text-gray-300"
+                      ? "bg-blue-600 hover:bg-blue-700 text-white"
+                      : "hover:bg-gray-50 hover:text-gray-800"
                   }
                 `}
               >
@@ -178,7 +175,7 @@ const TablePagination: React.FC<{
           size="sm"
           onClick={() => onPageChange(current + 1)}
           disabled={current === totalPages}
-          className="flex items-center gap-1 px-3 dark:border-gray-600 dark:hover:bg-gray-700 dark:text-gray-300"
+          className="flex items-center gap-1 px-3"
         >
           <span className="hidden sm:inline">Sau</span>
           <ChevronRight className="h-4 w-4" />
@@ -190,7 +187,7 @@ const TablePagination: React.FC<{
           size="sm"
           onClick={() => onPageChange(totalPages)}
           disabled={current === totalPages}
-          className="flex items-center gap-1 px-2 dark:border-gray-600 dark:hover:bg-gray-700 dark:text-gray-300"
+          className="flex items-center gap-1 px-2"
           title="Trang cuối"
         >
           <ChevronsRight className="h-4 w-4" />
@@ -218,12 +215,12 @@ const TableSkeleton: React.FC<{
   };
 
   return (
-    <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
+    <tbody className="bg-white divide-y divide-gray-200">
       {[...Array(rows)].map((_, rowIndex) => (
         <tr key={rowIndex} className="animate-pulse">
           {columns.map((column, colIndex) => (
             <td key={colIndex} className={`${getPadding()} whitespace-nowrap`}>
-              <Skeleton className="h-4 w-full bg-gray-200 dark:bg-gray-700" />
+              <Skeleton className="h-4 w-full bg-gray-200" />
             </td>
           ))}
         </tr>
@@ -239,14 +236,12 @@ const EmptyState: React.FC<{
   colSpan: number;
 }> = ({ emptyText, emptyIcon, colSpan }) => (
   <tr>
-    <td colSpan={colSpan} className="text-center py-16 bg-white dark:bg-gray-900">
+    <td colSpan={colSpan} className="text-center py-16 bg-white">
       <div className="flex flex-col items-center justify-center space-y-4">
-        {emptyIcon && (
-          <div className="flex justify-center text-gray-400 dark:text-gray-600">{emptyIcon}</div>
-        )}
+        {emptyIcon && <div className="flex justify-center text-gray-400">{emptyIcon}</div>}
         <div className="text-center">
-          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-1">{emptyText}</h3>
-          <p className="text-sm text-gray-500 dark:text-gray-400">Không có dữ liệu để hiển thị</p>
+          <h3 className="text-lg font-medium text-gray-900 mb-1">{emptyText}</h3>
+          <p className="text-sm text-gray-500">Không có dữ liệu để hiển thị</p>
         </div>
       </div>
     </td>
@@ -324,9 +319,9 @@ const TableFlygora = <T,>({
 
   const cardClassName = `
     ${className}
-    ${bordered ? "border border-gray-200 dark:border-gray-700" : ""}
-    bg-white dark:bg-gray-900
-    shadow-sm dark:shadow-gray-900/20
+    ${bordered ? "border border-gray-200" : ""}
+    bg-white
+    shadow-sm
     transition-colors duration-200
   `.trim();
 
@@ -341,9 +336,9 @@ const TableFlygora = <T,>({
         <table className={tableClassName}>
           <thead
             className={`
-            bg-gray-50 dark:bg-gray-800
+            bg-gray-50
             ${sticky ? "sticky top-0 z-10" : ""}
-            border-b border-gray-200 dark:border-gray-700
+            border-b border-gray-200
           `}
           >
             <tr>
@@ -352,13 +347,13 @@ const TableFlygora = <T,>({
                   key={index}
                   className={`
                     ${getHeaderPadding()}
-                    text-xs font-semibold text-gray-600 dark:text-gray-300
+                    text-xs font-semibold text-gray-600
                     uppercase tracking-wider
                     ${getColumnAlign(column.align)}
                     ${column.className || ""}
-                    bg-gray-50 dark:bg-gray-800
-                    border-b border-gray-200 dark:border-gray-700
-                    ${bordered ? "border-r border-gray-200 dark:border-gray-700 last:border-r-0" : ""}
+                    bg-gray-50
+                    border-b border-gray-200
+                    ${bordered ? "border-r border-gray-200 last:border-r-0" : ""}
                   `}
                   style={{ width: column.width }}
                 >
@@ -369,13 +364,13 @@ const TableFlygora = <T,>({
                         <ChevronLeft
                           className={`
                           h-3 w-3 rotate-90
-                          ${column.sortOrder === "asc" ? "text-blue-600 dark:text-blue-400" : "text-gray-400"}
+                          ${column.sortOrder === "asc" ? "text-blue-600" : "text-gray-400"}
                         `}
                         />
                         <ChevronLeft
                           className={`
                           h-3 w-3 -rotate-90 -mt-1
-                          ${column.sortOrder === "desc" ? "text-blue-600 dark:text-blue-400" : "text-gray-400"}
+                          ${column.sortOrder === "desc" ? "text-blue-600" : "text-gray-400"}
                         `}
                         />
                       </div>
@@ -389,7 +384,7 @@ const TableFlygora = <T,>({
           {loading ? (
             <TableSkeleton columns={columns} rows={skeletonRows} size={size} />
           ) : (
-            <tbody className="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
+            <tbody className="bg-white divide-y divide-gray-200">
               {data.length === 0 ? (
                 <EmptyState emptyText={emptyText} emptyIcon={emptyIcon} colSpan={columns.length} />
               ) : (
@@ -399,11 +394,11 @@ const TableFlygora = <T,>({
                     <tr
                       key={getRowKey(record, index)}
                       className={`
-                        hover:bg-gray-50 dark:hover:bg-gray-800/50
+                        hover:bg-gray-50
                         transition-colors duration-150
                         ${rowProps.onClick ? "cursor-pointer" : ""}
                         ${rowProps.className || ""}
-                        ${index % 2 === 0 ? "bg-white dark:bg-gray-900" : "bg-gray-50/30 dark:bg-gray-800/30"}
+                        ${index % 2 === 0 ? "bg-white" : "bg-gray-50/30"}
                       `}
                       onClick={rowProps.onClick}
                     >
@@ -414,8 +409,8 @@ const TableFlygora = <T,>({
                             ${getPadding()}
                             ${getColumnAlign(column.align)}
                             ${column.className || ""}
-                            text-gray-900 dark:text-gray-100
-                            ${bordered ? "border-r border-gray-200 dark:border-gray-700 last:border-r-0" : ""}
+                            text-gray-900
+                            ${bordered ? "border-r border-gray-200last:border-r-0" : ""}
                             ${size === "small" ? "text-sm" : size === "large" ? "text-base" : "text-sm"}
                           `}
                         >

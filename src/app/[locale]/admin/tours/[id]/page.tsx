@@ -69,15 +69,11 @@ const TourDetailPage = () => {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen space-y-4 bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900">
+      <div className="flex flex-col items-center justify-center min-h-screen space-y-4 bg-gradient-to-br from-gray-50 to-blue-50">
         <div className="animate-spin rounded-full h-16 w-16 border-4 border-blue-200 border-t-blue-600 shadow-lg"></div>
-        <div className="text-center bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-            Đang tải thông tin tour...
-          </h3>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-            Vui lòng chờ trong giây lát
-          </p>
+        <div className="text-center bg-white p-6 rounded-xl shadow-sm">
+          <h3 className="text-lg font-semibold text-gray-900">Đang tải thông tin tour...</h3>
+          <p className="text-sm text-gray-500 mt-1">Vui lòng chờ trong giây lát</p>
         </div>
       </div>
     );
@@ -85,15 +81,11 @@ const TourDetailPage = () => {
 
   if (error || !tour) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen space-y-6 bg-gradient-to-br from-red-50 to-orange-50 dark:from-red-900 dark:to-orange-900">
-        <div className="text-center bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg border border-red-200 dark:border-red-700">
+      <div className="flex flex-col items-center justify-center min-h-screen space-y-6 bg-gradient-to-br from-red-50 to-orange-50">
+        <div className="text-center bg-white p-8 rounded-xl shadow-lg border border-red-200">
           <div className="text-6xl mb-4">😞</div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-            Tour không tồn tại
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400 mb-6">
-            Không tìm thấy tour với ID: {tourId}
-          </p>
+          <h1 className="text-2xl font-bold text-gray-900 ">Tour không tồn tại</h1>
+          <p className="text-gray-600 mb-6">Không tìm thấy tour với ID: {tourId}</p>
           <Link href={`/${locale}/admin/tours`}>
             <Button className="shadow-md hover:shadow-lg transition-shadow">
               <ArrowLeft className="mr-2 h-4 w-4" />
@@ -106,7 +98,7 @@ const TourDetailPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
       <div className="container mx-auto px-4 py-8 space-y-8">
         {/* Header */}
         <div className="flex items-center justify-between">
@@ -118,10 +110,8 @@ const TourDetailPage = () => {
               </Button>
             </Link>
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Chi tiết tour</h1>
-              <p className="text-gray-600 dark:text-gray-400 mt-1">
-                Xem thông tin chi tiết và quản lý tour
-              </p>
+              <h1 className="text-3xl font-bold text-gray-900">Chi tiết tour</h1>
+              <p className="text-gray-600 mt-1">Xem thông tin chi tiết và quản lý tour</p>
             </div>
           </div>
           <div className="flex gap-2">
@@ -154,9 +144,7 @@ const TourDetailPage = () => {
               <div className="flex-1 space-y-4">
                 <div>
                   <div className="flex items-center gap-2 mb-2">
-                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                      {tour.title}
-                    </h2>
+                    <h2 className="text-2xl font-bold text-gray-900">{tour.title}</h2>
                     <Badge
                       variant={tour.meta_data.status === "published" ? "default" : "secondary"}
                     >
@@ -170,9 +158,7 @@ const TourDetailPage = () => {
                     )}
                     {tour.meta_data.is_top && <Badge variant="outline">TOP</Badge>}
                   </div>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm font-mono">
-                    #{tour.product_code}
-                  </p>
+                  <p className="text-gray-600 text-sm font-mono">#{tour.product_code}</p>
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -201,7 +187,7 @@ const TourDetailPage = () => {
                   </div>
                 </div>
 
-                <p className="text-gray-700 dark:text-gray-300 line-clamp-3">
+                <p className="text-gray-700 line-clamp-3">
                   {tour.card_description || tour.description}
                 </p>
               </div>
@@ -337,7 +323,7 @@ const TourDetailPage = () => {
                 <CardTitle>Mô tả tour</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="prose max-w-none dark:prose-invert">
+                <div className="prose max-w-none">
                   <p>{tour.description}</p>
                 </div>
               </CardContent>
@@ -459,12 +445,8 @@ const TourDetailPage = () => {
                         <div className="flex items-start gap-3">
                           <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
                           <div>
-                            <h4 className="font-semibold text-gray-900 dark:text-white">
-                              {item.title}
-                            </h4>
-                            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                              {item.description}
-                            </p>
+                            <h4 className="font-semibold text-gray-900">{item.title}</h4>
+                            <p className="text-sm text-gray-600 mt-1">{item.description}</p>
                           </div>
                         </div>
                       </CardContent>
@@ -493,9 +475,7 @@ const TourDetailPage = () => {
                         <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                           <span className="text-2xl">{getIconByName(item.icon)}</span>
                         </div>
-                        <h4 className="font-semibold text-gray-900 dark:text-white">
-                          {item.title}
-                        </h4>
+                        <h4 className="font-semibold text-gray-900">{item.title}</h4>
                       </CardContent>
                     </Card>
                   ))}

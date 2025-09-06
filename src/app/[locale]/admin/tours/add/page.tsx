@@ -12,6 +12,7 @@ import Link from "next/link";
 import { toast } from "sonner";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createTour } from "@/config/tour/tour.api";
+import { getErrorMessage } from "@/lib/utils";
 
 const CreateTourPage = () => {
   const locale = useLocale();
@@ -36,7 +37,8 @@ const CreateTourPage = () => {
       router.push(`/${locale}/admin/tours`);
     },
     onError: (error: any) => {
-      console.log(error.response.data.errors);
+      const errorMessage = getErrorMessage(error, "Thêm tour thất bại");
+      toast.error(errorMessage);
     },
   });
 
@@ -85,8 +87,8 @@ const CreateTourPage = () => {
             <ChevronLeft size="29" />
           </Link>
           <div>
-            <span className="text-2xl font-bold text-gray-900 dark:text-white">Tạo mới tour</span>
-            <p className="text-gray-600 dark:text-gray-400 mt-1">Điền thông tin để tạo tour mới</p>
+            <span className="text-2xl font-bold text-gray-900">Tạo mới tour</span>
+            <p className="text-gray-600 mt-1">Điền thông tin để tạo tour mới</p>
           </div>
         </div>
 

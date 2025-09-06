@@ -34,6 +34,7 @@ import { CategoryModalRef } from "@/components/Admin/Categories/CategoryModal";
 import { CategoryModal } from "@/components/Admin/Categories";
 import { ConfirmDialog } from "@/components/Admin/Categories/ConfirmDialog";
 import { useDebounce } from "@/hooks/useDebounce";
+import { getErrorMessage } from "@/lib/utils";
 
 const CategoryManager = () => {
   const queryClient = useQueryClient();
@@ -80,7 +81,8 @@ const CategoryManager = () => {
       toast.success("Thêm danh mục thành công");
     },
     onError: (error: any) => {
-      toast.error(error?.message || "Thêm danh mục thất bại");
+      const errorMessage = getErrorMessage(error, "Thêm danh mục thất bại");
+      toast.error(errorMessage);
     },
   });
 
@@ -92,7 +94,8 @@ const CategoryManager = () => {
       toast.success("Cập nhật danh mục thành công");
     },
     onError: (error: any) => {
-      toast.error(error?.message || "Cập nhật danh mục thất bại");
+      const errorMessage = getErrorMessage(error, "Cập nhật danh mục thất bại");
+      toast.error(errorMessage);
     },
   });
 
@@ -104,7 +107,8 @@ const CategoryManager = () => {
       toast.success("Cập nhật trạng thái thành công");
     },
     onError: (error: any) => {
-      toast.error(error?.message || "Cập nhật trạng thái thất bại");
+      const errorMessage = getErrorMessage(error, "Cập nhật trạng thái thất bại");
+      toast.error(errorMessage);
     },
   });
 
@@ -115,7 +119,8 @@ const CategoryManager = () => {
       toast.success("Xóa danh mục thành công");
     },
     onError: (error: any) => {
-      toast.error(error?.response?.data?.message);
+      const errorMessage = getErrorMessage(error, "Xóa danh mục thất bại");
+      toast.error(errorMessage);
     },
   });
 
@@ -203,7 +208,7 @@ const CategoryManager = () => {
           <div className="h-8 w-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white text-sm font-semibold">
             {value.charAt(0).toUpperCase()}
           </div>
-          <span className="font-medium text-gray-900 dark:text-white">{value}</span>
+          <span className="font-medium text-gray-900">{value}</span>
         </div>
       ),
     },
@@ -212,9 +217,7 @@ const CategoryManager = () => {
       title: "Mô tả",
       render: (value: string) => (
         <div className="max-w-xs">
-          <span className="text-sm text-gray-700 dark:text-gray-300 line-clamp-2">
-            {value || "Không có mô tả"}
-          </span>
+          <span className="text-sm text-gray-700 line-clamp-2">{value || "Không có mô tả"}</span>
         </div>
       ),
     },
@@ -226,8 +229,8 @@ const CategoryManager = () => {
           variant={value === "active" ? "default" : "secondary"}
           className={
             value === "active"
-              ? "bg-green-100 text-green-800 hover:bg-green-200 dark:bg-green-900 dark:text-green-300"
-              : "bg-yellow-100 text-yellow-800 hover:bg-yellow-200 dark:bg-yellow-900 dark:text-yellow-300"
+              ? "bg-green-100 text-green-800 hover:bg-green-200"
+              : "bg-yellow-100 text-yellow-800 hover:bg-yellow-200"
           }
         >
           {value === "active" ? "Hoạt động" : "Vô hiệu hóa"}
@@ -238,7 +241,7 @@ const CategoryManager = () => {
       key: "created_at",
       title: "Ngày tạo",
       render: (value: string) => (
-        <span className="text-sm text-gray-500 dark:text-gray-400">
+        <span className="text-sm text-gray-500">
           {value
             ? new Date(value).toLocaleDateString("vi-VN", {
                 year: "numeric",
@@ -272,7 +275,7 @@ const CategoryManager = () => {
               {record.status === "active" ? "Vô hiệu hóa" : "Kích hoạt"}
             </DropdownMenuItem>
             <DropdownMenuItem
-              className="text-red-600 focus:text-red-600 focus:bg-red-50 dark:focus:bg-red-950"
+              className="text-red-600 focus:text-red-600 focus:bg-red-50"
               onClick={() => handleDelete(record)}
             >
               <Trash2 className="mr-2 h-4 w-4" />
@@ -306,8 +309,8 @@ const CategoryManager = () => {
       {/* Header */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Quản lý danh mục</h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-2">
+          <h1 className="text-3xl font-bold text-gray-900">Quản lý danh mục</h1>
+          <p className="text-gray-600 mt-2">
             Quản lý các danh mục tour trong hệ thống ({data?.pagination?.total || 0} danh mục)
           </p>
         </div>

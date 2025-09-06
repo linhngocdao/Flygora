@@ -36,7 +36,7 @@ const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>
-        <div className="mb-4 text-sm text-gray-700 dark:text-gray-300">{description}</div>
+        <div className="mb-4 text-sm text-gray-700 ">{description}</div>
         <DialogFooter>
           <Button variant={variant} onClick={onConfirm}>
             {confirmText}

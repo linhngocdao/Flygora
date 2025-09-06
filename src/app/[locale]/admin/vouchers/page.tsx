@@ -32,6 +32,7 @@ import {
   updateVoucherStatus,
 } from "@/config/voucher/voucher.api";
 import { useDebounce } from "@/hooks/useDebounce";
+import { getErrorMessage } from "@/lib/utils";
 import {
   filterVoucher,
   StatisticalVoucher,
@@ -96,7 +97,8 @@ const VoucherManager = () => {
       toast.success("Thêm voucher thành công");
     },
     onError: (error: any) => {
-      toast.error(error?.message || "Thêm voucher thất bại");
+      const errorMessage = getErrorMessage(error, "Thêm voucher thất bại");
+      toast.error(errorMessage);
     },
   });
 
@@ -109,7 +111,8 @@ const VoucherManager = () => {
       toast.success("Cập nhật voucher thành công");
     },
     onError: (error: any) => {
-      toast.error(error?.message || "Cập nhật voucher thất bại");
+      const errorMessage = getErrorMessage(error, "Cập nhật voucher thất bại");
+      toast.error(errorMessage);
     },
   });
 
@@ -122,7 +125,8 @@ const VoucherManager = () => {
       toast.success("Cập nhật trạng thái thành công");
     },
     onError: (error: any) => {
-      toast.error(error?.message || "Cập nhật trạng thái thất bại");
+      const errorMessage = getErrorMessage(error, "Cập nhật trạng thái thất bại");
+      toast.error(errorMessage);
     },
   });
 
@@ -134,7 +138,8 @@ const VoucherManager = () => {
       toast.success("Xóa voucher thành công");
     },
     onError: (error: any) => {
-      toast.error(error?.response?.data?.message);
+      const errorMessage = getErrorMessage(error, "Xóa voucher thất bại");
+      toast.error(errorMessage);
     },
   });
 
@@ -152,7 +157,9 @@ const VoucherManager = () => {
       toast.success("Tạo bản sao voucher thành công");
     },
     onError: (error: any) => {
-      toast.error(error?.message || "Tạo bản sao voucher thất bại");
+      console.log("Duplicate voucher error:", error);
+      const errorMessage = getErrorMessage(error, "Tạo bản sao voucher thất bại");
+      toast.error(errorMessage);
     },
   });
 
@@ -270,17 +277,13 @@ const VoucherManager = () => {
     {
       key: "code",
       title: "Mã voucher",
-      render: (value: string) => (
-        <span className="font-semibold text-blue-600 dark:text-blue-400">{value}</span>
-      ),
+      render: (value: string) => <span className="font-semibold text-blue-600">{value}</span>,
     },
     {
       key: "description",
       title: "Mô tả",
       render: (value: string) => (
-        <span className="text-sm text-gray-700 dark:text-gray-300 line-clamp-2">
-          {value || "Không có mô tả"}
-        </span>
+        <span className="text-sm text-gray-700 line-clamp-2">{value || "Không có mô tả"}</span>
       ),
     },
     {
@@ -301,7 +304,7 @@ const VoucherManager = () => {
       key: "valid_from",
       title: "Hiệu lực từ",
       render: (value: string) => (
-        <span className="text-sm text-gray-500 dark:text-gray-400">
+        <span className="text-sm text-gray-500 ">
           {value ? new Date(value).toLocaleDateString("vi-VN") : "-"}
         </span>
       ),
@@ -310,7 +313,7 @@ const VoucherManager = () => {
       key: "valid_to",
       title: "Hiệu lực đến",
       render: (value: string) => (
-        <span className="text-sm text-gray-500 dark:text-gray-400">
+        <span className="text-sm text-gray-500 ">
           {value ? new Date(value).toLocaleDateString("vi-VN") : "-"}
         </span>
       ),
@@ -323,8 +326,8 @@ const VoucherManager = () => {
           variant={value ? "default" : "secondary"}
           className={
             value
-              ? "bg-green-100 text-green-800 hover:bg-green-200 dark:bg-green-900 dark:text-green-300"
-              : "bg-yellow-100 text-yellow-800 hover:bg-yellow-200 dark:bg-yellow-900 dark:text-yellow-300"
+              ? "bg-green-100 text-green-800 hover:bg-green-200 "
+              : "bg-yellow-100 text-yellow-800 hover:bg-yellow-200 "
           }
         >
           {value ? "Hoạt động" : "Vô hiệu hóa"}
@@ -381,8 +384,8 @@ const VoucherManager = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Quản lý voucher</h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-2">
+          <h1 className="text-3xl font-bold text-gray-900 ">Quản lý voucher</h1>
+          <p className="text-gray-600 mt-2">
             Quản lý các voucher khuyến mãi trong hệ thống ({data?.pagination?.total_items} voucher)
           </p>
         </div>
@@ -396,10 +399,8 @@ const VoucherManager = () => {
           <Card>
             <CardContent className="p-6">
               <div className="text-center">
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                  Tổng số voucher
-                </p>
-                <p className="text-2xl font-bold text-blue-600 dark:text-white mt-2">
+                <p className="text-sm font-medium text-gray-600 ">Tổng số voucher</p>
+                <p className="text-2xl font-bold text-blue-600 mt-2">
                   {statistics?.data?.total_vouchers}
                 </p>
               </div>
@@ -408,10 +409,8 @@ const VoucherManager = () => {
           <Card>
             <CardContent className="p-6">
               <div className="text-center">
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                  Voucher hoạt động
-                </p>
-                <p className="text-2xl font-bold text-green-600 dark:text-white mt-2">
+                <p className="text-sm font-medium text-gray-600 ">Voucher hoạt động</p>
+                <p className="text-2xl font-bold text-green-600 mt-2">
                   {statistics?.data?.active_vouchers}
                 </p>
               </div>
@@ -420,10 +419,8 @@ const VoucherManager = () => {
           <Card>
             <CardContent className="p-6">
               <div className="text-center">
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                  Voucher hết hạn
-                </p>
-                <p className="text-2xl font-bold text-red-600 dark:text-white mt-2">
+                <p className="text-sm font-medium text-gray-600 ">Voucher hết hạn</p>
+                <p className="text-2xl font-bold text-red-600 mt-2">
                   {" "}
                   {statistics?.data?.expired_vouchers}
                 </p>
@@ -433,10 +430,8 @@ const VoucherManager = () => {
           <Card>
             <CardContent className="p-6">
               <div className="text-center">
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                  Voucher sử dụng nhiều nhất
-                </p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white mt-2">
+                <p className="text-sm font-medium text-gray-600 ">Voucher sử dụng nhiều nhất</p>
+                <p className="text-2xl font-bold text-gray-900 mt-2">
                   {statistics?.data?.most_used_voucher?.code} (
                   {statistics?.data?.most_used_voucher?.uses_count})
                 </p>

@@ -33,6 +33,7 @@ import {
   changePasswordUserApi,
   deleteUser,
 } from "@/config/user/user.api";
+import { getErrorMessage } from "@/lib/utils";
 
 const UserDetailPage = () => {
   const t = useTranslations("admin.users");
@@ -84,9 +85,11 @@ const UserDetailPage = () => {
       toast.success("Trạng thái người dùng đã được cập nhật thành công!");
     },
     onError: (error: any) => {
-      toast.error(
-        error?.response?.data?.message || "Đã xảy ra lỗi khi thay đổi trạng thái người dùng."
+      const errorMessage = getErrorMessage(
+        error,
+        "Đã xảy ra lỗi khi thay đổi trạng thái người dùng."
       );
+      toast.error(errorMessage);
     },
   });
 
@@ -121,7 +124,8 @@ const UserDetailPage = () => {
       setIsEditModalOpen(false);
     },
     onError: (error: any) => {
-      toast.error(error?.response?.data?.message || "Đã xảy ra lỗi khi cập nhật người dùng.");
+      const errorMessage = getErrorMessage(error, "Đã xảy ra lỗi khi cập nhật người dùng.");
+      toast.error(errorMessage);
     },
   });
 
@@ -151,7 +155,8 @@ const UserDetailPage = () => {
       setIsPasswordModalOpen(false);
     },
     onError: (error: any) => {
-      toast.error(error?.response?.data?.message || "Đã xảy ra lỗi khi đổi mật khẩu.");
+      const errorMessage = getErrorMessage(error, "Đã xảy ra lỗi khi đổi mật khẩu.");
+      toast.error(errorMessage);
     },
   });
 
@@ -170,7 +175,8 @@ const UserDetailPage = () => {
       router.back();
     },
     onError: (error: any) => {
-      toast.error(error?.response?.data?.message || "Đã xảy ra lỗi khi xóa người dùng.");
+      const errorMessage = getErrorMessage(error, "Đã xảy ra lỗi khi xóa người dùng.");
+      toast.error(errorMessage);
     },
   });
 
@@ -228,10 +234,8 @@ const UserDetailPage = () => {
   if (error || !user) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px]">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-          Không tìm thấy người dùng
-        </h2>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">Không tìm thấy người dùng</h2>
+        <p className="text-gray-600 mb-4">
           {error?.message || "Người dùng này không tồn tại hoặc đã bị xóa."}
         </p>
         <div className="flex gap-3">
@@ -307,12 +311,8 @@ const UserDetailPage = () => {
             <ArrowLeft className="h-4 w-4" />
           </Button>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-              Chi tiết người dùng
-            </h1>
-            <p className="text-gray-600 dark:text-gray-400">
-              Thông tin chi tiết và hoạt động của người dùng
-            </p>
+            <h1 className="text-3xl font-bold text-gray-900 ">Chi tiết người dùng</h1>
+            <p className="text-gray-600 ">Thông tin chi tiết và hoạt động của người dùng</p>
           </div>
         </div>
 
@@ -370,9 +370,7 @@ const UserDetailPage = () => {
         {/* Thông tin cơ bản */}
         <div className="lg:col-span-2 space-y-6">
           <Card className="p-6">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
-              Thông tin cơ bản
-            </h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-6">Thông tin cơ bản</h2>
 
             <div className="flex items-start gap-6 mb-6">
               <Avatar className="h-20 w-20">
@@ -382,9 +380,7 @@ const UserDetailPage = () => {
               </Avatar>
 
               <div className="flex-1">
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                  {user.name}
-                </h3>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">{user.name}</h3>
                 <div className="flex flex-wrap gap-3 mb-4">
                   <Badge variant="secondary" className={getRoleBadge(user.role).color}>
                     <Shield className="h-3 w-3 mr-1" />
@@ -396,20 +392,20 @@ const UserDetailPage = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
+                  <div className="flex items-center gap-2 text-gray-600 ">
                     <Mail className="h-4 w-4" />
                     <span>{user.email}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
+                  <div className="flex items-center gap-2 text-gray-600 ">
                     <Phone className="h-4 w-4" />
                     <span>đang cập nhật</span>
                   </div>
-                  <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
+                  <div className="flex items-center gap-2 text-gray-600 ">
                     <Calendar className="h-4 w-4" />
                     {/* {new Date(user.birthday).toLocaleDateString("vi-VN")} */}
                     <span>Sinh ngày: đang cập nhật</span>
                   </div>
-                  <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
+                  <div className="flex items-center gap-2 text-gray-600 ">
                     <MapPin className="h-4 w-4" />
                     <span>đang cập nhật</span>
                   </div>
@@ -418,24 +414,22 @@ const UserDetailPage = () => {
             </div>
 
             <div className="border-t pt-6">
-              <h4 className="font-semibold text-gray-900 dark:text-white mb-3">
-                Thông tin hệ thống
-              </h4>
+              <h4 className="font-semibold text-gray-900 mb-3">Thông tin hệ thống</h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                 <div>
-                  <span className="text-gray-500 dark:text-gray-400">ID:</span>
+                  <span className="text-gray-500 ">ID:</span>
                   <span className="ml-2 font-mono">#{user.id}</span>
                 </div>
                 <div>
-                  <span className="text-gray-500 dark:text-gray-400">Ngày tham gia:</span>
+                  <span className="text-gray-500 ">Ngày tham gia:</span>
                   <span className="ml-2">{formatDate(user.created_at)}</span>
                 </div>
                 <div>
-                  <span className="text-gray-500 dark:text-gray-400">Cập nhật lần cuối:</span>
+                  <span className="text-gray-500 ">Cập nhật lần cuối:</span>
                   <span className="ml-2">{formatDate(user.updated_at)}</span>
                 </div>
                 <div>
-                  <span className="text-gray-500 dark:text-gray-400">Đăng nhập lần cuối:</span>
+                  <span className="text-gray-500 ">Đăng nhập lần cuối:</span>
                   <span className="ml-2">đang cập nhật</span>
                 </div>
               </div>
@@ -444,26 +438,22 @@ const UserDetailPage = () => {
 
           {/* Lịch sử đăng nhập */}
           <Card className="p-6">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
-              Lịch sử đăng nhập gần đây
-            </h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-6">Lịch sử đăng nhập gần đây</h2>
             <div className="space-y-4">
               {/* {user.loginHistory.map((login, index) => ( */}
               <div
                 // key={index}
-                className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-800 rounded-lg"
+                className="flex items-center justify-between p-4 bg-gray-50 rounded-lg"
               >
                 <div>
-                  <p className="font-medium text-gray-900 dark:text-white">
-                    lúc 23:45 14 tháng 1, 2024
-                  </p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Chrome/Windows</p>
+                  <p className="font-medium text-gray-900 ">lúc 23:45 14 tháng 1, 2024</p>
+                  <p className="text-sm text-gray-600 ">Chrome/Windows</p>
                 </div>
-                <div className="text-sm text-gray-500 dark:text-gray-400">IP: 192.168.1.3</div>
+                <div className="text-sm text-gray-500 ">IP: 192.168.1.3</div>
               </div>
               {/* ))} */}
               <div className="text-center py-8">
-                <p className="text-gray-500 dark:text-gray-400">đang cập nhật</p>
+                <p className="text-gray-500 ">đang cập nhật</p>
               </div>
             </div>
           </Card>
@@ -472,14 +462,12 @@ const UserDetailPage = () => {
         {/* Sidebar thống kê */}
         <div className="space-y-6">
           <Card className="p-6">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
-              Thống kê hoạt động
-            </h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-6">Thống kê hoạt động</h2>
 
             <div className="space-y-6">
               <div className="text-center">
                 <p className="text-3xl font-bold text-blue-600 mb-1">Đang cập nhật</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Tổng số booking</p>
+                <p className="text-sm text-gray-600 ">Tổng số booking</p>
               </div>
 
               <div className="text-center">
@@ -487,7 +475,7 @@ const UserDetailPage = () => {
                   {/* {formatCurrency(user.totalRevenue)} */}
                   đang cập nhật
                 </p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Tổng doanh thu</p>
+                <p className="text-sm text-gray-600 ">Tổng doanh thu</p>
               </div>
 
               <div className="text-center">
@@ -496,15 +484,13 @@ const UserDetailPage = () => {
                     (Date.now() - new Date(user.created_at).getTime()) / (1000 * 60 * 60 * 24)
                   )}
                 </p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Ngày hoạt động</p>
+                <p className="text-sm text-gray-600 ">Ngày hoạt động</p>
               </div>
             </div>
           </Card>
 
           <Card className="p-6">
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
-              Thao tác nhanh
-            </h2>
+            <h2 className="text-xl font-semibold text-gray-900 mb-4">Thao tác nhanh</h2>
             <div className="space-y-3">
               <Button
                 variant="outline"

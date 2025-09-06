@@ -168,8 +168,8 @@ export default function CustomersManagement() {
       {/* Page Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t("title")}</h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">{t("subtitle")}</p>
+          <h1 className="text-3xl font-bold text-gray-900 ">{t("title")}</h1>
+          <p className="text-gray-600 mt-1">{t("subtitle")}</p>
         </div>
         <Dialog>
           <DialogTrigger asChild>
@@ -203,10 +203,8 @@ export default function CustomersManagement() {
           <Card key={index}>
             <CardContent className="p-6">
               <div className="text-center">
-                <p className="text-sm font-medium text-gray-600 dark:text-gray-400">{stat.title}</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white mt-2">
-                  {stat.value}
-                </p>
+                <p className="text-sm font-medium text-gray-600">{stat.title}</p>
+                <p className="text-2xl font-bold text-gray-900 mt-2">{stat.value}</p>
               </div>
             </CardContent>
           </Card>

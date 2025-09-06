@@ -13,6 +13,7 @@ import { toast } from "sonner";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { updateTour, getTourById } from "@/config/tour/tour.api";
 import { Skeleton } from "@/components/ui/skeleton";
+import { getErrorMessage } from "@/lib/utils";
 
 const EditTourPage = () => {
   const locale = useLocale();
@@ -52,8 +53,8 @@ const EditTourPage = () => {
       router.push(`/${locale}/admin/tours`);
     },
     onError: (error: any) => {
-      console.log("Update error:", error.response?.data?.errors);
-      toast.error(error.response?.data?.message || "Có lỗi xảy ra khi cập nhật tour");
+      const errorMessage = getErrorMessage(error, "Có lỗi xảy ra khi cập nhật tour");
+      toast.error(errorMessage);
     },
   });
 
@@ -125,7 +126,7 @@ const EditTourPage = () => {
             <ChevronLeft size="29" />
           </Link>
           <div>
-            <span className="text-2xl font-bold text-gray-900 dark:text-white">Lỗi</span>
+            <span className="text-2xl font-bold text-gray-900">Lỗi</span>
             <p className="text-red-600 mt-1">Không thể tải thông tin tour</p>
           </div>
         </div>
@@ -142,8 +143,8 @@ const EditTourPage = () => {
             <ChevronLeft size="29" />
           </Link>
           <div>
-            <span className="text-2xl font-bold text-gray-900 dark:text-white">Chỉnh sửa tour</span>
-            <p className="text-gray-600 dark:text-gray-400 mt-1">
+            <span className="text-2xl font-bold text-gray-900">Chỉnh sửa tour</span>
+            <p className="text-gray-600 mt-1">
               Cập nhật thông tin tour: {tourData?.data?.tour?.title || "Đang tải..."}
             </p>
           </div>

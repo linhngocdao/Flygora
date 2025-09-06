@@ -32,6 +32,7 @@ import {
   getAllUser,
 } from "@/config/user/user.api";
 import { useDebounce } from "@/hooks/useDebounce";
+import { getErrorMessage } from "@/lib/utils";
 import { GetAllUserResponse } from "@/types/user.type";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
@@ -123,9 +124,11 @@ const UserManager = () => {
       toast.success("Trạng thái người dùng đã được cập nhật thành công!");
     },
     onError: (error: any) => {
-      toast.error(
-        error?.response?.data?.message || "Đã xảy ra lỗi khi thay đổi trạng thái người dùng."
+      const errorMessage = getErrorMessage(
+        error,
+        "Đã xảy ra lỗi khi thay đổi trạng thái người dùng."
       );
+      toast.error(errorMessage);
     },
   });
 
@@ -140,7 +143,8 @@ const UserManager = () => {
       setIsDeleteModalOpen(false);
     },
     onError: (error: any) => {
-      toast.error(error?.response?.data?.message);
+      const errorMessage = getErrorMessage(error, "Đã xảy ra lỗi khi xóa người dùng.");
+      toast.error(errorMessage);
     },
   });
 
@@ -154,7 +158,8 @@ const UserManager = () => {
       setIsPasswordModalOpen(false);
     },
     onError: (error: any) => {
-      toast.error(error?.response?.data?.message);
+      const errorMessage = getErrorMessage(error, "Đã xảy ra lỗi khi thêm người dùng.");
+      toast.error(errorMessage);
     },
   });
 
@@ -170,7 +175,8 @@ const UserManager = () => {
       setIsAddModalOpen(false);
     },
     onError: (error: any) => {
-      toast.error(error?.response?.data?.message);
+      const errorMessage = getErrorMessage(error, "Đã xảy ra lỗi khi thêm người dùng.");
+      toast.error(errorMessage);
     },
   });
 
@@ -187,7 +193,8 @@ const UserManager = () => {
       setSelectedUser(null);
     },
     onError: (error: any) => {
-      toast.error(error?.response?.data?.message);
+      const errorMessage = getErrorMessage(error, "Đã xảy ra lỗi khi cập nhật người dùng.");
+      toast.error(errorMessage);
     },
   });
 
@@ -313,7 +320,7 @@ const UserManager = () => {
             </div>
           </Avatar>
           <div>
-            <div className="text-sm font-medium text-gray-900 dark:text-white">
+            <div className="text-sm font-medium text-gray-900 ">
               {debouncedSearch ? (
                 <span
                   dangerouslySetInnerHTML={{
@@ -335,7 +342,7 @@ const UserManager = () => {
       key: "email",
       title: t("email"),
       render: (value: string) => (
-        <span className="text-sm text-gray-900 dark:text-white">
+        <span className="text-sm text-gray-900 ">
           {debouncedSearch ? (
             <span
               dangerouslySetInnerHTML={{
@@ -370,7 +377,7 @@ const UserManager = () => {
       key: "created_at",
       title: t("joinedDate"),
       render: (value: string) => (
-        <span className="text-sm text-gray-500 dark:text-gray-400">{formatDate(value || "")}</span>
+        <span className="text-sm text-gray-500 ">{formatDate(value || "")}</span>
       ),
     },
     {
@@ -438,8 +445,8 @@ const UserManager = () => {
       {/* Header Section */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t("title")}</h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-2">{t("subtitle")}</p>
+          <h1 className="text-3xl font-bold text-gray-900 ">{t("title")}</h1>
+          <p className="text-gray-600 mt-2">{t("subtitle")}</p>
         </div>
         <Button className="flex items-center gap-2" onClick={() => setIsAddModalOpen(true)}>
           <UserPlus className="h-4 w-4" />

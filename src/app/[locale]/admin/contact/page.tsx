@@ -42,6 +42,7 @@ import {
   MessageSquare,
 } from "lucide-react";
 import { useDebounce } from "@/hooks/useDebounce";
+import { getErrorMessage } from "@/lib/utils";
 
 const ContactManager = () => {
   const queryClient = useQueryClient();
@@ -106,7 +107,8 @@ const ContactManager = () => {
       toast.success("Xóa liên hệ thành công");
     },
     onError: (error: any) => {
-      toast.error(error?.response?.data?.message || "Xóa liên hệ thất bại");
+      const errorMessage = getErrorMessage(error, "Xóa liên hệ thất bại");
+      toast.error(errorMessage);
     },
   });
 
@@ -177,8 +179,8 @@ const ContactManager = () => {
                 {record.email?.charAt(0).toUpperCase()}
               </div>
               <div>
-                <span className="font-medium text-gray-900 dark:text-white">{record.email}</span>
-                <div className="text-sm text-gray-500 dark:text-gray-400">
+                <span className="font-medium text-gray-900">{record.email}</span>
+                <div className="text-sm text-gray-500 ">
                   {record.firstName && record.lastName
                     ? `${record.firstName} ${record.lastName}`
                     : "Marketing Subscriber"}
@@ -193,7 +195,7 @@ const ContactManager = () => {
           render: () => (
             <Badge
               variant="secondary"
-              className="bg-purple-100 text-purple-800 hover:bg-purple-200 dark:bg-purple-900 dark:text-purple-300"
+              className="bg-purple-100 text-purple-800 hover:bg-purple-200 "
             >
               Đăng ký
             </Badge>
@@ -203,7 +205,7 @@ const ContactManager = () => {
           key: "created_at",
           title: "Ngày đăng ký",
           render: (value: any, record: Contact) => (
-            <span className="text-sm text-gray-500 dark:text-gray-400">
+            <span className="text-sm text-gray-500 ">
               {record.createdAt
                 ? new Date(record.createdAt).toLocaleDateString("vi-VN", {
                     year: "numeric",
@@ -233,7 +235,7 @@ const ContactManager = () => {
                   Xem chi tiết
                 </DropdownMenuItem>
                 <DropdownMenuItem
-                  className="text-red-600 focus:text-red-600 focus:bg-red-50 dark:focus:bg-red-950"
+                  className="text-red-600 focus:text-red-600 focus:bg-red-50 "
                   onClick={() => handleDelete(record)}
                 >
                   <Trash2 className="mr-2 h-4 w-4" />
@@ -257,10 +259,10 @@ const ContactManager = () => {
               {record.firstName?.charAt(0).toUpperCase()}
             </div>
             <div>
-              <span className="font-medium text-gray-900 dark:text-white">
+              <span className="font-medium text-gray-900 ">
                 {record.firstName} {record.lastName}
               </span>
-              <div className="text-sm text-gray-500 dark:text-gray-400">{record.email}</div>
+              <div className="text-sm text-gray-500 ">{record.email}</div>
             </div>
           </div>
         ),
@@ -271,7 +273,7 @@ const ContactManager = () => {
         render: (value: any, record: Contact) => (
           <div className="flex items-center gap-2 text-sm">
             <Phone className="h-4 w-4 text-gray-400" />
-            <span className="text-gray-700 dark:text-gray-300">
+            <span className="text-gray-700 ">
               {record.phonePrefix} {record.phoneNumber}
             </span>
           </div>
@@ -282,7 +284,7 @@ const ContactManager = () => {
         title: "Tin nhắn",
         render: (value: string) => (
           <div className="max-w-xs">
-            <span className="text-sm text-gray-700 dark:text-gray-300 line-clamp-2">
+            <span className="text-sm text-gray-700  line-clamp-2">
               {value
                 ? value.substring(0, 100) + (value.length > 100 ? "..." : "")
                 : "Không có tin nhắn"}
@@ -294,10 +296,7 @@ const ContactManager = () => {
         key: "status",
         title: "Trạng thái",
         render: () => (
-          <Badge
-            variant="secondary"
-            className="bg-blue-100 text-blue-800 hover:bg-blue-200 dark:bg-blue-900 dark:text-blue-300"
-          >
+          <Badge variant="secondary" className="bg-blue-100 text-blue-800 hover:bg-blue-200 ">
             Mới
           </Badge>
         ),
@@ -306,7 +305,7 @@ const ContactManager = () => {
         key: "created_at",
         title: "Ngày gửi",
         render: (value: any, record: Contact) => (
-          <span className="text-sm text-gray-500 dark:text-gray-400">
+          <span className="text-sm text-gray-500 ">
             {record.createdAt
               ? new Date(record.createdAt).toLocaleDateString("vi-VN", {
                   year: "numeric",
@@ -336,7 +335,7 @@ const ContactManager = () => {
                 Xem chi tiết
               </DropdownMenuItem>
               <DropdownMenuItem
-                className="text-red-600 focus:text-red-600 focus:bg-red-50 dark:focus:bg-red-950"
+                className="text-red-600 focus:text-red-600 focus:bg-red-50 "
                 onClick={() => handleDelete(record)}
               >
                 <Trash2 className="mr-2 h-4 w-4" />
@@ -381,16 +380,16 @@ const ContactManager = () => {
       {/* Header */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Quản lý liên hệ</h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-2">
+          <h1 className="text-3xl font-bold text-gray-900 ">Quản lý liên hệ</h1>
+          <p className="text-gray-600 mt-2">
             Quản lý các liên hệ từ khách hàng ({data?.meta?.total || 0} liên hệ)
           </p>
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="bg-white dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700">
-        <div className="flex border-b border-gray-200 dark:border-gray-700">
+      <div className="bg-white rounded-lg border border-gray-200 ">
+        <div className="flex border-b border-gray-200 ">
           {tabs.map((tab) => (
             <button
               key={tab.key}
@@ -399,8 +398,8 @@ const ContactManager = () => {
                 flex items-center gap-2 px-6 py-4 text-sm font-medium transition-colors
                 ${
                   activeTab === tab.key
-                    ? "text-blue-600 dark:text-blue-400 border-b-2 border-blue-600 dark:border-blue-400 bg-blue-50 dark:bg-blue-900/20"
-                    : "text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
+                    ? "text-blue-600 border-b-2 border-blue-600 bg-blue-50 "
+                    : "text-gray-500 hover:text-gray-700 hover:bg-gray-50 "
                 }
               `}
             >
@@ -411,8 +410,8 @@ const ContactManager = () => {
                   px-2 py-1 text-xs rounded-full
                   ${
                     activeTab === tab.key
-                      ? "bg-blue-100 dark:bg-blue-800 text-blue-600 dark:text-blue-300"
-                      : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400"
+                      ? "bg-blue-100 text-blue-600 "
+                      : "bg-gray-100 text-gray-600 "
                   }
                 `}
                 >
@@ -497,10 +496,8 @@ const ContactManager = () => {
               {/* Customer Info */}
               <div className="grid grid-cols-1 gap-4">
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-900 dark:text-white">
-                    Họ và tên
-                  </label>
-                  <div className="flex items-center gap-2 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <label className="text-sm font-medium text-gray-900 ">Họ và tên</label>
+                  <div className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg">
                     <div className="h-8 w-8 rounded-full bg-gradient-to-r from-green-500 to-blue-600 flex items-center justify-center text-white text-sm font-semibold">
                       {viewingContact.firstName.charAt(0).toUpperCase()}
                     </div>
@@ -514,22 +511,20 @@ const ContactManager = () => {
               {/* Contact Info */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                  <div className="flex items-center gap-2 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <label className="text-sm font-medium text-gray-900 ">Email</label>
+                  <div className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg">
                     <Mail className="h-4 w-4 text-gray-400" />
-                    <span className="text-gray-700 dark:text-gray-300">{viewingContact.email}</span>
+                    <span className="text-gray-700 ">{viewingContact.email}</span>
                   </div>
                 </div>
 
                 {/* Chỉ hiển thị số điện thoại cho contact tab */}
                 {activeTab === "contact" && (
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-900 dark:text-white">
-                      Số điện thoại
-                    </label>
-                    <div className="flex items-center gap-2 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                    <label className="text-sm font-medium text-gray-900 ">Số điện thoại</label>
+                    <div className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg">
                       <Phone className="h-4 w-4 text-gray-400" />
-                      <span className="text-gray-700 dark:text-gray-300">
+                      <span className="text-gray-700 ">
                         {viewingContact.phonePrefix} {viewingContact.phoneNumber}
                       </span>
                     </div>
@@ -540,11 +535,9 @@ const ContactManager = () => {
               {/* Message - only show for contact type */}
               {activeTab === "contact" && (
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-900 dark:text-white">
-                    Tin nhắn
-                  </label>
-                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg min-h-[120px]">
-                    <p className="text-gray-700 dark:text-gray-300 whitespace-pre-wrap">
+                  <label className="text-sm font-medium text-gray-900 ">Tin nhắn</label>
+                  <div className="p-4 bg-gray-50 rounded-lg min-h-[120px]">
+                    <p className="text-gray-700 whitespace-pre-wrap">
                       {viewingContact.message || "Không có tin nhắn"}
                     </p>
                   </div>
@@ -554,10 +547,8 @@ const ContactManager = () => {
               {/* Marketing interests - only show for marketing type */}
               {activeTab === "marketing" && (
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-gray-900 dark:text-white">
-                    Quan tâm Marketing
-                  </label>
-                  <div className="p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                  <label className="text-sm font-medium text-gray-900 ">Quan tâm Marketing</label>
+                  <div className="p-4 bg-gray-50 rounded-lg">
                     <div className="flex flex-wrap gap-2">
                       <Badge
                         variant="outline"
@@ -580,22 +571,20 @@ const ContactManager = () => {
               )}
 
               {/* Timestamps */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t border-gray-200">
                 <div className="space-y-1">
-                  <label className="text-sm font-medium text-gray-900 dark:text-white">
+                  <label className="text-sm font-medium text-gray-900 ">
                     {activeTab === "marketing" ? "Ngày đăng ký" : "Ngày gửi"}
                   </label>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                  <p className="text-sm text-gray-600 ">
                     {new Date(viewingContact.createdAt).toLocaleString("vi-VN")}
                   </p>
                 </div>
 
                 {viewingContact.updatedAt && (
                   <div className="space-y-1">
-                    <label className="text-sm font-medium text-gray-900 dark:text-white">
-                      Cập nhật lần cuối
-                    </label>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                    <label className="text-sm font-medium text-gray-900 ">Cập nhật lần cuối</label>
+                    <p className="text-sm text-gray-600 ">
                       {new Date(viewingContact.updatedAt).toLocaleString("vi-VN")}
                     </p>
                   </div>

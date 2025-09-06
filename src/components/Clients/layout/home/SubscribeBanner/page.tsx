@@ -9,6 +9,7 @@ import ButtonPrimary from "@/components/Clients/ui/buttonPrimary";
 import { useMutation } from "@tanstack/react-query";
 import { SendContact } from "@/config/contact/contact.api";
 import { toast } from "sonner";
+import { getErrorMessage } from "@/lib/utils";
 
 const SubscribeBanner = ({ className }: { className?: string }) => {
   // Sử dụng hook đa ngôn ngữ
@@ -49,7 +50,8 @@ const SubscribeBanner = ({ className }: { className?: string }) => {
       reset(); // Reset form sau khi submit thành công
     },
     onError: (error: any) => {
-      toast.error(error?.message || t("form.errorMessage"));
+      const errorMessage = getErrorMessage(error, t("form.errorMessage"));
+      toast.error(errorMessage);
     },
   });
 

@@ -6,13 +6,6 @@
   overflow: hidden;
 }
 
-@media (prefers-color-scheme: dark) {
-  .quill-flygora-wrapper {
-    border-color: #374151;
-    background: #1f2937;
-  }
-}
-
 .quill-flygora-wrapper .ql-snow {
   border: none !important;
 }
@@ -35,16 +28,6 @@
   line-height: 1.5;
   min-height: 150px;
   word-wrap: break-word;
-}
-
-@media (prefers-color-scheme: dark) {
-  .quill-flygora-wrapper .ql-toolbar {
-    border-bottom-color: #374151 !important;
-  }
-
-  .quill-flygora-wrapper .ql-editor {
-    color: #f9fafb;
-  }
 }
 
 .quill-flygora-wrapper .ql-container::-webkit-scrollbar {

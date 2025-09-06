@@ -249,20 +249,17 @@ const AdminDashboard: React.FC = () => {
   const getStatusBadge = (status: Booking["status"]): JSX.Element => {
     const statusConfig = {
       confirmed: {
-        className:
-          "bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-800",
+        className: "bg-emerald-50 text-emerald-700 border-emerald-200",
         dotColor: "bg-emerald-500",
         label: "Đã xác nhận",
       },
       pending: {
-        className:
-          "bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-900/30 dark:text-amber-300 dark:border-amber-800",
+        className: "bg-amber-50 text-amber-700 border-amber-200",
         dotColor: "bg-amber-500",
         label: "Chờ xử lý",
       },
       cancelled: {
-        className:
-          "bg-red-50 text-red-700 border-red-200 dark:bg-red-900/30 dark:text-red-300 dark:border-red-800",
+        className: "bg-red-50 text-red-700 border-red-200",
         dotColor: "bg-red-500",
         label: "Đã hủy",
       },
@@ -280,33 +277,30 @@ const AdminDashboard: React.FC = () => {
 
   const getColorClasses = (color: StatCard["color"]): string => {
     const colorMap: Record<StatCard["color"], string> = {
-      emerald:
-        "bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-emerald-900/20 dark:to-emerald-800/20 text-emerald-700 dark:text-emerald-400",
-      blue: "bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 text-blue-700 dark:text-blue-400",
-      purple:
-        "bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 text-purple-700 dark:text-purple-400",
-      orange:
-        "bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 text-orange-700 dark:text-orange-400",
+      emerald: "bg-gradient-to-br from-emerald-50 to-emerald-100 text-emerald-700",
+      blue: "bg-gradient-to-br from-blue-50 to-blue-100 text-blue-700",
+      purple: "bg-gradient-to-br from-purple-50 to-purple-100 text-purple-700",
+      orange: "bg-gradient-to-br from-orange-50 to-orange-100 text-orange-700",
     };
     return colorMap[color];
   };
 
   const getNotificationBgColor = (type: Notification["type"]): string => {
     const typeMap: Record<Notification["type"], string> = {
-      info: "bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800",
-      success: "bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800",
-      warning: "bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800",
-      error: "bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800",
+      info: "bg-blue-50 border-blue-200",
+      success: "bg-green-50 border-green-200",
+      warning: "bg-amber-50 border-amber-200",
+      error: "bg-red-50 border-red-200",
     };
     return typeMap[type];
   };
 
   const getNotificationTextColor = (type: Notification["type"]): string => {
     const typeMap: Record<Notification["type"], string> = {
-      info: "text-blue-800 dark:text-blue-300",
-      success: "text-green-800 dark:text-green-300",
-      warning: "text-amber-800 dark:text-amber-300",
-      error: "text-red-800 dark:text-red-300",
+      info: "text-blue-800",
+      success: "text-green-800",
+      warning: "text-amber-800",
+      error: "text-red-800",
     };
     return typeMap[type];
   };
@@ -338,11 +332,11 @@ const AdminDashboard: React.FC = () => {
           <div className="space-y-1">
             <div className="flex items-center gap-2">
               <div className="w-2 h-8 bg-gradient-to-b from-blue-500 to-blue-600 rounded-full"></div>
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent">
+              <h1 className="text-4xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
                 Dashboard Quản trị
               </h1>
             </div>
-            <p className="text-lg text-gray-600 dark:text-gray-400 ml-4">
+            <p className="text-lg text-gray-600 ml-4">
               Tổng quan hoạt động kinh doanh và quản lý hệ thống
             </p>
           </div>
@@ -351,7 +345,7 @@ const AdminDashboard: React.FC = () => {
             <select
               value={selectedPeriod}
               onChange={handlePeriodChange}
-              className="px-4 py-2 rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-800 text-sm font-medium focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              className="px-4 py-2 rounded-lg border border-gray-200 bg-white text-sm font-medium focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
               disabled={isLoading}
             >
               <option value="thisMonth">Tháng này</option>
@@ -371,7 +365,7 @@ const AdminDashboard: React.FC = () => {
 
             <Button
               variant="outline"
-              className="border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-slate-800"
+              className="border-gray-300 hover:bg-gray-50"
               disabled={isLoading}
             >
               <Download className="h-4 w-4" />
@@ -388,17 +382,15 @@ const AdminDashboard: React.FC = () => {
             return (
               <Card
                 key={index}
-                className="group relative overflow-hidden border-0 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 bg-white dark:bg-slate-800/50 backdrop-blur-sm"
+                className="group relative overflow-hidden border-0 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 bg-white backdrop-blur-sm"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-gray-50/50 dark:to-slate-700/20"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-gray-50/50"></div>
 
                 <CardContent className="p-6 relative z-10">
                   <div className="flex items-start justify-between">
                     <div className="space-y-3 flex-1">
                       <div className="flex items-center justify-between">
-                        <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
-                          {stat.title}
-                        </p>
+                        <p className="text-sm font-medium text-gray-600">{stat.title}</p>
                         <div
                           className={`w-12 h-12 rounded-xl ${getColorClasses(stat.color)} flex items-center justify-center transition-transform duration-300 group-hover:scale-110`}
                         >
@@ -408,12 +400,10 @@ const AdminDashboard: React.FC = () => {
 
                       <div>
                         <div className="flex items-baseline gap-2">
-                          <span className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                          <span className="text-2xl font-bold tracking-tight text-gray-900">
                             {formatCurrency(stat.value)}
                           </span>
-                          <span className="text-sm text-gray-500 dark:text-gray-400 font-medium">
-                            {stat.unit}
-                          </span>
+                          <span className="text-sm text-gray-500 font-medium">{stat.unit}</span>
                         </div>
                       </div>
 
@@ -424,13 +414,11 @@ const AdminDashboard: React.FC = () => {
                           <ArrowDownRight className="h-4 w-4 text-red-500" />
                         )}
                         <span
-                          className={`text-sm font-semibold ${isIncrease ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"}`}
+                          className={`text-sm font-semibold ${isIncrease ? "text-emerald-600" : "text-red-600"}`}
                         >
                           {stat.change}
                         </span>
-                        <span className="text-xs text-gray-500 dark:text-gray-400">
-                          {stat.description}
-                        </span>
+                        <span className="text-xs text-gray-500">{stat.description}</span>
                       </div>
                     </div>
                   </div>
@@ -444,7 +432,7 @@ const AdminDashboard: React.FC = () => {
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
           {/* Recent Bookings */}
           <div className="xl:col-span-2">
-            <Card className="border-0 shadow-lg bg-white/80 dark:bg-slate-800/50 backdrop-blur-sm">
+            <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
               <CardHeader className="pb-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
@@ -452,10 +440,10 @@ const AdminDashboard: React.FC = () => {
                       <Activity className="h-5 w-5 text-white" />
                     </div>
                     <div>
-                      <CardTitle className="text-xl font-bold text-gray-900 dark:text-white">
+                      <CardTitle className="text-xl font-bold text-gray-900">
                         Booking gần đây
                       </CardTitle>
-                      <CardDescription className="text-gray-600 dark:text-gray-400">
+                      <CardDescription className="text-gray-600">
                         Danh sách booking mới nhất trong hệ thống
                       </CardDescription>
                     </div>
@@ -477,20 +465,16 @@ const AdminDashboard: React.FC = () => {
                 <div className="overflow-hidden rounded-lg">
                   <Table>
                     <TableHeader>
-                      <TableRow className="border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/50">
-                        <TableHead className="font-semibold text-gray-700 dark:text-gray-200 py-4">
+                      <TableRow className="border-slate-200 bg-slate-50/50">
+                        <TableHead className="font-semibold text-gray-700 py-4">
                           Booking ID
                         </TableHead>
-                        <TableHead className="font-semibold text-gray-700 dark:text-gray-200">
-                          Khách hàng
-                        </TableHead>
-                        <TableHead className="font-semibold text-gray-700 dark:text-gray-200">
-                          Trạng thái
-                        </TableHead>
-                        <TableHead className="font-semibold text-gray-700 dark:text-gray-200 text-right">
+                        <TableHead className="font-semibold text-gray-700">Khách hàng</TableHead>
+                        <TableHead className="font-semibold text-gray-700">Trạng thái</TableHead>
+                        <TableHead className="font-semibold text-gray-700 text-right">
                           Số tiền
                         </TableHead>
-                        <TableHead className="font-semibold text-gray-700 dark:text-gray-200 text-center">
+                        <TableHead className="font-semibold text-gray-700 text-center">
                           Thao tác
                         </TableHead>
                       </TableRow>
@@ -499,9 +483,9 @@ const AdminDashboard: React.FC = () => {
                       {recentBookings.map((booking, index) => (
                         <TableRow
                           key={booking.id}
-                          className={`border-slate-200 dark:border-slate-700 hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors ${index % 2 === 0 ? "bg-white dark:bg-transparent" : "bg-slate-50/30 dark:bg-slate-800/20"}`}
+                          className={`border-slate-200 hover:bg-slate-50/50 transition-colors ${index % 2 === 0 ? "bg-white" : "bg-slate-50/30"}`}
                         >
-                          <TableCell className="font-mono text-sm font-semibold text-blue-600 dark:text-blue-400 py-4">
+                          <TableCell className="font-mono text-sm font-semibold text-blue-600 py-4">
                             {booking.id}
                           </TableCell>
                           <TableCell>
@@ -510,18 +494,14 @@ const AdminDashboard: React.FC = () => {
                                 {booking.avatar}
                               </div>
                               <div>
-                                <p className="font-semibold text-gray-900 dark:text-white">
-                                  {booking.customer}
-                                </p>
-                                <p className="text-sm text-gray-600 dark:text-gray-400">
-                                  {booking.tour}
-                                </p>
+                                <p className="font-semibold text-gray-900">{booking.customer}</p>
+                                <p className="text-sm text-gray-600">{booking.tour}</p>
                               </div>
                             </div>
                           </TableCell>
                           <TableCell>{getStatusBadge(booking.status)}</TableCell>
                           <TableCell className="text-right">
-                            <span className="font-bold text-gray-900 dark:text-white">
+                            <span className="font-bold text-gray-900">
                               {formatCurrency(booking.amount)} VNĐ
                             </span>
                           </TableCell>
@@ -547,7 +527,7 @@ const AdminDashboard: React.FC = () => {
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Quick Actions */}
-            <Card className="border-0 shadow-lg bg-white/80 dark:bg-slate-800/50 backdrop-blur-sm">
+            <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center">
@@ -555,7 +535,7 @@ const AdminDashboard: React.FC = () => {
                   </div>
                   Thao tác nhanh
                 </CardTitle>
-                <CardDescription className="text-gray-600 dark:text-gray-400">
+                <CardDescription className="text-gray-600">
                   Các chức năng thường sử dụng
                 </CardDescription>
               </CardHeader>
@@ -582,7 +562,7 @@ const AdminDashboard: React.FC = () => {
             </Card>
 
             {/* Notifications */}
-            <Card className="border-0 shadow-lg bg-white/80 dark:bg-slate-800/50 backdrop-blur-sm">
+            <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center">
