@@ -56,7 +56,7 @@ const TourDetailPage = () => {
 
   const handleEdit = () => {
     if (tour) {
-      router.push(`/${locale}/admin/tours/${tour.id}/edit`);
+      router.push(`/${locale}/admin/tour-manager/tours/${tour.id}/edit`);
     }
   };
 
@@ -86,7 +86,7 @@ const TourDetailPage = () => {
           <div className="text-6xl mb-4">😞</div>
           <h1 className="text-2xl font-bold text-gray-900 ">Tour không tồn tại</h1>
           <p className="text-gray-600 mb-6">Không tìm thấy tour với ID: {tourId}</p>
-          <Link href={`/${locale}/admin/tours`}>
+          <Link href={`/${locale}/admin/tour-manager/tours`}>
             <Button className="shadow-md hover:shadow-lg transition-shadow">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Quay lại danh sách
@@ -103,7 +103,7 @@ const TourDetailPage = () => {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <Link href={`/${locale}/admin/tours`}>
+            <Link href={`/${locale}/admin/tour-manager/tours`}>
               <Button variant="outline" size="sm">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Quay lại danh sách

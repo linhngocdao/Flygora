@@ -200,13 +200,7 @@ export interface TourPayload {
 
 // Response types
 export interface TourListResponse {
-  tours: Tour[];
-  pagination: {
-    page: number;
-    limit: number;
-    total: number;
-    totalPages: number;
-  };
+  tours?: Tour[]; // Làm cho trường này tùy chọn
 }
 
 export interface TourResponse {

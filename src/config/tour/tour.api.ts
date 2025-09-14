@@ -1,16 +1,10 @@
-import {
-  Tour,
-  TourPayload,
-  QueryGetTours,
-  TourListResponse,
-  TourResponse,
-} from "@/types/tour.type";
+import { Tour, TourPayload, QueryGetTours, TourResponse } from "@/types/tour.type";
 import axiosInstance from "../axios";
 import { ApiResponse } from "@/types/main";
 
 /* Get All tours (Public) */
 export async function getTours(payload: QueryGetTours) {
-  const { data } = await axiosInstance.get<ApiResponse<TourListResponse>>("/tours", {
+  const { data } = await axiosInstance.get<ApiResponse<Tour[]>>("/tours", {
     params: payload,
   });
   return data;
@@ -18,7 +12,7 @@ export async function getTours(payload: QueryGetTours) {
 
 /* Get All tours (Private - Admin) */
 export async function getPrivateTours(payload: QueryGetTours) {
-  const { data } = await axiosInstance.get<ApiResponse<TourListResponse>>("/tours/private", {
+  const { data } = await axiosInstance.get<ApiResponse<Tour[]>>("/tours/private", {
     params: payload,
   });
   return data;
@@ -26,7 +20,7 @@ export async function getPrivateTours(payload: QueryGetTours) {
 
 /* Get Featured tours */
 export async function getFeaturedTours(payload?: QueryGetTours) {
-  const { data } = await axiosInstance.get<ApiResponse<TourListResponse>>("/tours/featured", {
+  const { data } = await axiosInstance.get<ApiResponse<Tour[]>>("/tours/featured", {
     params: payload,
   });
   return data;
@@ -34,12 +28,9 @@ export async function getFeaturedTours(payload?: QueryGetTours) {
 
 /* Get tours by category */
 export async function getToursByCategory(categoryId: string, payload?: QueryGetTours) {
-  const { data } = await axiosInstance.get<ApiResponse<TourListResponse>>(
-    `/tours/category/${categoryId}`,
-    {
-      params: payload,
-    }
-  );
+  const { data } = await axiosInstance.get<ApiResponse<Tour[]>>(`/tours/category/${categoryId}`, {
+    params: payload,
+  });
   return data;
 }
 

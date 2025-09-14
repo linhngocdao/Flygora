@@ -3,6 +3,11 @@ export interface ApiResponse<T> {
   code: number;
   message: string;
   data: T;
-  errors: null;
-  meta: null;
+  errors: null | any;
+  meta: {
+    page: number;
+    limit: number;
+    total: number;
+    totalPages: number;
+  } | null;
 }

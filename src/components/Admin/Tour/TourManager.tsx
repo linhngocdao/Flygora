@@ -69,14 +69,20 @@ const TourManager = () => {
 
   // Effect để cập nhật store khi có data mới
   React.useEffect(() => {
-    if (toursData?.data?.tours) {
-      setTours(toursData.data.tours);
-      setPagination({
-        page: toursData.data.pagination.page,
-        limit: toursData.data.pagination.limit,
-        total: toursData.data.pagination.total,
-        totalPages: toursData.data.pagination.totalPages,
-      });
+    if (toursData?.data) {
+      // Kiểm tra nếu data là mảng (dựa vào API mới)
+      if (Array.isArray(toursData.data)) {
+        setTours(toursData.data);
+      }
+      // Kiểm tra meta tồn tại trước khi sử dụng
+      if (toursData.meta) {
+        setPagination({
+          page: toursData.meta.page,
+          limit: toursData.meta.limit,
+          total: toursData.meta.total,
+          totalPages: toursData.meta.totalPages,
+        });
+      }
     }
   }, [toursData, setTours, setPagination]);
 
@@ -285,7 +291,7 @@ const TourManager = () => {
             </DropdownMenuItem>
 
             <DropdownMenuItem asChild>
-              <Link href={`/${locale}/admin/tours/${record.id}/edit`}>
+              <Link href={`/${locale}/admin/tour-manager/tours/${record.id}/edit`}>
                 <Edit className="mr-2 h-4 w-4" />
                 Chỉnh sửa
               </Link>
@@ -321,7 +327,7 @@ const TourManager = () => {
     <>
       <TableFlygora
         columns={columns}
-        data={toursData?.data?.tours || []}
+        data={toursData?.data || []}
         loading={isLoading}
         pagination={paginationInfo}
         onPageChange={handlePageChange}

@@ -85,7 +85,7 @@ const VoucherModal = forwardRef<VoucherModalRef, VoucherModalProps>(
       staleTime: 5 * 60 * 1000, // 5 minutes
     });
 
-    const tours = React.useMemo(() => toursData?.data?.tours || [], [toursData?.data?.tours]);
+    const tours = React.useMemo(() => toursData?.data || [], [toursData?.data]);
 
     // Khởi tạo form với react-hook-form và zod
     const {

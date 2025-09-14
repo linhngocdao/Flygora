@@ -35,7 +35,7 @@ const EmptyPage = () => {
               <span> để chúng tôi giúp bạn tìm đường.</span>
             </div>
             <div className="flex justify-center">
-              <ButtonPrimary name={t("backtoHome")} href="/" />
+              <ButtonPrimary name={t("backtoHome")} href="/" className="p-20" fullWidth />
             </div>
           </div>
         </div>
