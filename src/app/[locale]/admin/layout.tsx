@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useParams } from "next/navigation";
 import {
@@ -17,6 +17,8 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
+import { useVerifyToken } from "@/hooks/useVerifyToken";
 
 interface AdminLayoutProps {
   children: React.ReactNode;
@@ -26,9 +28,24 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   const pathname = usePathname();
   const params = useParams();
   const locale = params.locale as string;
+  const router = useRouter();
+  const isLoginPage = pathname.includes("/admin/login");
+  console.log(isLoginPage);
+  const { error } = useVerifyToken(!isLoginPage);
+  console.log(error);
 
   const [collapsed, setCollapsed] = useState(false);
   const [openMenus, setOpenMenus] = useState<Record<string, boolean>>({});
+  useEffect(() => {
+    if (error) {
+      const locale = pathname.split("/")[1];
+      router.replace(`/${locale}/admin/login`);
+    }
+  }, [error, pathname, router]);
+
+  if (isLoginPage) {
+    return <>{children}</>;
+  }
 
   const toggleMenu = (title: string) => {
     setOpenMenus((prev) => ({

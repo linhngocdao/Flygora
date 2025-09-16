@@ -86,6 +86,7 @@ const VoucherModal = forwardRef<VoucherModalRef, VoucherModalProps>(
     });
 
     const tours = React.useMemo(() => toursData?.data || [], [toursData?.data]);
+    console.log("Fetched tours for voucher:", tours);
 
     // Khởi tạo form với react-hook-form và zod
     const {
@@ -242,7 +243,7 @@ const VoucherModal = forwardRef<VoucherModalRef, VoucherModalProps>(
     }, []);
 
     const handleSelectAllTours = React.useCallback(() => {
-      const allTourIds = tours.map((tour) => tour.id);
+      const allTourIds = Array.isArray(tours) ? tours.map((tour) => tour.id) : [];
       setSelectedTourIds(allTourIds);
     }, [tours]);
 
