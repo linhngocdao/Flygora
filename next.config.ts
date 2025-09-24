@@ -5,6 +5,7 @@ const withNextIntl = createNextIntlPlugin();
 //http://52.64.94.227
 const nextConfig: NextConfig = {
   images: {
+    qualities: [75, 95, 100],
     remotePatterns: [
       {
         protocol: "https",
